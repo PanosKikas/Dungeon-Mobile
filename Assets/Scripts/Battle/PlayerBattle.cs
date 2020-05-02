@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using Cinemachine;
+
 
 public class PlayerBattle : MonoBehaviour, IDamagable
 {
@@ -9,6 +11,8 @@ public class PlayerBattle : MonoBehaviour, IDamagable
     CharacterStats playerStats;
 
     int currentHp;
+
+    bool isMainHero = true;
 
     Animator animator;
 
@@ -36,6 +40,7 @@ public class PlayerBattle : MonoBehaviour, IDamagable
             if (enemyTarget != null)
             {
                 animator.SetTrigger("Attack");
+                GetComponent<CinemachineImpulseSource>().GenerateImpulse();
             }
         }
     }
