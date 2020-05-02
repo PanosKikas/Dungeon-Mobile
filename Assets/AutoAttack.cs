@@ -7,33 +7,42 @@ public class AutoAttack : MonoBehaviour
     Animator animator;
 
     [SerializeField]
-    PlayerBattle playerTarget;
+    GameObject target;
 
     IDamagable currentTarget;
+
+    StatusEffects statusEffects;
+
+    CharacterStats stats;
 
     float rateOfFire = .5f;
     float nextFire = 0f;
 
-    int currentHp;
-
     private void Awake()
     {
         animator = GetComponentInChildren<Animator>();
+        statusEffects = GetComponent<StatusEffects>();
+        currentTarget = GetComponent<IDamagable>();
+        stats = statusEffects.stats;
     }
 
-    private void Start()
-    {
-        //currentHp = enemyStats.MaxHealth;
-        currentTarget = playerTarget.GetComponent<IDamagable>();
-    }
 
     private void Update()
     {
-        if (Time.time >= nextFire)
+        if (target == null)
+            return;
+
+        if (TimeToAttack())
         {
+            
             nextFire = Time.time + 1 / rateOfFire;
             StartCoroutine(Attack());
         }
+    }
+
+    bool TimeToAttack()
+    {
+        return Time.time >= nextFire;
     }
 
     IEnumerator Attack()
@@ -48,7 +57,7 @@ public class AutoAttack : MonoBehaviour
 
     void DamageTarget()
     {
-        //currentTarget.TakeDamage(enemyStats.MainAttackDamage);
+        currentTarget.TakeDamage(stats.MainAttackDamage);
     }
 
 }

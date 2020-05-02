@@ -5,33 +5,28 @@ using System.Linq;
 using Cinemachine;
 
 
-public class PlayerBattle : MonoBehaviour, IDamagable
+public class PlayerBattle : MonoBehaviour
 {
-    [SerializeField]
-    CharacterStats playerStats;
-
-    int currentHp;
 
     Animator animator;
-
+    
     GameObject enemyTarget;
 
     [SerializeField]
     LayerMask enemyLayerMask;
 
     CinemachineImpulseSource impulseSource;
+    StatusEffects effects;
+
+   
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
         impulseSource = GetComponent<CinemachineImpulseSource>();
+        effects = GetComponent<StatusEffects>();
     }
 
-
-    void Start()
-    {
-        currentHp = playerStats.MaxHealth;
-    }
     
     void Update()
     {
@@ -65,16 +60,13 @@ public class PlayerBattle : MonoBehaviour, IDamagable
     void AttackTarget()
     {
         animator.SetTrigger("Attack");
+        enemyTarget.GetComponent<IDamagable>().TakeDamage(effects.stats.MainAttackDamage);
+
         ShakeCamera();
     }
 
     void ShakeCamera()
     {
         impulseSource.GenerateImpulse();
-    }
-
-    public void TakeDamage(int damage)
-    {
-        currentHp -= damage;
     }
 }

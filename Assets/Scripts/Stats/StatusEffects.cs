@@ -21,6 +21,11 @@ public class StatusEffects : MonoBehaviour, IDamagable
 
     void Start()
     {
+        Initialize();
+    }
+
+    void Initialize()
+    {
         CurrentHealth = stats.MaxHealth;
     }
     
@@ -35,6 +40,11 @@ public class StatusEffects : MonoBehaviour, IDamagable
             Die();
         }
     }  
+
+    public void Heal(int health)
+    {
+        CurrentHealth += health;
+    }
 
     void Die()
     {
