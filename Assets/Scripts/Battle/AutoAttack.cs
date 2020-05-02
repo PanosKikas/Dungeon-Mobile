@@ -22,14 +22,14 @@ public class AutoAttack : MonoBehaviour
     {
         animator = GetComponentInChildren<Animator>();
         statusEffects = GetComponent<StatusEffects>();
-        currentTarget = GetComponent<IDamagable>();
+        currentTarget = target.GetComponent<IDamagable>();
         stats = statusEffects.stats;
     }
 
 
     private void Update()
     {
-        if (target == null)
+        if (target == null || !target.activeSelf)
             return;
 
         if (TimeToAttack())
@@ -50,7 +50,7 @@ public class AutoAttack : MonoBehaviour
         animator.SetTrigger("Attack");
 
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length +
-            animator.GetCurrentAnimatorStateInfo(0).normalizedTime);
+            animator.GetCurrentAnimatorStateInfo(0).normalizedTime - 1f);
 
         DamageTarget();
     }

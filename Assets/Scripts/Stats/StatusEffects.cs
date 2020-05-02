@@ -13,6 +13,8 @@ public class StatusEffects : MonoBehaviour, IDamagable
 
     IMovementDebuffs movementDebuffs;
 
+    bool hasDied = false;
+
     void Awake()
     {
         movementDebuffs = (IMovementDebuffs)GetComponent(typeof(IMovementDebuffs));
@@ -34,9 +36,10 @@ public class StatusEffects : MonoBehaviour, IDamagable
         
         movementDebuffs?.DebuffMovement();
 
-        CurrentHealth -= damage;
-        if (CurrentHealth <= 0)
+        CurrentHealth = Mathf.Clamp(CurrentHealth - damage, 0, stats.MaxHealth);
+        if (CurrentHealth <= 0 && !hasDied)
         {
+            hasDied = true;
             Die();
         }
     }  
@@ -48,6 +51,9 @@ public class StatusEffects : MonoBehaviour, IDamagable
 
     void Die()
     {
-        Destroy(gameObject);
+        Debug.Log("Die");
+        Destroy(gameObject, .5f);
+        enabled = false;
+        gameObject.SetActive(false);
     }
 }
