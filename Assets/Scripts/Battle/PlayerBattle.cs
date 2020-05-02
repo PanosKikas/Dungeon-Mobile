@@ -60,7 +60,7 @@ public class PlayerBattle : MonoBehaviour
     void AttackTarget()
     {
         animator.SetTrigger("Attack");
-        enemyTarget.GetComponent<IDamagable>().TakeDamage(effects.stats.MainAttackDamage);
+        enemyTarget.GetComponent<IDamagable>().TakeDamage(effects.stats.MainAttackDamage, effects.impactEffect);
 
         ShakeCamera();
     }

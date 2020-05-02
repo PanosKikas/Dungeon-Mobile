@@ -5,8 +5,9 @@ using Pathfinding;
 
 public class StatusEffects : MonoBehaviour, IDamagable
 {
-
     public CharacterStats stats;
+        
+    public GameObject impactEffect;
 
     [SerializeField]
     int CurrentHealth;
@@ -31,12 +32,21 @@ public class StatusEffects : MonoBehaviour, IDamagable
         CurrentHealth = stats.MaxHealth;
     }
     
-    public void TakeDamage(int damage)
+    public void TakeDamage(int damage, GameObject impactEffect)
     {
         
         movementDebuffs?.DebuffMovement();
 
         CurrentHealth = Mathf.Clamp(CurrentHealth - damage, 0, stats.MaxHealth);
+
+        if (impactEffect != null)
+        {
+            
+            GameObject impact = Instantiate(impactEffect, transform.position, Quaternion.identity);
+            Destroy(impact, 2f);
+        }
+        
+
         if (CurrentHealth <= 0 && !hasDied)
         {
             hasDied = true;

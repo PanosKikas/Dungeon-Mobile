@@ -57,7 +57,7 @@ public class AutoAttack : MonoBehaviour
 
     void DamageTarget()
     {
-        currentTarget.TakeDamage(stats.MainAttackDamage);
+        currentTarget.TakeDamage(stats.MainAttackDamage, statusEffects.impactEffect);
     }
 
 }
