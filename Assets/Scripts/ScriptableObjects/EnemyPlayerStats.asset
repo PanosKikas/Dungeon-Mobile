@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9861da3ebf8ebb44bb59889d04671b3f, type: 3}
   m_Name: EnemyPlayerStats
   m_EditorClassIdentifier: 
-  MaxHealth: 200
+  MaxHealth: 100000
   ProjecitleDamage: 0
   MainAttackDamage: 20

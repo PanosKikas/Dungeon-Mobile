@@ -16,7 +16,7 @@ public class AutoAttack : MonoBehaviour
     CharacterStats stats;
 
     float rateOfFire = .5f;
-    float nextFire = 0f;
+    float nextFire = 0;
 
     private void Awake()
     {
@@ -25,7 +25,6 @@ public class AutoAttack : MonoBehaviour
         currentTarget = target.GetComponent<IDamagable>();
         stats = statusEffects.stats;
     }
-
 
     private void Update()
     {
