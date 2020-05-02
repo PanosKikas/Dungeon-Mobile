@@ -16,6 +16,7 @@ GameObject:
   - component: {fileID: 7495838158229068008}
   - component: {fileID: 3819792626427891041}
   - component: {fileID: 1092331572}
+  - component: {fileID: -2740005285570043115}
   m_Layer: 10
   m_Name: Enemy
   m_TagString: Enemy
@@ -176,6 +177,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   patrolRadius: 2.86
+--- !u!114 &-2740005285570043115
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7495838158229068014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16c5e3a85a50c734cb7dcd4ec5ff1163, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7495838158493420706
 GameObject:
   m_ObjectHideFlags: 0

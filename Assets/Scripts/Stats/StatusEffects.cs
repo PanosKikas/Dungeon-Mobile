@@ -11,6 +11,14 @@ public class StatusEffects : MonoBehaviour, IDamagable
     [SerializeField]
     int CurrentHealth;
 
+    IMovementDebuffs movementDebuffs;
+
+    void Awake()
+    {
+        movementDebuffs = (IMovementDebuffs)GetComponent(typeof(IMovementDebuffs));
+        
+    }
+
     void Start()
     {
         CurrentHealth = stats.MaxHealth;
@@ -18,22 +26,15 @@ public class StatusEffects : MonoBehaviour, IDamagable
     
     public void TakeDamage(int damage)
     {
-        StartCoroutine(Stagger());
+        
+        movementDebuffs?.DebuffMovement();
+
         CurrentHealth -= damage;
         if (CurrentHealth <= 0)
         {
             Die();
         }
-    }
-
-    IEnumerator Stagger()
-    {
-        AIPath path = GetComponent<AIPath>();
-        float speed = path.maxSpeed;
-        path.maxSpeed *= .4f;
-        yield return new WaitForSeconds(.1f);
-        path.maxSpeed = speed;
-    }
+    }  
 
     void Die()
     {

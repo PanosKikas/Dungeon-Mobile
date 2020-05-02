@@ -12,8 +12,6 @@ public class PlayerBattle : MonoBehaviour, IDamagable
 
     int currentHp;
 
-    bool isMainHero = true;
-
     Animator animator;
 
     GameObject enemyTarget;
@@ -21,9 +19,12 @@ public class PlayerBattle : MonoBehaviour, IDamagable
     [SerializeField]
     LayerMask enemyLayerMask;
 
+    CinemachineImpulseSource impulseSource;
+
     private void Awake()
     {
         animator = GetComponent<Animator>();
+        impulseSource = GetComponent<CinemachineImpulseSource>();
     }
 
 
@@ -39,8 +40,8 @@ public class PlayerBattle : MonoBehaviour, IDamagable
             FindAttackTarget();
             if (enemyTarget != null)
             {
-                animator.SetTrigger("Attack");
-                GetComponent<CinemachineImpulseSource>().GenerateImpulse();
+                AttackTarget();
+                ShakeCamera();
             }
         }
     }
@@ -59,6 +60,17 @@ public class PlayerBattle : MonoBehaviour, IDamagable
         {
             enemyTarget = null;
         }
+    }
+
+    void AttackTarget()
+    {
+        animator.SetTrigger("Attack");
+        ShakeCamera();
+    }
+
+    void ShakeCamera()
+    {
+        impulseSource.GenerateImpulse();
     }
 
     public void TakeDamage(int damage)

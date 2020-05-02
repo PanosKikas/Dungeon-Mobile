@@ -29,8 +29,6 @@ public class SeekRadius : MonoBehaviour
     {
         StartCoroutine(Search());
     }
-    
-
    
     IEnumerator Search()
     {
@@ -66,8 +64,7 @@ public class SeekRadius : MonoBehaviour
     }
 
     void EnablePathFinder()
-    {
-        Debug.Log("Walk");
+    {   
         animator.SetTrigger("Walk");
         path.enabled = true;
         destinationSetter.enabled = true;
