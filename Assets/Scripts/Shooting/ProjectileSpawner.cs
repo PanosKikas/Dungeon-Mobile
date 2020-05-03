@@ -13,10 +13,14 @@ public class ProjectileSpawner : MonoBehaviour
 
     int projectileDamage;
 
+    Touch? currentTouch = null;
+
     private void Awake()
     {
         projectileDamage = GetComponent<StatusEffects>().stats.ProjecitleDamage;
     }
+
+
     public void Spawn()
     {
         CalculateSpawnPositionAndRotation();
@@ -24,18 +28,53 @@ public class ProjectileSpawner : MonoBehaviour
         projectile.GetComponent<Projectile>().ProjectileDamage = projectileDamage;
     }
 
+
+    public void SpawnAndroid(Touch? touch)
+    {
+        currentTouch = touch;
+        CalculateSpawnPositionAndRotation();
+        GameObject projectile = Instantiate(projectileToSpawn, bulletSpawnPosition, bulletSpawnRotation);
+        projectile.GetComponent<Projectile>().ProjectileDamage = projectileDamage;
+    }
+
     void CalculateSpawnPositionAndRotation()
     {
-        Vector2 mouseDirection = GetMouseDirection();
+        Vector2 mouseDirection;
+        #region CheckPlatform
+#if UNITY_EDITOR_WIN
+
+        if (UnityEditor.EditorApplication.isRemoteConnected)
+        {
+            mouseDirection = GetTouchAndroid();
+        }
+        else
+        {
+            mouseDirection = GetMouseDirection();
+        }
+#else
+
+        GetInputAndroid();
+#endif
+        #endregion
+        
         CalculateSpawnRotation(mouseDirection);
         mouseDirection.Normalize();
         CalculateSpawnPosition(mouseDirection);
 
     }
 
+
     Vector2 GetMouseDirection()
     {
         var mouseDir = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        Vector2 dir = mouseDir - transform.position;
+        return dir;
+    }
+
+    Vector2 GetTouchAndroid()
+    {
+        var mouseDir = Camera.main.ScreenToWorldPoint(currentTouch.Value.position);
 
         Vector2 dir = mouseDir - transform.position;
         return dir;

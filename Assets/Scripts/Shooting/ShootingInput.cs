@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 [RequireComponent(typeof(ProjectileSpawner))]
 public class ShootingInput : MonoBehaviour
@@ -20,10 +21,12 @@ public class ShootingInput : MonoBehaviour
     {
         if (PressedShoot() && IsTimeToShoot())
         {
+
             CalculateNextShootTime();
             spawner.Spawn();
-        }
-    }
+        }   
+            
+    }   
 
     bool PressedShoot()
     {
