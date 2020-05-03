@@ -1,5 +1,13 @@
 fileFormatVersion: 2
+<<<<<<< Updated upstream
+<<<<<<< Updated upstream:Assets/_TerrainAutoUpgrade.meta
 guid: 40713d17c66cefa47b93aa9b33d5d772
+=======
+guid: 5e96a179a0da0cc409b79ca696a90d72
+>>>>>>> Stashed changes:Assets/Sprites/Objects/Heavy Outline Pixel Items.meta
+=======
+guid: 40713d17c66cefa47b93aa9b33d5d772
+>>>>>>> Stashed changes
 folderAsset: yes
 DefaultImporter:
   externalObjects: {}
