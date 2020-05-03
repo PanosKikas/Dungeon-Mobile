@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 using Pathfinding;
 
 public class StatusEffects : MonoBehaviour, IDamagable
@@ -11,24 +12,22 @@ public class StatusEffects : MonoBehaviour, IDamagable
     [SerializeField]
     Vector3 ImpactEffectOffset;
 
-    [SerializeField]
-    int CurrentHealth;
-
+    public int CurrentHealth { get; private set; }
+    
     IMovementDebuffs movementDebuffs;
 
     bool hasDied = false;
 
+
+    public UnityEvent OnHpLoss;
+    
+
     void Awake()
     {
         movementDebuffs = (IMovementDebuffs)GetComponent(typeof(IMovementDebuffs));
-        
-    }
-
-    void Start()
-    {
         Initialize();
     }
-
+    
     void Initialize()
     {
         CurrentHealth = stats.MaxHealth;
@@ -39,6 +38,10 @@ public class StatusEffects : MonoBehaviour, IDamagable
         movementDebuffs?.DebuffMovement();
 
         CurrentHealth = Mathf.Clamp(CurrentHealth - damage, 0, stats.MaxHealth);
+        
+      
+        OnHpLoss?.Invoke();
+   
 
         if (impactEffect != null)
         {

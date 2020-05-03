@@ -1,36 +1,57 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 using UnityEngine.Experimental.Rendering.Universal;
 
 public class BattleGameManager : MonoBehaviour
 {
+   
     [SerializeField]
-    List<GameObject> aliveCharacters;
-
+    GameObject[] aliveCharacters;
 
     GameObject currentlySelectedCharacter;
     int currentlySelectedIdx;
 
-    private void Start()
+    #region Singletton
+    public static BattleGameManager _instance;
+
+    public static BattleGameManager Instance
     {
+        get
+        {
+            if (_instance == null)
+            {
+                _instance = GameObject.FindObjectOfType<BattleGameManager>();
+
+                if (_instance == null)
+                {
+                    GameObject container = new GameObject("BattleGameManager");
+                    _instance = container.AddComponent<BattleGameManager>();
+                }
+            }
+
+            return _instance;
+        }
+    }
+    #endregion
+
+    private void Start()
+    {     
         StartCoroutine(Setup());
     }
 
     IEnumerator Setup()
-    {
-        
+    {   
         yield return new WaitForSeconds(2f);
 
         currentlySelectedIdx = 0;
         currentlySelectedCharacter = aliveCharacters[currentlySelectedIdx];
-        MakeManualCombat();
-        for (int i = 1; i < aliveCharacters.Count; i++)
+        ActivateManualCombat();
+        for (int i = 1; i < aliveCharacters.Length; i++)
         {
-
             DeselectCharacter(i);
         }
-
     }
     
 
@@ -42,11 +63,11 @@ public class BattleGameManager : MonoBehaviour
             DeselectCharacter(currentlySelectedIdx);
             currentlySelectedIdx = idx;
             currentlySelectedCharacter = aliveCharacters[idx];
-            MakeManualCombat();
+            ActivateManualCombat();
         }
     }
 
-    void MakeManualCombat()
+    void ActivateManualCombat()
     {
         currentlySelectedCharacter.GetComponent<AutoAttack>().enabled = false;
         currentlySelectedCharacter.GetComponent<PlayerBattle>().enabled = true;
@@ -60,5 +81,5 @@ public class BattleGameManager : MonoBehaviour
         characterToDeselect.GetComponent<PlayerBattle>().enabled = false;
         characterToDeselect.GetComponentInChildren<Light2D>().enabled = false;
     }
-
+    
 }

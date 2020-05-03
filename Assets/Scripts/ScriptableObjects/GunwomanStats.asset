@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9861da3ebf8ebb44bb59889d04671b3f, type: 3}
-  m_Name: EnemyPlayerStats
+  m_Name: GunwomanStats
   m_EditorClassIdentifier: 
-  MaxHealth: 5000
-  ProjecitleDamage: 0
-  MainAttackDamage: 20
+  MaxHealth: 1000
+  ProjecitleDamage: 10
+  MainAttackDamage: 10
