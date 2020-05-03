@@ -7,6 +7,13 @@ public class CharacterStats : ScriptableObject
 
     public int ProjecitleDamage = 10;
 
-    public int MainAttackDamage = 50;
+    public int BaseAttackDamage = 50;
+
+    public float AutoAttackRate = 1 / 2f;
+    public float ManualAttackRate = 2f;
+
+    public int MaxEndurace = 100;
+
+
     
 }

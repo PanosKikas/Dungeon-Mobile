@@ -13,14 +13,13 @@ public class StatusEffects : MonoBehaviour, IDamagable
     Vector3 ImpactEffectOffset;
 
     public int CurrentHealth { get; private set; }
+    public int CurrentEndurace { get; private set; }
     
     IMovementDebuffs movementDebuffs;
 
     bool hasDied = false;
 
-
     public UnityEvent OnHpLoss;
-    
 
     void Awake()
     {
@@ -31,6 +30,7 @@ public class StatusEffects : MonoBehaviour, IDamagable
     void Initialize()
     {
         CurrentHealth = stats.MaxHealth;
+        CurrentEndurace = stats.MaxEndurace;
     }
     
     public void TakeDamage(int damage, GameObject impactEffect)

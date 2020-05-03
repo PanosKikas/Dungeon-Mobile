@@ -14,4 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   MaxHealth: 5000
   ProjecitleDamage: 0
-  MainAttackDamage: 20
+  BaseAttackDamage: 10
+  AutoAttackRate: 2
+  ManualAttackRate: 4
+  MaxEndurace: 100

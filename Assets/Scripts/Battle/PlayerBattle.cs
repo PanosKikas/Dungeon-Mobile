@@ -18,7 +18,7 @@ public class PlayerBattle : MonoBehaviour
     CinemachineImpulseSource impulseSource;
     StatusEffects effects;
 
-   
+    float nextFireTime = 0;
 
     private void Awake()
     {
@@ -30,15 +30,21 @@ public class PlayerBattle : MonoBehaviour
     
     void Update()
     {
-        if (Input.GetButtonDown("Fire1"))
+        if (Input.GetButtonDown("Fire1") && TimeToAttack())
         {
             FindAttackTarget();
             if (enemyTarget != null)
             {
                 AttackTarget();
+                nextFireTime = Time.time + 1f/effects.stats.ManualAttackRate;
                 ShakeCamera();
             }
         }
+    }
+
+    bool TimeToAttack()
+    {
+        return Time.time >= nextFireTime;
     }
 
     void FindAttackTarget()
@@ -49,7 +55,6 @@ public class PlayerBattle : MonoBehaviour
         if (colliders != null && colliders.Any<Collider2D>())
         {
             enemyTarget = colliders[0].gameObject;
-            
         }
         else
         {
@@ -59,10 +64,21 @@ public class PlayerBattle : MonoBehaviour
 
     void AttackTarget()
     {
-        animator.SetTrigger("Attack");
-        enemyTarget.GetComponent<IDamagable>().TakeDamage(effects.stats.MainAttackDamage, effects.impactEffect);
+        PlayAttackAnimation();
 
+        DamageEnemyTarget();
         ShakeCamera();
+    }
+
+    void PlayAttackAnimation()
+    {
+        animator.SetTrigger("Attack");
+    }
+
+    void DamageEnemyTarget()
+    {
+        IDamagable target = enemyTarget.GetComponent<IDamagable>();
+        target.TakeDamage(effects.stats.BaseAttackDamage, effects.impactEffect);
     }
 
     void ShakeCamera()

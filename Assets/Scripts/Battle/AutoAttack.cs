@@ -15,8 +15,10 @@ public class AutoAttack : MonoBehaviour
 
     CharacterStats stats;
 
-    float rateOfFire = .5f;
+    
     float nextFire = 0;
+
+    float attackRate;
 
     private void Awake()
     {
@@ -26,6 +28,11 @@ public class AutoAttack : MonoBehaviour
         stats = statusEffects.stats;
     }
 
+    private void Start()
+    {
+        attackRate = stats.AutoAttackRate;
+    }
+
     private void Update()
     {
         if (target == null || !target.activeSelf)
@@ -33,8 +40,8 @@ public class AutoAttack : MonoBehaviour
 
         if (TimeToAttack())
         {
-            
-            nextFire = Time.time + 1 / rateOfFire;
+
+            nextFire = Time.time + 1 / attackRate;
             StartCoroutine(Attack());
         }
     }
@@ -56,7 +63,7 @@ public class AutoAttack : MonoBehaviour
 
     void DamageTarget()
     {
-        currentTarget.TakeDamage(stats.MainAttackDamage, statusEffects.impactEffect);
+        currentTarget.TakeDamage(stats.BaseAttackDamage, statusEffects.impactEffect);
     }
 
 }
