@@ -4,18 +4,16 @@ using UnityEngine;
 using UnityEngine.Events;
 using Pathfinding;
 
-public class StatusEffects : MonoBehaviour, IDamagable
+public abstract class StatusEffects : MonoBehaviour, IDamagable
 {
     public CharacterStats stats;
         
     public GameObject impactEffect;
+
     [SerializeField]
     Vector3 ImpactEffectOffset;
 
     public int CurrentHealth { get; private set; }
-    public int CurrentEndurace { get; private set; }
-    
-    IMovementDebuffs movementDebuffs;
 
     bool hasDied = false;
 
@@ -23,23 +21,18 @@ public class StatusEffects : MonoBehaviour, IDamagable
 
     void Awake()
     {
-        movementDebuffs = (IMovementDebuffs)GetComponent(typeof(IMovementDebuffs));
         Initialize();
     }
     
-    void Initialize()
+    protected virtual void Initialize()
     {
-        CurrentHealth = stats.MaxHealth;
-        CurrentEndurace = stats.MaxEndurace;
+        CurrentHealth = stats.MaxHealth;   
     }
     
-    public void TakeDamage(int damage, GameObject impactEffect)
+    public virtual void TakeDamage(int damage, GameObject impactEffect)
     {  
-        movementDebuffs?.DebuffMovement();
-
         CurrentHealth = Mathf.Clamp(CurrentHealth - damage, 0, stats.MaxHealth);
         
-      
         OnHpLoss?.Invoke();
    
 
@@ -50,7 +43,6 @@ public class StatusEffects : MonoBehaviour, IDamagable
             Destroy(impact, 2f);
         }
         
-
         if (CurrentHealth <= 0 && !hasDied)
         {
             hasDied = true;
@@ -58,14 +50,12 @@ public class StatusEffects : MonoBehaviour, IDamagable
         }
     }  
 
-   
-
     public void Heal(int health)
     {
         CurrentHealth += health;
     }
 
-    void Die()
+    protected virtual void Die()
     {
         Debug.Log("Die");
         Destroy(gameObject, .5f);

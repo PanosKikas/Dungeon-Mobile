@@ -1283,6 +1283,25 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 9178162201955053590}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &829578684
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 829578682}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2d03ee29c9f7df429a2d2a3f6b96a62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 11400000, guid: ca4e8815f63aefa4180a49fc103573c2, type: 2}
+  impactEffect: {fileID: 3169309519121193936, guid: 496f152371072cb438f300083c2f54b0,
+    type: 3}
+  ImpactEffectOffset: {x: 0, y: 0, z: 0}
+  OnHpLoss:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &859244305
 GameObject:
   m_ObjectHideFlags: 0
@@ -3552,11 +3571,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8229876415448862326, guid: 014cc388af6d3c44c807754bfc598379,
-        type: 3}
-      propertyPath: OnHpLoss.m_PersistentCalls.m_Calls.Array.size
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8405479702608628577, guid: 014cc388af6d3c44c807754bfc598379,
         type: 3}
       propertyPath: target
@@ -3811,5 +3825,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 9178162202769681833, guid: f5b4c58344771cb4ab92a8320429d6b2, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f5b4c58344771cb4ab92a8320429d6b2, type: 3}

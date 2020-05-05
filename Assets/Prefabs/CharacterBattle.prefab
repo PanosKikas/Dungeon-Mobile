@@ -97,8 +97,8 @@ GameObject:
   - component: {fileID: 8229876415448862322}
   - component: {fileID: 8229876415448862325}
   - component: {fileID: 8229876415448862321}
-  - component: {fileID: 8229876415448862326}
   - component: {fileID: 8405479702608628577}
+  - component: {fileID: 456131177}
   m_Layer: 11
   m_Name: CharacterBattle
   m_TagString: Untagged
@@ -265,35 +265,6 @@ MonoBehaviour:
     m_DirectionMode: 0
     m_DissipationMode: 2
     m_DissipationDistance: 1000
---- !u!114 &8229876415448862326
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8229876415448862320}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07868ce48e7115245bfc46c950c76094, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: 06dbedb128bfc4d4c8520838e51b4d44, type: 2}
-  impactEffect: {fileID: 0}
-  ImpactEffectOffset: {x: -1, y: 0, z: 0}
-  OnHpLoss:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 9133154577597408844}
-        m_MethodName: UpdateHealth
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &8405479702608628577
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -307,6 +278,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
+--- !u!114 &456131177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8229876415448862320}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3078bb11c61d3bd448ec2c45f4b38ec1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 11400000, guid: 06dbedb128bfc4d4c8520838e51b4d44, type: 2}
+  impactEffect: {fileID: 0}
+  ImpactEffectOffset: {x: -1, y: 0, z: 0}
+  OnHpLoss:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &392981737254119807
 PrefabInstance:
   m_ObjectHideFlags: 0
