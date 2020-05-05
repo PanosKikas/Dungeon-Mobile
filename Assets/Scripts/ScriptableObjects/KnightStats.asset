@@ -17,4 +17,6 @@ MonoBehaviour:
   BaseAttackDamage: 50
   AutoAttackRate: 0.25
   ManualAttackRate: 2
-  MaxEndurace: 300
+  MaxEndurace: 100
+  EndurancePerAttack: 10
+  EnduranceRechargeRate: 4

@@ -101,6 +101,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &1386870477
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4055636238916326943}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d4aadad804d69b43aa46c7b2432e4c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9178162202769681836
 GameObject:
   m_ObjectHideFlags: 0
@@ -113,7 +125,7 @@ GameObject:
   - component: {fileID: 9178162202769681834}
   - component: {fileID: 9178162202769681835}
   - component: {fileID: 9178162202769681832}
-  - component: {fileID: 9178162202769681833}
+  - component: {fileID: 829578684}
   m_Layer: 10
   m_Name: EnemyBattlePhase
   m_TagString: Untagged
@@ -128,7 +140,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 9178162202769681836}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 10.936, y: -3.491, z: 0}
   m_LocalScale: {x: 1.1544243, y: 1.2286518, z: 0.8657609}
   m_Children:
@@ -178,7 +190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
---- !u!114 &9178162202769681833
+--- !u!114 &829578684
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -187,27 +199,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 9178162202769681836}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07868ce48e7115245bfc46c950c76094, type: 3}
+  m_Script: {fileID: 11500000, guid: e2d03ee29c9f7df429a2d2a3f6b96a62, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   stats: {fileID: 11400000, guid: ca4e8815f63aefa4180a49fc103573c2, type: 2}
   impactEffect: {fileID: 3169309519121193936, guid: 496f152371072cb438f300083c2f54b0,
     type: 3}
-  ImpactEffectOffset: {x: -3, y: 0, z: 0}
-  onHpLoss:
+  ImpactEffectOffset: {x: 0, y: 0, z: 0}
+  OnHpLoss:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_MethodName: UpdateHealth
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1001 &2688048416173682776
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -375,6 +376,12 @@ PrefabInstance:
 --- !u!224 &4055636237542269658 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2091181374667870850, guid: ecd12630b1b487f46ab36c0ea4b92582,
+    type: 3}
+  m_PrefabInstance: {fileID: 2688048416173682776}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4055636238916326943 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2091181372820055623, guid: ecd12630b1b487f46ab36c0ea4b92582,
     type: 3}
   m_PrefabInstance: {fileID: 2688048416173682776}
   m_PrefabAsset: {fileID: 0}

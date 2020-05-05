@@ -14,7 +14,7 @@ public class CharacterStats : ScriptableObject
 
     public int MaxEndurace = 100;
 
-    public int EndurancePerAttack = 4;
+    public float EndurancePerAttack = 4;
 
     public float EnduranceRechargeRate = 1f;
     
