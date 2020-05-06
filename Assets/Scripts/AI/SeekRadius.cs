@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
 using UnityEngine.SceneManagement;
@@ -24,61 +23,13 @@ public class SeekRadius : MonoBehaviour
         destinationSetter = GetComponent<AIDestinationSetter>();
         animator = GetComponentInChildren<Animator>();
     }
-
-    void Start()
-    {
-        StartCoroutine(Search());
-    }
+    
    
-    IEnumerator Search()
+    private void Update()
     {
-
-        while(true)
-        {
-            
-            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, searchRadius, searchMask);
-            if (colliders != null && colliders.Length > 0)
-            {
-                EnablePathFinder();
-
-            }
-            else if (destinationSetter.enabled)
-            {
-                DisablePathfinder();
-            }
-            yield return new WaitForSeconds(.2f);
-        }      
-    }  
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Player"))
-        {
-            EnterBattle();
-            Destroy(gameObject);
-        }
+        animator.SetFloat("Speed", path.velocity.magnitude);
     }
-
-    void EnterBattle()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-    }
-
-    void EnablePathFinder()
-    {   
-        animator.SetTrigger("Walk");
-        path.enabled = true;
-        destinationSetter.enabled = true;
-        
-    }
-
-    void DisablePathfinder()
-    {
-        animator.SetTrigger("Idle");
-        
-        path.enabled = false;
-        destinationSetter.enabled = false;
-        
-    }
+    
 
     private void OnDrawGizmosSelected()
     {

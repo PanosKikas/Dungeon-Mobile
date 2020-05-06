@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyStatusEffects : StatusEffects
 {
     IMovementDebuffs movementDebuffs;
-
+   
     protected override void Initialize()
     {
         base.Initialize();
