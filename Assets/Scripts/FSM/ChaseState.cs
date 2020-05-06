@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PatrolState : EnemyState
+public class ChaseState : EnemyState
 {
     public override void EnterState()
     {

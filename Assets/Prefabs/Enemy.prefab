@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 7495838158229068015}
   - component: {fileID: 7495838158229068013}
   - component: {fileID: 7495838158229068008}
-  - component: {fileID: 3819792626427891041}
   - component: {fileID: 1092331572}
   m_Layer: 10
   m_Name: Enemy
@@ -149,24 +148,6 @@ MonoBehaviour:
     m_Bits: 6144
   animator: {fileID: 0}
   searchRadius: 4.01
---- !u!114 &3819792626427891041
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7495838158229068014}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07868ce48e7115245bfc46c950c76094, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: ca4e8815f63aefa4180a49fc103573c2, type: 2}
-  impactEffect: {fileID: 0}
-  ImpactEffectOffset: {x: 0, y: 0, z: 0}
-  OnHpLoss:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &1092331572
 MonoBehaviour:
   m_ObjectHideFlags: 0

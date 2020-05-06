@@ -20,7 +20,6 @@ public class PlayerStatusEffects : StatusEffects
     private void Update()
     {
         RechargeEndurance(Time.deltaTime * stats.EnduranceRechargeRate);
-        Debug.Log("Endurance: " + gameObject.name + " " + CurrentEndurance);
     }
 
     void RechargeEndurance(float endurance)

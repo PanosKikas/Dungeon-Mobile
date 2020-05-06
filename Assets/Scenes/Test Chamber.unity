@@ -1158,7 +1158,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.838953, y: 3.01398, z: -10}
+  m_LocalPosition: {x: 12.838949, y: 3.013988, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2115,7 +2115,6 @@ GameObject:
   - component: {fileID: 894039796}
   - component: {fileID: 894039797}
   - component: {fileID: 894039792}
-  - component: {fileID: 894039799}
   - component: {fileID: 894039798}
   - component: {fileID: 894039800}
   - component: {fileID: 894039801}
@@ -2268,29 +2267,12 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 894039791}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 138eedb3ee6a09c45a14ced58c18280e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &894039799
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 894039791}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 07868ce48e7115245bfc46c950c76094, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: 06dbedb128bfc4d4c8520838e51b4d44, type: 2}
-  impactEffect: {fileID: 0}
-  ImpactEffectOffset: {x: 0, y: 0, z: 0}
-  OnHpLoss:
-    m_PersistentCalls:
-      m_Calls: []
+  rateOfFire: 3
 --- !u!114 &894039800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2312,7 +2294,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 894039791}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a948fffad3a90bb439bc3a6e05f5cda0, type: 3}
   m_Name: 
@@ -2925,6 +2907,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slowDownRate: 0.4
+--- !u!114 &1061481983
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1061481981}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e2d03ee29c9f7df429a2d2a3f6b96a62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats: {fileID: 0}
+  impactEffect: {fileID: 0}
+  ImpactEffectOffset: {x: 0, y: 0, z: 0}
+  OnHpLoss:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1001 &1077325159
 PrefabInstance:
   m_ObjectHideFlags: 0

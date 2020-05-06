@@ -9,6 +9,7 @@ public class ShootingInput : MonoBehaviour
 
     ProjectileSpawner spawner;
 
+    [SerializeField]
     float rateOfFire = 2f;
     float nextFireTime = 0f;
 
