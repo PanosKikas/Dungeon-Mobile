@@ -41,6 +41,8 @@ public class ProjectileSpawner : MonoBehaviour
     {
         Vector2 mouseDirection;
         #region CheckPlatform
+
+
 #if UNITY_EDITOR_WIN
 
         if (UnityEditor.EditorApplication.isRemoteConnected)
@@ -53,10 +55,12 @@ public class ProjectileSpawner : MonoBehaviour
         }
 #else
 
-        GetInputAndroid();
+                        GetInputAndroid();
 #endif
         #endregion
-        
+
+       // mouseDirection = GetTouchAndroid();
+
         CalculateSpawnRotation(mouseDirection);
         mouseDirection.Normalize();
         CalculateSpawnPosition(mouseDirection);
