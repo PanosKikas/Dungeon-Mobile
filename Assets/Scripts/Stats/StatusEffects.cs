@@ -15,6 +15,7 @@ public abstract class StatusEffects : MonoBehaviour, IDamagable
 
     bool hasDied = false;
 
+    [HideInInspector]
     public UnityEvent OnHpLoss;
     
     
@@ -23,7 +24,6 @@ public abstract class StatusEffects : MonoBehaviour, IDamagable
         stats.CurrentHealth = Mathf.Clamp(stats.CurrentHealth - damage, 0, stats.MaxHealth);
         
         OnHpLoss?.Invoke();
-   
 
         if (impactEffect != null)
         {

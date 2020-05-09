@@ -5,7 +5,6 @@ using UnityEngine;
 public class PlayerStatusEffects : StatusEffects
 {
     
-
     public void DecreaseEndurance()
     {
         stats.CurrentEndurance = Mathf.Clamp(stats.CurrentEndurance - stats.EndurancePerAttack, 0, stats.MaxEndurace);
