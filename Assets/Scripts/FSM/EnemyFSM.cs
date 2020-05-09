@@ -12,10 +12,11 @@ public class EnemyFSM : MonoBehaviour
 
     public State currentState { get; private set; }
 
-    private void Awake()
+/*    private void Update()
     {
-        
-    }
+
+        Debug.Log(currentState);
+    }*/
 
     private void Start()
     {

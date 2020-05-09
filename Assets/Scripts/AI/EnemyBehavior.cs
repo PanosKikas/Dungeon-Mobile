@@ -38,10 +38,14 @@ public class EnemyBehavior : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") || collision.CompareTag("Projectile"))
+        if (stateMachine.currentState != stateMachine.ChaseState)
         {
-
-            stateMachine.ChangeState(stateMachine.ChaseState);
+            if (collision.CompareTag("Player") || collision.CompareTag("Projectile"))
+            {
+                stateMachine.ChangeState(stateMachine.ChaseState);
+            }
+            
+           
         }
     }
 
@@ -53,7 +57,11 @@ public class EnemyBehavior : MonoBehaviour
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (stateMachine.currentState == stateMachine.ChaseState && collision.CompareTag("Player"))
+        {
+            
             stateMachine.ChangeState(stateMachine.PatrolState);
+        }
+            
     }
 
 

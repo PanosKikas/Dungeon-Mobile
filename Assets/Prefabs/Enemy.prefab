@@ -235,7 +235,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 5.04
+  m_Radius: 9.42
 --- !u!114 &304844771
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -301,7 +301,6 @@ GameObject:
   - component: {fileID: 7495838158493420766}
   - component: {fileID: 7495838158493420705}
   - component: {fileID: 1034520440}
-  - component: {fileID: 552357305}
   m_Layer: 10
   m_Name: GFX
   m_TagString: Untagged
@@ -392,15 +391,3 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &552357305
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7495838158493420706}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 453171f0c773c884c81bb2cf371c6a95, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
