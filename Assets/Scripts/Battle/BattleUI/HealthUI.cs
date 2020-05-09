@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class HealthUI : BattleUI
 {
+    
+    
     void Start()
     {
         statusEffects.OnHpLoss.AddListener(UpdateHealth);
@@ -13,7 +15,7 @@ public class HealthUI : BattleUI
 
     public void UpdateHealth()
     {
-        bar.value = (float)statusEffects.CurrentHealth / statusEffects.stats.MaxHealth;
+        bar.value = (float)stats.CurrentHealth / stats.MaxHealth;
     }
 
 }

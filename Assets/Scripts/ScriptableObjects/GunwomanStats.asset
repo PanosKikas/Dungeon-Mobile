@@ -12,11 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9861da3ebf8ebb44bb59889d04671b3f, type: 3}
   m_Name: GunwomanStats
   m_EditorClassIdentifier: 
+  CurrentHealth: 970
   MaxHealth: 1000
-  ProjecitleDamage: 10
+  ProjecitleDamage: 1000
   BaseAttackDamage: 5
   AutoAttackRate: 0.5
   ManualAttackRate: 10
+  CurrentEndurance: 100
   MaxEndurace: 100
   EndurancePerAttack: 4
   EnduranceRechargeRate: 3

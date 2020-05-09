@@ -5,12 +5,12 @@ using UnityEngine;
 public class EnemyStatusEffects : StatusEffects
 {
     IMovementDebuffs movementDebuffs;
-   
-    protected override void Initialize()
+
+    private void Awake()
     {
-        base.Initialize();
         movementDebuffs = (IMovementDebuffs)GetComponent(typeof(IMovementDebuffs));
     }
+    
 
     public override void TakeDamage(int damage, GameObject impactEffect)
     {

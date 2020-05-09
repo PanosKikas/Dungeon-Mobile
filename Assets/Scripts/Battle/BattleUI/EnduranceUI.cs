@@ -4,15 +4,7 @@ using UnityEngine;
 
 public class EnduranceUI : BattleUI
 {
-
-    PlayerStatusEffects playerStatusEffects;
-
-    protected override void Awake()
-    {
-        base.Awake();
-        playerStatusEffects = (PlayerStatusEffects)statusEffects;
-    }
-
+        
     private void Update()
     {
         UpdateEnduranceBar();
@@ -21,7 +13,7 @@ public class EnduranceUI : BattleUI
     void UpdateEnduranceBar()
     {
        
-        bar.value = (float)playerStatusEffects.CurrentEndurance / (float)playerStatusEffects.stats.MaxEndurace;
+        bar.value = (float)stats.CurrentEndurance / (float)stats.MaxEndurace;
     }
 
 

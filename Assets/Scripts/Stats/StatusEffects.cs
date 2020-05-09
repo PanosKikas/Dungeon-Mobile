@@ -13,25 +13,14 @@ public abstract class StatusEffects : MonoBehaviour, IDamagable
     [SerializeField]
     Vector3 ImpactEffectOffset;
 
-    public int CurrentHealth { get; private set; }
-
     bool hasDied = false;
 
     public UnityEvent OnHpLoss;
-
-    void Awake()
-    {
-        Initialize();
-    }
     
-    protected virtual void Initialize()
-    {
-        CurrentHealth = stats.MaxHealth;   
-    }
     
-    public virtual void TakeDamage(int damage, GameObject impactEffect)
+    public virtual void TakeDamage(int damage, GameObject impactEffect = null)
     {  
-        CurrentHealth = Mathf.Clamp(CurrentHealth - damage, 0, stats.MaxHealth);
+        stats.CurrentHealth = Mathf.Clamp(stats.CurrentHealth - damage, 0, stats.MaxHealth);
         
         OnHpLoss?.Invoke();
    
@@ -43,7 +32,7 @@ public abstract class StatusEffects : MonoBehaviour, IDamagable
             Destroy(impact, 2f);
         }
         
-        if (CurrentHealth <= 0 && !hasDied)
+        if (stats.CurrentHealth <= 0 && !hasDied)
         {
             hasDied = true;
             Die();
@@ -52,7 +41,7 @@ public abstract class StatusEffects : MonoBehaviour, IDamagable
 
     public void Heal(int health)
     {
-        CurrentHealth += health;
+        stats.CurrentHealth += health;
     }
 
     protected virtual void Die()
