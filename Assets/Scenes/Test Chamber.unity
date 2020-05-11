@@ -782,13 +782,13 @@ GameObject:
   m_Component:
   - component: {fileID: 282365906}
   - component: {fileID: 282365907}
-  m_Layer: 10
+  m_Layer: 0
   m_Name: Enemies
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &282365906
 Transform:
   m_ObjectHideFlags: 0
