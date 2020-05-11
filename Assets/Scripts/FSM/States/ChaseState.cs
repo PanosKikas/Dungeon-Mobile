@@ -8,6 +8,7 @@ public class ChaseState : State
     AIDestinationSetter destinationSetter;
     AIPath path;
     EnemyBehavior enemyBehavior;
+    EnemyGroup parentGroup;
 
     public ChaseState(EnemyFSM stateMachine)
     {
@@ -16,14 +17,14 @@ public class ChaseState : State
         path = stateMachine.GetComponent<AIPath>();
         
         enemyBehavior = stateMachine.GetComponent<EnemyBehavior>();
-       
+        parentGroup = stateMachine.GetComponentInParent<EnemyGroup>();
     }
 
     public override void EnterState()
     {
         
+        parentGroup.EnableChaseAllEnemies();
         EnablePathFinder();
-        
     }
 
     public override void ExitState()

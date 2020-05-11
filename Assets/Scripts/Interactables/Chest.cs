@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Experimental.Rendering.Universal;
 
 public class Chest : Interactable
 {
@@ -10,6 +11,9 @@ public class Chest : Interactable
 
     [SerializeField]
     Sprite openChestSprite;
+
+    [SerializeField]
+    Light2D light;
 
     private void Awake()
     {
@@ -27,6 +31,7 @@ public class Chest : Interactable
     void OpenChest()
     {
         ChangeGraphics();
+        OpenLight();
         this.enabled = false;
     }
 
@@ -35,6 +40,10 @@ public class Chest : Interactable
         spriteRenderer.sprite = openChestSprite;
     }
 
+    void OpenLight()
+    {
+        light.enabled = true;
+    }
 
     private void OnDrawGizmosSelected()
     {

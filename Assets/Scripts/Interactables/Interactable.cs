@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-[RequireComponent(typeof(CircleCollider2D))]
+
 public abstract class Interactable : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField]
@@ -13,7 +13,7 @@ public abstract class Interactable : MonoBehaviour, IPointerClickHandler
 
     protected void Awake()
     {
-        var collider = GetComponent<CircleCollider2D>();
+        var collider = GetComponentInChildren<CircleCollider2D>();
         collider.radius = interactableRadius;
         collider.isTrigger = true;
     }
@@ -36,13 +36,14 @@ public abstract class Interactable : MonoBehaviour, IPointerClickHandler
 
     public virtual void Interact()
     {
-        Debug.Log("interact");
+       
     }
 
     public void OnPointerClick(PointerEventData eventData)
     {   
         if (canInteract)
         {
+            
             Interact();
         }
     }

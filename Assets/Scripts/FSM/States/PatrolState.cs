@@ -14,6 +14,7 @@ public class PatrolState : State
 
     int currentWaypointIndex;
     Transform currentWaypoint;
+    Vector3 targetWaypointPosition;
 
     [SerializeField]
     float speed = 5f;
@@ -37,12 +38,14 @@ public class PatrolState : State
         var EnemyWaypoints = stateMachine.GetComponent<EnemyWaypoints>();
           
         patrolWaypoints = EnemyWaypoints.PatrolWaypoints;
+       
     }
 
     public override void EnterState()
     {
         currentWaypointIndex = Random.Range(0, patrolWaypoints.Length);
         currentWaypoint = patrolWaypoints[currentWaypointIndex];
+        targetWaypointPosition = currentWaypoint.position + Random.onUnitSphere * .4f;
     }
 
 
@@ -73,17 +76,17 @@ public class PatrolState : State
 
     Vector3 GetMoveDirection()
     {
-        return (currentWaypoint.position - stateMachine.transform.position).normalized;
+        return (targetWaypointPosition - stateMachine.transform.position).normalized;
     }
 
     bool CloseToWaypoint()
     {
-        return Vector2.Distance(stateMachine.transform.position, currentWaypoint.position) <= .1f;
+        return Vector2.Distance(stateMachine.transform.position, targetWaypointPosition) <= .1f;
     }
 
     void ArriveAtWaypoint()
     {
-        stateMachine.transform.position = currentWaypoint.position;
+        stateMachine.transform.position = targetWaypointPosition;
         velocity = Vector3.zero;
         stateMachine.ChangeState(stateMachine.WaitState);
     }
