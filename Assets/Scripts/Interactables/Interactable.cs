@@ -40,8 +40,7 @@ public abstract class Interactable : MonoBehaviour, IPointerClickHandler
     }
 
     public void OnPointerClick(PointerEventData eventData)
-    {
-        Debug.Log("Yo");
+    {   
         if (canInteract)
         {
             Interact();

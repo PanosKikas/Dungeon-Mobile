@@ -8,8 +8,7 @@ public class Chest : Interactable
 
     [SerializeField]
     Sprite openChestSprite;
-
-
+    
     private void Awake()
     {
         spriteRenderer = GetComponentInChildren<SpriteRenderer>();
@@ -19,7 +18,20 @@ public class Chest : Interactable
     {
 
         base.Interact();
-        Debug.Log("interact");
+        OpenChest();
+        
+    }
+
+    void OpenChest()
+    {
+        ChangeGraphics();
+        this.enabled = false;
+    }
+
+    void ChangeGraphics()
+    {
         spriteRenderer.sprite = openChestSprite;
     }
+
+    
 }
