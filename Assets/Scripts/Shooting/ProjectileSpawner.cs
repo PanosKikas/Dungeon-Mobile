@@ -15,6 +15,9 @@ public class ProjectileSpawner : MonoBehaviour
 
     Touch? currentTouch = null;
 
+    [SerializeField]
+    LayerMask blockMask;
+
     private void Awake()
     {
         projectileDamage = GetComponent<StatusEffects>().stats.ProjecitleDamage;
@@ -24,6 +27,11 @@ public class ProjectileSpawner : MonoBehaviour
     public void Spawn()
     {
         CalculateSpawnPositionAndRotation();
+        
+        if (Physics2D.OverlapCircle(bulletSpawnPosition, .05f, blockMask))
+        {
+            return;
+        }
         GameObject projectile = Instantiate(projectileToSpawn, bulletSpawnPosition, bulletSpawnRotation);
         projectile.GetComponent<Projectile>().ProjectileDamage = projectileDamage;
     }

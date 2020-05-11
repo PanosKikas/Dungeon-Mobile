@@ -7,11 +7,11 @@ using UnityEngine.EventSystems;
 public abstract class Interactable : MonoBehaviour, IPointerClickHandler
 {
     [SerializeField]
-    float interactableRadius = 3f;
+    protected float interactableRadius = 3f;
 
     bool canInteract = false;
 
-    private void Awake()
+    protected void Awake()
     {
         var collider = GetComponent<CircleCollider2D>();
         collider.radius = interactableRadius;

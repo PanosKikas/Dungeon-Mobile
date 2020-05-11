@@ -4,14 +4,16 @@ using UnityEngine;
 
 public class Chest : Interactable
 {
+
+    [SerializeField]
     SpriteRenderer spriteRenderer;
 
     [SerializeField]
     Sprite openChestSprite;
-    
+
     private void Awake()
     {
-        spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        base.Awake();
     }
 
     public override void Interact()
@@ -33,5 +35,11 @@ public class Chest : Interactable
         spriteRenderer.sprite = openChestSprite;
     }
 
-    
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, interactableRadius);
+    }
+
 }

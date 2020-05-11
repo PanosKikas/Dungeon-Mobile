@@ -1,6 +1,8 @@
 ﻿using System.Collections;
+using System;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 
 public class NewShootingInput : MonoBehaviour
@@ -13,7 +15,7 @@ public class NewShootingInput : MonoBehaviour
     float nextFireTime = 0f;
 
     [SerializeField]
-    LayerMask shootMask;
+    LayerMask blockMask;
 
     private void Awake()
     {
@@ -25,16 +27,28 @@ public class NewShootingInput : MonoBehaviour
         if (PressedShoot() && IsTimeToShoot())
         {
             
-            CalculateNextShootTime();
+
             var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            RaycastHit2D hit = Physics2D.Raycast(mousePos, Vector2.zero, Mathf.Infinity);
+            RaycastHit2D[] hitArray = Physics2D.RaycastAll(mousePos, Vector2.zero, Mathf.Infinity);
 
-            if (shootMask == (shootMask | (1 << hit.collider.gameObject.layer)))
+            var query = from hit in hitArray
+                        where !hit.collider.isTrigger
+                        select hit;
+
+
+            foreach (var hit in query)
             {
-                 spawner.Spawn();
+                if (blockMask == (blockMask | (1 << hit.collider.gameObject.layer)))
+                {
+                    return;
+                }
             }
+            
 
+            CalculateNextShootTime();
+            
 
+            spawner.Spawn();
         }
 
     }
