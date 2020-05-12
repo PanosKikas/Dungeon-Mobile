@@ -10,13 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9861da3ebf8ebb44bb59889d04671b3f, type: 3}
-  m_Name: KnightStats
+  m_Name: GunwomanStats
   m_EditorClassIdentifier: 
-  MaxHealth: 500
-  ProjecitleDamage: 10
-  BaseAttackDamage: 50
-  AutoAttackRate: 0.25
-  ManualAttackRate: 2
+  CurrentHealth: 1000
+  MaxHealth: 1000
+  ProjecitleDamage: 1000
+  BaseAttackDamage: 5
+  AutoAttackRate: 0.5
+  ManualAttackRate: 10
+  CurrentEndurance: 100
   MaxEndurace: 100
-  EndurancePerAttack: 10
-  EnduranceRechargeRate: 4
+  EndurancePerAttack: 4
+  EnduranceRechargeRate: 3

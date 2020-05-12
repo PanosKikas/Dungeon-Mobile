@@ -6,15 +6,15 @@ using UnityEngine.Experimental.Rendering.Universal;
 public class Chest : Interactable
 {
 
+    [Header("Open/Closed Chest"), SerializeField]
+    GameObject openChest;
     [SerializeField]
-    SpriteRenderer spriteRenderer;
+    GameObject closedChest;
 
-    [SerializeField]
-    Sprite openChestSprite;
+    [Header("Loot"), SerializeField]
+    GameObject[] loot;
 
-    [SerializeField]
-    Light2D light;
-    
+
     public override void Interact()
     {
 
@@ -25,19 +25,22 @@ public class Chest : Interactable
 
     void OpenChest()
     {
-        ChangeGraphics();
-        OpenLight();
+        openChest.SetActive(true);
+        closedChest.SetActive(false);
+        SpawnLoot();
         this.enabled = false;
     }
 
-    void ChangeGraphics()
+    void SpawnLoot()
     {
-        spriteRenderer.sprite = openChestSprite;
+        foreach (var item in loot)
+        {
+            Instantiate(item, transform.position + new Vector3(0, -.3f, 0), Quaternion.identity);
+        }
     }
 
-    void OpenLight()
-    {
-        light.enabled = true;
-    }
+
+
+    
 
 }

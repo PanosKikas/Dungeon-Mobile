@@ -9,14 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9861da3ebf8ebb44bb59889d04671b3f, type: 3}
-  m_Name: EnemyPlayerStats
+  m_Script: {fileID: 11500000, guid: 1cfc108e29ac3ad469ddbe1820c12e6f, type: 3}
+  m_Name: Potion
   m_EditorClassIdentifier: 
-  MaxHealth: 2000
-  ProjecitleDamage: 0
-  BaseAttackDamage: 10
-  AutoAttackRate: 2
-  ManualAttackRate: 4
-  MaxEndurace: 100
-  EndurancePerAttack: 4
-  EnduranceRechargeRate: 1
+  Name: Health Potion I
+  Icon: {fileID: -7149747800591892895, guid: efa2e029d1a721d469b4d0b897e7bdc9, type: 3}
+  description: Heals you for 20 HP
+  SellValue: 5
+  type: 0

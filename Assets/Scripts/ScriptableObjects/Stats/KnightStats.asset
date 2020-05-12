@@ -10,13 +10,15 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9861da3ebf8ebb44bb59889d04671b3f, type: 3}
-  m_Name: EnemySkeleton2Stats
+  m_Name: KnightStats
   m_EditorClassIdentifier: 
-  MaxHealth: 1000
-  ProjecitleDamage: 0
-  BaseAttackDamage: 10
-  AutoAttackRate: 2
-  ManualAttackRate: 4
+  CurrentHealth: 500
+  MaxHealth: 500
+  ProjecitleDamage: 10
+  BaseAttackDamage: 50
+  AutoAttackRate: 0.25
+  ManualAttackRate: 2
+  CurrentEndurance: 100
   MaxEndurace: 100
-  EndurancePerAttack: 4
-  EnduranceRechargeRate: 1
+  EndurancePerAttack: 10
+  EnduranceRechargeRate: 4
