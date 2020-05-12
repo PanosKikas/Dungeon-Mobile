@@ -14,12 +14,7 @@ public class Chest : Interactable
 
     [SerializeField]
     Light2D light;
-
-    private void Awake()
-    {
-        base.Awake();
-    }
-
+    
     public override void Interact()
     {
 
@@ -43,12 +38,6 @@ public class Chest : Interactable
     void OpenLight()
     {
         light.enabled = true;
-    }
-
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, interactableRadius);
     }
 
 }

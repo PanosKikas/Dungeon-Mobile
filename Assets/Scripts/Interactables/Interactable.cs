@@ -4,18 +4,43 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 
 
-public abstract class Interactable : MonoBehaviour, IPointerClickHandler
+public abstract class Interactable : MonoBehaviour, IPointerClickHandler, IPointerUpHandler, IPointerDownHandler
 {
+
+    bool canInteract = false;
     [SerializeField]
     protected float interactableRadius = 3f;
 
-    bool canInteract = false;
-
     protected void Awake()
     {
-        var collider = GetComponentInChildren<CircleCollider2D>();
+        var collider = GetComponent<CircleCollider2D>();
         collider.radius = interactableRadius;
         collider.isTrigger = true;
+    }
+
+
+    public virtual void Interact()
+    {
+       
+    }
+
+    public void OnPointerClick(PointerEventData eventData)
+    {   
+        if (canInteract)
+        {
+            Interact();
+        }
+    }
+    
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -34,17 +59,4 @@ public abstract class Interactable : MonoBehaviour, IPointerClickHandler
         }
     }
 
-    public virtual void Interact()
-    {
-       
-    }
-
-    public void OnPointerClick(PointerEventData eventData)
-    {   
-        if (canInteract)
-        {
-            
-            Interact();
-        }
-    }
 }
