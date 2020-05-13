@@ -9,16 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9861da3ebf8ebb44bb59889d04671b3f, type: 3}
-  m_Name: EnemyPlayerStats
+  m_Script: {fileID: 11500000, guid: fd93f53afc6e0584b8c4358fd27a686f, type: 3}
+  m_Name: Skeleton2
   m_EditorClassIdentifier: 
-  CurrentHealth: 2000
-  MaxHealth: 2000
-  ProjecitleDamage: 0
-  BaseAttackDamage: 10
+  CurrentHealth: 1000
+  MaxHealth: 1000
+  AttackDamage: 10
   AutoAttackRate: 2
-  ManualAttackRate: 4
-  CurrentEndurance: 100
-  MaxEndurace: 100
-  EndurancePerAttack: 4
-  EnduranceRechargeRate: 1
+  speed: 5

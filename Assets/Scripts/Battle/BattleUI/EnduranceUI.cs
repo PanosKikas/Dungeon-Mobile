@@ -4,7 +4,14 @@ using UnityEngine;
 
 public class EnduranceUI : BattleUI
 {
-        
+    private PlayerCharacterStats stats;
+
+    protected override void Awake()
+    {
+        base.Awake();
+        stats = (PlayerCharacterStats)statusEffects.stats;
+    }
+
     private void Update()
     {
         UpdateEnduranceBar();

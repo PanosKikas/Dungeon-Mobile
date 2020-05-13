@@ -35,7 +35,7 @@ public class PatrolState : State
         spriteRenderer = stateMachine.GetComponentInChildren<SpriteRenderer>();
         enemyBehavior = stateMachine.GetComponent<EnemyBehavior>();
         this.stateMachine = stateMachine;
-        var EnemyWaypoints = stateMachine.GetComponent<EnemyWaypoints>();
+        var EnemyWaypoints = stateMachine.GetComponentInParent<EnemyWaypoints>();
           
         patrolWaypoints = EnemyWaypoints.PatrolWaypoints;
        

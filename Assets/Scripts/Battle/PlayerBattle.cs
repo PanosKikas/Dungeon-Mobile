@@ -16,7 +16,7 @@ public class PlayerBattle : MonoBehaviour
     LayerMask enemyLayerMask;
 
     CinemachineImpulseSource impulseSource;
-    CharacterStats stats;
+    PlayerCharacterStats stats;
     PlayerStatusEffects statusEffects;
 
     float nextFireTime = 0;
@@ -26,7 +26,7 @@ public class PlayerBattle : MonoBehaviour
         animator = GetComponent<Animator>();
         impulseSource = GetComponent<CinemachineImpulseSource>();
         statusEffects = GetComponent<PlayerStatusEffects>();
-        stats = statusEffects.stats;
+        stats = (PlayerCharacterStats)statusEffects.stats;
     }
 
     
@@ -90,7 +90,7 @@ public class PlayerBattle : MonoBehaviour
     void DamageEnemyTarget()
     {
         IDamagable target = enemyTarget.GetComponent<IDamagable>();
-        target.TakeDamage(stats.BaseAttackDamage, statusEffects.impactEffect);
+        target.TakeDamage(stats.AttackDamage, statusEffects.impactEffect);
     }
 
     void ShakeCamera()

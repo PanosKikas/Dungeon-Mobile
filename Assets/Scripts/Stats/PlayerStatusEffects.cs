@@ -4,20 +4,27 @@ using UnityEngine;
 
 public class PlayerStatusEffects : StatusEffects
 {
-    
+    PlayerCharacterStats playerStats;
+
+    private void Awake()
+    {
+        playerStats = (PlayerCharacterStats)stats;
+    }
+
     public void DecreaseEndurance()
     {
-        stats.CurrentEndurance = Mathf.Clamp(stats.CurrentEndurance - stats.EndurancePerAttack, 0, stats.MaxEndurace);
+        playerStats.CurrentEndurance = Mathf.Clamp(playerStats.CurrentEndurance - playerStats.EndurancePerAttack,
+                                            0, playerStats.MaxEndurace);
     }
 
     private void Update()
     {
-        RechargeEndurance(Time.deltaTime * stats.EnduranceRechargeRate);
+        RechargeEndurance(Time.deltaTime * playerStats.EnduranceRechargeRate);
     }
 
     void RechargeEndurance(float endurance)
     {
-        stats.CurrentEndurance = Mathf.Clamp(stats.CurrentEndurance + endurance, 0f, stats.MaxEndurace);
+        playerStats.CurrentEndurance = Mathf.Clamp(playerStats.CurrentEndurance + endurance, 0f, playerStats.MaxEndurace);
     }
 
 }

@@ -9,16 +9,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9861da3ebf8ebb44bb59889d04671b3f, type: 3}
-  m_Name: GunwomanStats
+  m_Script: {fileID: 11500000, guid: 193d68d291902e448a0731a5601d7e9f, type: 3}
+  m_Name: Knight
   m_EditorClassIdentifier: 
-  CurrentHealth: 1000
-  MaxHealth: 1000
-  ProjecitleDamage: 1000
-  BaseAttackDamage: 5
-  AutoAttackRate: 0.5
-  ManualAttackRate: 10
+  CurrentHealth: 500
+  MaxHealth: 500
+  AttackDamage: 50
+  AutoAttackRate: 0.25
+  ManualAttackRate: 2
   CurrentEndurance: 100
   MaxEndurace: 100
-  EndurancePerAttack: 4
-  EnduranceRechargeRate: 3
+  EndurancePerAttack: 10
+  EnduranceRechargeRate: 4

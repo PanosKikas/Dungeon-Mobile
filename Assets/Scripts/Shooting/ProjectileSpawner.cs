@@ -20,7 +20,8 @@ public class ProjectileSpawner : MonoBehaviour
 
     private void Awake()
     {
-        projectileDamage = GetComponent<StatusEffects>().stats.ProjecitleDamage;
+        var heroStats =  (MainHeroPlayerStats)GetComponent<StatusEffects>().stats;
+        projectileDamage = heroStats.ProjecitleDamage;
     }
 
 
