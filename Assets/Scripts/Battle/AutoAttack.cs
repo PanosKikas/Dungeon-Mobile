@@ -18,7 +18,6 @@ public class AutoAttack : MonoBehaviour
     
     float nextFire = 0;
 
-    float attackRate;
 
     private void Awake()
     {
@@ -26,13 +25,9 @@ public class AutoAttack : MonoBehaviour
         statusEffects = GetComponent<StatusEffects>();
         currentTarget = target.GetComponent<IDamagable>();
         stats = statusEffects.stats;
+       
     }
-
-    private void Start()
-    {
-        attackRate = stats.AutoAttackRate;
-    }
-
+        
     private void Update()
     {
         if (target == null || !target.activeSelf)
@@ -41,7 +36,7 @@ public class AutoAttack : MonoBehaviour
         if (TimeToAttack())
         {
 
-            nextFire = Time.time + 1 / attackRate;
+            nextFire = Time.time + (1f / stats.AutoAttackRate);
             StartCoroutine(Attack());
         }
     }

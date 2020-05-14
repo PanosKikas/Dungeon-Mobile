@@ -134,3 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c29dbe1ca509b441af5f292cad4b175, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  item: {fileID: 11400000, guid: adb7d1f24ab32b243b401594af810aaf, type: 2}
+  OnItemPickup:
+    m_PersistentCalls:
+      m_Calls: []

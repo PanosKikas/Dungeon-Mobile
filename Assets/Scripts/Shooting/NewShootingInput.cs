@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.EventSystems;
 
 
 public class NewShootingInput : MonoBehaviour
@@ -10,8 +11,8 @@ public class NewShootingInput : MonoBehaviour
     
     ProjectileSpawner spawner;
 
-    [SerializeField]
-    float rateOfFire = 2f;
+    MainHeroPlayerStats characterStats;
+    
     float nextFireTime = 0f;
 
     [SerializeField]
@@ -20,31 +21,19 @@ public class NewShootingInput : MonoBehaviour
     private void Awake()
     {
         spawner = GetComponent<ProjectileSpawner>();
+        characterStats = (MainHeroPlayerStats)GetComponent<PlayerStatusEffects>().stats;
     }
 
     void Update()
     {
+
+        if (EventSystem.current.IsPointerOverGameObject())
+            return;
+        
+
         if (PressedShoot() && IsTimeToShoot())
         {
             
-
-            var mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            RaycastHit2D[] hitArray = Physics2D.RaycastAll(mousePos, Vector2.zero, Mathf.Infinity);
-
-            var query = from hit in hitArray
-                        where !hit.collider.isTrigger
-                        select hit;
-
-
-            foreach (var hit in query)
-            {
-                if (blockMask == (blockMask | (1 << hit.collider.gameObject.layer)))
-                {
-                    return;
-                }
-            }
-            
-
             CalculateNextShootTime();
             
 
@@ -65,6 +54,6 @@ public class NewShootingInput : MonoBehaviour
 
     void CalculateNextShootTime()
     {
-        nextFireTime = Time.time + 1 / rateOfFire;
+        nextFireTime = Time.time + 1 / characterStats.FireRate;
     }
 }

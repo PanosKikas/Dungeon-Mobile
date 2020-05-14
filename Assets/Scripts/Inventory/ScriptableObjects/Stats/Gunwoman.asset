@@ -12,14 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6031a7a2640388f46a0e464b919cf17d, type: 3}
   m_Name: Gunwoman
   m_EditorClassIdentifier: 
-  CurrentHealth: 500
+  CurrentHealth: 1000
   MaxHealth: 1000
   AttackDamage: 5
   AutoAttackRate: 0.5
   ManualAttackRate: 10
-  CurrentEndurance: 83.60078
+  CurrentEndurance: 100
   MaxEndurace: 100
   EndurancePerAttack: 4
   EnduranceRechargeRate: 3
   ProjecitleDamage: 100
+  FireRate: 2
   Speed: 5
+  InventorySpace: 20

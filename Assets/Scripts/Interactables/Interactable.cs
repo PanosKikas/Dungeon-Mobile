@@ -7,15 +7,15 @@ using UnityEngine.EventSystems;
 public abstract class Interactable : MonoBehaviour, IPointerClickHandler, IPointerUpHandler, IPointerDownHandler
 {
 
-    bool canInteract = false;
+    public bool canInteract = false;
     [SerializeField]
-    protected float interactableRadius = 3f;
+    public float interactableRadius = 3f;
 
     protected void Awake()
     {
-        var collider = GetComponent<CircleCollider2D>();
+        /*var collider = GetComponent<CircleCollider2D>();
         collider.radius = interactableRadius;
-        collider.isTrigger = true;
+        collider.isTrigger = true;*/
     }
 
 
@@ -43,7 +43,7 @@ public abstract class Interactable : MonoBehaviour, IPointerClickHandler, IPoint
         
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+   /* private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
@@ -57,6 +57,6 @@ public abstract class Interactable : MonoBehaviour, IPointerClickHandler, IPoint
         {
             canInteract = false;
         }
-    }
+    }*/
 
 }

@@ -9,7 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5756035065139682224}
-  m_Layer: 13
+  - component: {fileID: 1870404773}
+  - component: {fileID: 1870404772}
+  m_Layer: 2
   m_Name: ClosedChest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -31,6 +33,34 @@ Transform:
   m_Father: {fileID: 6058346524424804155}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!58 &1870404773
+CircleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2114778976030632474}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Radius: 0.5
+--- !u!114 &1870404772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2114778976030632474}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9588b0c860db4049a8aab2f33ea8360, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3661914043778926026
 GameObject:
   m_ObjectHideFlags: 0
@@ -195,7 +225,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6058346524340703064}
   - component: {fileID: 6058346524340703065}
-  m_Layer: 13
+  m_Layer: 2
   m_Name: GFX
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -341,9 +371,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a138a80a7cc35174e9cde5dfbecb84c8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canInteract: 0
   interactableRadius: 2.13
   openChest: {fileID: 7645924119379781240}
   closedChest: {fileID: 2114778976030632474}
+  loot:
+  - {fileID: 1142393820424044004, guid: 3dd9e1abd6f7538409bee30d58c72496, type: 3}
+  - {fileID: 1142393820424044004, guid: 3dd9e1abd6f7538409bee30d58c72496, type: 3}
+  - {fileID: 1142393820424044004, guid: 3dd9e1abd6f7538409bee30d58c72496, type: 3}
 --- !u!58 &6058346524250591563
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -351,10 +386,10 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6058346524424804152}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -409,7 +444,7 @@ MonoBehaviour:
   m_Color: {r: 1, g: 0.9561808, b: 0, a: 1}
   m_Intensity: 11.71
   m_LightVolumeOpacity: 0
-  m_ApplyToSortingLayers: d361b7d100000000a77d93a8
+  m_ApplyToSortingLayers: d361b7d100000000a77d93a8a74ca2eb
   m_LightCookieSprite: {fileID: 0}
   m_UseNormalMap: 0
   m_LightOrder: 0
@@ -429,9 +464,9 @@ MonoBehaviour:
   m_ShapeLightFalloffOffset: {x: 0, y: 0}
   m_ShapePath:
   - {x: 0.2928028, y: -0.3481369, z: 0}
-  - {x: 0.2966051, y: -0.12795019, z: 0}
-  - {x: -0.3082571, y: -0.1262765, z: 0}
-  - {x: -0.30515957, y: -0.35122585, z: 0}
+  - {x: 0.30174732, y: -0.15023553, z: 0}
+  - {x: -0.31511402, y: -0.1571331, z: 0}
+  - {x: -0.31030273, y: -0.35465443, z: 0}
 --- !u!1 &7645924119379781240
 GameObject:
   m_ObjectHideFlags: 0

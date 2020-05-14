@@ -10,10 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fd93f53afc6e0584b8c4358fd27a686f, type: 3}
-  m_Name: Skeleton1
+  m_Name: Skeleton3
   m_EditorClassIdentifier: 
   CurrentHealth: 1000
   MaxHealth: 1000
   AttackDamage: 10
-  AutoAttackRate: 2
+  AutoAttackRate: 3
   speed: 5

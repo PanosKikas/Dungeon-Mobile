@@ -26,8 +26,8 @@ public class Chest : Interactable
     void OpenChest()
     {
         openChest.SetActive(true);
-        closedChest.SetActive(false);
         SpawnLoot();
+        closedChest.SetActive(false);
         this.enabled = false;
     }
 

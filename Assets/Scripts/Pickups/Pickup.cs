@@ -1,15 +1,19 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+
 
 
 public abstract class Pickup : MonoBehaviour
 {
 
+   
+
     protected virtual void PickUp() 
     {
-        Debug.Log("Picked up"); 
-        Destroy(gameObject); 
+        Destroy(gameObject);
+        
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
@@ -17,6 +21,7 @@ public abstract class Pickup : MonoBehaviour
         if (collision.collider.CompareTag("Player"))
         {
             PickUp(); 
+            
         }
     }
 

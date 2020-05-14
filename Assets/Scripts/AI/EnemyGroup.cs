@@ -18,6 +18,11 @@ public class EnemyGroup : MonoBehaviour
         {
             if (enemy.currentState != enemy.ChaseState)
                 enemy.ChangeState(enemy.ChaseState);
+            else
+            {
+                Debug.Log(enemy.currentState);
+            }
+            
         }
     }
     

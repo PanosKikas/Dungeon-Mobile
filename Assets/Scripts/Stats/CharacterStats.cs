@@ -9,7 +9,7 @@ public abstract class CharacterStats : ScriptableObject
     
     public int AttackDamage = 50;
 
-    public float AutoAttackRate = 1 / 2f;
+    public float AutoAttackRate = .5f;
     
     void OnEnable()
     {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Potion : Pickup
+public class Potion : InentoryPickup
 {
     PotionSO potion;
 
