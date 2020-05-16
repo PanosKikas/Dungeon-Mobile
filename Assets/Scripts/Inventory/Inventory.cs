@@ -70,7 +70,7 @@ public class Inventory : MonoBehaviour
             CreateNewItemOn(item, indexToInsert);
         }
         items[indexToInsert].Stack++;
-        inventoryGUI.ShowItemOn(indexToInsert);
+        inventoryGUI.UpdateGUIOn(indexToInsert);
 
     }
     
@@ -107,7 +107,7 @@ public class Inventory : MonoBehaviour
         
         if (item.Use())
         {
-            
+           
             RemoveFromInventoryOn(index);    
         }
         else
@@ -124,13 +124,14 @@ public class Inventory : MonoBehaviour
         {
             NextFreeSlot--;
             items[index] = null;
-            inventoryGUI.HideItemFrom(index);
+            
         }
-        else
-        {
-            inventoryGUI.ShowItemOn(index);
-        }
+        inventoryGUI.UpdateGUIOn(index);
     }
 
+    public bool HasItemOnIndex(int index)
+    {
+        return items[index] != null && items[index].Stack > 0;
+    }
 
 }

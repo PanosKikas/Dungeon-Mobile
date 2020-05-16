@@ -26,13 +26,24 @@ public class InventoryGUI : MonoBehaviour
 
     public void OnEnable()
     {
-        for (int i = 0; i < Inventory.Instance.NextFreeSlot; ++i)
+        for (int i = 0; i < Inventory.InventoryCapacity; ++i)
         {
-            ShowItemOn(i);
+            UpdateGUIOn(i);
         }   
     }
-      
-   
+
+    public void UpdateGUIOn(int index)
+    {
+        if (Inventory.Instance.HasItemOnIndex(index))
+        {
+            ShowItemOn(index);
+        }
+        else
+        {
+            HideItemFrom(index);
+        }
+    }
+
     public void DisplayItemOnDescription(int index)
     {
         InventoryPickupSO item = Inventory.Instance.items[index].Item;
@@ -47,16 +58,16 @@ public class InventoryGUI : MonoBehaviour
 
     public void NotUsedItemEffect(int index)
     {
-        itemSlots[index].NotUsedItemSlot();
+        itemSlots[index].CannotBeUsedAnimate();
     }
     
-    public void ShowItemOn(int index)
+    private void ShowItemOn(int index)
     {
         var itemEntry = Inventory.Instance.items[index];
         itemSlots[index].ShowItemOnSlot(itemEntry);
     }
 
-    public void HideItemFrom(int index)
+    private void HideItemFrom(int index)
     {
         itemSlots[index].RemoveItemFromSlot();
 

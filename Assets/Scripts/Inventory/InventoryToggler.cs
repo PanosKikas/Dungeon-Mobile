@@ -7,7 +7,6 @@ public class InventoryToggler : MonoBehaviour
     [SerializeField]
     GameObject inventory;
 
-
     private void Start()
     {
         ToggleInventory();

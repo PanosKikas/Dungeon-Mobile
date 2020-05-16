@@ -32,17 +32,11 @@ public class ItemSlotUI : MonoBehaviour
     {
         itemClick.OnTap.AddListener(inventoryGUI.DisplayItemOnDescription);
         itemClick.OnLongClick.AddListener(Inventory.Instance.TryUseOnIndex);
-        DisableItemSlot();
+        DisableItemSlotComponents();
     }
+        
 
-    void DisableItemSlot()
-    {
-        itemClick.enabled = false;
-        itemIcon.enabled = false;
-        stackText.enabled = false;
-    }
-
-    public void NotUsedItemSlot()
+    public void CannotBeUsedAnimate()
     {
         rect.DOShakePosition(.5f, 2, 40);
     }
@@ -50,22 +44,28 @@ public class ItemSlotUI : MonoBehaviour
     public void ShowItemOnSlot(StoredItem item)
     {
         this.item = item;
-        EnableItemSlot();
+        EnableItemSlotComponents();
         itemIcon.sprite = item.Item.Icon;
         UpdateStackText();
-    
     }
 
-    void EnableItemSlot()
+    void EnableItemSlotComponents()
     {
         itemClick.enabled = true;
         itemIcon.enabled = true;
         stackText.enabled = true;
     }
 
+    void DisableItemSlotComponents()
+    {
+        itemClick.enabled = false;
+        itemIcon.enabled = false;
+        stackText.enabled = false;
+    }
+
     public void RemoveItemFromSlot()
     {
-        DisableItemSlot();
+        DisableItemSlotComponents();
         this.item = null;
     }
 
