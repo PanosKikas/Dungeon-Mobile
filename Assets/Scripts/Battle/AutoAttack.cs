@@ -7,13 +7,12 @@ public class AutoAttack : MonoBehaviour
     Animator animator;
 
     [SerializeField]
-    GameObject target;
+    CharacterStats target;
 
-    IDamagable currentTarget;
 
-    StatusEffects statusEffects;
+//    CharacterBattle characterBattle;
 
-    CharacterStats stats;
+    public CharacterStats stats;
 
     
     float nextFire = 0;
@@ -21,16 +20,22 @@ public class AutoAttack : MonoBehaviour
 
     private void Awake()
     {
+        //characterBattle = GetComponent<CharacterBattle>();
         animator = GetComponentInChildren<Animator>();
-        statusEffects = GetComponent<StatusEffects>();
-        currentTarget = target.GetComponent<IDamagable>();
-        stats = statusEffects.stats;
+        
+        
+        
        
     }
-        
+
+    private void Start()
+    {
+        //stats = characterBattle.;
+    }
+
     private void Update()
     {
-        if (target == null || !target.activeSelf)
+        if (target == null || target.HasDied)
             return;
 
         if (TimeToAttack())
@@ -53,12 +58,9 @@ public class AutoAttack : MonoBehaviour
         yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length +
             animator.GetCurrentAnimatorStateInfo(0).normalizedTime - 1f);
 
-        DamageTarget();
+        StatusEffects.DamageTarget(target, stats.AttackDamage);
     }
 
-    void DamageTarget()
-    {
-        currentTarget.TakeDamage(stats.AttackDamage, statusEffects.impactEffect);
-    }
+   
 
 }

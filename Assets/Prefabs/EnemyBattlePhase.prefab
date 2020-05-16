@@ -101,6 +101,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &5190532829980601407
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5772994897180607782}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7d4aadad804d69b43aa46c7b2432e4c6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9178162202769681836
 GameObject:
   m_ObjectHideFlags: 0
@@ -113,7 +125,6 @@ GameObject:
   - component: {fileID: 9178162202769681834}
   - component: {fileID: 9178162202769681835}
   - component: {fileID: 9178162202769681832}
-  - component: {fileID: 829578684}
   m_Layer: 10
   m_Name: EnemyBattlePhase
   m_TagString: Untagged
@@ -149,6 +160,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aeb2658c5a9a250438edd57637d63d6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stats: {fileID: 0}
 --- !u!70 &9178162202769681835
 CapsuleCollider2D:
   m_ObjectHideFlags: 0
@@ -178,25 +190,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
---- !u!114 &829578684
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9178162202769681836}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2d03ee29c9f7df429a2d2a3f6b96a62, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: ca4e8815f63aefa4180a49fc103573c2, type: 2}
-  impactEffect: {fileID: 3169309519121193936, guid: 496f152371072cb438f300083c2f54b0,
-    type: 3}
-  ImpactEffectOffset: {x: 0, y: 0, z: 0}
-  OnHpLoss:
-    m_PersistentCalls:
-      m_Calls: []
+  stats: {fileID: 11400000, guid: 43badc3cd22d4674990338c4e0b9d223, type: 2}
 --- !u!1001 &157113981660550887
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -314,6 +308,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CanvasStatsEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 4208242212132582462, guid: 5d7a107f4aba1314a94201aa99c7e6fd,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4208242212529732150, guid: 5d7a107f4aba1314a94201aa99c7e6fd,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -324,11 +323,27 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5923326496104753423, guid: 5d7a107f4aba1314a94201aa99c7e6fd,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5923326496104753423, guid: 5d7a107f4aba1314a94201aa99c7e6fd,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5d7a107f4aba1314a94201aa99c7e6fd, type: 3}
 --- !u!224 &4055636237542269658 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 4208242212132582461, guid: 5d7a107f4aba1314a94201aa99c7e6fd,
+    type: 3}
+  m_PrefabInstance: {fileID: 157113981660550887}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5772994897180607782 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5923326496533386177, guid: 5d7a107f4aba1314a94201aa99c7e6fd,
     type: 3}
   m_PrefabInstance: {fileID: 157113981660550887}
   m_PrefabAsset: {fileID: 0}

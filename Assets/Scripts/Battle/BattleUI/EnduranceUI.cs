@@ -6,18 +6,14 @@ public class EnduranceUI : BattleUI
 {
     private PlayerCharacterStats stats;
 
-    protected override void Awake()
+    protected override void Start()
     {
-        base.Awake();
-        stats = (PlayerCharacterStats)statusEffects.stats;
-    }
+        base.Start();
+        
 
-    private void Update()
-    {
-        UpdateEnduranceBar();
     }
-
-    void UpdateEnduranceBar()
+    
+    public void UpdateEnduranceBar(PlayerCharacterStats stats)
     {
        
         bar.value = (float)stats.CurrentEndurance / (float)stats.MaxEndurace;

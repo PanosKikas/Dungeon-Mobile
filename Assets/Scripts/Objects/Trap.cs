@@ -37,7 +37,7 @@ public class Trap : MonoBehaviour
 
     public void DamagePlayer()
     {
-        statusEffects?.TakeDamage(damage);
+        StatusEffects.DamageTarget(StatsDatabase.Instance.PlayerCharacterStats[0], damage);
         
     }
 

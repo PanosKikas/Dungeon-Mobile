@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Potion : InentoryPickup
+public class Potion : InventoryPickup<PotionSO>
 {
-    PotionSO potion;
+   
 
-    
 }

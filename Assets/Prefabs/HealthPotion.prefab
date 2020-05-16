@@ -12,9 +12,9 @@ GameObject:
   - component: {fileID: 1142393820424044005}
   - component: {fileID: 1142393820424044011}
   - component: {fileID: 4905545566884686702}
-  - component: {fileID: 7810985310939058186}
+  - component: {fileID: 8255462849839286057}
   m_Layer: 15
-  m_Name: Potion
+  m_Name: HealthPotion
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -122,7 +122,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &7810985310939058186
+--- !u!114 &8255462849839286057
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -134,7 +134,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4c29dbe1ca509b441af5f292cad4b175, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  item: {fileID: 11400000, guid: adb7d1f24ab32b243b401594af810aaf, type: 2}
-  OnItemPickup:
-    m_PersistentCalls:
-      m_Calls: []
+  playerStats: {fileID: 0}
+  PickupStats: {fileID: 11400000, guid: adb7d1f24ab32b243b401594af810aaf, type: 2}

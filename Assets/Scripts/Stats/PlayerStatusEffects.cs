@@ -4,27 +4,40 @@ using UnityEngine;
 
 public class PlayerStatusEffects : StatusEffects
 {
-    PlayerCharacterStats playerStats;
+    public static int index;
+    
+ //   [SerializeField]
+    //private PlayerCharacterStats playerStats;
 
-    private void Awake()
+//    public override CharacterStats stats => playerStats;
+
+    private void Start()
     {
-        playerStats = (PlayerCharacterStats)stats;
+        
+        
+       // playerStats = StatsDatabase.Instance.PlayerCharacterStats[index++];
+
     }
 
-    public void DecreaseEndurance()
+    
+
+    public static void DecreaseEndurance(PlayerCharacterStats playerStats)
     {
         playerStats.CurrentEndurance = Mathf.Clamp(playerStats.CurrentEndurance - playerStats.EndurancePerAttack,
                                             0, playerStats.MaxEndurace);
     }
 
-    private void Update()
+    /*private void Update()
     {
         RechargeEndurance(Time.deltaTime * playerStats.EnduranceRechargeRate);
-    }
+    }*/
 
-    void RechargeEndurance(float endurance)
+    public static void RechargeEndurance(PlayerCharacterStats playerStats)
     {
+        float endurance = Time.deltaTime * playerStats.EnduranceRechargeRate;
         playerStats.CurrentEndurance = Mathf.Clamp(playerStats.CurrentEndurance + endurance, 0f, playerStats.MaxEndurace);
     }
+
+   
 
 }

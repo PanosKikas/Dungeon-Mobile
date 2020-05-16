@@ -3,5 +3,5 @@ using UnityEngine;
 
 public interface IDamagable 
 {
-    void TakeDamage(int damage, GameObject impactEffect);
+   // abstract void TakeDamage(int damage, GameObject impactEffect);
 }

@@ -2,15 +2,57 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[CreateAssetMenu(fileName ="Potion", menuName ="Pickups/InventoryPickups/Potion")]
+
+public enum Type
+{
+    Health,
+    Mana,
+    Endurance
+}
+
+[CreateAssetMenu(fileName = "Potion", menuName = "Pickups/InventoryPickups/Potion")]
 public class PotionSO : InventoryPickupSO
 {
-    public enum Type
+
+    [Space, Header("Potion Stats")]
+    public Type type;
+
+    public int Amount;
+    public override bool Use()
     {
-        Health,
-        Mana,
-        Endurance
+        base.Use();
+        switch (type)
+        {
+            case Type.Health:
+                return StatusEffects.Heal(stats, Amount);
+            case Type.Mana:
+                Debug.Log("Restoring Mana");
+                return true;
+            case Type.Endurance:
+                Debug.Log("Restoring Endurance");
+                return true;
+            default:
+                return false;
+            
+        }
+
     }
 
-    public Type type;
+    
+/*    bool RestoreMana()
+    {
+        if (stats.HasMaxMana())
+        {
+            return false;
+        }
+        statusEffects.Heal(Amount);
+        return true;
+
+    }*/
+
+    bool ReduceEndurance()
+    {
+        return true;
+    }
 }
+    

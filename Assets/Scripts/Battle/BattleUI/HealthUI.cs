@@ -4,27 +4,19 @@ using UnityEngine;
 
 public class HealthUI : BattleUI
 {
-    CharacterStats stats;
+   
 
-    protected override void Awake()
+    protected override void Start()
     {
-        base.Awake();
-
-        /*   if (GetComponent<StatusEffects>() == null)
-           {
-               Debug.Log(transform.parent.parent.name);
-           }*/
-        stats = statusEffects.stats;
+        base.Start();
+       // var statusEffects = GetComponent<CharacterBattle>().statusEffects;
+        StatusEffects.OnHpLoss.AddListener(UpdateHealth);
+        
     }
-
-    void Start()
-    {
-        statusEffects.OnHpLoss.AddListener(UpdateHealth);
-        UpdateHealth();
-    }
+    
 
 
-    public void UpdateHealth()
+    public void UpdateHealth(CharacterStats stats)
     {
         bar.value = (float)stats.CurrentHealth / stats.MaxHealth;
     }

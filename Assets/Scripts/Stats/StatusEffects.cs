@@ -4,26 +4,27 @@ using UnityEngine;
 using UnityEngine.Events;
 using Pathfinding;
 
-public abstract class StatusEffects : MonoBehaviour, IDamagable
+public class StatsEvent : UnityEvent<CharacterStats> { }
+public abstract class StatusEffects : MonoBehaviour
 {
-    public CharacterStats stats;
-        
-    public GameObject impactEffect;
+
+   /* public GameObject impactEffect;
 
     [SerializeField]
-    Vector3 ImpactEffectOffset;
+    Vector3 ImpactEffectOffset;*/
 
     bool hasDied = false;
 
     [HideInInspector]
-    public UnityEvent OnHpLoss;
+    public static StatsEvent OnHpLoss;
+
+  //  public abstract CharacterStats stats { get; }
     
-    
-    public virtual void TakeDamage(int damage, GameObject impactEffect = null)
+    /*public virtual void TakeDamage(CharacterStats stats, int damage, GameObject impactEffect = null)
     {  
         stats.CurrentHealth = Mathf.Clamp(stats.CurrentHealth - damage, 0, stats.MaxHealth);
         
-        OnHpLoss?.Invoke();
+        OnHpLoss?.Invoke(stats);
 
         if (impactEffect != null)
         {
@@ -37,18 +38,29 @@ public abstract class StatusEffects : MonoBehaviour, IDamagable
             hasDied = true;
             Die();
         }
-    }  
+    }  */
 
-    public void Heal(int health)
+    public static void DamageTarget(CharacterStats stats, int damage)
     {
-        stats.CurrentHealth += health;
+        stats.TakeDamage(damage);
     }
 
-    protected virtual void Die()
+    public static bool Heal(CharacterStats stats, int health)
+    {
+       // Debug.Log(stats + " "+   stats.MaxHealth + stats.CurrentHealth + " " + stats.HasMaxHealth());
+        if (!stats.HasMaxHealth())
+        {
+            stats.CurrentHealth += health;
+            return true;
+        }
+        return false;
+    }
+
+    /*protected virtual void Die()
     {
         Debug.Log("Die");
-        Destroy(gameObject, .5f);
+        
         enabled = false;
         gameObject.SetActive(false);
-    }
+    }*/
 }

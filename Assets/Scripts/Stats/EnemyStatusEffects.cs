@@ -4,17 +4,19 @@ using UnityEngine;
 
 public class EnemyStatusEffects : StatusEffects
 {
-    IMovementDebuffs movementDebuffs;
+   // IMovementDebuffs movementDebuffs;
+
+    
 
     private void Awake()
     {
-        movementDebuffs = (IMovementDebuffs)GetComponent(typeof(IMovementDebuffs));
+      //  movementDebuffs = (IMovementDebuffs)GetComponent(typeof(IMovementDebuffs));
     }
     
 
-    public override void TakeDamage(int damage, GameObject impactEffect)
+   /* public override void TakeDamage(CharacterStats stats, int damage, GameObject impactEffect)
     {
-        base.TakeDamage(damage, impactEffect);
+        base.TakeDamage(stats, damage, impactEffect);
         movementDebuffs?.DebuffMovement();
-    }
+    }*/
 }

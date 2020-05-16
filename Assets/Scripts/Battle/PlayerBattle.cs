@@ -5,28 +5,28 @@ using System.Linq;
 using Cinemachine;
 
 
-public class PlayerBattle : MonoBehaviour
+public class PlayerBattle : CharacterBattle
 {
-
-    Animator animator;
+    static int index = 0;
     
-    GameObject enemyTarget;
+    
+    CharacterStats enemyTarget;
 
     [SerializeField]
     LayerMask enemyLayerMask;
 
     CinemachineImpulseSource impulseSource;
-    PlayerCharacterStats stats;
-    PlayerStatusEffects statusEffects;
 
     float nextFireTime = 0;
 
-    private void Awake()
+    PlayerCharacterStats playerStats;
+
+    protected override void Start()
     {
-        animator = GetComponent<Animator>();
+        base.Start();
         impulseSource = GetComponent<CinemachineImpulseSource>();
-        statusEffects = GetComponent<PlayerStatusEffects>();
-        stats = (PlayerCharacterStats)statusEffects.stats;
+
+        playerStats = (PlayerCharacterStats)stats;
     }
 
     
@@ -38,7 +38,7 @@ public class PlayerBattle : MonoBehaviour
             if (enemyTarget != null)
             {
                 AttackTarget();
-                nextFireTime = Time.time + 1f/stats.ManualAttackRate;
+                nextFireTime = Time.time + 1f/playerStats.ManualAttackRate;
                 ShakeCamera();
             }
         }
@@ -56,7 +56,7 @@ public class PlayerBattle : MonoBehaviour
 
     bool HasEndurance()
     {
-        return stats.CurrentEndurance >= stats.EndurancePerAttack;
+        return playerStats.CurrentEndurance >= playerStats.EndurancePerAttack;
     }
 
     void FindAttackTarget()
@@ -66,7 +66,8 @@ public class PlayerBattle : MonoBehaviour
         
         if (colliders != null && colliders.Any<Collider2D>())
         {
-            enemyTarget = colliders[0].gameObject;
+            enemyTarget = colliders[0].gameObject.GetComponent<CharacterBattle>().stats;
+            Debug.Log(enemyTarget);
         }
         else
         {
@@ -77,7 +78,7 @@ public class PlayerBattle : MonoBehaviour
     void AttackTarget()
     {
         PlayAttackAnimation();
-        statusEffects.DecreaseEndurance();
+        PlayerStatusEffects.DecreaseEndurance(playerStats);
         DamageEnemyTarget();
         ShakeCamera();
     }
@@ -89,8 +90,10 @@ public class PlayerBattle : MonoBehaviour
 
     void DamageEnemyTarget()
     {
-        IDamagable target = enemyTarget.GetComponent<IDamagable>();
-        target.TakeDamage(stats.AttackDamage, statusEffects.impactEffect);
+        Debug.Log("Damage");
+        /*StatusEffects target = enemyTarget.GetComponent<StatusEffects>(); 
+        target.TakeDamage(stats.AttackDamage, statusEffects.impactEffect);*/
+        StatusEffects.DamageTarget(enemyTarget, stats.AttackDamage);
     }
 
     void ShakeCamera()

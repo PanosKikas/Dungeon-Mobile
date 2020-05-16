@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBattle : MonoBehaviour
+public class EnemyBattle : CharacterBattle
 {
     
-    
+
 }

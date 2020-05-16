@@ -14,7 +14,6 @@ GameObject:
   - component: {fileID: 7495838158229068015}
   - component: {fileID: 7495838158229068013}
   - component: {fileID: 180465798}
-  - component: {fileID: 180465805}
   - component: {fileID: 175620272}
   - component: {fileID: 175620273}
   - component: {fileID: 304844771}
@@ -104,7 +103,7 @@ MonoBehaviour:
   repathRate: 0.2
   canSearch: 1
   canMove: 1
-  maxSpeed: 12
+  maxSpeed: 4
   gravity: {x: 0, y: 0, z: 0}
   groundMask:
     serializedVersion: 2
@@ -149,24 +148,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   slowDownRate: 0.4
---- !u!114 &180465805
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7495838158229068014}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e2d03ee29c9f7df429a2d2a3f6b96a62, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stats: {fileID: 0}
-  impactEffect: {fileID: 0}
-  ImpactEffectOffset: {x: 0, y: 0, z: 0}
-  OnHpLoss:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!50 &175620272
 Rigidbody2D:
   serializedVersion: 4

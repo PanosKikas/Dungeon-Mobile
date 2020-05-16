@@ -10,10 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1cfc108e29ac3ad469ddbe1820c12e6f, type: 3}
-  m_Name: Potion
+  m_Name: HealthPotion
   m_EditorClassIdentifier: 
   Name: Health Potion I
   Icon: {fileID: -7149747800591892895, guid: efa2e029d1a721d469b4d0b897e7bdc9, type: 3}
-  description: Heals you for 20 HP
-  SellValue: 5
+  description: Restore 20 HP
+  SellValue: 1
+  StackLimit: 99
   type: 0
+  Amount: 20

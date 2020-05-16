@@ -18,10 +18,10 @@ public class NewShootingInput : MonoBehaviour
     [SerializeField]
     LayerMask blockMask;
 
-    private void Awake()
+    private void Start()
     {
         spawner = GetComponent<ProjectileSpawner>();
-        characterStats = (MainHeroPlayerStats)GetComponent<PlayerStatusEffects>().stats;
+        characterStats = (MainHeroPlayerStats)StatsDatabase.Instance.PlayerCharacterStats[0];
     }
 
     void Update()

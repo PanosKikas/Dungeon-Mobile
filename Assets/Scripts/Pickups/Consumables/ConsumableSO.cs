@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName="Consumable", menuName ="Pickups/Consumables")]
-public class ConsumableSO : PickupSO
+public class ConsumableSO : ScriptableObject
 {
+    public PickupSO pickupStats;
     public enum Type
     {
         Health,
@@ -13,4 +14,5 @@ public class ConsumableSO : PickupSO
 
     public Type type;
     public int value;
+    
 }

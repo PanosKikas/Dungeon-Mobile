@@ -18,9 +18,9 @@ public class ProjectileSpawner : MonoBehaviour
     [SerializeField]
     LayerMask blockMask;
 
-    private void Awake()
+    private void Start()
     {
-        var heroStats =  (MainHeroPlayerStats)GetComponent<StatusEffects>().stats;
+        MainHeroPlayerStats heroStats = (MainHeroPlayerStats)StatsDatabase.Instance.PlayerCharacterStats[0];
         projectileDamage = heroStats.ProjecitleDamage;
     }
 

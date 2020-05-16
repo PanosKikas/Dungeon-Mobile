@@ -4,23 +4,23 @@ using UnityEngine;
 using UnityEngine.Events;
 
 
-[System.Serializable]
-public class InvPickupSOEvent : UnityEvent<InventoryPickupSO> { }
 
-public class InentoryPickup : Pickup
+public abstract class InventoryPickup<T>: Pickup<T> where T: InventoryPickupSO
 {
-    public InventoryPickupSO item;
-    
-    public InvPickupSOEvent OnItemPickup;
 
-
-    
     protected override void PickUp()
     {
+        StoreToInventory(PickupStats);
         base.PickUp();
-        Inventory.StoreToInventory(item);
+
+    }
+    protected void StoreToInventory(InventoryPickupSO item)
+    {
+        Inventory.Instance.StoreToInventory(item);
     }
 
+    
+    
 
 }
 
