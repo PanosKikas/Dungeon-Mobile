@@ -6,108 +6,74 @@ using DG.Tweening;
 
 public class InventoryGUI : MonoBehaviour
 {
-    
-    public GameObject[] itemSlots;
-    public Image[] itemIcons;
-    public Text[] itemStackText;
+    public ItemSlotUI[] itemSlots;
 
     [SerializeField]
     Text itemDescritpion;
 
     int? lastDisplayedIndex = null;
 
-    private void Awake()
+    private void Start()
     {
-
         InitializeUI();
-
     }
 
     void InitializeUI()
     {
-        itemSlots = new GameObject[transform.childCount];
-        itemIcons = new Image[transform.childCount];
-        itemStackText = new Text[transform.childCount];
-
-        for (int i = 0; i < itemSlots.Length; i++)
-        {
-            itemSlots[i] = transform.GetChild(i).gameObject;
-
-            itemIcons[i] = (itemSlots[i]).transform.GetChild(0).GetComponent<Image>();
-
-            ItemClickUI click = itemSlots[i].GetComponent<ItemClickUI>();
-
-            itemStackText[i] = itemIcons[i].GetComponentInChildren<Text>();
-            click.OnTap.AddListener(DisplayItemOn);
-            click.OnLongClick.AddListener(Inventory.Instance.TryUseOnIndex);
-            click.enabled = false;
-           
-            itemStackText[i].enabled = false;
-            itemIcons[i].enabled = false;
-        }
+        itemSlots = new ItemSlotUI[transform.childCount];
+        itemSlots = GetComponentsInChildren<ItemSlotUI>();      
     }
 
-    public void DisplayItemOn(int index)
+    public void OnEnable()
+    {
+        for (int i = 0; i < Inventory.Instance.NextFreeSlot; ++i)
+        {
+            ShowItemOn(i);
+        }   
+    }
+      
+   
+    public void DisplayItemOnDescription(int index)
     {
         InventoryPickupSO item = Inventory.Instance.items[index].Item;
-       
-        itemDescritpion.text = string.Format("{0}: {1}", item.Name, item.description);
+        DisplayItemDescription(item);
         lastDisplayedIndex = index;
     }
 
-    public void NotUsedItem(int index)
+    private void DisplayItemDescription(InventoryPickupSO item)
     {
-       var layoutGroup = GetComponent<GridLayoutGroup>();
-       layoutGroup.enabled = false;
+        itemDescritpion.text = string.Format("{0}: {1}", item.Name, item.description);
+    }
 
-       itemSlots[index].GetComponent<RectTransform>().DOShakePosition(.5f, 2, 40);
-
-       layoutGroup.enabled = true;
+    public void NotUsedItemEffect(int index)
+    {
+        itemSlots[index].NotUsedItemSlot();
+    }
     
-        
-    }
-
-    public void ModifyItemGUIOn(int index)
+    public void ShowItemOn(int index)
     {
-        
-        var inventoryPickup = Inventory.Instance.items[index];
-        
-        if (inventoryPickup == null)
-        {
-            
-            HideItemOn(index);
-        }
-        else
-        {
-            ShowItemOn(index);
-        }
-              
-    }
-
-    void ShowItemOn(int index)
-    {
-        
         var itemEntry = Inventory.Instance.items[index];
-        itemSlots[index].GetComponent<ItemClickUI>().enabled = true;
-        itemStackText[index].enabled = true;
-        itemStackText[index].text = string.Format("x{0}", itemEntry.Stack);
-        Image icon = itemIcons[index];
-        icon.sprite = itemEntry.Item.Icon;
-        icon.enabled = true;
+        itemSlots[index].ShowItemOnSlot(itemEntry);
     }
 
-    void HideItemOn(int index)
+    public void HideItemFrom(int index)
     {
-        itemIcons[index].enabled = false;
-        itemStackText[index].enabled = false;
-        itemSlots[index].GetComponent<ItemClickUI>().enabled = false;
-        if (lastDisplayedIndex != null && lastDisplayedIndex == index)
-        {
-            itemDescritpion.text = "";
+        itemSlots[index].RemoveItemFromSlot();
 
+        if (DescriptionShowingRemovedItem(index))
+        {
+            HideDescriptionText();
         }
-        
+    }
+    
+    bool DescriptionShowingRemovedItem(int index)
+    {
+        return lastDisplayedIndex != null && lastDisplayedIndex == index;
     }
 
+    void HideDescriptionText()
+    {
+        itemDescritpion.text = "";
+    }
     
 }

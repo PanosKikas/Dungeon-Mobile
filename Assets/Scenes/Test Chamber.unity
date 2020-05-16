@@ -1419,7 +1419,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.838965, y: 3.0139532, z: -10}
+  m_LocalPosition: {x: 12.83896, y: 3.0139642, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1720,8 +1720,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemSlots: []
-  itemIcons: []
-  itemStackText: []
   itemDescritpion: {fileID: 693357278}
 --- !u!1 &693357276
 GameObject:

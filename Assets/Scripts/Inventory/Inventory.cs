@@ -3,23 +3,23 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class Inventory : MonoBehaviour
-{
-    #region StoredItemData
-    [System.Serializable]
-    public class StoredItem
-    {
-        public InventoryPickupSO Item;
-        public int Stack = 0;
+public class ItemEvent : UnityEvent<StoredItem> { }
 
-        public StoredItem(InventoryPickupSO _item)
-        {
-            Item = _item;
-            Stack = 1;
-        }
+#region StoredItemData
+[System.Serializable]
+public class StoredItem 
+{
+    public InventoryPickupSO Item;
+    public int Stack = 0;
+    public StoredItem(InventoryPickupSO _item)
+    {
+        Item = _item;
+        Stack = 0;
     }
-    #endregion
-    
+}
+#endregion
+public class Inventory : MonoBehaviour
+{   
     MainHeroPlayerStats stats;
     public static int InventoryCapacity { get; private set; }
     public int NextFreeSlot { get; set; }
@@ -27,6 +27,8 @@ public class Inventory : MonoBehaviour
 
     [SerializeField]
     InventoryGUI inventoryGUI;
+
+    
 
     #region Singletton
     public static Inventory Instance { get; private set; }
@@ -45,9 +47,13 @@ public class Inventory : MonoBehaviour
         }
     }
     #endregion
-
-
+    
     private void Start()
+    {
+        InitializeInventory();
+    }
+
+    void InitializeInventory()
     {
         stats = (MainHeroPlayerStats)StatsDatabase.Instance.PlayerCharacterStats[0];
         items = new StoredItem[stats.InventorySpace];
@@ -57,53 +63,23 @@ public class Inventory : MonoBehaviour
 
     public void StoreToInventory(InventoryPickupSO item)
     {
-        int? found =  ItemExistsInventory(item);
-
-        int insertedIndex = found ?? (NextFreeSlot++);
-        InsertItemOn(item, insertedIndex, found.HasValue);
-        inventoryGUI.ModifyItemGUIOn(insertedIndex);
+        int indexToInsert = FindIndexToInsert(item);
         
+        if (items[indexToInsert] == null || items[indexToInsert].Item == null)
+        {
+            CreateNewItemOn(item, indexToInsert);
+        }
+        items[indexToInsert].Stack++;
+        inventoryGUI.ShowItemOn(indexToInsert);
+
     }
     
-    void InsertItemOn(InventoryPickupSO item, int index, bool found)
-    {
-        if (found)
-        {
-            Instance.items[index].Stack++;
-        }
-        else
-        {
-            
-            Instance.items[index] = new StoredItem(item);
-        }
 
-    }
-
-    public void TryUseOnIndex(int index)
+    int FindIndexToInsert(InventoryPickupSO item)
     {
-        
-        InventoryPickupSO item = Instance.items[index].Item;
-        
-        if (item.Use())
-        {
-            
-            RemoveFromInventoryOn(index);    
-        }
-        else
-        {
-            inventoryGUI.NotUsedItem(index);
-        }
-    }
-
-    void RemoveFromInventoryOn(int index)
-    {
-        items[index].Stack--;
-        if (items[index].Stack == 0)
-        {
-            items[index] = null;
-        }
-        
-        inventoryGUI.ModifyItemGUIOn(index);
+        int? found = ItemExistsInventory(item);
+        return found ?? (NextFreeSlot++);
+       
     }
 
     int? ItemExistsInventory(InventoryPickupSO itemToFind)
@@ -117,4 +93,44 @@ public class Inventory : MonoBehaviour
         }
         return null;
     }
+
+    void CreateNewItemOn(InventoryPickupSO item, int index)
+    {
+        Instance.items[index] = new StoredItem(item);
+        
+    }
+   
+    public void TryUseOnIndex(int index)
+    {
+        
+        InventoryPickupSO item = Instance.items[index].Item;
+        
+        if (item.Use())
+        {
+            
+            RemoveFromInventoryOn(index);    
+        }
+        else
+        {
+            inventoryGUI.NotUsedItemEffect(index);
+        }
+    }
+
+    void RemoveFromInventoryOn(int index)
+    {
+        items[index].Stack--;
+         
+        if (items[index].Stack == 0)
+        {
+            NextFreeSlot--;
+            items[index] = null;
+            inventoryGUI.HideItemFrom(index);
+        }
+        else
+        {
+            inventoryGUI.ShowItemOn(index);
+        }
+    }
+
+
 }
