@@ -27,8 +27,7 @@ public abstract class CharacterStats : ScriptableObject
         CurrentHealth = MaxHealth;
         
     }
-
-
+    
     public bool HasMaxHealth()
     {
         return CurrentHealth == MaxHealth;

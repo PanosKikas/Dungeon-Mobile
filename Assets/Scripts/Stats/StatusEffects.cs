@@ -47,10 +47,9 @@ public abstract class StatusEffects : MonoBehaviour
 
     public static bool Heal(CharacterStats stats, int health)
     {
-       // Debug.Log(stats + " "+   stats.MaxHealth + stats.CurrentHealth + " " + stats.HasMaxHealth());
         if (!stats.HasMaxHealth())
         {
-            stats.CurrentHealth += health;
+            stats.CurrentHealth = (int)Mathf.MoveTowards(stats.CurrentHealth, stats.MaxHealth, health);
             return true;
         }
         return false;
