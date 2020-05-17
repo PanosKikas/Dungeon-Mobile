@@ -15,17 +15,25 @@ public class InventoryGUI : MonoBehaviour
 
     private void Start()
     {
-        InitializeUI();
+        InitializeComponents();
     }
 
-    void InitializeUI()
+    void InitializeComponents()
+    {
+        FindItemSlotsUI();
+    }
+
+    void FindItemSlotsUI()
     {
         itemSlots = new ItemSlotUI[transform.childCount];
-        itemSlots = GetComponentsInChildren<ItemSlotUI>();      
+        itemSlots = GetComponentsInChildren<ItemSlotUI>();
     }
 
     public void OnEnable()
     {
+        lastDisplayedIndex = null;
+        HideDescriptionText();
+         
         for (int i = 0; i < Inventory.InventoryCapacity; ++i)
         {
             UpdateGUIOn(i);

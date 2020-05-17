@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
@@ -22,13 +23,13 @@ public class Inventory : MonoBehaviour
 {   
     MainHeroPlayerStats stats;
     public static int InventoryCapacity { get; private set; }
-    public int NextFreeSlot { get; set; }
+    public int NextFreeSlot { get; private set; }
     public StoredItem[] items;
 
     [SerializeField]
     InventoryGUI inventoryGUI;
-
-    
+    [SerializeField]
+    InventoryToggler toggler;
 
     #region Singletton
     public static Inventory Instance { get; private set; }
@@ -96,13 +97,11 @@ public class Inventory : MonoBehaviour
 
     void CreateNewItemOn(InventoryPickupSO item, int index)
     {
-        Instance.items[index] = new StoredItem(item);
-        
+        Instance.items[index] = new StoredItem(item);       
     }
    
     public void TryUseOnIndex(int index)
-    {
-        
+    {        
         InventoryPickupSO item = Instance.items[index].Item;
         
         if (item.Use())
@@ -122,11 +121,31 @@ public class Inventory : MonoBehaviour
          
         if (items[index].Stack == 0)
         {
-            NextFreeSlot--;
-            items[index] = null;
-            
+            DeleteItemFrominventory(index);
         }
+        else
+        {
+            inventoryGUI.UpdateGUIOn(index);
+        }
+          
+    }
+
+    void DeleteItemFrominventory(int index)
+    {
+        items[index] = null;
         inventoryGUI.UpdateGUIOn(index);
+        ShiftInventoryArray(index);
+        NextFreeSlot--;
+        toggler.ToggleInventory();
+        toggler.ToggleInventory();
+    }
+
+    void ShiftInventoryArray(int index)
+    {
+        var newArray = new StoredItem[NextFreeSlot - index + 1];
+        Array.Copy(items, index + 1, newArray, 0, NextFreeSlot - index + 1);
+        Array.Copy(newArray, 0, items, index, NextFreeSlot - index + 1);
+   
     }
 
     public bool HasItemOnIndex(int index)
