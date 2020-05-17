@@ -136,16 +136,14 @@ public class Inventory : MonoBehaviour
         inventoryGUI.UpdateGUIOn(index);
         ShiftInventoryArray(index);
         NextFreeSlot--;
+        items[NextFreeSlot] = null;
         toggler.ToggleInventory();
         toggler.ToggleInventory();
     }
 
     void ShiftInventoryArray(int index)
     {
-        var newArray = new StoredItem[NextFreeSlot - index + 1];
-        Array.Copy(items, index + 1, newArray, 0, NextFreeSlot - index + 1);
-        Array.Copy(newArray, 0, items, index, NextFreeSlot - index + 1);
-   
+        Array.Copy(items, index + 1, items, index, NextFreeSlot - index - 1);       
     }
 
     public bool HasItemOnIndex(int index)
