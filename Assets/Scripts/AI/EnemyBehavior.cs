@@ -20,13 +20,13 @@ public class EnemyBehavior : MonoBehaviour
 
     private void Update()
     {
-        stateMachine.currentState.LogicUpdate();
+        stateMachine.LogicUpdateCurrentState();
         animateMovement.AnimateMovement(Velocity);
     }
 
     private void FixedUpdate()
     {
-        stateMachine.currentState.PhysicsUpdate();
+        stateMachine.PhysicsUpdateCurrentState();
     }
 
     private void OnCollisionEnter2D(Collision2D collision)

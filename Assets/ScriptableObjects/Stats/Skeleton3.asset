@@ -12,8 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd93f53afc6e0584b8c4358fd27a686f, type: 3}
   m_Name: Skeleton3
   m_EditorClassIdentifier: 
-  CurrentHealth: 1000
   MaxHealth: 1000
-  AttackDamage: 10
-  AutoAttackRate: 3
+  AttackDamage: 5
+  AutoAttackRate: 0.8
+  HasDied: 0
+  impactEffect: {fileID: 0}
+  ImpactEffectOffset: {x: 0, y: 0, z: 0}
+  OnHpLoss:
+    m_PersistentCalls:
+      m_Calls: []
   speed: 5

@@ -4,7 +4,6 @@ using UnityEngine;
 using UnityEngine.Events;
 using Pathfinding;
 
-public class StatsEvent : UnityEvent<CharacterStats> { }
 public abstract class StatusEffects : MonoBehaviour
 {
 
@@ -14,9 +13,6 @@ public abstract class StatusEffects : MonoBehaviour
     Vector3 ImpactEffectOffset;*/
 
     bool hasDied = false;
-
-    [HideInInspector]
-    public static StatsEvent OnHpLoss;
 
   //  public abstract CharacterStats stats { get; }
     

@@ -3,20 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-public class EnemyFSM : MonoBehaviour
+public class EnemyFSM : FSM
 {
-    
     public ChaseState ChaseState { get; private set; }
     public PatrolState PatrolState { get; private set; }
     public WaitState WaitState { get; private set; }
-
-    public State currentState { get; private set; }
-
-/*    private void Update()
-    {
-
-        Debug.Log(currentState);
-    }*/
 
     private void Start()
     {
@@ -28,16 +19,5 @@ public class EnemyFSM : MonoBehaviour
            
         currentState.EnterState();
     }
-
-    public void ChangeState(State newState)
-    {
-        currentState.ExitState();
-        currentState = newState;
-        currentState.EnterState();
-       
-    }
- 
-
-
 
 }

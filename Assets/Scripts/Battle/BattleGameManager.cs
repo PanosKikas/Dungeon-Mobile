@@ -8,9 +8,9 @@ public class BattleGameManager : MonoBehaviour
 {
    
     [SerializeField]
-    PlayerBattle[] aliveCharacters;
+    PlayerBattleFSM[] playersFSM;
 
-    PlayerBattle currentlySelectedCharacter;
+    PlayerBattleFSM currentlySelectedCharacter;
     int currentlySelectedIdx;
 
     #region Singletton
@@ -46,9 +46,10 @@ public class BattleGameManager : MonoBehaviour
         yield return new WaitForSeconds(2f);
 
         currentlySelectedIdx = 0;
-        currentlySelectedCharacter = aliveCharacters[currentlySelectedIdx];
+        currentlySelectedCharacter = playersFSM[currentlySelectedIdx];
         ActivateManualCombat();
-        for (int i = 1; i < aliveCharacters.Length; i++)
+
+        for (int i = 1; i < playersFSM.Length; i++)
         {
             DeselectCharacter(i);
         }
@@ -57,28 +58,27 @@ public class BattleGameManager : MonoBehaviour
 
     public void SelectCharacter(int idx)
     {
-        GameObject characterToSelect = aliveCharacters[idx];
+        PlayerBattleFSM characterToSelect = playersFSM[idx];
+
         if (currentlySelectedCharacter != characterToSelect)
         {
             DeselectCharacter(currentlySelectedIdx);
             currentlySelectedIdx = idx;
-            currentlySelectedCharacter = aliveCharacters[idx];
+            currentlySelectedCharacter = playersFSM[idx];
             ActivateManualCombat();
         }
     }
 
     void ActivateManualCombat()
     {
-        currentlySelectedCharacter.GetComponent<AutoAttack>().enabled = false;
-        currentlySelectedCharacter.GetComponent<PlayerBattle>().enabled = true;
+        currentlySelectedCharacter.ChangeState(currentlySelectedCharacter.ManualAttackState);
         currentlySelectedCharacter.GetComponentInChildren<Light2D>().enabled = true;
     }
 
     void DeselectCharacter(int idx)
     {
-        GameObject characterToDeselect = aliveCharacters[idx];
-        characterToDeselect.GetComponent<AutoAttack>().enabled = true;
-        characterToDeselect.GetComponent<PlayerBattle>().enabled = false;
+        PlayerBattleFSM characterToDeselect = playersFSM[idx];
+        characterToDeselect.ChangeState(characterToDeselect.AutoAttackState);
         characterToDeselect.GetComponentInChildren<Light2D>().enabled = false;
     }
     

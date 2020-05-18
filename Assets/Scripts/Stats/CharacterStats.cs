@@ -1,10 +1,23 @@
 ﻿using UnityEngine;
-
+using UnityEngine.Events;
 
 public abstract class CharacterStats : ScriptableObject
 {
-    
-    public int CurrentHealth;
+    private int currentHealth;
+
+    public int CurrentHealth
+    {
+        get
+        {
+            return currentHealth;
+        }
+        set
+        {
+            currentHealth = value;
+            OnHpLoss?.Invoke();
+        }
+    }
+
     public int MaxHealth = 500;
     
     public int AttackDamage = 50;
@@ -16,6 +29,7 @@ public abstract class CharacterStats : ScriptableObject
 
     [SerializeField]
     Vector3 ImpactEffectOffset;
+    public UnityEvent OnHpLoss;
 
     void OnEnable()
     {

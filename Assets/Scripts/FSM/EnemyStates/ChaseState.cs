@@ -22,7 +22,6 @@ public class ChaseState : State
 
     public override void EnterState()
     {
-        
         parentGroup.EnableChaseAllEnemies();
         EnablePathFinder();
     }

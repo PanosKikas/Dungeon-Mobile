@@ -33,4 +33,9 @@ public class PlayerCharacterStats : CharacterStats
     {
         return MaxMana == CurrentMana;
     }
+
+    public bool HasEndurance()
+    {
+        return CurrentEndurance >= EndurancePerAttack;
+    }
 }

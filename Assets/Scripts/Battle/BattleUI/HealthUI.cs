@@ -5,20 +5,16 @@ using UnityEngine;
 public class HealthUI : BattleUI
 {
    
-
     protected override void Start()
     {
         base.Start();
-       // var statusEffects = GetComponent<CharacterBattle>().statusEffects;
-        StatusEffects.OnHpLoss.AddListener(UpdateHealth);
         
-    }
-    
+        stats.OnHpLoss.AddListener(UpdateHealth);
+        
+    }    
 
-
-    public void UpdateHealth(CharacterStats stats)
+    public void UpdateHealth()
     {
         bar.value = (float)stats.CurrentHealth / stats.MaxHealth;
     }
-
 }
