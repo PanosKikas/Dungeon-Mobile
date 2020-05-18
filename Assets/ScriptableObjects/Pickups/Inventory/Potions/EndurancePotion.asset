@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1cfc108e29ac3ad469ddbe1820c12e6f, type: 3}
-  m_Name: HealthPotion
+  m_Name: EndurancePotion
   m_EditorClassIdentifier: 
-  Name: Health Potion I
-  Icon: {fileID: -7149747800591892895, guid: efa2e029d1a721d469b4d0b897e7bdc9, type: 3}
+  Name: Endurance Potion I
+  Icon: {fileID: -6740909154531323576, guid: efa2e029d1a721d469b4d0b897e7bdc9, type: 3}
   prefab: {fileID: 1142393820424044004, guid: 3dd9e1abd6f7538409bee30d58c72496, type: 3}
-  description: Restore 20 HP
-  SellValue: 1
+  description: Restores 20 Endurance
+  SellValue: 2
   StackLimit: 99
-  type: 0
+  type: 2
   Amount: 20

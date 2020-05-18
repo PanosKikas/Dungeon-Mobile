@@ -11,13 +11,6 @@ public abstract class Interactable : MonoBehaviour, IPointerClickHandler, IPoint
     [SerializeField]
     public float interactableRadius = 3f;
 
-    protected void Awake()
-    {
-        /*var collider = GetComponent<CircleCollider2D>();
-        collider.radius = interactableRadius;
-        collider.isTrigger = true;*/
-    }
-
 
     public virtual void Interact()
     {
@@ -43,20 +36,6 @@ public abstract class Interactable : MonoBehaviour, IPointerClickHandler, IPoint
         
     }
 
-   /* private void OnTriggerEnter2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            canInteract = true;
-        }
-    }
 
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("Player"))
-        {
-            canInteract = false;
-        }
-    }*/
 
 }

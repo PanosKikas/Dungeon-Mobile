@@ -4412,6 +4412,24 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 173843539}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1142716688 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6058346524424804152, guid: 214ccb8e7b819e446b440efacb365861,
+    type: 3}
+  m_PrefabInstance: {fileID: 6058346524550719248}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1142716693
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1142716688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 103da0ae7efff7a4bb19225ea2985a3a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1147891947
 GameObject:
   m_ObjectHideFlags: 0
@@ -24121,14 +24139,32 @@ PrefabInstance:
     - target: {fileID: 857230784274042517, guid: 214ccb8e7b819e446b440efacb365861,
         type: 3}
       propertyPath: loot.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 857230784274042517, guid: 214ccb8e7b819e446b440efacb365861,
         type: 3}
       propertyPath: loot.Array.data[1]
       value: 
-      objectReference: {fileID: 1232510483380759385, guid: dc487145bbd4b044f887c9170142eb55,
+      objectReference: {fileID: 11400000, guid: adb7d1f24ab32b243b401594af810aaf,
+        type: 2}
+    - target: {fileID: 857230784274042517, guid: 214ccb8e7b819e446b440efacb365861,
         type: 3}
+      propertyPath: loot.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 77883111ee8482149af6c7619e3df434,
+        type: 2}
+    - target: {fileID: 857230784274042517, guid: 214ccb8e7b819e446b440efacb365861,
+        type: 3}
+      propertyPath: loot.Array.data[2]
+      value: 
+      objectReference: {fileID: 11400000, guid: adb7d1f24ab32b243b401594af810aaf,
+        type: 2}
+    - target: {fileID: 857230784274042517, guid: 214ccb8e7b819e446b440efacb365861,
+        type: 3}
+      propertyPath: loot.Array.data[3]
+      value: 
+      objectReference: {fileID: 11400000, guid: fdd0411befafa9c438a2962687643299,
+        type: 2}
     - target: {fileID: 6058346524424804152, guid: 214ccb8e7b819e446b440efacb365861,
         type: 3}
       propertyPath: m_Name

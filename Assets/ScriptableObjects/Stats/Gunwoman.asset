@@ -12,13 +12,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6031a7a2640388f46a0e464b919cf17d, type: 3}
   m_Name: Gunwoman
   m_EditorClassIdentifier: 
-  CurrentHealth: 1000
   MaxHealth: 1000
   AttackDamage: 5
   AutoAttackRate: 0.5
   HasDied: 0
   impactEffect: {fileID: 0}
   ImpactEffectOffset: {x: 0, y: 0, z: 0}
+  OnHpLoss:
+    m_PersistentCalls:
+      m_Calls: []
   ManualAttackRate: 10
   CurrentEndurance: 100
   MaxEndurace: 100
@@ -29,4 +31,4 @@ MonoBehaviour:
   ProjecitleDamage: 100
   FireRate: 2
   Speed: 5
-  InventorySpace: 2
+  InventorySpace: 20

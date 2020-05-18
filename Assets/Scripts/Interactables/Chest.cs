@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Experimental.Rendering.Universal;
 
+[RequireComponent(typeof(ItemSpawner))]
 public class Chest : Interactable
 {
 
@@ -12,8 +13,14 @@ public class Chest : Interactable
     GameObject closedChest;
 
     [Header("Loot"), SerializeField]
-    GameObject[] loot;
+    PotionSO[] loot;
 
+    ItemSpawner itemSpawner;
+
+    private void Awake()
+    {
+        itemSpawner = GetComponent<ItemSpawner>();
+    }
 
     public override void Interact()
     {
@@ -35,7 +42,7 @@ public class Chest : Interactable
     {
         foreach (var item in loot)
         {
-            Instantiate(item, transform.position + new Vector3(0, -.3f, 0), Quaternion.identity);
+            itemSpawner.SpawnItem(item);   
         }
     }
 

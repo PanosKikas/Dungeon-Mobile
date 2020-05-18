@@ -5,8 +5,10 @@ using UnityEngine.Events;
 
 public abstract class PickupSO : ScriptableObject
 {
+    
     public string Name;
     public Sprite Icon;
+    public GameObject prefab;
 
     protected PlayerCharacterStats stats;
     public virtual bool Use() 
