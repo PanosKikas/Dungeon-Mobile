@@ -67,6 +67,8 @@ public abstract class CharacterStats : ScriptableObject
         }
     }
 
+
+
     protected virtual void Die()
     {
         Debug.Log("Die");

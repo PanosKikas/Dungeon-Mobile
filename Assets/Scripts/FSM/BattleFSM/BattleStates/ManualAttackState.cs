@@ -21,7 +21,7 @@ public class ManualAttackState : AttackState
     {
         base.EnterState();
         playerStats = (PlayerCharacterStats)playerBattle.playerStats;
-        playerBattle.Target = null;
+        battle.Target = null;
     }
 
     public override void LogicUpdate()
