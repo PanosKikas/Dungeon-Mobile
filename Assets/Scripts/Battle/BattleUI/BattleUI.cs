@@ -11,7 +11,7 @@ public abstract class BattleUI: MonoBehaviour
     protected virtual void Start()
     {
         bar = GetComponent<Slider>();
-        stats = GetComponentInParent<CharacterBattle<CharacterStats>>().stats;
+        stats = GetComponentInParent<CharacterBattle>().stats;
     }
     
 

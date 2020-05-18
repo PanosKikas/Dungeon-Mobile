@@ -3,24 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
-public class ManualAttackState : AttackState<PlayerCharacterStats, PlayerBattle>
+public class ManualAttackState : AttackState
 {
 
-  //  PlayerBattle playerBattle;
+    PlayerBattle playerBattle;
     CinemachineImpulseSource impulseSource;
+    PlayerCharacterStats playerStats;
 
     public ManualAttackState(FSM stateMachine) : base(stateMachine)
     {
         impulseSource = stateMachine.GetComponent<CinemachineImpulseSource>();
-     //   playerBattle = (PlayerBattle)battle;
+        playerBattle = (PlayerBattle)battle;
         
     }
 
     public override void EnterState()
     {
         base.EnterState();
-     
-        battle.Target = null;
+        playerStats = (PlayerCharacterStats)playerBattle.playerStats;
+        playerBattle.Target = null;
     }
 
     public override void LogicUpdate()
@@ -32,21 +33,21 @@ public class ManualAttackState : AttackState<PlayerCharacterStats, PlayerBattle>
             if (battle.HasAttackTarget())
             {
                 battle.AttackTarget();
-                nextFire = Time.time + 1f / stats.ManualAttackRate;
+                nextFire = Time.time + 1f / playerStats.ManualAttackRate;
                 ShakeCamera();
-                PlayerStatusEffects.DecreaseEndurance(stats);
+                PlayerStatusEffects.DecreaseEndurance(playerStats);
             }
         }
     }
 
     protected override void FindTarget()
     {
-        battle.FindManualAttackTarget();
+        playerBattle.FindManualAttackTarget();
     }
 
     protected override bool CanAttack()
     {
-        return base.CanAttack() && stats.HasEndurance();
+        return base.CanAttack() && playerBattle.playerStats.HasEndurance();
     }
 
     void ShakeCamera()
