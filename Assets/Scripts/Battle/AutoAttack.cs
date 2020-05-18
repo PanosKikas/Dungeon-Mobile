@@ -7,10 +7,7 @@ public class AutoAttack : MonoBehaviour
     Animator animator;
 
     [SerializeField]
-    CharacterStats target;
-
-
-//    CharacterBattle characterBattle;
+    CharacterStats target;   
 
     public CharacterStats stats;
 
@@ -20,17 +17,7 @@ public class AutoAttack : MonoBehaviour
 
     private void Awake()
     {
-        //characterBattle = GetComponent<CharacterBattle>();
-        animator = GetComponentInChildren<Animator>();
-        
-        
-        
-       
-    }
-
-    private void Start()
-    {
-        //stats = characterBattle.;
+        animator = GetComponentInChildren<Animator>();      
     }
 
     private void Update()
@@ -40,7 +27,6 @@ public class AutoAttack : MonoBehaviour
 
         if (TimeToAttack())
         {
-
             nextFire = Time.time + (1f / stats.AutoAttackRate);
             StartCoroutine(Attack());
         }

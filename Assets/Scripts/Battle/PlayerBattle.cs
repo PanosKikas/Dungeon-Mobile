@@ -6,10 +6,8 @@ using Cinemachine;
 
 
 public class PlayerBattle : CharacterBattle
-{
-    static int index = 0;
-    
-    
+{   
+       
     CharacterStats enemyTarget;
 
     [SerializeField]
@@ -20,6 +18,7 @@ public class PlayerBattle : CharacterBattle
     float nextFireTime = 0;
 
     PlayerCharacterStats playerStats;
+    AutoAttack autoAttack;
 
     protected override void Start()
     {
@@ -27,11 +26,14 @@ public class PlayerBattle : CharacterBattle
         impulseSource = GetComponent<CinemachineImpulseSource>();
 
         playerStats = (PlayerCharacterStats)stats;
+        autoAttack = GetComponent<AutoAttack>();
     }
 
     
     void Update()
     {
+        
+        
         if (Input.GetButtonDown("Fire1") && CanAttack())
         {
             FindAttackTarget();
@@ -42,6 +44,13 @@ public class PlayerBattle : CharacterBattle
                 ShakeCamera();
             }
         }
+        PlayerStatusEffects.RechargeEndurance(playerStats);
+
+    }
+
+    public void StartAutoAttack()
+    {
+
     }
 
     bool CanAttack()
@@ -89,10 +98,7 @@ public class PlayerBattle : CharacterBattle
     }
 
     void DamageEnemyTarget()
-    {
-        Debug.Log("Damage");
-        /*StatusEffects target = enemyTarget.GetComponent<StatusEffects>(); 
-        target.TakeDamage(stats.AttackDamage, statusEffects.impactEffect);*/
+    {   
         StatusEffects.DamageTarget(enemyTarget, stats.AttackDamage);
     }
 

@@ -16,12 +16,17 @@ MonoBehaviour:
   MaxHealth: 1000
   AttackDamage: 5
   AutoAttackRate: 0.5
+  HasDied: 0
+  impactEffect: {fileID: 0}
+  ImpactEffectOffset: {x: 0, y: 0, z: 0}
   ManualAttackRate: 10
   CurrentEndurance: 100
   MaxEndurace: 100
   EndurancePerAttack: 4
   EnduranceRechargeRate: 3
+  MaxMana: 200
+  CurrentMana: 200
   ProjecitleDamage: 100
   FireRate: 2
   Speed: 5
-  InventorySpace: 20
+  InventorySpace: 2

@@ -24137,6 +24137,11 @@ PrefabInstance:
       propertyPath: inventoryGUI
       value: 
       objectReference: {fileID: 673091449}
+    - target: {fileID: 6359789175508184117, guid: 0d6350479e3066a4792ab53b6e4d8c87,
+        type: 3}
+      propertyPath: toggler
+      value: 
+      objectReference: {fileID: 1843889171}
     - target: {fileID: 6359789175508184119, guid: 0d6350479e3066a4792ab53b6e4d8c87,
         type: 3}
       propertyPath: m_Name

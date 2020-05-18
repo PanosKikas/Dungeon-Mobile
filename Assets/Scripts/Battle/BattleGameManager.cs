@@ -8,9 +8,9 @@ public class BattleGameManager : MonoBehaviour
 {
    
     [SerializeField]
-    GameObject[] aliveCharacters;
+    PlayerBattle[] aliveCharacters;
 
-    GameObject currentlySelectedCharacter;
+    PlayerBattle currentlySelectedCharacter;
     int currentlySelectedIdx;
 
     #region Singletton

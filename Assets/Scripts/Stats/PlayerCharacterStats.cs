@@ -6,7 +6,7 @@ using UnityEngine;
 public class PlayerCharacterStats : CharacterStats
 {
     public float ManualAttackRate = 2f;
-    [HideInInspector]
+ //   [HideInInspector]
     public float CurrentEndurance;
     public int MaxEndurace = 100;
 
