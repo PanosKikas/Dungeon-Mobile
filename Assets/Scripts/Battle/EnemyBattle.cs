@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBattle : CharacterBattle
+public class EnemyBattle : CharacterBattle<EnemyCharacterStats>
 {
     
 

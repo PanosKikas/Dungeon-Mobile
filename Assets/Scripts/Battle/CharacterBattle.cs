@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class CharacterBattle: MonoBehaviour 
+public abstract class CharacterBattle<T>: MonoBehaviour  where T: CharacterStats
 {
     protected Animator animator;
-    public CharacterStats stats;
+    public T stats;
     public CharacterStats AutoAttackTarget;
     public CharacterStats Target;
     FSM stateMachine;

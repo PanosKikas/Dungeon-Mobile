@@ -2,16 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class AttackState : State
+public abstract class AttackState<T, U> : State where T: CharacterStats where U: CharacterBattle<T>
 {
-    protected CharacterBattle battle;
-    protected CharacterStats stats;
+    protected T stats;
+    protected U battle;
 
     protected float nextFire;
 
     public AttackState(FSM stateMachine)
     {
-        battle = stateMachine.GetComponent<CharacterBattle>();
+        battle = stateMachine.GetComponent<U>();
+        Debug.Log(battle);
         stats = battle.stats;
     }
 

@@ -5,24 +5,21 @@ using System.Linq;
 using Cinemachine;
 
 
-public class PlayerBattle : CharacterBattle
+public class PlayerBattle : CharacterBattle<PlayerCharacterStats>
 {   
     [SerializeField]
     LayerMask enemyLayerMask;
 
-    [HideInInspector]
-    public PlayerCharacterStats playerStats;
 
     protected override void Start()
     {
         base.Start();
-        playerStats = (PlayerCharacterStats)stats;
     }
 
     protected override void Update()
     {
         base.Update();
-        PlayerStatusEffects.RechargeEndurance(playerStats);
+        PlayerStatusEffects.RechargeEndurance(stats);
     }
 
     public void FindManualAttackTarget()
@@ -36,7 +33,7 @@ public class PlayerBattle : CharacterBattle
         Collider2D[] colliders = Physics2D.OverlapCircleAll(mousePosition, 2f, enemyLayerMask);
         if (colliders != null && colliders.Any<Collider2D>())
         {
-            Target = colliders[0].gameObject.GetComponent<CharacterBattle>().stats;
+            Target = colliders[0].gameObject.GetComponent<CharacterBattle<EnemyCharacterStats>>().stats;
         }
         else
         {

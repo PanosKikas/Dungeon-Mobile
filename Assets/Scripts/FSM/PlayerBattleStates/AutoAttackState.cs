@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AutoAttackState : AttackState
+public class AutoAttackState : AttackState<CharacterStats, CharacterBattle<CharacterStats>>
 {
     public AutoAttackState(FSM stateMachine) :base(stateMachine)
     {

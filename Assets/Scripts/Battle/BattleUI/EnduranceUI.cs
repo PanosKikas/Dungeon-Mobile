@@ -16,9 +16,9 @@ public class EnduranceUI : BattleUI
     {
         UpdateEnduranceBar();
     }
+
     public void UpdateEnduranceBar()
     {
-       
         bar.value = (float)playerStats.CurrentEndurance / (float)playerStats.MaxEndurace;
     }
 
