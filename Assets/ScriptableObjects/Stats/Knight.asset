@@ -12,12 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 193d68d291902e448a0731a5601d7e9f, type: 3}
   m_Name: Knight
   m_EditorClassIdentifier: 
-  CurrentHealth: 500
-  MaxHealth: 500
-  AttackDamage: 50
-  AutoAttackRate: 0.25
-  ManualAttackRate: 2
+  MaxHealthStat:
+    BaseValue: 1000
+  AttackDamageStat:
+    BaseValue: 50
+  AutoAttackRateStat:
+    BaseValue: 0.25
+  HasDied: 0
+  impactEffect: {fileID: 0}
+  ImpactEffectOffset: {x: 0, y: 0, z: 0}
+  OnHpLoss:
+    m_PersistentCalls:
+      m_Calls: []
+  ManualAttackRateStat:
+    BaseValue: 2
+  MaxEnduranceStat:
+    BaseValue: 100
+  MaxManaStat:
+    BaseValue: 100
+  EnduranceRegenStat:
+    BaseValue: 4
   CurrentEndurance: 100
-  MaxEndurace: 100
   EndurancePerAttack: 10
-  EnduranceRechargeRate: 4
+  CurrentMana: 100

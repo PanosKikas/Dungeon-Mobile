@@ -46,6 +46,7 @@ public class Inventory : MonoBehaviour
         {
             Destroy(gameObject);
         }
+ 
     }
     #endregion
     
@@ -115,7 +116,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    void RemoveFromInventoryOn(int index)
+    public void RemoveFromInventoryOn(int index)
     {
         items[index].Stack--;
          

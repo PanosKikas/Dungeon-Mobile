@@ -2330,7 +2330,7 @@ PrefabInstance:
         type: 3}
       propertyPath: stats
       value: 
-      objectReference: {fileID: 11400000, guid: c2901c8ad4422874aa8501616d711bf3,
+      objectReference: {fileID: 11400000, guid: ae618ad675fe34d4882fbeacca4ed97c,
         type: 2}
     - target: {fileID: 8229876415448862325, guid: 014cc388af6d3c44c807754bfc598379,
         type: 3}
@@ -2343,6 +2343,11 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: 43badc3cd22d4674990338c4e0b9d223,
         type: 2}
+    - target: {fileID: 8229876415448862325, guid: 014cc388af6d3c44c807754bfc598379,
+        type: 3}
+      propertyPath: playerStats
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 8229876415448862326, guid: 014cc388af6d3c44c807754bfc598379,
         type: 3}
       propertyPath: OnHpLoss.m_PersistentCalls.m_Calls.Array.size

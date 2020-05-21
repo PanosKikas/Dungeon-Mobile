@@ -5,12 +5,21 @@ using UnityEngine.Events;
 
 
 
-public abstract class InventoryPickup<T>: Pickup<T> where T: InventoryPickupSO
-{
+public class InventoryPickup : Pickup 
+{ 
+
+    InventoryPickupSO InventoryPickupStats
+    {
+        get
+        {
+            return (InventoryPickupSO)PickupStats;
+        }
+    }
+
 
     protected override void PickUp()
     {
-        StoreToInventory(PickupStats);
+        StoreToInventory(InventoryPickupStats);
         base.PickUp();
 
     }
@@ -18,9 +27,6 @@ public abstract class InventoryPickup<T>: Pickup<T> where T: InventoryPickupSO
     {
         Inventory.Instance.StoreToInventory(item);
     }
-
-    
-    
 
 }
 

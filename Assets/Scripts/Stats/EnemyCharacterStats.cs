@@ -5,5 +5,24 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PlayerStats", menuName = "Stats/EnemyStats")]
 public class EnemyCharacterStats : CharacterStats
 {
-    public int speed;
+
+    public CharacterStat MobilityStat;
+
+    public float Mobility
+    {
+        get
+        {
+            return MobilityStat.BaseValue;
+        }
+        set
+        {
+            MobilityStat.BaseValue = value;
+        }
+    }
+
+    protected override void Initialize()
+    {
+        base.Initialize();
+        
+    }
 }

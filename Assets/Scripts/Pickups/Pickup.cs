@@ -4,12 +4,12 @@ using UnityEngine;
 using UnityEngine.Events;
 
 
-public abstract class Pickup<T> : MonoBehaviour
+public abstract class Pickup : MonoBehaviour
 {
     
     public PlayerCharacterStats playerStats;
 
-    public T PickupStats;
+    public PickupSO PickupStats;
 
     Transform target = null;
     [SerializeField]

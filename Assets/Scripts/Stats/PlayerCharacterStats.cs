@@ -5,16 +5,63 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "PlayerStats", menuName = "Stats/PlayerStats")]
 public class PlayerCharacterStats : CharacterStats
 {
-    public float ManualAttackRate = 2f;
- //   [HideInInspector]
+
+    public CharacterStat ManualAttackRateStat = new CharacterStat(Stat.AttackSpeed);
+    public CharacterStat MaxEnduranceStat = new CharacterStat(Stat.MaxEndurance);
+    public CharacterStat MaxManaStat = new CharacterStat(Stat.MaxMana);
+    public CharacterStat EnduranceRegenStat = new CharacterStat(Stat.EnduranceRegen);
+
+    public float ManualAttackRate
+    {
+        get
+        {
+            return ManualAttackRateStat.BaseValue;
+        }
+        set
+        {
+            ManualAttackRateStat.BaseValue = value;
+        }
+    }
+     
     public float CurrentEndurance;
-    public int MaxEndurace = 100;
+    public int MaxEndurace
+    {
+        get
+        {
+            return (int)MaxEnduranceStat.BaseValue;
+        }
+        set
+        {
+            MaxEnduranceStat.BaseValue = value;
+        }
+    }
 
     public float EndurancePerAttack = 4;
 
-    public float EnduranceRechargeRate = 1f;
+    public float EnduranceRechargeRate
+    {
+        get
+        {
+            return EnduranceRegenStat.BaseValue;
+        }
+        set
+        {
+            EnduranceRegenStat.BaseValue = value;
+        }
+    }
 
-    public int MaxMana = 200;
+    public int MaxMana
+    {
+        get
+        {
+            return (int)MaxManaStat.BaseValue;
+        }
+        set
+        {
+            MaxManaStat.BaseValue = value;
+        }
+    }
+
     public int CurrentMana;
 
     protected override void Initialize()

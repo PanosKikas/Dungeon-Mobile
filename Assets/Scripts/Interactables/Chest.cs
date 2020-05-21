@@ -1,9 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Experimental.Rendering.Universal;
 
-[RequireComponent(typeof(ItemSpawner))]
+
 public class Chest : Interactable
 {
 
@@ -13,14 +12,7 @@ public class Chest : Interactable
     GameObject closedChest;
 
     [Header("Loot"), SerializeField]
-    PotionSO[] loot;
-
-    ItemSpawner itemSpawner;
-
-    private void Awake()
-    {
-        itemSpawner = GetComponent<ItemSpawner>();
-    }
+    public PickupSO[] loot;
 
     public override void Interact()
     {
@@ -42,8 +34,10 @@ public class Chest : Interactable
     {
         foreach (var item in loot)
         {
-            itemSpawner.SpawnItem(item);   
+            ItemSpawner.SpawnItemAtTransform(item, transform); 
         }
+
+       
     }
 
 
