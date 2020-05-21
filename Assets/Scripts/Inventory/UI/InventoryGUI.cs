@@ -6,18 +6,14 @@ using DG.Tweening;
 
 public class InventoryGUI : MonoBehaviour
 {
-    public ItemSlotUI[] itemSlots;
+    public ItemSlotUI[] itemSlots = null;
 
     [SerializeField]
     Text itemDescritpion;
 
     int? lastDisplayedIndex = null;
 
-    private void Start()
-    {
-        InitializeComponents();
-    }
-
+    
     void InitializeComponents()
     {
         FindItemSlotsUI();
@@ -31,6 +27,10 @@ public class InventoryGUI : MonoBehaviour
 
     public void OnEnable()
     {
+        if (itemSlots == null || itemSlots.Length == 0)
+        {
+            FindItemSlotsUI();
+        }
         lastDisplayedIndex = null;
         HideDescriptionText();
          

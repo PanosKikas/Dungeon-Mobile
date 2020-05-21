@@ -16,4 +16,5 @@ public class InventoryToggler : MonoBehaviour
     {
         inventory.SetActive(!inventory.activeSelf);
     }
+    
 }
