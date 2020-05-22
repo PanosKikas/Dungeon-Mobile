@@ -25,4 +25,10 @@ public class StatsDatabase : MonoBehaviour
         }
     }
     #endregion
+
+    private void Start()
+    {
+        PlayerCharacterStats[0].Initialize();
+    }
+   
 }

@@ -34,13 +34,16 @@ public class CharacterEquipment : MonoBehaviour
     {
         int equippedIndex = (int)item.Type;
         EquipableSO oldItem = MainCharacterEquipment[equippedIndex];
-        MainCharacterEquipment[equippedIndex] = item;
-        
+
         if (oldItem != null)
         {
+            oldItem.Unequip();
             Inventory.Instance.StoreToInventory(oldItem);
-             
-        }         
+
+        }
+
+        MainCharacterEquipment[equippedIndex] = item;
+        
         
     }
 

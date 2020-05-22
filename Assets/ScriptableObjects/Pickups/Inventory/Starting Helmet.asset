@@ -13,12 +13,12 @@ MonoBehaviour:
   m_Name: Starting Helmet
   m_EditorClassIdentifier: 
   Name: Starting Helmet
-  Icon: {fileID: 1668169014850924109, guid: efa2e029d1a721d469b4d0b897e7bdc9, type: 3}
+  Icon: {fileID: -5725696974351560699, guid: efa2e029d1a721d469b4d0b897e7bdc9, type: 3}
   prefab: {fileID: 1142393820424044004, guid: e350ea23c5af2d54c9ed6c0a4c454881, type: 3}
   description: A starting helmet
   SellValue: 5
   StackLimit: 10
   Type: 0
-  Modifiers:
-  - stat: 11
-    value: 3
+  StatValuePairs:
+  - stat: 2
+    value: 2

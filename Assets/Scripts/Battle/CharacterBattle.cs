@@ -14,6 +14,7 @@ public abstract class CharacterBattle: MonoBehaviour
     {
         animator = GetComponentInChildren<Animator>();
         stateMachine = GetComponent<FSM>();
+        stats.Initialize();
     }
 
     protected virtual void Update()

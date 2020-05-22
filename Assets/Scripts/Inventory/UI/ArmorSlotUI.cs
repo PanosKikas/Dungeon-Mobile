@@ -7,19 +7,14 @@ public class ArmorSlotUI : MonoBehaviour
 {
 
     Image armorIcon;
-    private void Awake()
-    {
-        armorIcon = transform.GetChild(0).GetComponent<Image>();
-    }
-    
 
-    private void Start()
+    private void OnEnable()
     {
-        armorIcon.enabled = false;
-    }
+        if (armorIcon == null)
+        {
+            armorIcon = transform.GetChild(0).GetComponent<Image>();
+        }
 
-    public void UpdateArmorSlot()
-    {
         EquipableSO equipedSlot = CharacterEquipment.Instance.MainCharacterEquipment[transform.GetSiblingIndex()];
         if (equipedSlot != null)
         {

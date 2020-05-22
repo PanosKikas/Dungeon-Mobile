@@ -4,30 +4,25 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-//[System.Serializable] public class CharacterStatDictionary : SerializableDictionary<string, CharacterStat> { }
 public abstract class CharacterStats : ScriptableObject
 {
         
-    public static List<CharacterStat> upgradableStatsList;
+    protected List<CharacterStat> upgradableStatsList;
 
-    public CharacterStat MaxHealthStat = new CharacterStat(Stat.MaxHealth);
-    public CharacterStat AttackDamageStat = new CharacterStat(Stat.AttackDamage);
-    public CharacterStat AutoAttackRateStat = new CharacterStat(Stat.AttackSpeed);
+    public CharacterStat MaxHealthStat;
+    public CharacterStat AttackDamageStat;
+    public CharacterStat AutoAttackRateStat;
 
-    private void OnEnable()
+    public virtual void Initialize()
     {
-        Initialize();
-    }
-
-    protected virtual void Initialize()
-    {
-
+        
         upgradableStatsList = new List<CharacterStat>
         {
            MaxHealthStat, AttackDamageStat, AutoAttackRateStat
             
         };
 
+         
         CurrentHealth = (int)MaxHealthStat.Value;
         HasDied = false;
            
@@ -94,7 +89,7 @@ public abstract class CharacterStats : ScriptableObject
         CurrentHealth = Mathf.Clamp(CurrentHealth - damage, 0, (int)MaxHealth);
 
       
-
+        
         if (impactEffect != null)
         {
             //Vector3 impactPosition = transform.position + ImpactEffectOffset + Random.onUnitSphere;
@@ -119,7 +114,7 @@ public abstract class CharacterStats : ScriptableObject
        // gameObject.SetActive(false);
     }
 
-    public static CharacterStat FindCharacterStat(Stat type)
+    public CharacterStat FindCharacterStat(Stat type)
     {
         return upgradableStatsList.Find(i => (i.Type == type));
     }

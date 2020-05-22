@@ -7,6 +7,7 @@ using UnityEngine.EventSystems;
 public abstract class Interactable : MonoBehaviour, IPointerClickHandler, IPointerUpHandler, IPointerDownHandler
 {
 
+    [HideInInspector]
     public bool canInteract = false;
     [SerializeField]
     public float interactableRadius = 3f;

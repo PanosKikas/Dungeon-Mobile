@@ -6,21 +6,25 @@ using UnityEngine;
 public class PlayerCharacterStats : CharacterStats
 {
 
-    public CharacterStat ManualAttackRateStat = new CharacterStat(Stat.AttackSpeed);
-    public CharacterStat MaxEnduranceStat = new CharacterStat(Stat.MaxEndurance);
-    public CharacterStat MaxManaStat = new CharacterStat(Stat.MaxMana);
-    public CharacterStat EnduranceRegenStat = new CharacterStat(Stat.EnduranceRegen);
+    public CharacterStat ManualAttackRateStat;
+    public CharacterStat MaxEnduranceStat;
+    public CharacterStat MaxManaStat;
+    public CharacterStat EnduranceRegenStat;
+    public CharacterStat CriticalDamageStat;
+    public CharacterStat CriticalChanceStat;
+    public CharacterStat MagicDamageStat;
+    public CharacterStat EvasionChanceStat;
+    public CharacterStat PhysicalDefenseStat;
+    public CharacterStat MagicalResistanceStat;
+    
 
     public float ManualAttackRate
     {
         get
         {
-            return ManualAttackRateStat.BaseValue;
+            return ManualAttackRateStat.Value;
         }
-        set
-        {
-            ManualAttackRateStat.BaseValue = value;
-        }
+
     }
      
     public float CurrentEndurance;
@@ -28,12 +32,9 @@ public class PlayerCharacterStats : CharacterStats
     {
         get
         {
-            return (int)MaxEnduranceStat.BaseValue;
+            return (int)MaxEnduranceStat.Value;
         }
-        set
-        {
-            MaxEnduranceStat.BaseValue = value;
-        }
+
     }
 
     public float EndurancePerAttack = 4;
@@ -42,11 +43,7 @@ public class PlayerCharacterStats : CharacterStats
     {
         get
         {
-            return EnduranceRegenStat.BaseValue;
-        }
-        set
-        {
-            EnduranceRegenStat.BaseValue = value;
+            return EnduranceRegenStat.Value;
         }
     }
 
@@ -54,21 +51,29 @@ public class PlayerCharacterStats : CharacterStats
     {
         get
         {
-            return (int)MaxManaStat.BaseValue;
+            return (int)MaxManaStat.Value;
         }
-        set
-        {
-            MaxManaStat.BaseValue = value;
-        }
+      
     }
 
     public int CurrentMana;
 
-    protected override void Initialize()
+    public override void Initialize()
     {
         base.Initialize();
         CurrentEndurance = MaxEndurace;
         CurrentMana = MaxMana;
+
+        upgradableStatsList.Add(ManualAttackRateStat);
+        upgradableStatsList.Add(MaxEnduranceStat);
+        upgradableStatsList.Add(MaxManaStat);
+        upgradableStatsList.Add(EnduranceRegenStat);
+        upgradableStatsList.Add(CriticalDamageStat);
+        upgradableStatsList.Add(CriticalChanceStat);
+        upgradableStatsList.Add(MagicDamageStat);
+        upgradableStatsList.Add(EvasionChanceStat);
+        upgradableStatsList.Add(PhysicalDefenseStat);
+        upgradableStatsList.Add(MagicalResistanceStat);    
     }
 
     public bool HasMaxEndurance()

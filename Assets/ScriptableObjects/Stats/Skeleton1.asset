@@ -12,12 +12,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd93f53afc6e0584b8c4358fd27a686f, type: 3}
   m_Name: Skeleton1
   m_EditorClassIdentifier: 
+  upgradableStatsList: []
   MaxHealthStat:
-    BaseValue: 2000
+    BaseValue: 100
+    Type: 0
   AttackDamageStat:
     BaseValue: 10
+    Type: 0
   AutoAttackRateStat:
     BaseValue: 0.8
+    Type: 0
   HasDied: 0
   impactEffect: {fileID: 0}
   ImpactEffectOffset: {x: 0, y: 0, z: 0}
@@ -26,3 +30,4 @@ MonoBehaviour:
       m_Calls: []
   MobilityStat:
     BaseValue: 5
+    Type: 0

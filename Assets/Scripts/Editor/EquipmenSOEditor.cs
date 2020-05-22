@@ -27,23 +27,23 @@ public class EquipmenSOEditor : Editor
 
         EditorGUILayout.LabelField("Modifiers List");
         EditorGUILayout.Space();
-        if (equipable.Modifiers != null)
+        if (equipable.StatValuePairs != null)
         {
-            for (int i = equipable.Modifiers.Count - 1; i >= 0; --i)
+            for (int i = equipable.StatValuePairs.Count - 1; i >= 0; --i)
             {
                 EditorGUILayout.BeginHorizontal();
                 EditorGUI.indentLevel++;
-                var modifiers = equipable.Modifiers[i];
+                var modifiers = equipable.StatValuePairs[i];
                 var selectedStat = (Stat)EditorGUILayout.EnumPopup(modifiers.stat);
                 var selectedValue = EditorGUILayout.FloatField(modifiers.value);
 
-                equipable.Modifiers[i].stat = selectedStat;
-                equipable.Modifiers[i].value = selectedValue;
+                equipable.StatValuePairs[i].stat = selectedStat;
+                equipable.StatValuePairs[i].value = selectedValue;
 
                 if (GUILayout.Button("-", GUILayout.Width(30)))
                 {
 
-                    equipable.Modifiers.Remove(modifiers);
+                    equipable.StatValuePairs.Remove(modifiers);
 
                 }
 
@@ -58,7 +58,7 @@ public class EquipmenSOEditor : Editor
         if (GUILayout.Button("+", GUILayout.Width(30)))
         {
             
-            equipable.Modifiers.Add(new EquipableSO.StatValuePair(Stat.MaxHealth, 20));
+            equipable.StatValuePairs.Add(new EquipableSO.StatValuePair(Stat.MaxHealth, 20));
 
         }
 

@@ -20,7 +20,7 @@ public class EnemyCharacterStats : CharacterStats
         }
     }
 
-    protected override void Initialize()
+    public override void Initialize()
     {
         base.Initialize();
         

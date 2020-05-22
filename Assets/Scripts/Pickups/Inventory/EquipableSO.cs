@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public enum EquipmentType
@@ -17,6 +18,7 @@ public class EquipableSO : InventoryPickupSO
 
     public EquipmentType Type;
 
+    #region StatValuePair
     [System.Serializable]
     public class StatValuePair
     {
@@ -29,28 +31,64 @@ public class EquipableSO : InventoryPickupSO
             this.value = value;
         }
     }
+    #endregion
 
     [HideInInspector]
-    public List<StatValuePair> Modifiers;
+    public List<StatValuePair> StatValuePairs;
+
+    List<(CharacterStat, StatModifier)> Modifiers;
 
     private void OnEnable()
     {
-        if (Modifiers == null)
-            Modifiers = new List<StatValuePair>();
+        if (StatValuePairs == null)
+            StatValuePairs = new List<StatValuePair>();
     }
+    
 
     public override bool Use()
     {
         base.Use();
         // Equip - Unequip
         Equip();
+        AddModifiers();
         return true;
     }
 
     void Equip()
     { 
-       CharacterEquipment.Instance.Equip(this);
-      
+       CharacterEquipment.Instance.Equip(this);  
+    }
+
+    public void Unequip()
+    {
+        foreach (var ModifierStatPair in Modifiers)
+        {
+            ModifierStatPair.Item1.RemoveModifier(ModifierStatPair.Item2);
+        }
+    }
+
+    void AddModifiers()
+    {
+        if (Modifiers == null || !Modifiers.Any())
+        {
+            Modifiers = new List<(CharacterStat, StatModifier)>();
+            foreach (var StatValue in StatValuePairs)
+            {
+                CharacterStat modifiedStat = stats.FindCharacterStat(StatValue.stat);
+                StatModifier modifier = new StatModifier(StatValue.value, this);
+                Modifiers.Add((modifiedStat, modifier));
+                Debug.Log(modifiedStat);
+                modifiedStat.AddModifier(modifier);
+            }
+        }
+        else
+        {
+            foreach (var StatModifierPair in Modifiers)
+            {
+                StatModifierPair.Item1.AddModifier(StatModifierPair.Item2);
+            }
+        }
+        
     }
      
 }

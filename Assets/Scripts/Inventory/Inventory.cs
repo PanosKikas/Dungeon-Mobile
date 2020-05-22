@@ -29,7 +29,7 @@ public class Inventory : MonoBehaviour
     [SerializeField]
     InventoryGUI inventoryGUI;
     [SerializeField]
-    InventoryToggler toggler;
+    UIToggler toggler;
 
     #region Singletton
     public static Inventory Instance { get; private set; }
@@ -50,6 +50,8 @@ public class Inventory : MonoBehaviour
     }
     #endregion
     
+    
+
     private void Start()
     {
         InitializeInventory();

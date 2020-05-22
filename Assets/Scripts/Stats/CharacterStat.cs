@@ -3,8 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UnityEngine;
-
-
 public enum Stat
 {
     MaxHealth,
@@ -31,19 +29,20 @@ public class CharacterStat
     private float _value;
     private float lastBaseValue = float.MinValue;
 
-    public readonly Stat Type;
+    public Stat Type;
 
     public float Value
     {
         get
         {
-            if (isDirty || BaseValue != lastBaseValue)
+            /*if (isDirty || (BaseValue != lastBaseValue))
             {
                 lastBaseValue = BaseValue;
                 _value = CalculateFinalValue();
                 isDirty = false;
-            }
-            return _value;
+            }*/
+            
+            return CalculateFinalValue();
         }
     }
     
@@ -53,16 +52,9 @@ public class CharacterStat
 
     public CharacterStat() 
     {
+        isDirty = true;
         statModifiers = new List<StatModifier>();
         StatModifiers = statModifiers.AsReadOnly();
-    }
-
-    
-
-    public CharacterStat(Stat type, float Value = 0) : this()
-    {
-        this.BaseValue = Value;
-        this.Type = type;
     }
 
     public void AddModifier(StatModifier mod)
@@ -86,7 +78,7 @@ public class CharacterStat
     public bool RemoveAllModifiersFromSource(object source)
     {
         bool didRemove = false;
-        for (int i = statModifiers.Count; i >= 0; i++)
+        for (int i = statModifiers.Count - 1; i >= 0; i--)
         {
             if (statModifiers[i].Source == source)
             {
@@ -104,6 +96,7 @@ public class CharacterStat
         for (int i = 0; i < statModifiers.Count; ++i)
         {
             StatModifier modifier = statModifiers[i];
+            
             finalValue += modifier.Value;
            
         }

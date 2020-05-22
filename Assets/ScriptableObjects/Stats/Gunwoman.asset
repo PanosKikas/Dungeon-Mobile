@@ -13,11 +13,14 @@ MonoBehaviour:
   m_Name: Gunwoman
   m_EditorClassIdentifier: 
   MaxHealthStat:
-    BaseValue: 1000
+    BaseValue: 420
+    Type: 0
   AttackDamageStat:
     BaseValue: 5
+    Type: 4
   AutoAttackRateStat:
     BaseValue: 0.5
+    Type: 5
   HasDied: 0
   impactEffect: {fileID: 0}
   ImpactEffectOffset: {x: 0, y: 0, z: 0}
@@ -26,15 +29,37 @@ MonoBehaviour:
       m_Calls: []
   ManualAttackRateStat:
     BaseValue: 10
+    Type: 5
   MaxEnduranceStat:
-    BaseValue: 100
+    BaseValue: 200
+    Type: 1
   MaxManaStat:
-    BaseValue: 10
+    BaseValue: 300
+    Type: 3
   EnduranceRegenStat:
     BaseValue: 3
-  CurrentEndurance: 0
+    Type: 2
+  CriticalDamageStat:
+    BaseValue: 10
+    Type: 6
+  CriticalChanceStat:
+    BaseValue: 0.1
+    Type: 8
+  MagicDamageStat:
+    BaseValue: 5
+    Type: 10
+  EvasionChanceStat:
+    BaseValue: 0.1
+    Type: 7
+  PhysicalDefenseStat:
+    BaseValue: 5
+    Type: 11
+  MagicalResistanceStat:
+    BaseValue: 5
+    Type: 12
+  CurrentEndurance: 200
   EndurancePerAttack: 4
-  CurrentMana: 0
+  CurrentMana: 300
   ProjecitleDamage: 10
   FireRate: 1.5
   Speed: 0
