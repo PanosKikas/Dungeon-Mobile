@@ -57,6 +57,9 @@ MonoBehaviour:
   MagicalResistanceStat:
     BaseValue: 5
     Type: 12
+  ItemDropRateStat:
+    BaseValue: 0.1
+    Type: 9
   CurrentEndurance: 200
   EndurancePerAttack: 4
   CurrentMana: 300

@@ -16,7 +16,7 @@ public class PlayerCharacterStats : CharacterStats
     public CharacterStat EvasionChanceStat;
     public CharacterStat PhysicalDefenseStat;
     public CharacterStat MagicalResistanceStat;
-    
+    public CharacterStat ItemDropRateStat;
 
     public float ManualAttackRate
     {
@@ -73,7 +73,8 @@ public class PlayerCharacterStats : CharacterStats
         upgradableStatsList.Add(MagicDamageStat);
         upgradableStatsList.Add(EvasionChanceStat);
         upgradableStatsList.Add(PhysicalDefenseStat);
-        upgradableStatsList.Add(MagicalResistanceStat);    
+        upgradableStatsList.Add(MagicalResistanceStat);
+        upgradableStatsList.Add(ItemDropRateStat);
     }
 
     public bool HasMaxEndurance()

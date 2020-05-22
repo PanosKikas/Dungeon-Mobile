@@ -77,7 +77,6 @@ public class EquipableSO : InventoryPickupSO
                 CharacterStat modifiedStat = stats.FindCharacterStat(StatValue.stat);
                 StatModifier modifier = new StatModifier(StatValue.value, this);
                 Modifiers.Add((modifiedStat, modifier));
-                Debug.Log(modifiedStat);
                 modifiedStat.AddModifier(modifier);
             }
         }
