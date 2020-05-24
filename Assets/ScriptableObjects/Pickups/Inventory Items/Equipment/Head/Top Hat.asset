@@ -9,16 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb51442add58af2479ebc21838f12d18, type: 3}
-  m_Name: Sword
+  m_Script: {fileID: 11500000, guid: d3a3843e54b076b44a31a5c8102e6294, type: 3}
+  m_Name: Top Hat
   m_EditorClassIdentifier: 
-  Name: Iron Sword
-  Icon: {fileID: -4021536631775024569, guid: efa2e029d1a721d469b4d0b897e7bdc9, type: 3}
+  Name: Top Hat
+  Icon: {fileID: -5725696974351560699, guid: efa2e029d1a721d469b4d0b897e7bdc9, type: 3}
   prefab: {fileID: 1142393820424044004, guid: e350ea23c5af2d54c9ed6c0a4c454881, type: 3}
-  description: A starting sword
-  SellValue: 40
-  StackLimit: 10
-  Type: 3
-  Modifiers:
-  - stat: 4
-    value: 1
+  description: A fancy top hat
+  SellValue: 20
+  StackLimit: 99
+  EquipmentType: 0
+  StatValuePairs:
+  - stat: 9
+    value: 5

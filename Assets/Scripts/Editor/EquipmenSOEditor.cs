@@ -4,18 +4,16 @@ using UnityEngine;
 using UnityEditor;
 using System;
 
-[CustomEditor(typeof(EquipableSO), true)]
+[CustomEditor(typeof(EquipmentSO), true)]
 public class EquipmenSOEditor : Editor
 {
-    EquipableSO equipable;
-    bool foldout;
+    EquipmentSO equipable;
+    
     private void OnEnable()
     {
-        equipable = (EquipableSO)target;
+        equipable = (EquipmentSO)target;
         
     }
-
-
 
     public override void OnInspectorGUI()
     {
@@ -58,7 +56,7 @@ public class EquipmenSOEditor : Editor
         if (GUILayout.Button("+", GUILayout.Width(30)))
         {
             
-            equipable.StatValuePairs.Add(new EquipableSO.StatValuePair(Stat.MaxHealth, 20));
+            equipable.StatValuePairs.Add(new EquipmentSO.StatValuePair(Stat.MaxHealth, 20));
 
         }
 

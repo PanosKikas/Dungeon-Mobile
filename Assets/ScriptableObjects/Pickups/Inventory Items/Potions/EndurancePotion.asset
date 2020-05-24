@@ -18,5 +18,7 @@ MonoBehaviour:
   description: Restores 20 Endurance
   SellValue: 2
   StackLimit: 99
+  EquipmentType: 4
+  StatValuePairs: []
   type: 2
   Amount: 20

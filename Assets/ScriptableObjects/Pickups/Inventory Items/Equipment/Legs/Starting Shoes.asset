@@ -9,16 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: eb51442add58af2479ebc21838f12d18, type: 3}
-  m_Name: Starting Helmet
+  m_Script: {fileID: 11500000, guid: d3a3843e54b076b44a31a5c8102e6294, type: 3}
+  m_Name: Starting Shoes
   m_EditorClassIdentifier: 
-  Name: Starting Helmet
-  Icon: {fileID: -5725696974351560699, guid: efa2e029d1a721d469b4d0b897e7bdc9, type: 3}
+  Name: Top Hat
+  Icon: {fileID: 5542302946816055466, guid: efa2e029d1a721d469b4d0b897e7bdc9, type: 3}
   prefab: {fileID: 1142393820424044004, guid: e350ea23c5af2d54c9ed6c0a4c454881, type: 3}
-  description: A starting helmet
-  SellValue: 5
-  StackLimit: 10
-  Type: 0
+  description: Some sport shoes
+  SellValue: 20
+  StackLimit: 99
+  EquipmentType: 2
   StatValuePairs:
-  - stat: 2
-    value: 2
+  - stat: 7
+    value: 0.1
