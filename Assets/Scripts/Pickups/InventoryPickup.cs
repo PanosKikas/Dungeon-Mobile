@@ -19,14 +19,13 @@ public class InventoryPickup : Pickup
 
     protected override void PickUp()
     {
-        StoreToInventory(InventoryPickupStats);
+        bool stored = Inventory.Instance.TryStoreInventory(InventoryPickupStats);
+        if (!stored)
+            return;
         base.PickUp();
 
     }
-    protected void StoreToInventory(InventoryPickupSO item)
-    {
-        Inventory.Instance.StoreToInventory(item);
-    }
+
 
 }
 

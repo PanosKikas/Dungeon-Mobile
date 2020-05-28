@@ -6,14 +6,34 @@ public abstract class CharacterBattle: MonoBehaviour
 {
     protected Animator animator;
     public CharacterStats stats;
-    public CharacterStats AutoAttackTarget;
-    public CharacterStats Target;
-    FSM stateMachine;
+
+
+    public CharacterBattle AutoAttackTarget;
+
+
+    public CharacterBattle Target;
+    protected CharacterStat TargetStats;
+
+
+    protected BattleFSM stateMachine;
+
+    public bool IsBlocking
+    {
+        get
+        {
+            return stateMachine.currentState.Equals(stateMachine.ParryState);
+        }
+    }
+
+    private void Awake()
+    {
+        animator = GetComponentInChildren<Animator>();
+        stateMachine = GetComponent<BattleFSM>();
+        
+    }
 
     protected virtual void Start()
     {
-        animator = GetComponentInChildren<Animator>();
-        stateMachine = GetComponent<FSM>();
         stats.Initialize();
     }
 
@@ -25,7 +45,8 @@ public abstract class CharacterBattle: MonoBehaviour
     public virtual void AttackTarget()
     {
         PlayAttackAnimation();
-        DamageEnemyTarget();
+        if (!Target.IsBlocking)
+             DamageEnemyTarget();
     }
 
     void PlayAttackAnimation()
@@ -35,12 +56,12 @@ public abstract class CharacterBattle: MonoBehaviour
 
     void DamageEnemyTarget()
     {
-        StatusEffects.DamageTarget(Target, stats.AttackDamage);
+        StatusEffects.DamageTarget(Target.stats, stats.AttackDamage);
     }
 
     public virtual bool HasAttackTarget()
     {
-        return Target != null && !Target.HasDied;
+        return Target != null && !Target.stats.HasDied;
     }
 
     public void FindAutoAttackTarget()

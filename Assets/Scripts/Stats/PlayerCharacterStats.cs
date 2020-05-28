@@ -18,15 +18,27 @@ public class PlayerCharacterStats : CharacterStats
     public CharacterStat MagicalResistanceStat;
     public CharacterStat ItemDropRateStat;
 
+
+    public Attribute Vitality;
+    Attribute Strength;
+    Attribute Agility;
+    Attribute Wisdom;
+    Attribute Luck;
+
+    [HideInInspector]
+    public Attribute[] attributes;
+
     public float ManualAttackRate
     {
         get
         {
+            
             return ManualAttackRateStat.Value;
         }
 
     }
-     
+
+
     public float CurrentEndurance;
     public int MaxEndurace
     {
@@ -60,7 +72,7 @@ public class PlayerCharacterStats : CharacterStats
 
     public override void Initialize()
     {
-        base.Initialize();
+        
         CurrentEndurance = MaxEndurace;
         CurrentMana = MaxMana;
 
@@ -75,6 +87,35 @@ public class PlayerCharacterStats : CharacterStats
         upgradableStatsList.Add(PhysicalDefenseStat);
         upgradableStatsList.Add(MagicalResistanceStat);
         upgradableStatsList.Add(ItemDropRateStat);
+
+        Vitality = new Attribute(3);
+            
+        Strength = new Attribute(2);
+        Agility = new Attribute(4);
+        Wisdom = new Attribute(1);
+        Luck = new Attribute(0);
+
+        attributes = new[]
+        {
+            Vitality, Strength, Agility, Wisdom, Luck
+        };
+
+        MaxHealthStat.AddDependantAttribute(Vitality, new StatModifier(10));
+        MaxEnduranceStat.AddDependantAttribute(Vitality, new StatModifier(3));
+        EnduranceRegenStat.AddDependantAttribute(Vitality, new StatModifier(.2f));
+
+
+        AttackDamageStat.AddDependantAttribute(Strength, new StatModifier(1));
+        CriticalDamageStat.AddDependantAttribute(Strength, new StatModifier(1));
+        AutoAttackRateStat.AddDependantAttribute(Agility, new StatModifier(.1f));
+        ManualAttackRateStat.AddDependantAttribute(Agility, new StatModifier(.05f));
+
+
+        EvasionChanceStat.AddDependantAttribute(Luck, new StatModifier(.05f));
+        CriticalChanceStat.AddDependantAttribute(Luck, new StatModifier(.05f));
+        ItemDropRateStat.AddDependantAttribute(Luck, new StatModifier(.05f));
+        base.Initialize();
+
     }
 
     public bool HasMaxEndurance()
@@ -87,7 +128,7 @@ public class PlayerCharacterStats : CharacterStats
         return MaxMana == CurrentMana;
     }
 
-    public bool HasEndurance()
+    public bool HasEnduranceForAttack()
     {
         return CurrentEndurance >= EndurancePerAttack;
     }

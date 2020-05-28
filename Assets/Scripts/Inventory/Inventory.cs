@@ -65,27 +65,33 @@ public class Inventory : MonoBehaviour
         NextFreeSlot = 0;
     }
 
-    public void StoreToInventory(InventoryPickupSO item)
-    {
-        int indexToInsert = FindIndexToInsert(item);
-        
-        if (items[indexToInsert] == null || items[indexToInsert].Item == null)
-        {
-            CreateNewItemOn(item, indexToInsert);
-        }
-        items[indexToInsert].Stack++;
-        inventoryGUI.UpdateGUIOn(indexToInsert);
-
-    }
-    
-
-    int FindIndexToInsert(InventoryPickupSO item)
+    public bool TryStoreInventory(InventoryPickupSO item)
     {
         int? found = ItemExistsInventory(item);
-        return found ?? (NextFreeSlot++);
-       
-    }
+        //int indexToInsert = FindIndexToInsert(item);
+        int insertedIndex;
+        if (found == null)
+        {
+            if (InventoryFull())
+            {
+                return false;
+            }
+            else
+            {
+                insertedIndex = NextFreeSlot++;
+                CreateNewItemOn(item, insertedIndex);
+            }
+        }
+        else
+        {
+            insertedIndex = found.Value;
+        }
 
+        items[insertedIndex].Stack++;
+        inventoryGUI.UpdateGUIOn(insertedIndex);
+        return true;
+    }
+    
     int? ItemExistsInventory(InventoryPickupSO itemToFind)
     {
         for (int i = 0; i < NextFreeSlot; ++i)
@@ -154,4 +160,8 @@ public class Inventory : MonoBehaviour
         return items[index] != null && items[index].Stack > 0;
     }
 
+    bool InventoryFull()
+    {
+        return NextFreeSlot  == InventoryCapacity;
+    }
 }

@@ -44,6 +44,7 @@ public class InventoryGUI : MonoBehaviour
     {
         if (Inventory.Instance.HasItemOnIndex(index))
         {
+           
             ShowItemOn(index);
         }
         else

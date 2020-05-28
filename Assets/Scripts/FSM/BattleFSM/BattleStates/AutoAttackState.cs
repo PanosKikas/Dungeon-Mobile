@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AutoAttackState : AttackState
 {
-    public AutoAttackState(FSM stateMachine) :base(stateMachine)
+    public AutoAttackState(BattleFSM stateMachine) :base(stateMachine)
     {
         
     }

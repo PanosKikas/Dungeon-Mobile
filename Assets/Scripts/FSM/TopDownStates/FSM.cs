@@ -6,12 +6,11 @@ public abstract class FSM : MonoBehaviour
 {
     public State currentState { get; protected set; }
 
-    public void ChangeState(State newState)
+    public virtual void ChangeState(State newState)
     {
         currentState.ExitState();
         currentState = newState;
         currentState.EnterState();
-
     }
 
     public void LogicUpdateCurrentState()

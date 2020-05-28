@@ -4,14 +4,18 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
+
 public abstract class CharacterStats : ScriptableObject
 {
         
     protected List<CharacterStat> upgradableStatsList;
 
+ 
+
     public CharacterStat MaxHealthStat;
     public CharacterStat AttackDamageStat;
     public CharacterStat AutoAttackRateStat;
+    
 
     public virtual void Initialize()
     {
@@ -53,11 +57,11 @@ public abstract class CharacterStats : ScriptableObject
     }
     
     
-    public int AttackDamage
+    public virtual float AttackDamage
     {
         get
         {
-            return (int)AttackDamageStat.Value;
+            return AttackDamageStat.Value;
         }
        
     }
@@ -84,9 +88,9 @@ public abstract class CharacterStats : ScriptableObject
         return CurrentHealth == MaxHealth;
     }
 
-    public virtual void TakeDamage(int damage)
+    public virtual void TakeDamage(float damage)
     {
-        CurrentHealth = Mathf.Clamp(CurrentHealth - damage, 0, (int)MaxHealth);
+        CurrentHealth = Mathf.Clamp((int)(CurrentHealth - damage), 0, MaxHealth);
 
       
         
@@ -114,8 +118,8 @@ public abstract class CharacterStats : ScriptableObject
        // gameObject.SetActive(false);
     }
 
-    public CharacterStat FindCharacterStat(Stat type)
+    public List<CharacterStat> FindCharacterStats(Stat type)
     {
-        return upgradableStatsList.Find(i => (i.Type == type));
+        return upgradableStatsList.FindAll(i => (i.Type == type));
     }
 }

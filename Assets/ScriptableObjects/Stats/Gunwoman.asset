@@ -60,6 +60,26 @@ MonoBehaviour:
   ItemDropRateStat:
     BaseValue: 0.1
     Type: 9
+  Vitality:
+    OnAttributeChanged:
+      m_PersistentCalls:
+        m_Calls: []
+  attributes:
+  - OnAttributeChanged:
+      m_PersistentCalls:
+        m_Calls: []
+  - OnAttributeChanged:
+      m_PersistentCalls:
+        m_Calls: []
+  - OnAttributeChanged:
+      m_PersistentCalls:
+        m_Calls: []
+  - OnAttributeChanged:
+      m_PersistentCalls:
+        m_Calls: []
+  - OnAttributeChanged:
+      m_PersistentCalls:
+        m_Calls: []
   CurrentEndurance: 200
   EndurancePerAttack: 4
   CurrentMana: 300

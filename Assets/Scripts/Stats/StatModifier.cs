@@ -8,7 +8,7 @@ public class StatModifier
     public float Value;
     public object Source;
 
-    public StatModifier(float value, object Source)
+    public StatModifier(float value, object Source = null)
     {
         this.Value = value;
         this.Source = Source;

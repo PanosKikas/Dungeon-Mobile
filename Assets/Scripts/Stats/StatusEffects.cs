@@ -36,7 +36,7 @@ public abstract class StatusEffects : MonoBehaviour
         }
     }  */
 
-    public static void DamageTarget(CharacterStats stats, int damage)
+    public static void DamageTarget(CharacterStats stats, float damage)
     {
         stats.TakeDamage(damage);
     }

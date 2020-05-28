@@ -20,9 +20,15 @@ public class PlayerBattle : CharacterBattle
     }
 
     protected override void Update()
-    {
+    {      
         base.Update();
         PlayerStatusEffects.RechargeEndurance(playerStats);
+    }
+
+    public void EnterParry()
+    {
+        stateMachine.ChangeState(stateMachine.ParryState);
+        animator.SetTrigger("Parry");
     }
 
     public void FindManualAttackTarget()
@@ -36,7 +42,7 @@ public class PlayerBattle : CharacterBattle
         Collider2D[] colliders = Physics2D.OverlapCircleAll(mousePosition, 2f, enemyLayerMask);
         if (colliders != null && colliders.Any<Collider2D>())
         {
-            Target = colliders[0].gameObject.GetComponent<CharacterBattle>().stats;
+            Target = colliders[0].gameObject.GetComponent<CharacterBattle>();
         }
         else
         {

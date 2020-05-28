@@ -30,8 +30,8 @@ public class HpUI : MonoBehaviour
     private void Update()
     {
         float CurrentHealth = StatsDatabase.Instance.PlayerCharacterStats[0].CurrentHealth;
-        float MaxHealth = (float)StatsDatabase.Instance.PlayerCharacterStats[0].MaxHealth;
-        HpSlider.value = (float)CurrentHealth / MaxHealth;
+        float MaxHealth = StatsDatabase.Instance.PlayerCharacterStats[0].MaxHealth;
+        HpSlider.value = CurrentHealth / MaxHealth;
         textMeshPro.text = string.Format("{0}/{1}", CurrentHealth, MaxHealth);
     }
 }

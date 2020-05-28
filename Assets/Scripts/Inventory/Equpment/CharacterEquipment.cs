@@ -49,7 +49,7 @@ public class CharacterEquipment : MonoBehaviour
         if (oldItem != null)
         {
             oldItem.Unequip();
-            Inventory.Instance.StoreToInventory(oldItem);
+            Inventory.Instance.TryStoreInventory(oldItem);
 
         }
 

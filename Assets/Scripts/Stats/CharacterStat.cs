@@ -31,6 +31,10 @@ public class CharacterStat
 
     public Stat Type;
 
+    StatModifier levelModifier;
+    Attribute dependantAttribute;
+
+
     public float Value
     {
         get
@@ -54,7 +58,13 @@ public class CharacterStat
     {
         isDirty = true;
         statModifiers = new List<StatModifier>();
-        StatModifiers = statModifiers.AsReadOnly();
+        StatModifiers = statModifiers.AsReadOnly();    
+        
+    }
+
+    private void AddModifier()
+    {
+        AddModifier(levelModifier);
     }
 
     public void AddModifier(StatModifier mod)
@@ -101,6 +111,20 @@ public class CharacterStat
            
         }
         return (float)Math.Round(finalValue, 4);
+    }
+
+    public void AddDependantAttribute(Attribute attribute, StatModifier _levelModifier)
+    {
+        levelModifier = _levelModifier;
+        for (int i = 0; i < attribute.Value; ++i)
+        {
+
+            AddModifier(levelModifier);
+        }
+
+        attribute.OnAttributeChanged.AddListener(AddModifier);
+        dependantAttribute = attribute;
+        
     }
 
 }

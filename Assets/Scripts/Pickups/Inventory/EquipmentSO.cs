@@ -48,10 +48,14 @@ public class EquipmentSO : EquipableSO
             Modifiers = new List<(CharacterStat, StatModifier)>();
             foreach (var StatValue in StatValuePairs)
             {
-                CharacterStat modifiedStat = stats.FindCharacterStat(StatValue.stat);
-                StatModifier modifier = new StatModifier(StatValue.value, this);
-                Modifiers.Add((modifiedStat, modifier));
-                modifiedStat.AddModifier(modifier);
+                List<CharacterStat> modifiedStat = stats.FindCharacterStats(StatValue.stat);
+                foreach (var stat in modifiedStat)
+                {
+                    StatModifier modifier = new StatModifier(StatValue.value, this);
+                    Modifiers.Add((stat, modifier));
+                    stat.AddModifier(modifier);
+                }
+               
             }
         }
         else

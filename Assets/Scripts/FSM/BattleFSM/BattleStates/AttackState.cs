@@ -9,7 +9,7 @@ public abstract class AttackState : State
 
     protected float nextFire;
 
-    public AttackState(FSM stateMachine)
+    public AttackState(BattleFSM stateMachine)
     {
         battle = stateMachine.GetComponent<CharacterBattle>();
         stats = battle.stats;
