@@ -17,13 +17,13 @@ public abstract class CharacterBattle: MonoBehaviour
 
     protected BattleFSM stateMachine;
 
-    public bool IsBlocking
+/*    public bool IsBlocking
     {
         get
         {
             return stateMachine.currentState.Equals(stateMachine.ParryState);
         }
-    }
+    }*/
 
     private void Awake()
     {
@@ -45,8 +45,8 @@ public abstract class CharacterBattle: MonoBehaviour
     public virtual void AttackTarget()
     {
         PlayAttackAnimation();
-        if (!Target.IsBlocking)
-             DamageEnemyTarget();
+        //if (!Target.IsBlocking)
+        DamageEnemyTarget();
     }
 
     void PlayAttackAnimation()

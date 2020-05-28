@@ -38,10 +38,10 @@ public class ManualAttackState : AttackState
                 PlayerStatusEffects.DecreaseEndurance(playerStats);
             }
         }
-        else if (Input.GetMouseButtonDown(2))
+     /*   else if (Input.GetMouseButtonDown(2))
         {
             playerBattle.EnterParry();
-        }
+        }*/
     }
 
     protected override void FindTarget()

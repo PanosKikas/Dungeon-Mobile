@@ -25,11 +25,11 @@ public class PlayerBattle : CharacterBattle
         PlayerStatusEffects.RechargeEndurance(playerStats);
     }
 
-    public void EnterParry()
+/*    public void EnterParry()
     {
         stateMachine.ChangeState(stateMachine.ParryState);
         animator.SetTrigger("Parry");
-    }
+    }*/
 
     public void FindManualAttackTarget()
     {

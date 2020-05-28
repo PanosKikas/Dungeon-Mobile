@@ -19,7 +19,7 @@ public class PlayerCharacterStats : CharacterStats
     public CharacterStat ItemDropRateStat;
 
 
-    public Attribute Vitality;
+    Attribute Vitality;
     Attribute Strength;
     Attribute Agility;
     Attribute Wisdom;
@@ -28,6 +28,7 @@ public class PlayerCharacterStats : CharacterStats
     [HideInInspector]
     public Attribute[] attributes;
 
+    #region StatGetters
     public float ManualAttackRate
     {
         get
@@ -70,6 +71,8 @@ public class PlayerCharacterStats : CharacterStats
 
     public int CurrentMana;
 
+    #endregion
+
     public override void Initialize()
     {
         
@@ -90,7 +93,7 @@ public class PlayerCharacterStats : CharacterStats
 
         Vitality = new Attribute(3);
             
-        Strength = new Attribute(2);
+        Strength = new Attribute(3);
         Agility = new Attribute(4);
         Wisdom = new Attribute(1);
         Luck = new Attribute(0);

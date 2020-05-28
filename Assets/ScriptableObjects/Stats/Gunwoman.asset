@@ -16,7 +16,7 @@ MonoBehaviour:
     BaseValue: 420
     Type: 0
   AttackDamageStat:
-    BaseValue: 5
+    BaseValue: 7
     Type: 4
   AutoAttackRateStat:
     BaseValue: 0.5
@@ -60,10 +60,6 @@ MonoBehaviour:
   ItemDropRateStat:
     BaseValue: 0.1
     Type: 9
-  Vitality:
-    OnAttributeChanged:
-      m_PersistentCalls:
-        m_Calls: []
   attributes:
   - OnAttributeChanged:
       m_PersistentCalls:

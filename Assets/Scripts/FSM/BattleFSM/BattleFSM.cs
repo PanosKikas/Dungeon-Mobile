@@ -8,14 +8,14 @@ public abstract class BattleFSM : FSM
     private State previousState = null;
 
     public AutoAttackState AutoAttackState { get; protected set; }
-    public ParryState ParryState { get; protected set; }
+    //public ParryState ParryState { get; protected set; }
 
 
 
     protected virtual void Start()
     {
         AutoAttackState = new AutoAttackState(this);
-        ParryState = new ParryState(this);
+       // ParryState = new ParryState(this);
 
         currentState = AutoAttackState;
 

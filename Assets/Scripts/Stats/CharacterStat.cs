@@ -39,14 +39,14 @@ public class CharacterStat
     {
         get
         {
-            /*if (isDirty || (BaseValue != lastBaseValue))
+            if (isDirty || (BaseValue != lastBaseValue))
             {
                 lastBaseValue = BaseValue;
                 _value = CalculateFinalValue();
                 isDirty = false;
-            }*/
-            
-            return CalculateFinalValue();
+            }
+
+            return _value;
         }
     }
     
@@ -59,7 +59,6 @@ public class CharacterStat
         isDirty = true;
         statModifiers = new List<StatModifier>();
         StatModifiers = statModifiers.AsReadOnly();    
-        
     }
 
     private void AddModifier()
