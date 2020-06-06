@@ -20,8 +20,8 @@ public class ProjectileSpawner : MonoBehaviour
 
     private void Start()
     {
-        MainHeroPlayerStats heroStats = (MainHeroPlayerStats)StatsDatabase.Instance.PlayerCharacterStats[0];
-        projectileDamage = heroStats.ProjecitleDamage;
+        //projectileDamage = StatsDatabase.Instance.GetMainCharacterStats().ProjecitleDamage;
+        projectileDamage = 20;
     }
 
 

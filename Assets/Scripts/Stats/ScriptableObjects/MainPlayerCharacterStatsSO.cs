@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "PlayerStats", menuName = "Stats/MainHeroStats")]
-public class MainHeroPlayerStats : PlayerCharacterStats
+public class MainPlayerCharacterStatsSO : PlayerCharacterStatsSO
 {
     public int ProjecitleDamage = 10;
     public float FireRate = 1.5f;

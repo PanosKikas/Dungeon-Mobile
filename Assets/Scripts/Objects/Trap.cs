@@ -8,11 +8,17 @@ public class Trap : MonoBehaviour
     int damage = 10;
 
     Animator animator;
-    PlayerStatusEffects statusEffects;
+
+    PlayerCharacterStats playerStats;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
+    }
+
+    private void Start()
+    {
+        playerStats = StatsDatabase.Instance.GetMainCharacterStats();
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
@@ -20,7 +26,6 @@ public class Trap : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             animator.SetBool("Activated", true);
-            statusEffects = collision.gameObject.GetComponent<PlayerStatusEffects>();
         }
        
     }
@@ -30,15 +35,13 @@ public class Trap : MonoBehaviour
         if (collision.CompareTag("Player"))
         {
             animator.SetBool("Activated", false);
-            statusEffects = null;
         }
         
     }
 
     public void DamagePlayer()
     {
-        StatusEffects.DamageTarget(StatsDatabase.Instance.PlayerCharacterStats[0], damage);
-        
+        StatusEffects.DamageTarget(playerStats, damage);     
     }
 
     

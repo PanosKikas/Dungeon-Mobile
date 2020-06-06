@@ -25,7 +25,7 @@ public class HealthUI : BattleUI
 
     public void UpdateHealth()
     {
-        bar.value = (float)stats.CurrentHealth / stats.MaxHealth;
+        bar.value = (float)stats.Health / stats.Data.MaxHealth;
     }
 
     private void Update()

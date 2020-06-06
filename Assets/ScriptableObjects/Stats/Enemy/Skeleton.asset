@@ -9,31 +9,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd93f53afc6e0584b8c4358fd27a686f, type: 3}
-  m_Name: Skeleton3
+  m_Script: {fileID: 11500000, guid: 184a0b9fc27782b46b2530da867a9097, type: 3}
+  m_Name: Skeleton
   m_EditorClassIdentifier: 
-  upgradableStatsList:
-  - BaseValue: 500
-    Type: 0
-  - BaseValue: 10
-    Type: 4
-  - BaseValue: 1.2
-    Type: 5
   MaxHealthStat:
-    BaseValue: 150
+    BaseValue: 500
     Type: 0
   AttackDamageStat:
-    BaseValue: 10
+    BaseValue: 20
     Type: 4
   AutoAttackRateStat:
-    BaseValue: 1.2
+    BaseValue: 0.5
     Type: 5
-  HasDied: 0
   impactEffect: {fileID: 0}
   ImpactEffectOffset: {x: 0, y: 0, z: 0}
-  OnHpLoss:
-    m_PersistentCalls:
-      m_Calls: []
   MobilityStat:
-    BaseValue: 100
+    BaseValue: 10
     Type: 0

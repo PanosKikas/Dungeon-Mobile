@@ -5,8 +5,8 @@ using UnityEngine;
 public class StatsDatabase : MonoBehaviour
 {
 
-    public PlayerCharacterStats[] PlayerCharacterStats;
-    public PlayerStatusEffects[] PlayerStatusEffects;
+    [SerializeField]
+    private List<PlayerCharacterStats> PlayerCharacterStats;
 
     #region Singletton
     public static StatsDatabase Instance { get; private set; }
@@ -26,9 +26,20 @@ public class StatsDatabase : MonoBehaviour
     }
     #endregion
 
-    private void Start()
+
+    public PlayerCharacterStats GetMainCharacterStats()
     {
-        PlayerCharacterStats[0].Initialize();
+        return PlayerCharacterStats[0];
+    }
+
+    public PlayerCharacterStats GetSideCharacterStats(int index)
+    {
+        return PlayerCharacterStats[index + 1];
+    }
+
+    public PlayerCharacterStats GetCharacterStats(int index)
+    {
+        return PlayerCharacterStats[index];
     }
    
 }

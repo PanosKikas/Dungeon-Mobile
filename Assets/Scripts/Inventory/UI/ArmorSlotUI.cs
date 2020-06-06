@@ -5,21 +5,43 @@ using UnityEngine.UI;
 
 public class ArmorSlotUI : MonoBehaviour
 {
+    Button[] equipmentButtons;
+    Image[] armorIcons;
 
-    Image armorIcon;
+
 
     private void OnEnable()
     {
-        if (armorIcon == null)
+        if (equipmentButtons == null)
         {
-            armorIcon = transform.GetChild(0).GetComponent<Image>();
+            InitialiazeEquipmentSlots();         
         }
 
-        EquipableSO equipedSlot = CharacterEquipment.Instance.MainCharacterEquipment[transform.GetSiblingIndex()];
-        if (equipedSlot != null)
+        UpdateEquipmentSlotsUI();
+    }
+
+    void InitialiazeEquipmentSlots()
+    {
+        equipmentButtons = GetComponentsInChildren<Button>();
+        armorIcons = new Image[equipmentButtons.Length];
+
+        for (int i = 0; i < equipmentButtons.Length; i++)
         {
-            armorIcon.enabled = true;
-            armorIcon.sprite = equipedSlot.Icon;
+            armorIcons[i] = equipmentButtons[i].transform.GetChild(0).GetComponent<Image>();
+        }
+    }
+
+    void UpdateEquipmentSlotsUI()
+    {
+        for (int i = 0; i < equipmentButtons.Length; ++i)
+        {
+            EquipableSO equipedSlot = CharacterEquipment.Instance.MainCharacterEquipment[i];
+
+            if (equipedSlot != null)
+            {
+                armorIcons[i].enabled = true;
+                armorIcons[i].sprite = equipedSlot.Icon;
+            }
         }
     }
 }

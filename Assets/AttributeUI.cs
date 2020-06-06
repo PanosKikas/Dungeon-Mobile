@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class AttributeUI : MonoBehaviour
 {
@@ -9,9 +10,23 @@ public class AttributeUI : MonoBehaviour
     TextMeshProUGUI[] attributeValues;
     Attribute[] attributes;
 
+    Button[] attributeButtons;
+
+    private void OnEnable()
+    {
+        if (attributeButtons == null)
+        {
+            attributeButtons = GetComponentsInChildren<Button>();
+            foreach (Button button in attributeButtons)
+            {
+                button.onClick.AddListener(() => IncrementAttribute(button.transform.GetSiblingIndex()));
+            }
+        }
+    }
+
     private void Start()
     {
-        attributes = StatsDatabase.Instance.PlayerCharacterStats[0].attributes;
+        attributes = StatsDatabase.Instance.GetMainCharacterStats().stats.AttributeStats;
         UpdateAttributeTexts();
     }
 

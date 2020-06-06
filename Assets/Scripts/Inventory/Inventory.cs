@@ -21,13 +21,14 @@ public class StoredItem
 #endregion
 public class Inventory : MonoBehaviour
 {   
-    MainHeroPlayerStats stats;
+    MainPlayerCharacterStatsSO stats;
     public static int InventoryCapacity { get; private set; }
     public int NextFreeSlot { get; private set; }
     public StoredItem[] items;
 
     [SerializeField]
     InventoryGUI inventoryGUI;
+
     [SerializeField]
     UIToggler toggler;
 
@@ -50,8 +51,6 @@ public class Inventory : MonoBehaviour
     }
     #endregion
     
-    
-
     private void Start()
     {
         InitializeInventory();
@@ -59,9 +58,9 @@ public class Inventory : MonoBehaviour
 
     void InitializeInventory()
     {
-        stats = (MainHeroPlayerStats)StatsDatabase.Instance.PlayerCharacterStats[0];
-        items = new StoredItem[stats.InventorySpace];
-        InventoryCapacity = stats.InventorySpace;
+        //stats = StatsDatabase.Instance.GetMainCharacterStats();
+        items = new StoredItem[20];
+        InventoryCapacity = 20;
         NextFreeSlot = 0;
     }
 

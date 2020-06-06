@@ -11,9 +11,10 @@ public abstract class PickupSO : ScriptableObject
     public GameObject prefab;
 
     protected PlayerCharacterStats stats;
+
     public virtual bool Use() 
-    { 
-        stats = StatsDatabase.Instance.PlayerCharacterStats[0]; 
+    {
+        stats = StatsDatabase.Instance.GetMainCharacterStats();
         return true; 
     }
 

@@ -45,7 +45,7 @@ public abstract class StatusEffects : MonoBehaviour
     {
         if (!stats.HasMaxHealth())
         {
-            stats.CurrentHealth = (int)Mathf.MoveTowards(stats.CurrentHealth, stats.MaxHealth, health);
+            stats.Health = (int)Mathf.MoveTowards(stats.Health, stats.Data.MaxHealth, health);
             return true;
         }
         return false;

@@ -2,15 +2,17 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class CharacterBattle: MonoBehaviour 
+public abstract class CharacterBattle : MonoBehaviour 
 {
     protected Animator animator;
+    
+    [HideInInspector]
     public CharacterStats stats;
 
 
     public CharacterBattle AutoAttackTarget;
 
-
+    [HideInInspector]
     public CharacterBattle Target;
     protected CharacterStat TargetStats;
 
@@ -32,11 +34,6 @@ public abstract class CharacterBattle: MonoBehaviour
         
     }
 
-    protected virtual void Start()
-    {
-        stats.Initialize();
-    }
-
     protected virtual void Update()
     {
         stateMachine.LogicUpdateCurrentState();
@@ -46,7 +43,7 @@ public abstract class CharacterBattle: MonoBehaviour
     {
         PlayAttackAnimation();
         //if (!Target.IsBlocking)
-        DamageEnemyTarget();
+       // DamageEnemyTarget();
     }
 
     void PlayAttackAnimation()
@@ -54,9 +51,9 @@ public abstract class CharacterBattle: MonoBehaviour
         animator.SetTrigger("Attack");
     }
 
-    void DamageEnemyTarget()
+    public void DamageEnemyTarget()
     {
-        StatusEffects.DamageTarget(Target.stats, stats.AttackDamage);
+        StatusEffects.DamageTarget(Target.stats, stats.Data.AttackDamage);
     }
 
     public virtual bool HasAttackTarget()

@@ -11,7 +11,7 @@ public class NewShootingInput : MonoBehaviour
     
     ProjectileSpawner spawner;
 
-    MainHeroPlayerStats characterStats;
+    PlayerCharacterStats characterStats;
     
     float nextFireTime = 0f;
 
@@ -21,7 +21,7 @@ public class NewShootingInput : MonoBehaviour
     private void Start()
     {
         spawner = GetComponent<ProjectileSpawner>();
-        characterStats = (MainHeroPlayerStats)StatsDatabase.Instance.PlayerCharacterStats[0];
+        characterStats = StatsDatabase.Instance.GetMainCharacterStats();
     }
 
     void Update()
@@ -54,6 +54,7 @@ public class NewShootingInput : MonoBehaviour
 
     void CalculateNextShootTime()
     {
-        nextFireTime = Time.time + 1 / characterStats.FireRate;
+        /// TODO
+        nextFireTime = Time.time + 1 / 2f;
     }
 }

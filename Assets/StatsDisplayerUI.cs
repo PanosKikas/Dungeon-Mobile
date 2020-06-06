@@ -7,7 +7,7 @@ using System.Text;
 public class StatsDisplayerUI : MonoBehaviour
 {
     TextMeshProUGUI statsText;
-    PlayerCharacterStats characterStats;
+    PlayerCharacterStatsSO characterStats;
 
     private void Awake()
     {
@@ -16,7 +16,7 @@ public class StatsDisplayerUI : MonoBehaviour
 
     private void Start()
     {
-        characterStats = StatsDatabase.Instance.PlayerCharacterStats[0];
+        characterStats = StatsDatabase.Instance.GetMainCharacterStats().stats;
     }
 
     private void Update()

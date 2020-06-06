@@ -33,8 +33,7 @@ public class CharacterStat
 
     StatModifier levelModifier;
     Attribute dependantAttribute;
-
-
+    
     public float Value
     {
         get

@@ -20,7 +20,7 @@ public class ManualAttackState : AttackState
     public override void EnterState()
     {
         base.EnterState();
-        playerStats = (PlayerCharacterStats)playerBattle.playerStats;
+        playerStats = playerBattle.playerStats;
         battle.Target = null;
     }
 
@@ -33,7 +33,7 @@ public class ManualAttackState : AttackState
             if (battle.HasAttackTarget())
             {
                 battle.AttackTarget();
-                nextFire = Time.time + 1f / playerStats.ManualAttackRate;
+                nextFire = Time.time + 1f / playerStats.stats.ManualAttackRate;
                 ShakeCamera();
                 PlayerStatusEffects.DecreaseEndurance(playerStats);
             }

@@ -91,6 +91,7 @@ GameObject:
   - component: {fileID: 304844771}
   - component: {fileID: 304844772}
   - component: {fileID: 2017368314191846117}
+  - component: {fileID: 6842344413883981008}
   m_Layer: 10
   m_Name: EnemyTopDown
   m_TagString: Enemy
@@ -282,7 +283,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 48aa121940fc91e4ca058d358058bbcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stats: {fileID: 11400000, guid: e2fa23d7be862e34ca28cf918860184b, type: 2}
 --- !u!114 &2017368314191846117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -295,6 +295,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 453171f0c773c884c81bb2cf371c6a95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6842344413883981008
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7495838158229068014}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9861da3ebf8ebb44bb59889d04671b3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Data: {fileID: 11400000, guid: 97f730c9046256d4ab36e7c13e1c60ae, type: 2}
+  currentHealth: 0
+  OnHpLoss:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &7495838158493420706
 GameObject:
   m_ObjectHideFlags: 0

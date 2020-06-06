@@ -12,11 +12,12 @@ public class PlayerBattle : CharacterBattle
 
     [HideInInspector]
     public PlayerCharacterStats playerStats;
-
-    protected override void Start()
+    
+    void Start()
     {
-        base.Start();
-        playerStats = (PlayerCharacterStats)stats;
+        
+        playerStats = StatsDatabase.Instance.GetCharacterStats(transform.GetSiblingIndex());
+        stats = playerStats;
     }
 
     protected override void Update()

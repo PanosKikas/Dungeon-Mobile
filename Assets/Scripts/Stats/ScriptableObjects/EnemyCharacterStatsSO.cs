@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "PlayerStats", menuName = "Stats/EnemyStats")]
-public class EnemyCharacterStats : CharacterStats
+public class EnemyCharacterStatsSO : CharacterStatsSO
 {
-
     public CharacterStat MobilityStat;
 
     public float Mobility
@@ -18,11 +17,5 @@ public class EnemyCharacterStats : CharacterStats
         {
             MobilityStat.BaseValue = value;
         }
-    }
-
-    public override void Initialize()
-    {
-        base.Initialize();
-        
     }
 }

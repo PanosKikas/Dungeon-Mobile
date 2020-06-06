@@ -6,22 +6,13 @@ using UnityEngine.Events;
 
 public abstract class Pickup : MonoBehaviour
 {
-    
-    public PlayerCharacterStats playerStats;
 
     public PickupSO PickupStats;
 
     Transform target = null;
+
     [SerializeField]
     float gravitationSpeed = 1f;
-
-    protected virtual void Start()
-    {
-
-        
-        playerStats = StatsDatabase.Instance.PlayerCharacterStats[0];
-        
-    }
 
     protected virtual void PickUp() 
     {
@@ -32,8 +23,7 @@ public abstract class Pickup : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.CompareTag("Player"))
-        {   
-            
+        {        
             PickUp();     
         }
     }

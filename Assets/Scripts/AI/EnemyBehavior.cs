@@ -9,9 +9,6 @@ public class EnemyBehavior : MonoBehaviour
     public Vector2 Velocity { get; set; }
     MovementAnimation animateMovement;
 
-    [SerializeField]
-    public EnemyCharacterStats stats;
-
     private void Awake()
     {
         stateMachine = GetComponent<EnemyFSM>();

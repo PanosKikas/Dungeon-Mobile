@@ -86,7 +86,6 @@ GameObject:
   - component: {fileID: 1200157956806816794}
   - component: {fileID: 1998471866969082411}
   - component: {fileID: 3624937374062660577}
-  - component: {fileID: 2122125674}
   m_Layer: 5
   m_Name: ArmorSlot
   m_TagString: Untagged
@@ -194,15 +193,3 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &2122125674
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7343077781507974486}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 23b216d86feadf5409cee5c29596cf10, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

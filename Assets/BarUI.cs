@@ -4,14 +4,24 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-
-public class HpUI : MonoBehaviour
+public enum BarType
 {
+    HP,
+    Mana,
+    Endurance,
+    Experience
+}
 
+public class BarUI : MonoBehaviour
+{
+    public BarType Type;
     Slider HpSlider;
 
     TextMeshProUGUI textMeshPro;
+    CharacterStats characterStats;
 
+    int targetCurrentStat; 
+    CharacterStat targetMaxStat;
 
     private void OnEnable()
     {
@@ -24,13 +34,16 @@ public class HpUI : MonoBehaviour
         {
             textMeshPro = GetComponentInChildren<TextMeshProUGUI>();
         }
+
+        characterStats = StatsDatabase.Instance.GetMainCharacterStats();
+
+         
     }
-
-
+    
     private void Update()
     {
-        float CurrentHealth = StatsDatabase.Instance.PlayerCharacterStats[0].CurrentHealth;
-        float MaxHealth = StatsDatabase.Instance.PlayerCharacterStats[0].MaxHealth;
+        float CurrentHealth = characterStats.Health;
+        float MaxHealth = characterStats.Data.MaxHealth;
         HpSlider.value = CurrentHealth / MaxHealth;
         textMeshPro.text = string.Format("{0}/{1}", CurrentHealth, MaxHealth);
     }

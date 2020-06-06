@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class EnemyBattle : CharacterBattle
 {
-    
+    void Start()
+    {
+        
+        stats = GetComponent<CharacterStats>();
+    }
 
 }

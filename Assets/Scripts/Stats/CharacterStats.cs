@@ -1,40 +1,19 @@
-﻿using UnityEngine;
-using UnityEngine.Events;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
+using UnityEngine;
+using UnityEngine.Events;
 
-
-public abstract class CharacterStats : ScriptableObject
+public class CharacterStats : MonoBehaviour
 {
-        
-    protected List<CharacterStat> upgradableStatsList;
+    public CharacterStatsSO Data;
 
- 
-
-    public CharacterStat MaxHealthStat;
-    public CharacterStat AttackDamageStat;
-    public CharacterStat AutoAttackRateStat;
-    
-
-    public virtual void Initialize()
-    {
-        
-        upgradableStatsList = new List<CharacterStat>
-        {
-           MaxHealthStat, AttackDamageStat, AutoAttackRateStat
-            
-        };
-
-         
-        CurrentHealth = (int)MaxHealthStat.Value;
-        HasDied = false;
-           
-    }
-
+    [SerializeField]
     private int currentHealth;
 
-    public int CurrentHealth
+    [HideInInspector]
+    public UnityEvent OnHpLoss;
+
+    public int Health
     {
         get
         {
@@ -47,61 +26,34 @@ public abstract class CharacterStats : ScriptableObject
         }
     }
 
-    public int MaxHealth
+    private void Start()
     {
-        get
-        {
-            return (int)MaxHealthStat.Value;
-        }
-        
-    }
-    
-    
-    public virtual float AttackDamage
-    {
-        get
-        {
-            return AttackDamageStat.Value;
-        }
-       
+        Initialize();
     }
 
-    public float AutoAttackRate
-    {
-        get
-        {
-            return AutoAttackRateStat.Value;
-        }
-        
-    }
-
-    public bool HasDied = false;
-
-    public GameObject impactEffect;
-
-    [SerializeField]
-    Vector3 ImpactEffectOffset;
-    public UnityEvent OnHpLoss;
+    public bool HasDied { get; private set; }
     
-    public bool HasMaxHealth()
+    protected virtual void Initialize()
     {
-        return CurrentHealth == MaxHealth;
+        Data.Initialize();
+        Health = Data.MaxHealth;
+        HasDied = false;
     }
 
     public virtual void TakeDamage(float damage)
     {
-        CurrentHealth = Mathf.Clamp((int)(CurrentHealth - damage), 0, MaxHealth);
-
-      
         
-        if (impactEffect != null)
+        Health = Mathf.Clamp((int)(Health - damage), 0, Data.MaxHealth);
+
+
+        if (Data.impactEffect != null)
         {
             //Vector3 impactPosition = transform.position + ImpactEffectOffset + Random.onUnitSphere;
-           // GameObject impact = Instantiate(impactEffect, impactPosition, Quaternion.identity);
-          //  Destroy(impact, 2f);
+            // GameObject impact = Instantiate(impactEffect, impactPosition, Quaternion.identity);
+            //  Destroy(impact, 2f);
         }
 
-        if (CurrentHealth <= 0 && !HasDied)
+        if (Health <= 0 && !HasDied)
         {
             HasDied = true;
             Die();
@@ -109,17 +61,16 @@ public abstract class CharacterStats : ScriptableObject
     }
 
 
-
     protected virtual void Die()
     {
-        Debug.Log("Die");
+        Debug.Log("Die "  + gameObject);
 
         //this.enabled = false;
-       // gameObject.SetActive(false);
+        // gameObject.SetActive(false);
     }
 
-    public List<CharacterStat> FindCharacterStats(Stat type)
+    public bool HasMaxHealth()
     {
-        return upgradableStatsList.FindAll(i => (i.Type == type));
+        return Health == Data.MaxHealth;
     }
 }
