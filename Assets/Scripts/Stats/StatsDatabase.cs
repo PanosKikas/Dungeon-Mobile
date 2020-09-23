@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class StatsDatabase : MonoBehaviour
 {
-
-    [SerializeField]
-    private List<PlayerCharacterStats> PlayerCharacterStats;
+    
+    public List<PlayerCharacterStatsSO> PlayerCharacterStats;
 
     #region Singletton
     public static StatsDatabase Instance { get; private set; }
@@ -25,19 +24,19 @@ public class StatsDatabase : MonoBehaviour
         }
     }
     #endregion
+    
 
-
-    public PlayerCharacterStats GetMainCharacterStats()
+    public PlayerCharacterStatsSO GetMainCharacterStats()
     {
         return PlayerCharacterStats[0];
     }
 
-    public PlayerCharacterStats GetSideCharacterStats(int index)
+    public PlayerCharacterStatsSO GetSideCharacterStats(int index)
     {
         return PlayerCharacterStats[index + 1];
     }
 
-    public PlayerCharacterStats GetCharacterStats(int index)
+    public PlayerCharacterStatsSO GetCharacterStats(int index)
     {
         return PlayerCharacterStats[index];
     }

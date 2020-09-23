@@ -11,7 +11,7 @@ public class NewShootingInput : MonoBehaviour
     
     ProjectileSpawner spawner;
 
-    PlayerCharacterStats characterStats;
+    PlayerCharacterStatsSO characterStats;
     
     float nextFireTime = 0f;
 

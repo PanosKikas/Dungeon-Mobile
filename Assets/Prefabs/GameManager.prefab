@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6359789175508184116}
   - component: {fileID: 6359789175508184123}
   - component: {fileID: 6359789175508184120}
+  - component: {fileID: -3395263143443776109}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -48,6 +49,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   items: []
   inventoryGUI: {fileID: 0}
+  toggler: {fileID: 0}
 --- !u!114 &6359789175508184116
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -61,10 +63,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerCharacterStats:
-  - {fileID: 11400000, guid: ba4d607a03a7f2348bbd40a5dd34ca1b, type: 2}
-  - {fileID: 11400000, guid: c2901c8ad4422874aa8501616d711bf3, type: 2}
-  - {fileID: 11400000, guid: 9642a0b19fc38f44cbe8c789ec3aa96c, type: 2}
-  PlayerStatusEffects: []
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &6359789175508184123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -87,5 +88,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e2d03ee29c9f7df429a2d2a3f6b96a62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &-3395263143443776109
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6359789175508184119}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb0a4c743f770144a99f009e36db8e92, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

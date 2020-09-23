@@ -15,8 +15,8 @@ public class PlayerBattle : CharacterBattle
     
     void Start()
     {
-        
-        playerStats = StatsDatabase.Instance.GetCharacterStats(transform.GetSiblingIndex());
+
+        playerStats = GetComponent<PlayerCharacterStats>();
         stats = playerStats;
     }
 

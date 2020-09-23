@@ -31,7 +31,7 @@ public class EnemyBehavior : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             EnterBattle();
-            Destroy(gameObject);
+          //  Destroy(gameObject);
         }
     }
 
@@ -44,21 +44,19 @@ public class EnemyBehavior : MonoBehaviour
             {
                 stateMachine.ChangeState(stateMachine.ChaseState);
             }
-            
-           
+                   
         }
     }
 
     void EnterBattle()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        BattleTransistor.Instance.EnterBattleScene(this.gameObject);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (stateMachine.currentState == stateMachine.ChaseState && collision.CompareTag("Player"))
         {
-            
             stateMachine.ChangeState(stateMachine.PatrolState);
         }
             

@@ -35,7 +35,7 @@ public class BarUI : MonoBehaviour
             textMeshPro = GetComponentInChildren<TextMeshProUGUI>();
         }
 
-        characterStats = StatsDatabase.Instance.GetMainCharacterStats();
+        characterStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacterStats>();
 
          
     }

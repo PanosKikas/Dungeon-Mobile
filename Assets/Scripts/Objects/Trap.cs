@@ -15,16 +15,17 @@ public class Trap : MonoBehaviour
     {
         animator = GetComponent<Animator>();
     }
-
-    private void Start()
-    {
-        playerStats = StatsDatabase.Instance.GetMainCharacterStats();
-    }
+    
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
+            if (playerStats == null)
+            {
+                playerStats = collision.GetComponent<PlayerCharacterStats>();
+            }
+
             animator.SetBool("Activated", true);
         }
        

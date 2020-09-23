@@ -5,13 +5,15 @@ using UnityEngine;
 [System.Serializable]
 public class PlayerCharacterStats : CharacterStats
 {
-    
+    [HideInInspector]
     public PlayerCharacterStatsSO stats;
 
+    [HideInInspector]
     public float Endurance;
+
+    [HideInInspector]
     public float Mana;
-
-
+    
     protected override void Initialize()
     {
         base.Initialize();

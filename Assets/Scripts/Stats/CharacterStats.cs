@@ -6,13 +6,12 @@ using UnityEngine.Events;
 public class CharacterStats : MonoBehaviour
 {
     public CharacterStatsSO Data;
-
-    [SerializeField]
+    
     private int currentHealth;
 
     [HideInInspector]
     public UnityEvent OnHpLoss;
-
+    
     public int Health
     {
         get

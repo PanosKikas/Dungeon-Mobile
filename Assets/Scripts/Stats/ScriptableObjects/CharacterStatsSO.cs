@@ -6,7 +6,7 @@ using System.Linq;
 
 public abstract class CharacterStatsSO : ScriptableObject
 {
-        
+    public string Name;    
     protected List<CharacterStat> upgradableStatsList;
 
     public CharacterStat MaxHealthStat;
@@ -14,6 +14,7 @@ public abstract class CharacterStatsSO : ScriptableObject
 
     public CharacterStat AutoAttackRateStat;
 
+    public RuntimeAnimatorController battleAnimator;
     public virtual void Initialize()
     {
 

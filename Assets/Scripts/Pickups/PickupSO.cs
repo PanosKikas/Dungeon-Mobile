@@ -14,7 +14,7 @@ public abstract class PickupSO : ScriptableObject
 
     public virtual bool Use() 
     {
-        stats = StatsDatabase.Instance.GetMainCharacterStats();
+        stats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacterStats>();
         return true; 
     }
 

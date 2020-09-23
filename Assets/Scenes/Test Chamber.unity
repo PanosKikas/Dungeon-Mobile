@@ -1313,80 +1313,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1513264001}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &186361403
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 186361404}
-  - component: {fileID: 186361406}
-  - component: {fileID: 186361405}
-  m_Layer: 5
-  m_Name: Image
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &186361404
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 186361403}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 2068503156}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.000017166138, y: 0.000005722046}
-  m_SizeDelta: {x: -23.000832, y: -21.467508}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &186361405
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 186361403}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 4e3b5910a39088c4ca67d989c002195b, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
---- !u!222 &186361406
-CanvasRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 186361403}
-  m_CullTransparentMesh: 0
 --- !u!4 &207312436 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3272984748274777609, guid: 1938514a208fe5649aef14ed5286cf1c,
@@ -2833,7 +2759,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.838967, y: 3.0139499, z: -10}
+  m_LocalPosition: {x: 12.838968, y: 3.0139484, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3331,26 +3257,6 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
---- !u!114 &571505039
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 571505031}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 193d68d291902e448a0731a5601d7e9f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Data: {fileID: 11400000, guid: cace7edb0a096964d815d4e7a2e3cdd7, type: 2}
-  currentHealth: 0
-  OnHpLoss:
-    m_PersistentCalls:
-      m_Calls: []
-  stats: {fileID: 11400000, guid: cace7edb0a096964d815d4e7a2e3cdd7, type: 2}
-  Endurance: 0
-  Mana: 0
 --- !u!4 &616009753 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7096388552937123688, guid: 985aeae993babcf4999cb37e4cb2f628,
@@ -5712,6 +5618,7 @@ GameObject:
   - component: {fileID: 894039800}
   - component: {fileID: 894039801}
   - component: {fileID: 894039802}
+  - component: {fileID: 894039799}
   m_Layer: 11
   m_Name: Character
   m_TagString: Player
@@ -5867,6 +5774,25 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rateOfFire: 3
+--- !u!114 &894039799
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 894039791}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 193d68d291902e448a0731a5601d7e9f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Data: {fileID: 11400000, guid: cace7edb0a096964d815d4e7a2e3cdd7, type: 2}
+  OnHpLoss:
+    m_PersistentCalls:
+      m_Calls: []
+  stats: {fileID: 0}
+  Endurance: 0
+  Mana: 0
 --- !u!114 &894039800
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7474,6 +7400,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7495838158229068014, guid: e529457742c495245aaa14c89d0a0b10,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7495838158229068015, guid: e529457742c495245aaa14c89d0a0b10,
         type: 3}
@@ -15843,6 +15774,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Enemy (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 7495838158229068014, guid: e529457742c495245aaa14c89d0a0b10,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7495838158493420705, guid: e529457742c495245aaa14c89d0a0b10,
         type: 3}
@@ -27081,15 +27017,14 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children:
-  - {fileID: 186361404}
+  m_Children: []
   m_Father: {fileID: 1194689876}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: -8.799927, y: -4.300049}
-  m_SizeDelta: {x: 40.395485, y: 39.20038}
+  m_SizeDelta: {x: 25, y: 25}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2068503157
 MonoBehaviour:
@@ -27164,7 +27099,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 8319bc19b3e2af34ebefb063b1051893, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 65ab4a7316ba1934eaf1659504d4faa8, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -30523,7 +30458,8 @@ PrefabInstance:
         type: 3}
       propertyPath: PlayerCharacterStats.Array.data[0]
       value: 
-      objectReference: {fileID: 571505039}
+      objectReference: {fileID: 11400000, guid: cace7edb0a096964d815d4e7a2e3cdd7,
+        type: 2}
     - target: {fileID: 6359789175508184116, guid: 0d6350479e3066a4792ab53b6e4d8c87,
         type: 3}
       propertyPath: PlayerCharacterStats.Array.data[1]

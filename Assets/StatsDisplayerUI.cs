@@ -16,7 +16,7 @@ public class StatsDisplayerUI : MonoBehaviour
 
     private void Start()
     {
-        characterStats = StatsDatabase.Instance.GetMainCharacterStats().stats;
+        characterStats = StatsDatabase.Instance.GetMainCharacterStats();
     }
 
     private void Update()

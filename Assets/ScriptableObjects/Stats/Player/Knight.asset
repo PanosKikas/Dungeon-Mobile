@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 2751084c9f052fd4cb9d77151f313d8d, type: 3}
-  m_Name: Gunwoman
+  m_Name: Knight
   m_EditorClassIdentifier: 
-  Name: Gunwoman
+  Name: Knight
   MaxHealthStat:
-    BaseValue: 500
+    BaseValue: 2000
     Type: 0
   AttackDamageStat:
     BaseValue: 10
@@ -22,7 +22,7 @@ MonoBehaviour:
   AutoAttackRateStat:
     BaseValue: 0.005
     Type: 5
-  battleAnimator: {fileID: 9100000, guid: a8ff043a6239c5042a96cc9246e52f2b, type: 2}
+  battleAnimator: {fileID: 22100000, guid: 62a5bda882a3813499e47a3fcc88de66, type: 2}
   impactEffect: {fileID: 0}
   ImpactEffectOffset: {x: 0, y: 0, z: 0}
   ManualAttackRateStat:

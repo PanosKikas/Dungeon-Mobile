@@ -20,7 +20,7 @@ public class HealthUI : BattleUI
         base.Start();
         
         stats.OnHpLoss.AddListener(UpdateHealth);
-        
+        UpdateHealth();
     }    
 
     public void UpdateHealth()
