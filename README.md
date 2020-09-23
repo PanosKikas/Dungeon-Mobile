@@ -1,3 +1,2 @@
 # Dungeon-Mobile-
-
-It's just the best fucking game...lol                 it has some dungeon procedural generation as well ..lol    but we need to add backrounds
+A procedural Dungeon Roguelike Mobile Game under construction using the Unity Engine 2020. [Currently under development]. 
