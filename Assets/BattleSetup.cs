@@ -28,7 +28,8 @@ public class BattleSetup : MonoBehaviour
         {
             GameObject enemyToSetup = enemyPlaceholders[i];
             enemyToSetup.GetComponent<CharacterStats>().Data = enemyStats[i];
-            enemyToSetup.GetComponentInChildren<Animator>().runtimeAnimatorController = enemyStats[i].battleAnimator;
+            enemyToSetup.GetComponentInChildren<Animator>().
+                runtimeAnimatorController = enemyStats[i].battleAnimator;
         }
     }
 
