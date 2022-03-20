@@ -4009,6 +4009,14 @@ PrefabInstance:
       propertyPath: m_CullTransparentMesh
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5772994896791702209, guid: f5b4c58344771cb4ab92a8320429d6b2, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: -0.0000019073486
+      objectReference: {fileID: 0}
+    - target: {fileID: 5772994896791702209, guid: f5b4c58344771cb4ab92a8320429d6b2, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.00000023841858
+      objectReference: {fileID: 0}
     - target: {fileID: 5772994897621843944, guid: f5b4c58344771cb4ab92a8320429d6b2, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
