@@ -57,8 +57,10 @@ public class Projectile : MonoBehaviour
 
     void HitTarget(Collider2D collider)
     {
-        IDamagable damagable = collider.GetComponent<IDamagable>();
-        damagable?.TakeDamage(ProjectileDamage, null);
+        EnemyBehavior enemy = collider.GetComponent<EnemyBehavior>();
+
+        if (enemy != null)
+            StatusEffects.DamageTarget(enemy.GetComponent<CharacterStats>(), ProjectileDamage);
     }
 
     void Explode()

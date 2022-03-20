@@ -1,0 +1,30 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 184a0b9fc27782b46b2530da867a9097, type: 3}
+  m_Name: Skeleton
+  m_EditorClassIdentifier: 
+  Name: Skeleton Archer
+  MaxHealthStat:
+    BaseValue: 500
+    Type: 0
+  AttackDamageStat:
+    BaseValue: 20
+    Type: 4
+  AutoAttackRateStat:
+    BaseValue: 0.5
+    Type: 5
+  battleAnimator: {fileID: 9100000, guid: 3cea7f64e02989a418e363e429279726, type: 2}
+  impactEffect: {fileID: 0}
+  ImpactEffectOffset: {x: 0, y: 0, z: 0}
+  MobilityStat:
+    BaseValue: 10
+    Type: 0

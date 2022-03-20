@@ -4,21 +4,46 @@ using UnityEngine;
 
 public class Trap : MonoBehaviour
 {
+    [SerializeField]
+    int damage = 10;
 
     Animator animator;
+
+    PlayerCharacterStats playerStats;
 
     private void Awake()
     {
         animator = GetComponent<Animator>();
     }
+    
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        animator.SetTrigger("Activate");
+        if (collision.CompareTag("Player"))
+        {
+            if (playerStats == null)
+            {
+                playerStats = collision.GetComponent<PlayerCharacterStats>();
+            }
+
+            animator.SetBool("Activated", true);
+        }
+       
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        animator.SetTrigger("DeActivate");
+        if (collision.CompareTag("Player"))
+        {
+            animator.SetBool("Activated", false);
+        }
+        
     }
+
+    public void DamagePlayer()
+    {
+        StatusEffects.DamageTarget(playerStats, damage);     
+    }
+
+    
 }

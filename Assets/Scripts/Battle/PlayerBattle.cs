@@ -5,68 +5,49 @@ using System.Linq;
 using Cinemachine;
 
 
-public class PlayerBattle : MonoBehaviour
-{
-
-    Animator animator;
-    
-    GameObject enemyTarget;
-
+public class PlayerBattle : CharacterBattle
+{   
     [SerializeField]
     LayerMask enemyLayerMask;
 
-    CinemachineImpulseSource impulseSource;
-    StatusEffects effects;
-
-   
-
-    private void Awake()
-    {
-        animator = GetComponent<Animator>();
-        impulseSource = GetComponent<CinemachineImpulseSource>();
-        effects = GetComponent<StatusEffects>();
-    }
-
+    [HideInInspector]
+    public PlayerCharacterStats playerStats;
     
-    void Update()
+    void Start()
     {
-        if (Input.GetButtonDown("Fire1"))
-        {
-            FindAttackTarget();
-            if (enemyTarget != null)
-            {
-                AttackTarget();
-                ShakeCamera();
-            }
-        }
+
+        playerStats = GetComponent<PlayerCharacterStats>();
+        stats = playerStats;
     }
 
-    void FindAttackTarget()
+    protected override void Update()
+    {      
+        base.Update();
+        PlayerStatusEffects.RechargeEndurance(playerStats);
+    }
+
+/*    public void EnterParry()
+    {
+        stateMachine.ChangeState(stateMachine.ParryState);
+        animator.SetTrigger("Parry");
+    }*/
+
+    public void FindManualAttackTarget()
+    {
+        FindClosestTargetToMousePosition();    
+    }
+
+    void FindClosestTargetToMousePosition()
     {
         Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Collider2D[] colliders = Physics2D.OverlapCircleAll(mousePosition, 2f, enemyLayerMask);
-        
         if (colliders != null && colliders.Any<Collider2D>())
         {
-            enemyTarget = colliders[0].gameObject;
-            
+            Target = colliders[0].gameObject.GetComponent<CharacterBattle>();
         }
         else
         {
-            enemyTarget = null;
+            Target = null;
         }
-    }
-
-    void AttackTarget()
-    {
-        animator.SetTrigger("Attack");
-        enemyTarget.GetComponent<IDamagable>().TakeDamage(effects.stats.MainAttackDamage, effects.impactEffect);
-
-        ShakeCamera();
-    }
-
-    void ShakeCamera()
-    {
-        impulseSource.GenerateImpulse();
-    }
+    } 
 }

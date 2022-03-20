@@ -14,6 +14,10 @@ public class TopDownMovement : MonoBehaviour
 
     Vector2 input = Vector2.zero;
 
+    [SerializeField]
+    Joystick joystick;
+
+    
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
@@ -22,7 +26,24 @@ public class TopDownMovement : MonoBehaviour
     
     void Update()
     {
-        GetInput();
+
+#if UNITY_EDITOR_WIN
+
+        if (UnityEditor.EditorApplication.isRemoteConnected)
+        {
+            GetInputAndroid();
+        }
+        else
+        {
+            GetInputWindows();
+        }
+#else
+
+        GetInputAndroid();
+#endif
+
+
+
         Animate();       
     }
 
@@ -33,14 +54,33 @@ public class TopDownMovement : MonoBehaviour
 
     void Move()
     {
-        Vector3 deltaVelocity = input * speed * Time.fixedDeltaTime;
+        Vector3 deltaVelocity;
+ 
+        
+        deltaVelocity = input * speed * Time.fixedDeltaTime;
+
+
+        if (input.magnitude >= .1f)
+        {
+            float maxDeltaSpeed = speed * Time.fixedDeltaTime;
+            deltaVelocity.x *= maxDeltaSpeed / deltaVelocity.magnitude;
+            deltaVelocity.y *=  maxDeltaSpeed / deltaVelocity.magnitude;
+        }
+         
         rb.velocity = deltaVelocity;
     }
 
-    private void GetInput()
+    private void GetInputWindows()
     {
         input.x = Input.GetAxisRaw("Horizontal");
         input.y = Input.GetAxisRaw("Vertical");
+        NormalizeInput();
+    }
+
+    void GetInputAndroid()
+    {
+        input.x = joystick.Horizontal;
+        input.y = joystick.Vertical;
         NormalizeInput();
     }
 

@@ -5,6 +5,9 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - Projectile
+  - PlayerBattleHolder
+  - BattleManager
   layers:
   - Default
   - TransparentFX
@@ -19,11 +22,11 @@ TagManager:
   - Enemy
   - Player
   - Projectile
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Interactable
+  - Camera
+  - Pickups
+  - Joystick
+  - Props
   - 
   - 
   - 
@@ -48,8 +51,14 @@ TagManager:
   - name: Props
     uniqueID: 3518456275
     locked: 0
+  - name: Pickup
+    uniqueID: 3953282215
+    locked: 0
   - name: Player
     uniqueID: 881787977
+    locked: 0
+  - name: Enemy
+    uniqueID: 1137326413
     locked: 0
   - name: Projectiles
     uniqueID: 3239221339
