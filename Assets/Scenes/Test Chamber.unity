@@ -1274,7 +1274,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DialogueBoxPrefab: {fileID: -2632323001842876362, guid: b5a300e3556a29c4ab9ff4ceaff93334, type: 3}
-  SpawnOffset: {x: 0, y: 0, z: 0}
   Dialogue: {fileID: 11400000, guid: dc63b19be1362b84fa9a7d424b348370, type: 2}
 --- !u!4 &207312436 stripped
 Transform:

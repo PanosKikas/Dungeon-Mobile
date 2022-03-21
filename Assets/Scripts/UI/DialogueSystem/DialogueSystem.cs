@@ -10,7 +10,7 @@ public class DialogueSystem : MonoBehaviour
     [SerializeField]
     TextMeshProUGUI dialogueTextUI;
 
-    private float speed = 0.05f;
+    private float speed = 0.025f;
 
     [HideInInspector]
     public DialogueText dialogueText;
@@ -20,7 +20,7 @@ public class DialogueSystem : MonoBehaviour
     private bool awaitingClick = false;
 
     string currentLine;
-
+    string kAlphaCode = "<color=#00000000>";
     Action OnComplete;
 
     public void Show(DialogueText dialogue, Action onCompleteCallback=null)
@@ -70,12 +70,19 @@ public class DialogueSystem : MonoBehaviour
     {
         dialogueTextUI.text = string.Empty;
         currentLine = dialogueText.Text[currentLineIndex];
+        string originalText = currentLine;
+        string displayedText = "";
+        int alphaIndex = 0;
         for (int i = 0; i < currentLine.Length; ++i)
         {
+            ++alphaIndex;
             if (awaitingClick)
             {
                 yield break;
             }
+            dialogueTextUI.text = originalText;
+            displayedText = dialogueTextUI.text.Insert(alphaIndex, kAlphaCode);
+            dialogueTextUI.text = displayedText;
             dialogueTextUI.text += currentLine[i];
             yield return new WaitForSeconds(speed);
         }
