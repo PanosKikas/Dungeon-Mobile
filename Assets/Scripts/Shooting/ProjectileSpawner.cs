@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class ProjectileSpawner : MonoBehaviour
 {
-    
     [SerializeField]
     GameObject projectileToSpawn;
 
@@ -12,8 +11,6 @@ public class ProjectileSpawner : MonoBehaviour
     Quaternion bulletSpawnRotation;
 
     int projectileDamage;
-
-    Touch? currentTouch = null;
 
     [SerializeField]
     LayerMask blockMask;
@@ -24,73 +21,14 @@ public class ProjectileSpawner : MonoBehaviour
         projectileDamage = 20;
     }
 
-
-    public void Spawn()
+    public void Spawn(Vector2 dir)
     {
-        CalculateSpawnPositionAndRotation();
-        
-        if (Physics2D.OverlapCircle(bulletSpawnPosition, .05f, blockMask))
-        {
-            return;
-        }
-        GameObject projectile = Instantiate(projectileToSpawn, bulletSpawnPosition, bulletSpawnRotation);
-        projectile.GetComponent<Projectile>().ProjectileDamage = projectileDamage;
-    }
-
-
-    public void SpawnAndroid(Touch? touch)
-    {
-        currentTouch = touch;
-        CalculateSpawnPositionAndRotation();
-        GameObject projectile = Instantiate(projectileToSpawn, bulletSpawnPosition, bulletSpawnRotation);
-        projectile.GetComponent<Projectile>().ProjectileDamage = projectileDamage;
-    }
-
-    void CalculateSpawnPositionAndRotation()
-    {
-        Vector2 mouseDirection;
-        #region CheckPlatform
-
-
-#if UNITY_EDITOR_WIN
-
-        if (UnityEditor.EditorApplication.isRemoteConnected)
-        {
-            mouseDirection = GetTouchAndroid();
-        }
-        else
-        {
-            mouseDirection = GetMouseDirection();
-        }
-#else
-
-                        GetInputAndroid();
-#endif
-        #endregion
-
-       // mouseDirection = GetTouchAndroid();
-
+        Vector2 mouseDirection = dir;
         CalculateSpawnRotation(mouseDirection);
         mouseDirection.Normalize();
         CalculateSpawnPosition(mouseDirection);
-
-    }
-
-
-    Vector2 GetMouseDirection()
-    {
-        var mouseDir = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-
-        Vector2 dir = mouseDir - transform.position;
-        return dir;
-    }
-
-    Vector2 GetTouchAndroid()
-    {
-        var mouseDir = Camera.main.ScreenToWorldPoint(currentTouch.Value.position);
-
-        Vector2 dir = mouseDir - transform.position;
-        return dir;
+        GameObject projectile = Instantiate(projectileToSpawn, bulletSpawnPosition, bulletSpawnRotation);
+        projectile.GetComponent<Projectile>().ProjectileDamage = projectileDamage;
     }
 
     void CalculateSpawnRotation(Vector2 mouseDirection)
