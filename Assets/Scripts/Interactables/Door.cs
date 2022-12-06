@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class Door : MonoBehaviour
 {
-
+    private bool isOpen = false;
     public List<Condition> pendingConditions;
 
     public void Start()
@@ -17,6 +17,11 @@ public class Door : MonoBehaviour
 
     private void ConditionCompleteHandler(Condition condition)
     {
+        if (isOpen)
+        {
+            return;
+        }
+        
         pendingConditions.Remove(condition);
         if(!pendingConditions.Any()){
             OpenDoor();
@@ -25,7 +30,7 @@ public class Door : MonoBehaviour
 
     public void OpenDoor()
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 
     public void CloseDoor()

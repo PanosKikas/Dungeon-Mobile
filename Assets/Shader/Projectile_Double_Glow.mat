@@ -51,8 +51,8 @@ Material:
     m_Ints: []
     m_Floats: []
     m_Colors:
-    - Color_2980AF5A: {r: 0.5, g: 0.015686275, b: 0, a: 0}
-    - Color_E099DADA: {r: 0.27585918, g: 0.8393081, b: 6.498019, a: 0}
+    - Color_2980AF5A: {r: 0.43965724, g: 0.17144115, b: 0.9911022, a: 0}
+    - Color_E099DADA: {r: 0.19020757, g: 0, b: 9.082411, a: 0}
   m_BuildTextureStacks: []
 --- !u!114 &7461398878863162113
 MonoBehaviour:
