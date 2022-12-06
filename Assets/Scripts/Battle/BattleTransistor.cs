@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class BattleTransistor : MonoBehaviour
 {
-
     #region Singletton
     public static BattleTransistor Instance { get; private set; }
 
@@ -33,7 +32,6 @@ public class BattleTransistor : MonoBehaviour
     {
         FindEnemyGroupFromEnemy(enemy);
         StartCoroutine(LoadBattleScene());
-            
     }
 
     IEnumerator LoadBattleScene()

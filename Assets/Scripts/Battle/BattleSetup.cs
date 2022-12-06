@@ -13,7 +13,13 @@ public class BattleSetup : MonoBehaviour
 
     private void Awake()
     {
-        SetupBattleScene(BattleTransistor.Instance.enemyGroupStats);
+        // TODO: Delete once we have battle transition working.
+        var testStats = new List<CharacterStatsSO>
+        {
+            BattleTransistor.Instance.enemyGroupStats[0]
+        };
+        SetupBattleScene(testStats);
+        //SetupBattleScene(BattleTransistor.Instance.enemyGroupStats);
     }
 
     public void SetupBattleScene(List<CharacterStatsSO> enemyStats)
