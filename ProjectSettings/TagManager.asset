@@ -60,14 +60,14 @@ TagManager:
   - name: Player
     uniqueID: 881787977
     locked: 0
-  - name: Enemy
-    uniqueID: 1137326413
-    locked: 0
   - name: Projectiles
     uniqueID: 3239221339
     locked: 0
   - name: Walls
     uniqueID: 1999588177
+    locked: 0
+  - name: Enemy
+    uniqueID: 1137326413
     locked: 0
   - name: Torches
     uniqueID: 2476932965

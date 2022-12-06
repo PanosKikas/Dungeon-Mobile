@@ -16,8 +16,7 @@ public class PcShooting : ShootingBase
 
     protected override void Update()
     {
-
-        if (EventSystem.current.IsPointerOverGameObject())
+        if (EventSystem.current.IsPointerOverUI())
             return;
 
         base.Update();
