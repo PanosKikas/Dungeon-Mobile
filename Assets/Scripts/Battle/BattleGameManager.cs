@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using UnityEngine.Experimental.Rendering.Universal;
+
 
 public class BattleGameManager : MonoBehaviour
 {
@@ -72,14 +72,14 @@ public class BattleGameManager : MonoBehaviour
     void ActivateManualCombat()
     {
         currentlySelectedCharacter.ChangeState(currentlySelectedCharacter.ManualAttackState);
-        currentlySelectedCharacter.GetComponentInChildren<Light2D>().enabled = true;
+        currentlySelectedCharacter.GetComponentInChildren<UnityEngine.Rendering.Universal.Light2D>().enabled = true;
     }
 
     void DeselectCharacter(int idx)
     {
         PlayerBattleFSM characterToDeselect = playersFSM[idx];
         characterToDeselect.ChangeState(characterToDeselect.AutoAttackState);
-        characterToDeselect.GetComponentInChildren<Light2D>().enabled = false;
+        characterToDeselect.GetComponentInChildren<UnityEngine.Rendering.Universal.Light2D>().enabled = false;
     }
     
 }
