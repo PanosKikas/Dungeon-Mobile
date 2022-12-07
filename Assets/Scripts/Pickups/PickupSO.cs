@@ -10,11 +10,11 @@ public abstract class PickupSO : ScriptableObject
     public Sprite Icon;
     public GameObject prefab;
 
-    protected PlayerCharacterStats stats;
+    protected PlayerCharacter stats;
 
     public virtual bool Use() 
     {
-        stats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacterStats>();
+        stats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacter>();
         return true; 
     }
 

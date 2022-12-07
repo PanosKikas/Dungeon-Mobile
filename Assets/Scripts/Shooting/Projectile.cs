@@ -60,7 +60,7 @@ public class Projectile : MonoBehaviour
         EnemyBehavior enemy = collider.GetComponent<EnemyBehavior>();
 
         if (enemy != null)
-            StatusEffects.DamageTarget(enemy.GetComponent<CharacterStats>(), ProjectileDamage);
+            StatusEffects.DamageTarget(enemy.GetComponent<Character>(), ProjectileDamage);
     }
 
     void Explode()

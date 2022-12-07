@@ -6,12 +6,16 @@ using UnityEngine.UI;
 public abstract class BattleUI: MonoBehaviour
 {   
     protected Slider bar;
+    
+    [SerializeField]
+    private CharacterBattle characterBattle;
+
     protected CharacterStats stats;
-   
+    
     protected virtual void Start()
     {
         bar = GetComponent<Slider>();
-        stats = GetComponentInParent<CharacterStats>();
+        //stats = characterBattle.stats;
     }
     
 

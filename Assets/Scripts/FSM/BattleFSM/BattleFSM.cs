@@ -9,8 +9,7 @@ public abstract class BattleFSM : FSM
 
     public AutoAttackState AutoAttackState { get; protected set; }
     //public ParryState ParryState { get; protected set; }
-
-
+    
 
     protected virtual void Start()
     {

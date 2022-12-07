@@ -6,27 +6,36 @@ using Cinemachine;
 
 
 public class PlayerBattle : CharacterBattle
-{   
-    [SerializeField]
-    LayerMask enemyLayerMask;
+{
+    [SerializeField] LayerMask enemyLayerMask;
 
-    [HideInInspector]
-    public PlayerCharacterStats playerStats;
-    
+    [HideInInspector] public PlayerCharacterStats playerStats;
+
     void Start()
     {
-
-        playerStats = GetComponent<PlayerCharacterStats>();
-        stats = playerStats;
+        playerStats = stats as PlayerCharacterStats;
     }
 
     protected override void Update()
-    {      
+    {
         base.Update();
-        PlayerStatusEffects.RechargeEndurance(playerStats);
+        RechargeEndurance();
     }
 
-/*    public void EnterParry()
+    private void RechargeEndurance()
+    {
+        float endurance = Time.deltaTime * playerStats.EnduranceRechargeRate;
+        playerStats.Endurance =
+            Mathf.Clamp(playerStats.Endurance + endurance, 0f, playerStats.MaxEndurance);
+    }
+
+    public override void AttackTarget()
+    {
+        base.AttackTarget();
+        playerStats.PerformAttack();
+    }
+
+    /*    public void EnterParry()
     {
         stateMachine.ChangeState(stateMachine.ParryState);
         animator.SetTrigger("Parry");
@@ -34,7 +43,7 @@ public class PlayerBattle : CharacterBattle
 
     public void FindManualAttackTarget()
     {
-        FindClosestTargetToMousePosition();    
+        FindClosestTargetToMousePosition();
     }
 
     void FindClosestTargetToMousePosition()
@@ -49,5 +58,5 @@ public class PlayerBattle : CharacterBattle
         {
             Target = null;
         }
-    } 
+    }
 }

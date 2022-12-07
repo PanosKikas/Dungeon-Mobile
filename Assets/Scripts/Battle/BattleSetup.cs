@@ -33,7 +33,7 @@ public class BattleSetup : MonoBehaviour
         for (int i = 0; i < enemyStats.Count; ++i)
         {
             GameObject enemyToSetup = enemyPlaceholders[i];
-            enemyToSetup.GetComponent<CharacterStats>().Data = enemyStats[i];
+            enemyToSetup.GetComponent<CharacterBattle>().stats = new CharacterStats(enemyStats[i]);
             enemyToSetup.GetComponentInChildren<Animator>().
                 runtimeAnimatorController = enemyStats[i].battleAnimator;
         }
@@ -44,9 +44,9 @@ public class BattleSetup : MonoBehaviour
     {
         for (int i = 0; i < StatsDatabase.Instance.PlayerCharacterStats.Count; ++i)
         {
-            var stat = StatsDatabase.Instance.GetCharacterStats(i);
-            playerPlaceholders[i].GetComponent<CharacterStats>().Data = stat;
-            playerPlaceholders[i].GetComponentInChildren<Animator>().runtimeAnimatorController = stat.battleAnimator;
+            var initialData = StatsDatabase.Instance.GetCharacterStats(i);
+            playerPlaceholders[i].GetComponent<CharacterBattle>().stats = new PlayerCharacterStats(initialData);
+            playerPlaceholders[i].GetComponentInChildren<Animator>().runtimeAnimatorController = initialData.battleAnimator;
 
         }
     }

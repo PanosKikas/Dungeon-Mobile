@@ -47,7 +47,7 @@ public class BattleTransistor : MonoBehaviour
     {
         enemyGroupStats.Clear();
         GameObject parentGroup = enemy.transform.parent.gameObject;
-        var stats = parentGroup.GetComponentsInChildren<CharacterStats>();
+        var stats = parentGroup.GetComponentsInChildren<Character>();
         foreach (var stat in stats)
         {
             enemyGroupStats.Add(stat.Data);

@@ -9,7 +9,7 @@ public class Trap : MonoBehaviour
 
     Animator animator;
 
-    PlayerCharacterStats playerStats;
+    PlayerCharacter playerStats;
 
     private void Awake()
     {
@@ -23,7 +23,7 @@ public class Trap : MonoBehaviour
         {
             if (playerStats == null)
             {
-                playerStats = collision.GetComponent<PlayerCharacterStats>();
+                playerStats = collision.GetComponent<PlayerCharacter>();
             }
 
             animator.SetBool("Activated", true);

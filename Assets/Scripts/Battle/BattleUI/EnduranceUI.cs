@@ -4,21 +4,18 @@ using UnityEngine;
 
 public class EnduranceUI : BattleUI
 {
-    private PlayerCharacterStats playerStats;
-
     protected override void Start()
     {
         base.Start();
-        playerStats = (PlayerCharacterStats)stats;
 
     }
     private void Update()
     {
-        UpdateEnduranceBar();
+        //UpdateEnduranceBar();
     }
     
     public void UpdateEnduranceBar()
     {
-        bar.value = (float)playerStats.Endurance / (float)playerStats.stats.MaxEndurace;
+        //bar.value = (float)character.playerStats.Endurance / (float)character.stats.MaxEndurace;
     }
 }

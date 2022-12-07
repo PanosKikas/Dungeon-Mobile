@@ -20,7 +20,7 @@ public class AutoAttackState : AttackState
         base.LogicUpdate();
         if (CanAttack())
         {
-            nextFire = Time.time + (1f / stats.Data.AutoAttackRate);
+            nextFire = Time.time + (1f / stats.InitialData.AutoAttackRate);
             battle.AttackTarget();
         }
     }

@@ -19,13 +19,13 @@ public class HealthUI : BattleUI
     {
         base.Start();
         
-        stats.OnHpLoss.AddListener(UpdateHealth);
+        //characterBattle.OnHpChanged.AddListener(UpdateHealth);
         UpdateHealth();
     }    
 
     public void UpdateHealth()
     {
-        bar.value = (float)stats.Health / stats.Data.MaxHealth;
+        //bar.value = (float)characterBattle.Health / characterBattle.Data.MaxHealth;
     }
 
     private void Update()

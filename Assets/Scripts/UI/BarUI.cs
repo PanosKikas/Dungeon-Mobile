@@ -18,7 +18,7 @@ public class BarUI : MonoBehaviour
     Slider HpSlider;
 
     TextMeshProUGUI textMeshPro;
-    CharacterStats characterStats;
+    Character characterStats;
 
     int targetCurrentStat; 
     CharacterStat targetMaxStat;
@@ -35,7 +35,7 @@ public class BarUI : MonoBehaviour
             textMeshPro = GetComponentInChildren<TextMeshProUGUI>();
         }
 
-        characterStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacterStats>();
+        characterStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacter>();
 
          
     }

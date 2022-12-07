@@ -5,7 +5,6 @@ using Cinemachine;
 
 public class ManualAttackState : AttackState
 {
-
     PlayerBattle playerBattle;
     CinemachineImpulseSource impulseSource;
     PlayerCharacterStats playerStats;
@@ -33,9 +32,8 @@ public class ManualAttackState : AttackState
             if (battle.HasAttackTarget())
             {
                 battle.AttackTarget();
-                nextFire = Time.time + 1f / playerStats.stats.ManualAttackRate;
+                nextFire = Time.time + 1f / playerStats.ManualAttackRate;
                 ShakeCamera();
-                PlayerStatusEffects.DecreaseEndurance(playerStats);
             }
         }
      /*   else if (Input.GetMouseButtonDown(2))

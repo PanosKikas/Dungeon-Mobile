@@ -1,39 +1,33 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-[System.Serializable]
 public class PlayerCharacterStats : CharacterStats
 {
-    [HideInInspector]
-    public PlayerCharacterStatsSO stats;
-
-    [HideInInspector]
     public float Endurance;
-
-    [HideInInspector]
     public float Mana;
+
+    private PlayerCharacterStatsSO playerInitialStats => InitialData as PlayerCharacterStatsSO;
+
+    public float EnduranceRechargeRate => playerInitialStats.EnduranceRechargeRate;
+    public float ManualAttackRate => playerInitialStats.ManualAttackRate;
+    public int MaxEndurance => playerInitialStats.MaxEndurace;
     
-    protected override void Initialize()
+    public PlayerCharacterStats(PlayerCharacterStatsSO initialData) : base(initialData)
     {
-        base.Initialize();
-        stats = (PlayerCharacterStatsSO)Data;
-        Endurance = stats.MaxEndurace;
-        Mana = stats.MaxMana;
+        initialData.Initialize();
+        Endurance = initialData.MaxEndurace;
+        Mana = initialData.MaxMana;
     }
 
-    public bool HasMaxEndurance()
+    public void PerformAttack()
     {
-        return stats.MaxEndurace == Endurance;
-    }
-
-    public bool HasMaxMana()
-    {
-        return stats.MaxMana == Mana;
+        Endurance = Mathf.Clamp(Endurance - playerInitialStats.EndurancePerAttack,
+            0, playerInitialStats.MaxEndurace);
     }
 
     public bool HasEnduranceForAttack()
     {
-        return Endurance >= stats.EndurancePerAttack;
+        return Endurance >= playerInitialStats.EndurancePerAttack;
     }
 }

@@ -5,10 +5,8 @@ using UnityEngine;
 public abstract class CharacterBattle : MonoBehaviour 
 {
     protected Animator animator;
-    
-    [HideInInspector]
-    public CharacterStats stats;
 
+    [HideInInspector] public CharacterStats stats;
 
     public CharacterBattle AutoAttackTarget;
 
@@ -53,12 +51,12 @@ public abstract class CharacterBattle : MonoBehaviour
 
     public void DamageEnemyTarget()
     {
-        StatusEffects.DamageTarget(Target.stats, stats.Data.AttackDamage);
+        Target.stats.TakeDamage(stats.InitialData.AttackDamage);
     }
 
     public virtual bool HasAttackTarget()
     {
-        return Target != null && !Target.stats.HasDied;
+        return Target != null;
     }
 
     public void FindAutoAttackTarget()
