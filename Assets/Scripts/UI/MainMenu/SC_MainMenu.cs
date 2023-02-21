@@ -19,16 +19,28 @@ public class SC_MainMenu : MonoBehaviour
 
     public void OptionsButton()
     {
-        // Show Credits Menu
-        MainMenu.SetActive(false);
-        OptionsMenu.SetActive(true);
+        if (MainMenu.activeSelf)
+        {
+            MainMenu.SetActive(false); 
+        }
+
+        if (!OptionsMenu.activeSelf)
+        {
+            OptionsMenu.SetActive(true); 
+        }
     }
 
     public void MainMenuButton()
     {
-        // Show Main Menu
-        MainMenu.SetActive(true);
-        OptionsMenu.SetActive(false);
+        if (!MainMenu.activeSelf)
+        {
+            MainMenu.SetActive(true); 
+        }
+
+        if (OptionsMenu.activeSelf)
+        {
+            OptionsMenu.SetActive(false); 
+        }
     }
 
     public void QuitButton()
