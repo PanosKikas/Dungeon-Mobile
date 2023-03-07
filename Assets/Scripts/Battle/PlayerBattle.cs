@@ -10,20 +10,15 @@ public class PlayerBattle : CharacterBattle
     [SerializeField]
     LayerMask enemyLayerMask;
 
-    [HideInInspector]
-    public PlayerCharacterStats playerStats;
-    
     void Start()
     {
-
-        playerStats = GetComponent<PlayerCharacterStats>();
-        stats = playerStats;
+        
     }
 
     protected override void Update()
     {      
         base.Update();
-        PlayerStatusEffects.RechargeEndurance(playerStats);
+        //PlayerStatusEffects.RechargeEndurance(playerStats);
     }
 
 /*    public void EnterParry()

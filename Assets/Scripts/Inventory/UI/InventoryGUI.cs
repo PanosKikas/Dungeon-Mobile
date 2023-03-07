@@ -55,14 +55,14 @@ public class InventoryGUI : MonoBehaviour
 
     public void DisplayItemOnDescription(int index)
     {
-        InventoryPickupSO item = Inventory.Instance.items[index].Item;
+        Item item = Inventory.Instance.items[index].Item;
         DisplayItemDescription(item);
         lastDisplayedIndex = index;
     }
 
-    private void DisplayItemDescription(InventoryPickupSO item)
+    private void DisplayItemDescription(Item item)
     {
-        itemDescritpion.text = string.Format("{0}: {1}", item.Name, item.description);
+        itemDescritpion.text = string.Format("{0}: {1}", item.Name, item.Description);
     }
 
     public void NotUsedItemEffect(int index)

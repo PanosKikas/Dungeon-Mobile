@@ -5,21 +5,19 @@ using UnityEngine.Events;
 
 public abstract class PickupSO : ScriptableObject
 {
-    
     public string Name;
     public Sprite Icon;
-    public GameObject prefab;
+    
+    [TextArea]
+    public string description;
 
-    protected PlayerCharacterStats stats;
+    public int SellValue;
+    public int StackLimit = 99;
+    
+    /*[Space, Header("Potion Stats")]
+    public PotionType type;*/
 
-    public virtual bool Use() 
-    {
-        stats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacterStats>();
-        return true; 
-    }
+    public int Amount;
 
-    public override string ToString()
-    {
-        return string.Format("{0}: {1}", Name, Icon);
-    }
+    public EquipmentType Type;
 }

@@ -14,7 +14,7 @@ public abstract class CharacterBattle : MonoBehaviour
 
     [HideInInspector]
     public CharacterBattle Target;
-    protected CharacterStat TargetStats;
+    protected Stat TargetStats;
 
 
     protected BattleFSM stateMachine;

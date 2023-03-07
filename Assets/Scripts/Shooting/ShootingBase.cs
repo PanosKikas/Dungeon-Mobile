@@ -6,8 +6,6 @@ public abstract class ShootingBase : MonoBehaviour
 {
     protected ProjectileSpawner spawner;
 
-    protected PlayerCharacterStatsSO characterStats;
-
     protected float nextFireTime = 0f;
 
     [SerializeField]

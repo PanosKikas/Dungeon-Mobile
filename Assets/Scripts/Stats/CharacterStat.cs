@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UnityEngine;
-public enum Stat
+public enum StatType
 {
     MaxHealth,
     MaxEndurance,
@@ -22,14 +22,14 @@ public enum Stat
 }
 
 [System.Serializable]
-public class CharacterStat
+public class Stat
 {
     private bool isDirty = true;
     public float BaseValue;
     private float _value;
     private float lastBaseValue = float.MinValue;
 
-    public Stat Type;
+    public StatType Type;
 
     StatModifier levelModifier;
     Attribute dependantAttribute;
@@ -53,11 +53,16 @@ public class CharacterStat
 
     public readonly ReadOnlyCollection<StatModifier> StatModifiers;
 
-    public CharacterStat() 
+    public Stat() 
     {
         isDirty = true;
         statModifiers = new List<StatModifier>();
         StatModifiers = statModifiers.AsReadOnly();    
+    }
+
+    public Stat(float baseValue) : this()
+    {
+        BaseValue = baseValue;
     }
 
     private void AddModifier()

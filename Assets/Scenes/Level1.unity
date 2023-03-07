@@ -20,7 +20,7 @@ RenderSettings:
   m_FogDensity: 0.01
   m_LinearFogStart: 0
   m_LinearFogEnd: 300
-  m_AmbientSkyColor: {r: 0.212, g: 0.227, b: 0.259, a: 1}
+  m_AmbientSkyColor: {r: 0.24916932, g: 0.2824651, b: 0.3490566, a: 1}
   m_AmbientEquatorColor: {r: 0.114, g: 0.125, b: 0.133, a: 1}
   m_AmbientGroundColor: {r: 0.047, g: 0.043, b: 0.035, a: 1}
   m_AmbientIntensity: 1
@@ -2458,11 +2458,11 @@ MonoBehaviour:
   m_LightType: 4
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
-  m_Color: {r: 0.8567594, g: 0.7311321, b: 1, a: 1}
-  m_Intensity: 0.05
+  m_Color: {r: 0.6886792, g: 0.43854573, b: 0.6813956, a: 1}
+  m_Intensity: 0.2
   m_LightVolumeIntensity: 0
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 00000000a74ca2eb
+  m_ApplyToSortingLayers: 00000000a74ca2eb895cb6f4d361b7d149048f34514b2f774d39ca43
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -2886,11 +2886,9 @@ GameObject:
   - component: {fileID: 381830853}
   - component: {fileID: 381830852}
   - component: {fileID: 381830851}
-  - component: {fileID: 381830850}
   - component: {fileID: 381830849}
   - component: {fileID: 381830848}
   - component: {fileID: 381830847}
-  - component: {fileID: 381830846}
   m_Layer: 11
   m_Name: Character
   m_TagString: Player
@@ -2914,25 +2912,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &381830846
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 381830844}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 193d68d291902e448a0731a5601d7e9f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Data: {fileID: 11400000, guid: cace7edb0a096964d815d4e7a2e3cdd7, type: 2}
-  OnHpLoss:
-    m_PersistentCalls:
-      m_Calls: []
-  stats: {fileID: 0}
-  Endurance: 0
-  Mana: 0
 --- !u!114 &381830847
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2980,18 +2959,6 @@ MonoBehaviour:
   blockMask:
     serializedVersion: 2
     m_Bits: 256
---- !u!114 &381830850
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 381830844}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 138eedb3ee6a09c45a14ced58c18280e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!58 &381830851
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -37335,6 +37302,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7495838158229068012, guid: e529457742c495245aaa14c89d0a0b10, type: 3}
+      propertyPath: graphMask.value
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 7495838158229068013, guid: e529457742c495245aaa14c89d0a0b10, type: 3}
       propertyPath: target
       value: 
@@ -46302,7 +46273,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   version: 1
   data:
-    dataString: UEsDBBQAAAgIAAAAIewR6RIyeQIAADAFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlVE1z2jAQ/SuMzoWxDQnQW0sI6SEJE9rJxRchrbEGWfJIcoBk+O9dyTZ2XV8sv/16+3blLyKULYE5bTZG8GfNgXwfEX8m30ad8QnO9KDVTnxC6/MuuMu9Ew0+b9QJjXjsw6wuwBnBfqiD9M4RgpUSmTbFmh9gpa2zCGdUWkCT0c5HK4S+RuSMr/HSh1zwlMz96RNPy2h0xSMD5cB0rvFsMlvis4ibiHE8uWtCxsnkfpEk0WI+XY+jeYivFJO0KIH7Zro0s2kTPk2Cm8I2Gw+fmGkphW04Encpgwa7MgcDXgQuKLYceEWTOQI5iEPufAP96Ncss+AaRQy9PAiD2tVpyU9dC1pQe6yJfVBZ+UKL2WwRWNVZn/9zGMfBnBldPLWF48gXcblgxzd6YdS6nuR9+KHjHgeBTlQe6V7Cew7qRW+MrhRHozOVD60sJA/d5623VQ7s2OE11QFYlZ3i7YTb+foerqH980qKYh+knNXATuqgeFgLMDibX0g4LI1tUiDqWfyx8Jse+tvVGB6FsQ5NTZfK09vrynhXsg6a+W4qt9JGQYAb0iUoKt1li2nccIYDW6/swPJI/T1qije29noMQgLc+UfRwLTVp9uwbK5Pz2Dz18pJofrJvOUFhVpppeodswOrj9tVJqOsH3eoBP93uUi8j/jd/X4+j2CeUb4fL5FUNmXT+4TGjGaMhO0TCjulcltTbQTCualOSoWb1v5gRhtDy7Dw3NDTRnwWuie6UJneMQOgXusMN+ZgsAjeTL7mAiXagXNChYmTr5RIzY7A01uiNLS6PjtD0y5LSkrxoZ1HUrIKf5SUePi2zVsDHwJOvnib7EqufwFQSwMEFAAACAgAAAAh7Jew0uFtAAAAeAAAAAkAJABtZXRhLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQGrVipLLSrOzM9TslIw0TPSMzTXUVBKL0osyCgGihiCOKWZKSB2tJJhkkGKqVmSublBqnlaYkqSrqWhgUGacbKxmVGiYXJiWrJSLFB9SWVBql9ibipET0BiSUZaZl5KZl66nntRZoo7yGil2FoAUEsBAi0AFAAACAgAAAAh7BHpEjJ5AgAAMAUAAAsAJAAAAAAAAAAAAAAAAAAAAGdyYXBoMC5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsBAi0AFAAACAgAAAAh7Jew0uFtAAAAeAAAAAkAJAAAAAAAAAAAAAAAxgIAAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAVBLBQYAAAAAAgACALgAAAB+AwAAAAA=
+    dataString: UEsDBBQAAAgIAAAAIezQGvuNdQIAACsFAAALACQAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFlVE1z2jAQ/SuMzoWxndQOvbWEkB6SMCGdXHwR0hprkCWPJAdIhv/elWxsl55Y3n69fbvyFxHK1sCcNisj+JPmQH5MiLfJt8ngfIQj3Wm1EZ9wiXkX3JU+iIaYV+qERjz2aVZX4IxgP9VO+uAIwUaJQptqyXew0NZZhAsqLaDLaOezFUJfE3LEn+ncp5zQSjJvfaI1jyZnNBkoB2YITbJZNu+Cp+ks6aKn8SxOk2QeJTfLaZSG1EYxSasauJ9jqBCnXXrchimcsIvw0zAtpbAdPeJOdRh/U5dgwM/PBcVpA6VolmaIlCB2pfPcxukvRWHBdWoYeroXBnVr65JfuhWzonbfMvugsvGd7m5v7wKtturTfwHTOLgLo6vHS+M48k1cKdj+lZ4YtW4k9xi+H8jHQaEDlXu6lfBegnrWK6MbxdHpTONTGwvJ/fC3n21RAtsPeEv1CmzqQfLLdqN+W5PzOYx/XEhRbYOWty2wkTpIHk4CDC7nNxIOB2O7Eoh6Fn8svNHd+LI6x4Mw1qGrm1J5elvdGB9KlkEzP03jFtooCHBHugZFpTutsYy73uGVb9T2yvNA/Rvqmne+y9O4SgnwEB9FV661PvTLsqU+PIEtXxonhYKBtHc8o04LrVR7YmNNLmmbxhSUjdJ2jeD/nhaJtxH/nm6zLIKsoHw7nSOl4obdpAmNGS0YCbcnFM5J5bol2smDW1NDcYV3dvm0TFaG1uHcuaGHlfis9EhyoQq9YQZAvbQVeuJgsAk+TL7kAgXagHNChX2Tr5xIzfbA875QHiZdHp2h+VAlJ7X40M4jOVmEb0lOPNzf8trAh4CDb97nncn5L1BLAwQUAAAICAAAACHsl7DS4W0AAAB4AAAACQAkAG1ldGEuanNvbgoAIAAAAAAAAQAYAACAPtXesZ0BAIA+1d6xnQEAgD7V3rGdAatWKkstKs7Mz1OyUjDRM9IzNNdRUEovSizIKAaKGII4pZkpIHa0kmGSQYqpWZK5uUGqeVpiSpKupaGBQZpxsrGZUaJhcmJaslIsUH1JZUGqX2JuKkRPQGJJRlpmXkpmXrqee1FmijvIaKXYWgBQSwECLQAUAAAICAAAACHs0Br7jXUCAAArBQAACwAkAAAAAAAAAAAAAAAAAAAAZ3JhcGgwLmpzb24KACAAAAAAAAEAGAAAgD7V3rGdAQCAPtXesZ0BAIA+1d6xnQFQSwECLQAUAAAICAAAACHsl7DS4W0AAAB4AAAACQAkAAAAAAAAAAAAAADCAgAAbWV0YS5qc29uCgAgAAAAAAABABgAAIA+1d6xnQEAgD7V3rGdAQCAPtXesZ0BUEsFBgAAAAACAAIAuAAAAHoDAAAAAA==
     upgradeData: 
     file_cachedStartup: {fileID: 0}
     data_cachedStartup: 
@@ -46330,11 +46301,43 @@ MonoBehaviour:
     _MeshEdgeColor: {r: 0, g: 0, b: 0, a: 0.5}
     _AreaColors:
     - {r: 0, g: 0, b: 0, a: 0}
-  tagNames: []
+  tagNames:
+  - Basic Ground
+  - 1
+  - 2
+  - 3
+  - 4
+  - 5
+  - 6
+  - 7
+  - 8
+  - 9
+  - 10
+  - 11
+  - 12
+  - 13
+  - 14
+  - 15
+  - 16
+  - 17
+  - 18
+  - 19
+  - 20
+  - 21
+  - 22
+  - 23
+  - 24
+  - 25
+  - 26
+  - 27
+  - 28
+  - 29
+  - 30
+  - 31
   heuristic: 2
   heuristicScale: 1
   threadCount: 1
-  maxFrameTime: 1
+  maxFrameTime: 10
   batchGraphUpdates: 0
   graphUpdateBatchingInterval: 0.2
   euclideanEmbedding:
@@ -128113,6 +128116,10 @@ PrefabInstance:
     - target: {fileID: 3943578030394945588, guid: d38781b0c6e8e2143802011415e09a0b, type: 3}
       propertyPath: m_Name
       value: TorchFront (7)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3943578030394945588, guid: d38781b0c6e8e2143802011415e09a0b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_AddedGameObjects: []

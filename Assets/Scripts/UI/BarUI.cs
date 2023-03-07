@@ -21,7 +21,7 @@ public class BarUI : MonoBehaviour
     CharacterStats characterStats;
 
     int targetCurrentStat; 
-    CharacterStat targetMaxStat;
+    Stat targetMaxStat;
 
     private void OnEnable()
     {

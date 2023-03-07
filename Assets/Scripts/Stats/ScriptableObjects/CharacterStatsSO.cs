@@ -6,66 +6,17 @@ using System.Linq;
 
 public abstract class CharacterStatsSO : ScriptableObject
 {
-    public string Name;    
-    protected List<CharacterStat> upgradableStatsList;
-
-    public CharacterStat MaxHealthStat;
-    public CharacterStat AttackDamageStat;
-
-    public CharacterStat AutoAttackRateStat;
-
-    public RuntimeAnimatorController battleAnimator;
-    public virtual void Initialize()
-    {
-
-        upgradableStatsList = new List<CharacterStat>
-        {
-           MaxHealthStat, AttackDamageStat, AutoAttackRateStat
-
-        }; 
-    }
-
-    #region StatGetters
-    public int MaxHealth
-    {
-        get
-        {
-            return (int)MaxHealthStat.Value;
-        }
-        
-    }
-    
-    
-    public virtual float AttackDamage
-    {
-        get
-        {
-            return AttackDamageStat.Value;
-        }
-       
-    }
-
-    public float AutoAttackRate
-    {
-        get
-        {
-            return AutoAttackRateStat.Value;
-        }
-        
-    }
-    #endregion
-
-
-    public GameObject impactEffect;
-
-    [SerializeField]
-    Vector3 ImpactEffectOffset;
-
-
-    public List<CharacterStat> FindCharacterStats(Stat type)
-    {
-        return upgradableStatsList.FindAll(i => (i.Type == type));
-    }
-
-   
+    public int MaxHealth;
+    public float PhysicalDamage;
+    public float AutoAttackRate;
+    public int MaxStamina;
+    public int MaxDivnity;
+    public float StaminaRegen;
+    public int DivineDamage;
+    public float CriticalChance;
+    public int PhysicalDefense;
+    public int DivinityResistance;
+    public float EvasionChance;
+    public float ItemDropRate;
+    public float CooldownReduction;
 }

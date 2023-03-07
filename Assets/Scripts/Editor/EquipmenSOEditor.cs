@@ -32,10 +32,10 @@ public class EquipmenSOEditor : Editor
                 EditorGUILayout.BeginHorizontal();
                 EditorGUI.indentLevel++;
                 var modifiers = equipable.StatValuePairs[i];
-                var selectedStat = (Stat)EditorGUILayout.EnumPopup(modifiers.stat);
+                var selectedStat = (StatType)EditorGUILayout.EnumPopup(modifiers.statType);
                 var selectedValue = EditorGUILayout.FloatField(modifiers.value);
 
-                equipable.StatValuePairs[i].stat = selectedStat;
+                equipable.StatValuePairs[i].statType = selectedStat;
                 equipable.StatValuePairs[i].value = selectedValue;
 
                 if (GUILayout.Button("-", GUILayout.Width(30)))
@@ -56,7 +56,7 @@ public class EquipmenSOEditor : Editor
         if (GUILayout.Button("+", GUILayout.Width(30)))
         {
             
-            equipable.StatValuePairs.Add(new EquipmentSO.StatValuePair(Stat.MaxHealth, 20));
+            equipable.StatValuePairs.Add(new EquipmentSO.StatValuePair(StatType.MaxHealth, 20));
 
         }
 

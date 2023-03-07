@@ -1,21 +1,23 @@
-﻿using System.Collections;
+﻿/*
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [CreateAssetMenu(fileName = "Equipment", menuName = "Pickups/InventoryPickups/Equipment")]
-public class EquipmentSO : EquipableSO
+public class EquipmentSO : ScriptableObject
 {
     #region StatValuePair
     [System.Serializable]
     public class StatValuePair
     {
-        public Stat stat;
+        [FormerlySerializedAs("stat")] public StatType statType;
         public float value;
 
-        public StatValuePair(Stat stat, float value)
+        public StatValuePair(StatType statType, float value)
         {
-            this.stat = stat;
+            this.statType = statType;
             this.value = value;
         }
     }
@@ -24,7 +26,7 @@ public class EquipmentSO : EquipableSO
     [HideInInspector]
     public List<StatValuePair> StatValuePairs;
 
-    List<(CharacterStat, StatModifier)> Modifiers;
+    List<(Stat, StatModifier)> Modifiers;
 
     private void OnEnable()
     {
@@ -45,10 +47,10 @@ public class EquipmentSO : EquipableSO
     {
         if (Modifiers == null || !Modifiers.Any())
         {
-            Modifiers = new List<(CharacterStat, StatModifier)>();
+            Modifiers = new List<(Stat, StatModifier)>();
             foreach (var StatValue in StatValuePairs)
             {
-                List<CharacterStat> modifiedStat = stats.stats.FindCharacterStats(StatValue.stat);
+                List<Stat> modifiedStat = stats.stats.FindCharacterStats(StatValue.statType);
                 foreach (var stat in modifiedStat)
                 {
                     StatModifier modifier = new StatModifier(StatValue.value, this);
@@ -78,3 +80,4 @@ public class EquipmentSO : EquipableSO
 
 
 }
+*/

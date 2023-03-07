@@ -9,8 +9,6 @@ public class Trap : MonoBehaviour
 
     Animator animator;
 
-    PlayerCharacterStats playerStats;
-
     private void Awake()
     {
         animator = GetComponent<Animator>();
@@ -21,11 +19,8 @@ public class Trap : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            if (playerStats == null)
-            {
-                playerStats = collision.GetComponent<PlayerCharacterStats>();
-            }
-
+            var character = collision.GetComponent<Character>();
+            character.TakeDamage(damage);
             animator.SetBool("Activated", true);
         }
        
@@ -39,11 +34,4 @@ public class Trap : MonoBehaviour
         }
         
     }
-
-    public void DamagePlayer()
-    {
-        StatusEffects.DamageTarget(playerStats, damage);     
-    }
-
-    
 }

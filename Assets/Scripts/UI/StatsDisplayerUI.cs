@@ -7,7 +7,7 @@ using System.Text;
 public class StatsDisplayerUI : MonoBehaviour
 {
     TextMeshProUGUI statsText;
-    PlayerCharacterStatsSO characterStats;
+    CharacterStats stats;
 
     private void Awake()
     {
@@ -16,22 +16,20 @@ public class StatsDisplayerUI : MonoBehaviour
 
     private void Start()
     {
-        characterStats = StatsDatabase.Instance.GetMainCharacterStats();
+       // characterStats = StatsDatabase.Instance.GetMainCharacterStats();
     }
 
     private void Update()
     {
-       
         StringBuilder builder = new StringBuilder();
-        builder.Append("Attk: ").Append(characterStats.AttackDamage).Append("\n");
-        builder.Append("Crit Dmg: ").Append(characterStats.CriticalDamageStat.Value).Append("\n");
-        builder.Append("Crit % : ").Append(characterStats.CriticalChanceStat.Value).Append("\n");
-        builder.Append("Attk Speed: ").Append(characterStats.ManualAttackRateStat.Value).Append("\n");
-        builder.Append("Magic Dmg: ").Append(characterStats.MagicDamageStat.Value).Append("\n");
-        builder.Append("Mag Resist: ").Append(characterStats.MagicalResistanceStat.Value).Append("\n");
-        builder.Append("Endur Regen: ").Append(characterStats.EnduranceRechargeRate).Append("\n");
-        builder.Append("Evasion % : ").Append(characterStats.EvasionChanceStat.Value).Append("\n");
-        builder.Append("Item Drop % : ").Append(characterStats.ItemDropRateStat.Value).Append("\n");
+        builder.Append("Physical Dmg: ").Append(stats.PhysicalDamage.Value).Append("\n");
+        builder.Append("Crit % : ").Append(stats.CriticalChance.Value).Append("\n");
+        builder.Append("Attk Speed: ").Append(stats.AutoAttackRate.Value).Append("\n");
+        builder.Append("Divine Dmg: ").Append(stats.DivineDamage.Value).Append("\n");
+        builder.Append("Divine Resist: ").Append(stats.DivinityResistance.Value).Append("\n");
+        builder.Append("Stamina Regen: ").Append(stats.StaminaRegen.Value).Append("\n");
+        builder.Append("Evasion % : ").Append(stats.EvasionChanceStat.Value).Append("\n");
+        builder.Append("Item Drop % : ").Append(stats.ItemDropRateStat.Value).Append("\n");
         statsText.text = builder.ToString();
     }
 }

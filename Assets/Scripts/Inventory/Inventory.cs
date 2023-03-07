@@ -10,9 +10,9 @@ public class ItemEvent : UnityEvent<StoredItem> { }
 [System.Serializable]
 public class StoredItem 
 {
-    public InventoryPickupSO Item;
+    public Item Item;
     public int Stack = 0;
-    public StoredItem(InventoryPickupSO _item)
+    public StoredItem(Item _item)
     {
         Item = _item;
         Stack = 0;
@@ -20,8 +20,7 @@ public class StoredItem
 }
 #endregion
 public class Inventory : MonoBehaviour
-{   
-    MainPlayerCharacterStatsSO stats;
+{
     public static int InventoryCapacity { get; private set; }
     public int NextFreeSlot { get; private set; }
     public StoredItem[] items;
@@ -58,13 +57,12 @@ public class Inventory : MonoBehaviour
 
     void InitializeInventory()
     {
-        //stats = StatsDatabase.Instance.GetMainCharacterStats();
         items = new StoredItem[20];
         InventoryCapacity = 20;
         NextFreeSlot = 0;
     }
 
-    public bool TryStoreInventory(InventoryPickupSO item)
+    public bool TryStoreInventory(Item item)
     {
         int? found = ItemExistsInventory(item);
         //int indexToInsert = FindIndexToInsert(item);
@@ -91,7 +89,7 @@ public class Inventory : MonoBehaviour
         return true;
     }
     
-    int? ItemExistsInventory(InventoryPickupSO itemToFind)
+    int? ItemExistsInventory(Item itemToFind)
     {
         for (int i = 0; i < NextFreeSlot; ++i)
         {
@@ -103,18 +101,22 @@ public class Inventory : MonoBehaviour
         return null;
     }
 
-    void CreateNewItemOn(InventoryPickupSO item, int index)
+    void CreateNewItemOn(Item item, int index)
     {
         Instance.items[index] = new StoredItem(item);       
     }
    
     public void TryUseOnIndex(int index)
     {        
-        InventoryPickupSO item = Instance.items[index].Item;
-        
-        if (item.Use())
+        Item item = Instance.items[index].Item;
+        IUsable usable = item as IUsable;
+        if (usable is null)
         {
-           
+            return;
+        }
+        
+        if (usable.TryUse())
+        {
             RemoveFromInventoryOn(index);    
         }
         else

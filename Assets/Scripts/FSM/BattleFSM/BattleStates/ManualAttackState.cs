@@ -8,19 +8,18 @@ public class ManualAttackState : AttackState
 
     PlayerBattle playerBattle;
     CinemachineImpulseSource impulseSource;
-    PlayerCharacterStats playerStats;
+    Character _character;
 
-    public ManualAttackState(BattleFSM stateMachine) : base(stateMachine)
+    public ManualAttackState(BattleFSM stateMachine, Character character) : base(stateMachine)
     {
         impulseSource = stateMachine.GetComponent<CinemachineImpulseSource>();
         playerBattle = (PlayerBattle)battle;
-        
+        _character = character;
     }
 
     public override void EnterState()
     {
         base.EnterState();
-        playerStats = playerBattle.playerStats;
         battle.Target = null;
     }
 
@@ -33,9 +32,8 @@ public class ManualAttackState : AttackState
             if (battle.HasAttackTarget())
             {
                 battle.AttackTarget();
-                nextFire = Time.time + 1f / playerStats.stats.ManualAttackRate;
+                nextFire = Time.time + 1f / _character.Stats.AutoAttackRate.Value;
                 ShakeCamera();
-                PlayerStatusEffects.DecreaseEndurance(playerStats);
             }
         }
      /*   else if (Input.GetMouseButtonDown(2))

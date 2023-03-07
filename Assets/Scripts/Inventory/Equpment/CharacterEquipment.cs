@@ -5,15 +5,13 @@ using UnityEngine;
 
 public class CharacterEquipment : MonoBehaviour
 {
-    public EquipableSO[] MainCharacterEquipment;
-
-    private readonly int PotionIndex = (int)EquipmentType.Potion;
+    public IEquipable[] MainCharacterEquipment;
 
     private const int armorSlots = 6;
 
     private void Start()
     {
-        MainCharacterEquipment = new EquipableSO[armorSlots];
+       // MainCharacterEquipment = new EquipableSO[armorSlots];
     }
 
     #region Singletton
@@ -35,39 +33,17 @@ public class CharacterEquipment : MonoBehaviour
     }
     #endregion
 
-    public void Equip(EquipableSO item)
+    public void Equip(IEquipable item)
     {
-        int equippedIndex = (int)item.EquipmentType;
-        
+        int equippedIndex = (int)item.Type;
 
-        if (IsPotion(item.EquipmentType))
-        {
-            equippedIndex = FindPotionEquipmentIndex();
-        }
-
-        EquipableSO oldItem = MainCharacterEquipment[equippedIndex];
+        IEquipable oldItem = MainCharacterEquipment[equippedIndex];
         if (oldItem != null)
         {
             oldItem.Unequip();
-            Inventory.Instance.TryStoreInventory(oldItem);
-
+            Inventory.Instance.TryStoreInventory(oldItem as Item);
         }
 
         MainCharacterEquipment[equippedIndex] = item;
-        
-        
     }
-
-    private int FindPotionEquipmentIndex()
-    {
-        return (MainCharacterEquipment[PotionIndex] == null) ?  PotionIndex : PotionIndex + 1;
-    }
-
-    bool IsPotion(EquipmentType type)
-    {
-        return type == EquipmentType.Potion;
-    }
-
-
-    
 }

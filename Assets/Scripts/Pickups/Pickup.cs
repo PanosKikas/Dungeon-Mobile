@@ -1,25 +1,23 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
-
-public abstract class Pickup : MonoBehaviour
+public class Pickup : MonoBehaviour
 {
-
-    public PickupSO PickupStats;
-
     Transform target = null;
 
     [SerializeField]
     float gravitationSpeed = 1f;
 
-    protected virtual void PickUp() 
+    public Item Item;
+    
+    protected virtual void PickUp()
     {
+        var controller = target.GetComponent<PlayerController>();
+        controller.Pickup(Item);
         Destroy(gameObject);
-        
     }
-
+    
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.collider.CompareTag("Player"))
@@ -50,6 +48,4 @@ public abstract class Pickup : MonoBehaviour
         if (target != null && collision.CompareTag("Player"))
             target = null;
     }
-
 }
-
