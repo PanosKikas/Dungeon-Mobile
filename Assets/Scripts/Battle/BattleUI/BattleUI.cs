@@ -3,13 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public abstract class BattleUI: MonoBehaviour
-{   
+public abstract class BattleUI : MonoBehaviour
+{
     protected Slider bar;
+    protected Character owner;
 
     protected virtual void Start()
     {
         bar = GetComponent<Slider>();
     }
-
 }

@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using EventArgs;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -14,18 +16,15 @@ public class HealthUI : BattleUI
         fillImage = GetComponentInChildren<RawImage>();
     }
 
-
     protected override void Start()
     {
         base.Start();
-        
-        stats.OnHpLoss.AddListener(UpdateHealth);
-        UpdateHealth();
+        owner.CharacterDamaged += UpdateHealth;
     }    
 
-    public void UpdateHealth()
+    public void UpdateHealth(CharacterDamagedArgs damagedArgs)
     {
-        bar.value = (float)stats.Health / stats.Data.MaxHealth;
+        bar.value = (float)damagedArgs.CurrentHp / damagedArgs.MaxHp;
     }
 
     private void Update()

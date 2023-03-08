@@ -7,8 +7,7 @@ public class ArmorSlotUI : MonoBehaviour
 {
     Button[] equipmentButtons;
     Image[] armorIcons;
-
-
+    
 
     private void OnEnable()
     {
@@ -35,12 +34,12 @@ public class ArmorSlotUI : MonoBehaviour
     {
         for (int i = 0; i < equipmentButtons.Length; ++i)
         {
-            EquipableSO equipedSlot = CharacterEquipment.Instance.MainCharacterEquipment[i];
+            var equippable = CharacterEquipment.Instance.MainCharacterEquipment[i];
 
-            if (equipedSlot != null)
+            if (equippable != null)
             {
                 armorIcons[i].enabled = true;
-                armorIcons[i].sprite = equipedSlot.Icon;
+                armorIcons[i].sprite = ((Item)equippable).Icon;
             }
         }
     }

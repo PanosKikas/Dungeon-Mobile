@@ -10,14 +10,13 @@ public class ChaseState : State
     EnemyBehavior enemyBehavior;
     EnemyGroup parentGroup;
 
-    public ChaseState(EnemyFSM stateMachine)
+    public ChaseState(Character owner) : base(owner)
     {
+        destinationSetter = owner.GetComponent<AIDestinationSetter>();
+        path = owner.GetComponent<AIPath>();
         
-        destinationSetter = stateMachine.GetComponent<AIDestinationSetter>();
-        path = stateMachine.GetComponent<AIPath>();
-        
-        enemyBehavior = stateMachine.GetComponent<EnemyBehavior>();
-        parentGroup = stateMachine.GetComponentInParent<EnemyGroup>();
+        enemyBehavior = owner.GetComponent<EnemyBehavior>();
+        parentGroup = owner.GetComponentInParent<EnemyGroup>();
     }
 
     public override void EnterState()
@@ -34,24 +33,18 @@ public class ChaseState : State
     public override void LogicUpdate()
     {
         enemyBehavior.Velocity = path.desiredVelocity;
-
     }
 
     void EnablePathFinder()
     {
         path.enabled = true;
         destinationSetter.enabled = true;
-
     }
 
     void DisablePathfinder()
     {
-
         path.enabled = false;
         destinationSetter.enabled = false;
-
     }
-
     
-
 }

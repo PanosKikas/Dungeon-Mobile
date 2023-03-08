@@ -11,7 +11,7 @@ public class EnemyBehavior : MonoBehaviour
 
     private void Awake()
     {
-        stateMachine = GetComponent<EnemyFSM>();
+        stateMachine = new EnemyFSM(GetComponent<Character>());
         animateMovement = GetComponent<MovementAnimation>();
     }
 
@@ -62,5 +62,12 @@ public class EnemyBehavior : MonoBehaviour
             
     }
 
+    public void StartChase()
+    {
+        if (stateMachine.currentState != stateMachine.ChaseState)
+        {
+            stateMachine.ChangeState(stateMachine.ChaseState);
+        }
+    }
 
 }

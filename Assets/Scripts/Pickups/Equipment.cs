@@ -12,18 +12,25 @@ public enum EquipmentType
 
 public class Equipment : Item, IEquipable, IStorable, IUsable
 {
-    public EquipmentType Type => EquipmentType.Chest;
+    public EquipmentType Type { get; private set; }
+
+    public Equipment(PickupSO data) : base(data)
+    {
+        EquipmentSO equipmentData = data as EquipmentSO;
+        if (equipmentData != null)
+        {
+            Type = equipmentData.Type;
+        }
+    }
 
     public void Equip()
     {
-        
     }
 
     public void Unequip()
     {
-        
     }
-    
+
 
     public void Use()
     {

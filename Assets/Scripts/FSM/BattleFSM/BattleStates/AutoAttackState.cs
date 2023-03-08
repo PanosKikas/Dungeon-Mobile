@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class AutoAttackState : AttackState
 {
-    public AutoAttackState(BattleFSM stateMachine) :base(stateMachine)
+    public AutoAttackState(Character owner) :base(owner)
     {
         
     }
@@ -20,14 +20,14 @@ public class AutoAttackState : AttackState
         base.LogicUpdate();
         if (CanAttack())
         {
-            nextFire = Time.time + (1f / stats.Data.AutoAttackRate);
-            battle.AttackTarget();
+            nextFire = Time.time + (1f / Owner.Stats.AutoAttackRate.Value);
+            Owner.Attack(Target);
         }
     }
 
     protected override void FindTarget()
     {
-        battle.FindAutoAttackTarget();
+        //BattleController.FindAutoAttackTarget();
     }
 }
 

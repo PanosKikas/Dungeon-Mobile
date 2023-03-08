@@ -34,8 +34,7 @@ public class ItemSlotUI : MonoBehaviour
         itemClick.OnLongClick.AddListener(Inventory.Instance.TryUseOnIndex);
         DisableItemSlotComponents();
     }
-        
-
+    
     public void CannotBeUsedAnimate()
     {
         rect.DOShakePosition(.5f, 2, 40);

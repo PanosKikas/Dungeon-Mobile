@@ -8,16 +8,15 @@ public class EnemyFSM : FSM
     public ChaseState ChaseState { get; private set; }
     public PatrolState PatrolState { get; private set; }
     public WaitState WaitState { get; private set; }
-
-    private void Start()
+    
+    public EnemyFSM(Character owner)
     {
-        ChaseState = new ChaseState(this);
-        PatrolState = new PatrolState(this);
-        WaitState = new WaitState(this);
+        ChaseState = new ChaseState(owner);
+        PatrolState = new PatrolState(this, owner);
+        WaitState = new WaitState(this, owner);
 
         currentState = PatrolState;
            
         currentState.EnterState();
     }
-
 }

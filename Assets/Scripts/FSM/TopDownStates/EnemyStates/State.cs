@@ -9,6 +9,11 @@ public abstract class State
 
     public virtual void PhysicsUpdate() { }
     public virtual void ExitState() { }
-    
 
+    protected Character Owner;
+    
+    public State(Character owner)
+    {
+        Owner = owner;
+    }
 }

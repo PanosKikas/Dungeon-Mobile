@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,12 +10,26 @@ public class Pickup : MonoBehaviour
     [SerializeField]
     float gravitationSpeed = 1f;
 
-    public Item Item;
+    private Item item;
+    private PickupSO data;
+    private SpriteRenderer spriteRenderer;
+
+    private void Awake()
+    {
+        spriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    public void SetTo(PickupSO pickup)
+    {
+        this.data = pickup;
+        spriteRenderer.sprite = pickup.Icon;
+    }
     
     protected virtual void PickUp()
     {
         var controller = target.GetComponent<PlayerController>();
-        controller.Pickup(Item);
+        var item = new Equipment(data);
+        controller.Pickup(item);
         Destroy(gameObject);
     }
     

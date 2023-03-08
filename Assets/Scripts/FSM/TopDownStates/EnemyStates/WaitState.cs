@@ -13,10 +13,9 @@ public class WaitState : State
 
     EnemyFSM stateMachine;
 
-    public WaitState(EnemyFSM stateMachine)
+    public WaitState(EnemyFSM stateMachine, Character owner) : base(owner)
     {
         this.stateMachine = stateMachine;
-        
     }
 
     public override void EnterState()
@@ -34,5 +33,4 @@ public class WaitState : State
         }
         waitTime -= Time.deltaTime;
     }
-
 }

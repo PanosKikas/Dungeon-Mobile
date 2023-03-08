@@ -28,16 +28,16 @@ public class PatrolState : State
     EnemyBehavior enemyBehavior;
     EnemyFSM stateMachine;
 
-    public PatrolState(EnemyFSM stateMachine)
+    public PatrolState(EnemyFSM stateMachine, Character owner) : base(owner)
     {
         
-        rb = stateMachine.GetComponent<Rigidbody2D>();
-        spriteRenderer = stateMachine.GetComponentInChildren<SpriteRenderer>();
-        enemyBehavior = stateMachine.GetComponent<EnemyBehavior>();
+        rb = Owner.GetComponent<Rigidbody2D>();
+        spriteRenderer = Owner.GetComponentInChildren<SpriteRenderer>();
+        enemyBehavior = Owner.GetComponent<EnemyBehavior>();
         this.stateMachine = stateMachine;
-        var EnemyWaypoints = stateMachine.GetComponentInParent<EnemyWaypoints>();
+        var enemyWaypoints = Owner.GetComponentInParent<EnemyWaypoints>();
           
-        patrolWaypoints = EnemyWaypoints.PatrolWaypoints;
+        patrolWaypoints = enemyWaypoints.PatrolWaypoints;
        
     }
 
@@ -64,29 +64,27 @@ public class PatrolState : State
 
         var direction = GetMoveDirection();
 
-        rb.MovePosition(stateMachine.transform.position + direction * speed * Time.fixedDeltaTime);
+        var position = Owner.transform.position;
+        rb.MovePosition(position + direction * (speed * Time.fixedDeltaTime));
         UpdateVelocity();
 
-        previousPosition = stateMachine.transform.position;
+        previousPosition = position;
         enemyBehavior.Velocity = velocity;
     }
 
-
-
-
     Vector3 GetMoveDirection()
     {
-        return (targetWaypointPosition - stateMachine.transform.position).normalized;
+        return (targetWaypointPosition - Owner.transform.position).normalized;
     }
 
     bool CloseToWaypoint()
     {
-        return Vector2.Distance(stateMachine.transform.position, targetWaypointPosition) <= .1f;
+        return Vector2.Distance(Owner.transform.position, targetWaypointPosition) <= .1f;
     }
 
     void ArriveAtWaypoint()
     {
-        stateMachine.transform.position = targetWaypointPosition;
+        Owner.transform.position = targetWaypointPosition;
         velocity = Vector3.zero;
         stateMachine.ChangeState(stateMachine.WaitState);
     }
@@ -94,7 +92,7 @@ public class PatrolState : State
 
     void UpdateVelocity()
     {
-        velocity = (stateMachine.transform.position - previousPosition) / Time.deltaTime;
+        velocity = (Owner.transform.position - previousPosition) / Time.deltaTime;
         velocity *= speed;
     }
 

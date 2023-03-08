@@ -4,19 +4,20 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-public abstract class CharacterStatsSO : ScriptableObject
+[CreateAssetMenu(menuName = "Characters/Stats")]
+public class CharacterStatsSO : ScriptableObject
 {
-    public int MaxHealth;
-    public float PhysicalDamage;
-    public float AutoAttackRate;
-    public int MaxStamina;
-    public int MaxDivnity;
-    public float StaminaRegen;
-    public int DivineDamage;
-    public float CriticalChance;
-    public int PhysicalDefense;
-    public int DivinityResistance;
-    public float EvasionChance;
-    public float ItemDropRate;
-    public float CooldownReduction;
+    public int MaxHealth = 100;
+    public float PhysicalDamage = 10;
+    public float AutoAttackRate = 1f;
+    public int MaxStamina = 100;
+    public int MaxDivnity = 100;
+    public float StaminaRegen = 1f;
+    public int DivineDamage = 10;
+    public float CriticalChance = 0;
+    public int PhysicalDefense = 10;
+    public int DivinityResistance = 10;
+    public float EvasionChance = 0f;
+    public float ItemDropRate = 0f;
+    public float CooldownReduction = 0f;
 }

@@ -4,15 +4,14 @@ using UnityEngine;
 
 public abstract class AttackState : State
 {
-    protected CharacterBattle battle;
+    protected CharacterBattleController BattleController;
     protected CharacterStats stats;
 
     protected float nextFire;
+    protected Character Target;
 
-    public AttackState(BattleFSM stateMachine)
+    public AttackState(Character owner) : base(owner)
     {
-        battle = stateMachine.GetComponent<CharacterBattle>();
-        stats = battle.stats;
     }
 
     public override void EnterState()
@@ -27,6 +26,4 @@ public abstract class AttackState : State
     }
 
     protected abstract void FindTarget();
-    
-
 }

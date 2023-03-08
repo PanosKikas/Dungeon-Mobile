@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 
 public class BattleTransistor : MonoBehaviour
 {
@@ -23,10 +24,9 @@ public class BattleTransistor : MonoBehaviour
     }
     #endregion
 
-    [SerializeField]
-    public List<CharacterStatsSO> enemyGroupStats;
+    public List<Character> enemies;
 
-    BattleSetup setup;
+    //BattleSetup setup;
 
     public void EnterBattleScene(GameObject enemy)
     {
@@ -45,12 +45,12 @@ public class BattleTransistor : MonoBehaviour
 
     void FindEnemyGroupFromEnemy(GameObject enemy)
     {
-        enemyGroupStats.Clear();
+        enemies.Clear();
         GameObject parentGroup = enemy.transform.parent.gameObject;
-        var stats = parentGroup.GetComponentsInChildren<CharacterStats>();
-        foreach (var stat in stats)
+        var enemyGroup = parentGroup.GetComponentsInChildren<Character>();
+        foreach (var enemyCharacter in enemyGroup)
         {
-            enemyGroupStats.Add(stat.Data);
+            enemies.Add(enemyCharacter);
         }
     }
 
@@ -58,6 +58,4 @@ public class BattleTransistor : MonoBehaviour
     {
         // LOL
     }
-
-    
 }

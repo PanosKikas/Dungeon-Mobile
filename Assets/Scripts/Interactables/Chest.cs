@@ -11,15 +11,15 @@ public class Chest : Interactable
     [SerializeField]
     GameObject closedChest;
 
-    [Header("Loot"), SerializeField]
+    [SerializeField] private Pickup pickupPrefab;
+    
+    [SerializeField]
     public PickupSO[] loot;
 
     public override void Interact()
     {
-
         base.Interact();
         OpenChest();
-        
     }
 
     void OpenChest()
@@ -34,14 +34,13 @@ public class Chest : Interactable
     {
         foreach (var item in loot)
         {
-            ItemSpawner.SpawnItemAtTransform(item, transform); 
+            SpawnPickup(item); 
         }
-
-       
     }
-
-
-
     
-
+    private void SpawnPickup(PickupSO item)
+    {
+        var pickup = Instantiate(pickupPrefab, transform.position + new Vector3(0, -.3f, 0), Quaternion.identity);
+        pickup.SetTo(item);
+    }
 }

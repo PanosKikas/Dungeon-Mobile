@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 public class AttributeUI : MonoBehaviour
 {
-    
-    
     [SerializeField]
     TextMeshProUGUI[] attributeValues;
     
@@ -29,7 +27,7 @@ public class AttributeUI : MonoBehaviour
 
     private void Start()
     {
-        attributes = StatsDatabase.Instance.GetMainCharacterStats().AttributeStats;
+        //attributes = StatsDatabase.Instance.GetMainCharacterStats().AttributeStats;
         UpdateAttributeTexts();
     }
 

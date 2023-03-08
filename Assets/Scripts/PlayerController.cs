@@ -6,22 +6,14 @@ using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] private CharacterStatsSO InitialStats;
-    private CharacterStats _stats;
-
+    [SerializeField]
+    private Character[] characters;
+    
     [SerializeField]
     private Inventory _inventory;
     
-    private void Start()
-    {
-        _stats = new CharacterStats(InitialStats);
-    }
-
     public void Pickup(Item item)
     {
-        if (item is IStorable storable)
-        {
-            _inventory.TryStoreInventory(item);
-        }
+        _inventory.TryStore(item);
     }
 }

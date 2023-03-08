@@ -2,21 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class BattleFSM : FSM
+public class BattleFSM : FSM
 {
-
     private State previousState = null;
-
     public AutoAttackState AutoAttackState { get; protected set; }
-    //public ParryState ParryState { get; protected set; }
-
-
-
-    protected virtual void Start()
+    public ManualAttackState ManualAttackState { get; private set; }
+    
+    public BattleFSM(Character owner)
     {
-        AutoAttackState = new AutoAttackState(this);
-       // ParryState = new ParryState(this);
-
+        AutoAttackState = new AutoAttackState(owner);
+        ManualAttackState = new ManualAttackState(owner);
         currentState = AutoAttackState;
 
         currentState.EnterState();
@@ -26,13 +21,10 @@ public abstract class BattleFSM : FSM
     {
         previousState = currentState;
         base.ChangeState(newState);
-        
     }
 
     public void ChangeToPreviousState()
     {
         ChangeState(previousState);
     }
-
-
 }

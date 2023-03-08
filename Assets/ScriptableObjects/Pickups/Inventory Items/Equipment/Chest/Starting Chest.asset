@@ -9,16 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d3a3843e54b076b44a31a5c8102e6294, type: 3}
+  m_Script: {fileID: 11500000, guid: 56cc97bd6fa88f54890c489823acd9bf, type: 3}
   m_Name: Starting Chest
   m_EditorClassIdentifier: 
-  Name: Starting Shirt
-  Icon: {fileID: 8052848492954120146, guid: efa2e029d1a721d469b4d0b897e7bdc9, type: 3}
-  prefab: {fileID: 1142393820424044004, guid: e350ea23c5af2d54c9ed6c0a4c454881, type: 3}
-  description: A starting shirt
-  SellValue: 10
+  Name: Starting Chest
+  Icon: {fileID: -7913305309260777036, guid: efa2e029d1a721d469b4d0b897e7bdc9, type: 3}
+  description: 
+  SellValue: 0
   StackLimit: 99
-  EquipmentType: 1
-  StatValuePairs:
-  - stat: 1
-    value: 5
+  Type: 1

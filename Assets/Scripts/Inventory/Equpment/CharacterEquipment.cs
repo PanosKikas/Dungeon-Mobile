@@ -41,7 +41,7 @@ public class CharacterEquipment : MonoBehaviour
         if (oldItem != null)
         {
             oldItem.Unequip();
-            Inventory.Instance.TryStoreInventory(oldItem as Item);
+            Inventory.Instance.TryStore(oldItem as Item);
         }
 
         MainCharacterEquipment[equippedIndex] = item;

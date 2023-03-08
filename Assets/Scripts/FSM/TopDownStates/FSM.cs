@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class FSM : MonoBehaviour
+public abstract class FSM 
 {
     public State currentState { get; protected set; }
 

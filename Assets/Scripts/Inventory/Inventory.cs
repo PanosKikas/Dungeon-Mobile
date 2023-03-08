@@ -62,7 +62,7 @@ public class Inventory : MonoBehaviour
         NextFreeSlot = 0;
     }
 
-    public bool TryStoreInventory(Item item)
+    public bool TryStore(Item item)
     {
         int? found = ItemExistsInventory(item);
         //int indexToInsert = FindIndexToInsert(item);

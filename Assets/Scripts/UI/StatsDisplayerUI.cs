@@ -28,8 +28,8 @@ public class StatsDisplayerUI : MonoBehaviour
         builder.Append("Divine Dmg: ").Append(stats.DivineDamage.Value).Append("\n");
         builder.Append("Divine Resist: ").Append(stats.DivinityResistance.Value).Append("\n");
         builder.Append("Stamina Regen: ").Append(stats.StaminaRegen.Value).Append("\n");
-        builder.Append("Evasion % : ").Append(stats.EvasionChanceStat.Value).Append("\n");
-        builder.Append("Item Drop % : ").Append(stats.ItemDropRateStat.Value).Append("\n");
+        builder.Append("Evasion % : ").Append(stats.EvasionChance.Value).Append("\n");
+        builder.Append("Item Drop % : ").Append(stats.ItemDropRate.Value).Append("\n");
         statsText.text = builder.ToString();
     }
 }
