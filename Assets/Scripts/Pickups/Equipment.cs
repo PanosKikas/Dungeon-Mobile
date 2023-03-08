@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EquipmentType
+public enum EquipmentSlotType
 {
     Head,
     Chest,
@@ -12,34 +12,30 @@ public enum EquipmentType
 
 public class Equipment : Item, IEquipable, IStorable, IUsable
 {
-    public EquipmentType Type { get; private set; }
+    public EquipmentSlotType SlotType { get; private set; }
 
     public Equipment(PickupSO data) : base(data)
     {
         EquipmentSO equipmentData = data as EquipmentSO;
         if (equipmentData != null)
         {
-            Type = equipmentData.Type;
+            SlotType = equipmentData.slotType;
         }
     }
 
-    public void Equip()
+    public void Equip(Character character)
     {
+        character.Equipment.Equip(this);
     }
 
     public void Unequip()
     {
     }
+    
 
-
-    public void Use()
+    public bool TryUseOn(Character character)
     {
-        Equip();
-    }
-
-    public bool TryUse()
-    {
-        Equip();
+        Equip(character);
         return true;
     }
 }

@@ -1,5 +1,7 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -7,7 +9,6 @@ public class ArmorSlotUI : MonoBehaviour
 {
     Button[] equipmentButtons;
     Image[] armorIcons;
-    
 
     private void OnEnable()
     {
@@ -16,10 +17,10 @@ public class ArmorSlotUI : MonoBehaviour
             InitialiazeEquipmentSlots();         
         }
 
-        UpdateEquipmentSlotsUI();
+        UpdateEquipmentSlotsUI(null);
     }
 
-    void InitialiazeEquipmentSlots()
+    private void InitialiazeEquipmentSlots()
     {
         equipmentButtons = GetComponentsInChildren<Button>();
         armorIcons = new Image[equipmentButtons.Length];
@@ -30,17 +31,25 @@ public class ArmorSlotUI : MonoBehaviour
         }
     }
 
-    void UpdateEquipmentSlotsUI()
+    void UpdateEquipmentSlotsUI(CharacterEquipment characterEquipment)
     {
-        for (int i = 0; i < equipmentButtons.Length; ++i)
+        if (characterEquipment == null)
         {
-            var equippable = CharacterEquipment.Instance.MainCharacterEquipment[i];
+            return;
+        }
+        
+        int i = 0;
+        var equipmentSlots = Enum.GetValues(typeof(EquipmentSlotType)).Cast<EquipmentSlotType>();
+        foreach(var slot in equipmentSlots)
+        {
+            var equippable = characterEquipment.Equipment[slot];
 
             if (equippable != null)
             {
                 armorIcons[i].enabled = true;
                 armorIcons[i].sprite = ((Item)equippable).Icon;
             }
+            ++i; 
         }
     }
 }

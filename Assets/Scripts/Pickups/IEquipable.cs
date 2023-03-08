@@ -4,7 +4,7 @@ using UnityEngine;
 
 public interface IEquipable
 {
-    EquipmentType Type { get; }
-    void Equip();
+    EquipmentSlotType SlotType { get; }
+    void Equip(Character character);
     void Unequip();
 }

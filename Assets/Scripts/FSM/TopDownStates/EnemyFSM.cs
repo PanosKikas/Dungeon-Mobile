@@ -9,7 +9,7 @@ public class EnemyFSM : FSM
     public PatrolState PatrolState { get; private set; }
     public WaitState WaitState { get; private set; }
     
-    public EnemyFSM(Character owner)
+    public EnemyFSM(EnemyController owner)
     {
         ChaseState = new ChaseState(owner);
         PatrolState = new PatrolState(this, owner);

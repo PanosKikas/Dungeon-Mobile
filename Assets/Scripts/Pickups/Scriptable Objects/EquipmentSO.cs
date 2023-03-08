@@ -1,9 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [CreateAssetMenu(menuName = "Items/Equipment")]
 public class EquipmentSO : PickupSO
 {
-    public EquipmentType Type;
+    [FormerlySerializedAs("Type")] public EquipmentSlotType slotType;
 }

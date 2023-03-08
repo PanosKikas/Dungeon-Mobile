@@ -12,7 +12,6 @@ public class InventoryGUI : MonoBehaviour
     Text itemDescritpion;
 
     int? lastDisplayedIndex = null;
-
     
     void InitializeComponents()
     {
@@ -22,7 +21,7 @@ public class InventoryGUI : MonoBehaviour
     void FindItemSlotsUI()
     {
         itemSlots = new ItemSlotUI[transform.childCount];
-        itemSlots = GetComponentsInChildren<ItemSlotUI>();
+        itemSlots = GetComponentsInChildren<ItemSlotUI>(true);
     }
 
     public void OnEnable()
@@ -95,5 +94,10 @@ public class InventoryGUI : MonoBehaviour
     {
         itemDescritpion.text = "";
     }
-    
+
+    public void Refresh()
+    {
+        gameObject.SetActive(false);
+        gameObject.SetActive(true);
+    }
 }

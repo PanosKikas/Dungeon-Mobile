@@ -57,11 +57,11 @@ public class Projectile : MonoBehaviour
 
     void HitTarget(Collider2D collider)
     {
-        var enemy = collider.GetComponent<Character>();
+        var enemy = collider.GetComponent<EnemyController>();
 
         if (enemy != null)
         {
-            enemy.TakeDamage(10);
+            enemy.Character.TakeDamage(10);
         }
     }
 

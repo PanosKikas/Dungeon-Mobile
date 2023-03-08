@@ -33,10 +33,10 @@ public class AttributeUI : MonoBehaviour
 
     void UpdateAttributeTexts()
     {
-        for (int i = 0; i < attributes.Length; ++i)
+        /*for (int i = 0; i < attributes.Length; ++i)
         {
             attributeValues[i].text = attributes[i].Value.ToString();
-        }
+        }*/
     }
 
     public void IncrementAttribute(int index)

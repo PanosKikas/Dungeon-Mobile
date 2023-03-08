@@ -4,14 +4,11 @@ using System.Collections.Generic;
 using EventArgs;
 using UnityEngine;
 
-public class Character : MonoBehaviour
+public class Character 
 {
-    [SerializeField] private CharacterStatsSO _initialStats;
-
-    private Animator animator;
-    
     public CharacterStats Stats { get; private set; }
-
+    public CharacterEquipment Equipment { get; private set; }
+    
     public event Action<CharacterDamagedArgs> CharacterDamaged;
     
     public int Health { get; private set; }
@@ -19,22 +16,17 @@ public class Character : MonoBehaviour
 
     public bool IsAlive => Health > 0;
 
-    private void Awake()
-    {
-        animator = GetComponent<Animator>();
-    }
-
     // Start is called before the first frame update
-    void Start()
+    public Character(CharacterStatsSO initialStats)
     {
-        Stats = new CharacterStats(_initialStats);
+        Stats = new CharacterStats(initialStats);
         Health = (int)Stats.MaxHealth.Value;
         Stamina = (int)Stats.MaxStamina.Value;
+        Equipment = new CharacterEquipment();
     }
 
     public void Attack(Character target)
     {
-        animator.SetTrigger("Attack");
         target.TakeDamage(10);
     }
 

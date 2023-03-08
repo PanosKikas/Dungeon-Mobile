@@ -12,9 +12,9 @@ public class Potion : Item, IStorable, IUsable
 {
     private PotionType type;
     
-    public bool TryUse()
+    public bool TryUseOn(Character character)
     {
-        _character.Heal(20);
+        character.Heal(20);
         return true;
     }
 

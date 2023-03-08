@@ -3,8 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class PatrolState : State
-{ 
-
+{
     [SerializeField]
     float searchRadius = 5f;
 
@@ -25,17 +24,17 @@ public class PatrolState : State
 
     SpriteRenderer spriteRenderer;
 
-    EnemyBehavior enemyBehavior;
+    EnemyController enemyController;
     EnemyFSM stateMachine;
 
-    public PatrolState(EnemyFSM stateMachine, Character owner) : base(owner)
+    public PatrolState(EnemyFSM stateMachine, EnemyController owner) : base(owner.Character)
     {
         
-        rb = Owner.GetComponent<Rigidbody2D>();
-        spriteRenderer = Owner.GetComponentInChildren<SpriteRenderer>();
-        enemyBehavior = Owner.GetComponent<EnemyBehavior>();
+        rb = owner.GetComponent<Rigidbody2D>();
+        enemyController = owner;
+        spriteRenderer = enemyController.GetComponentInChildren<SpriteRenderer>();
+        var enemyWaypoints = enemyController.GetComponentInParent<EnemyWaypoints>();
         this.stateMachine = stateMachine;
-        var enemyWaypoints = Owner.GetComponentInParent<EnemyWaypoints>();
           
         patrolWaypoints = enemyWaypoints.PatrolWaypoints;
        
@@ -64,41 +63,40 @@ public class PatrolState : State
 
         var direction = GetMoveDirection();
 
-        var position = Owner.transform.position;
+        var position = enemyController.transform.position;
         rb.MovePosition(position + direction * (speed * Time.fixedDeltaTime));
         UpdateVelocity();
 
         previousPosition = position;
-        enemyBehavior.Velocity = velocity;
+        enemyController.Velocity = velocity;
     }
 
     Vector3 GetMoveDirection()
     {
-        return (targetWaypointPosition - Owner.transform.position).normalized;
+        return (targetWaypointPosition - enemyController.transform.position).normalized;
     }
 
     bool CloseToWaypoint()
     {
-        return Vector2.Distance(Owner.transform.position, targetWaypointPosition) <= .1f;
+        return Vector2.Distance(enemyController.transform.position, targetWaypointPosition) <= .1f;
     }
 
     void ArriveAtWaypoint()
     {
-        Owner.transform.position = targetWaypointPosition;
+        enemyController.transform.position = targetWaypointPosition;
         velocity = Vector3.zero;
         stateMachine.ChangeState(stateMachine.WaitState);
     }
 
-
     void UpdateVelocity()
     {
-        velocity = (Owner.transform.position - previousPosition) / Time.deltaTime;
+        velocity = (enemyController.transform.position - previousPosition) / Time.deltaTime;
         velocity *= speed;
     }
 
     public override void ExitState()
     {
-        enemyBehavior.Velocity = Vector2.zero;
+        enemyController.Velocity = Vector2.zero;
     }
     
 

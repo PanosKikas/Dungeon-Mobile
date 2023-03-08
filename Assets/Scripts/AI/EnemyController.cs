@@ -3,15 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class EnemyBehavior : MonoBehaviour
+public class EnemyController : MonoBehaviour
 {
     EnemyFSM stateMachine;
     public Vector2 Velocity { get; set; }
     MovementAnimation animateMovement;
 
+    [SerializeField] private CharacterStatsSO characterStats;
+    public Character Character { get; private set; }
+
     private void Awake()
     {
-        stateMachine = new EnemyFSM(GetComponent<Character>());
+        Character = new Character(characterStats);
+        stateMachine = new EnemyFSM(this);
         animateMovement = GetComponent<MovementAnimation>();
     }
 

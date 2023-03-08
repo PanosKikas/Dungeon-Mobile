@@ -4,11 +4,11 @@ using UnityEngine;
 using UnityEngine.Events;
 public class EnemyGroup : MonoBehaviour
 {
-    public EnemyBehavior[] enemies;
+    public EnemyController[] enemies;
 
     private void Awake()
     {
-        enemies = GetComponentsInChildren<EnemyBehavior>();
+        enemies = GetComponentsInChildren<EnemyController>();
     }
 
     public void EnableChaseAllEnemies()

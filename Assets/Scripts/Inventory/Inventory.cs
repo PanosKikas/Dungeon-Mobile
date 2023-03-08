@@ -28,12 +28,8 @@ public class Inventory : MonoBehaviour
     [SerializeField]
     InventoryGUI inventoryGUI;
 
-    [SerializeField]
-    UIToggler toggler;
-
     #region Singletton
     public static Inventory Instance { get; private set; }
-
 
     private void Awake()
     {
@@ -115,7 +111,7 @@ public class Inventory : MonoBehaviour
             return;
         }
         
-        if (usable.TryUse())
+        if (usable.TryUseOn(FindObjectOfType<PlayerController>().Character))
         {
             RemoveFromInventoryOn(index);    
         }
@@ -147,8 +143,7 @@ public class Inventory : MonoBehaviour
         ShiftInventoryArray(index);
         NextFreeSlot--;
         items[NextFreeSlot] = null;
-        toggler.ToggleInventory();
-        toggler.ToggleInventory();
+        inventoryGUI.Refresh();
     }
 
     void ShiftInventoryArray(int index)

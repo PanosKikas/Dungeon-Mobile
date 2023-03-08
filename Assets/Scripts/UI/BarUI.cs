@@ -32,7 +32,7 @@ public class BarUI : MonoBehaviour
             textMeshPro = GetComponentInChildren<TextMeshProUGUI>();
         }
 
-        character = GameObject.FindGameObjectWithTag("Player").GetComponent<Character>();
+        character = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().Character;
     }
     
     private void Update()

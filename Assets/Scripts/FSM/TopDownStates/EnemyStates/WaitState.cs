@@ -13,7 +13,7 @@ public class WaitState : State
 
     EnemyFSM stateMachine;
 
-    public WaitState(EnemyFSM stateMachine, Character owner) : base(owner)
+    public WaitState(EnemyFSM stateMachine, EnemyController enemyController) : base(enemyController.Character)
     {
         this.stateMachine = stateMachine;
     }

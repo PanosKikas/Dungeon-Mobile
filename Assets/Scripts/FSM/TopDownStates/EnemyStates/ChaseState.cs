@@ -7,15 +7,15 @@ public class ChaseState : State
 {
     AIDestinationSetter destinationSetter;
     AIPath path;
-    EnemyBehavior enemyBehavior;
+    EnemyController enemyController;
     EnemyGroup parentGroup;
 
-    public ChaseState(Character owner) : base(owner)
+    public ChaseState(EnemyController owner) : base(owner.Character)
     {
         destinationSetter = owner.GetComponent<AIDestinationSetter>();
         path = owner.GetComponent<AIPath>();
         
-        enemyBehavior = owner.GetComponent<EnemyBehavior>();
+        enemyController = owner.GetComponent<EnemyController>();
         parentGroup = owner.GetComponentInParent<EnemyGroup>();
     }
 
@@ -32,7 +32,7 @@ public class ChaseState : State
 
     public override void LogicUpdate()
     {
-        enemyBehavior.Velocity = path.desiredVelocity;
+        enemyController.Velocity = path.desiredVelocity;
     }
 
     void EnablePathFinder()

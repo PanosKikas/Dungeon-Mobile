@@ -9,8 +9,6 @@ public class Pickup : MonoBehaviour
 
     [SerializeField]
     float gravitationSpeed = 1f;
-
-    private Item item;
     private PickupSO data;
     private SpriteRenderer spriteRenderer;
 
@@ -28,8 +26,12 @@ public class Pickup : MonoBehaviour
     protected virtual void PickUp()
     {
         var controller = target.GetComponent<PlayerController>();
-        var item = new Equipment(data);
-        controller.Pickup(item);
+        var itemInstance = ItemFactory.CreateItemFromData(this.data);
+        if (itemInstance == null)
+        {
+            return;
+        }
+        controller.Pickup(itemInstance);
         Destroy(gameObject);
     }
     
