@@ -17,34 +17,24 @@ public class TopDownMovement : MonoBehaviour
     [SerializeField]
     Joystick joystick;
 
-    
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
-    
+
     void Update()
     {
+        var KeyboardInput = GetKeyboardInput();
+        var JoystickInput = GetJoystickInput();
+        var UsedInput = (JoystickInput != Vector2.zero) ? JoystickInput : KeyboardInput;
 
-#if UNITY_EDITOR_WIN
-
-        if (UnityEditor.EditorApplication.isRemoteConnected)
-        {
-            GetInputAndroid();
-        }
-        else
-        {
-            GetInputWindows();
-        }
-#else
-
-        GetInputAndroid();
-#endif
+        input = UsedInput;
+        NormalizeInput();
 
 
-
-        Animate();       
+            Animate();
     }
 
     private void FixedUpdate()
@@ -55,8 +45,8 @@ public class TopDownMovement : MonoBehaviour
     void Move()
     {
         Vector3 deltaVelocity;
- 
-        
+
+
         deltaVelocity = input * speed * Time.fixedDeltaTime;
 
 
@@ -64,24 +54,25 @@ public class TopDownMovement : MonoBehaviour
         {
             float maxDeltaSpeed = speed * Time.fixedDeltaTime;
             deltaVelocity.x *= maxDeltaSpeed / deltaVelocity.magnitude;
-            deltaVelocity.y *=  maxDeltaSpeed / deltaVelocity.magnitude;
+            deltaVelocity.y *= maxDeltaSpeed / deltaVelocity.magnitude;
         }
-         
+
         rb.velocity = deltaVelocity;
     }
 
-    private void GetInputWindows()
+    private Vector2 GetKeyboardInput()
     {
-        input.x = Input.GetAxisRaw("Horizontal");
-        input.y = Input.GetAxisRaw("Vertical");
-        NormalizeInput();
+
+        var x = Input.GetAxisRaw("Horizontal");
+        var y = Input.GetAxisRaw("Vertical");
+        return new Vector2(x, y);
     }
 
-    void GetInputAndroid()
+    private Vector2 GetJoystickInput()
     {
-        input.x = joystick.Horizontal;
-        input.y = joystick.Vertical;
-        NormalizeInput();
+        var x = joystick.Horizontal;
+        var y = joystick.Vertical;
+        return new Vector2(x, y);
     }
 
     void NormalizeInput()
@@ -94,6 +85,6 @@ public class TopDownMovement : MonoBehaviour
         animator.SetFloat("Horizontal", input.x);
         animator.SetFloat("Vertical", input.y);
     }
-    
-    
+
+
 }
