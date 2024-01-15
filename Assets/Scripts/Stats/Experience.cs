@@ -7,7 +7,7 @@ public class Experience
     private int currentXp;
     private int expBase;
     private int expLeft;
-    private float ExpMod = 1.15f;
+    private const float ExpMod = 1.15f;
 
     public Experience()
     {
@@ -26,7 +26,7 @@ public class Experience
         }
     }
 
-    void LevelUp()
+    private void LevelUp()
     {
         currentXp -= expLeft;
         CurrentLevel++;

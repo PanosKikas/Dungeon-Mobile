@@ -8,7 +8,6 @@ public abstract class State
     public virtual void LogicUpdate() { }
 
     public virtual void PhysicsUpdate() { }
+    public virtual void HandleInput(Input input) {}
     public virtual void ExitState() { }
-    
-
 }

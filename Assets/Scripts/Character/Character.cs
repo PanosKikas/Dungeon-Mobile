@@ -1,68 +1,55 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System;
+using DMT.Character.Stats;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.Serialization;
 
-public abstract class Character : MonoBehaviour
+namespace DMT.Character
 {
-    protected CharacterStats characterStats;
-    public CharacterStatsSO Data;
-
-    [HideInInspector]
-    public UnityEvent OnHpChanged;
-    
-    public int Health
+    public class Character : MonoBehaviour
     {
-        get => characterStats.CurrentHealth;
-        set
-        {
-            characterStats.CurrentHealth = value;
-            OnHpChanged?.Invoke();
-        }
-    }
+        public CharacterStats stats { get; private set; }
 
-    private void Start()
-    {
-        Initialize();
-    }
+        [SerializeField] private CharacterStatsSO initialStats;
 
-    public bool HasDied => Health >= 0;
-    
-    protected virtual void Initialize()
-    {
-    }
-
-    public virtual void TakeDamage(float damage)
-    {
+        private FSM _stateMachine;
         
-        Health = Mathf.Clamp((int)(Health - damage), 0, Data.MaxHealth);
-
-
-        if (Data.impactEffect != null)
+        private void Awake()
         {
+            stats = new(initialStats);
+        }
+
+        private void Update()
+        {
+            _stateMachine.LogicUpdate();
+        }
+        
+        private void FixedUpdate()
+        {
+            _stateMachine.PhysicsUpdate();
+        }
+
+        public bool IsAlive => stats.CurrentHealth > 0;
+        
+        public void TakeDamage(float damage)
+        {
+            stats.CurrentHealth = Mathf.Max((int)(stats.CurrentHealth - damage), 0);
+
             //Vector3 impactPosition = transform.position + ImpactEffectOffset + Random.onUnitSphere;
             // GameObject impact = Instantiate(impactEffect, impactPosition, Quaternion.identity);
             //  Destroy(impact, 2f);
+
+            if (!IsAlive)
+            {
+                Die();
+            }
         }
 
-        if (HasDied)
+        private void Die()
         {
-            Die();
+            Debug.Log($"Character {gameObject.name} has died ");
+            //this.enabled = false;
+            // gameObject.SetActive(false);
         }
     }
-
-
-    protected virtual void Die()
-    {
-        Debug.Log("Lol you died "  + gameObject);
-        //this.enabled = false;
-        // gameObject.SetActive(false);
-    }
-
-    public bool HasMaxHealth()
-    {
-        return characterStats.CurrentHealth == Data.MaxHealth;
-    }
-
-    protected abstract CharacterStats CreateStats();
 }

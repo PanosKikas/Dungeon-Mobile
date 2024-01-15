@@ -36,16 +36,16 @@ public abstract class StatusEffects : MonoBehaviour
         }
     }  */
 
-    public static void DamageTarget(Character stats, float damage)
+    public static void DamageTarget(CharacterController stats, float damage)
     {
         stats.TakeDamage(damage);
     }
 
-    public static bool Heal(Character stats, int health)
+    public static bool Heal(CharacterController stats, int health)
     {
         if (!stats.HasMaxHealth())
         {
-            stats.Health = (int)Mathf.MoveTowards(stats.Health, stats.Data.MaxHealth, health);
+            stats.Health = (int)Mathf.MoveTowards(stats.Health, stats.InitialStats.MaxHealth, health);
             return true;
         }
         return false;

@@ -18,7 +18,7 @@ public class BarUI : MonoBehaviour
     Slider HpSlider;
 
     TextMeshProUGUI textMeshPro;
-    Character characterStats;
+    CharacterController characterControllerStats;
 
     int targetCurrentStat; 
     CharacterStat targetMaxStat;
@@ -35,15 +35,15 @@ public class BarUI : MonoBehaviour
             textMeshPro = GetComponentInChildren<TextMeshProUGUI>();
         }
 
-        characterStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacter>();
+        characterControllerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacterController>();
 
          
     }
     
     private void Update()
     {
-        float CurrentHealth = characterStats.Health;
-        float MaxHealth = characterStats.Data.MaxHealth;
+        float CurrentHealth = characterControllerStats.Health;
+        float MaxHealth = characterControllerStats.InitialStats.MaxHealth;
         HpSlider.value = CurrentHealth / MaxHealth;
         textMeshPro.text = string.Format("{0}/{1}", CurrentHealth, MaxHealth);
     }

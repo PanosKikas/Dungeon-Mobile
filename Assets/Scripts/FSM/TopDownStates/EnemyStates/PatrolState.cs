@@ -1,16 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class PatrolState : State
 { 
-
     [SerializeField]
     float searchRadius = 5f;
 
     Rigidbody2D rb;
+
+    private Transform _source;
     
-    Transform[] patrolWaypoints;
+    Transform[] _patrolWaypoints;
 
     int currentWaypointIndex;
     Transform currentWaypoint;
@@ -23,78 +25,75 @@ public class PatrolState : State
 
     Vector3 previousPosition;
 
-    SpriteRenderer spriteRenderer;
+    private SpriteRenderer _spriteRenderer;
 
     EnemyBehavior enemyBehavior;
-    EnemyFSM stateMachine;
 
-    public PatrolState(EnemyFSM stateMachine)
+    private float _waitingCountdown = 0f;
+
+    public PatrolState(Transform source, SpriteRenderer spriteRenderer,
+        IEnumerable<Transform> wayPoints)
     {
-        
-        rb = stateMachine.GetComponent<Rigidbody2D>();
-        spriteRenderer = stateMachine.GetComponentInChildren<SpriteRenderer>();
-        enemyBehavior = stateMachine.GetComponent<EnemyBehavior>();
-        this.stateMachine = stateMachine;
-        var EnemyWaypoints = stateMachine.GetComponentInParent<EnemyWaypoints>();
-          
-        patrolWaypoints = EnemyWaypoints.PatrolWaypoints;
-       
+        _source = source;
+        rb = source.GetComponent<Rigidbody2D>();
+        _spriteRenderer = spriteRenderer;
+        enemyBehavior = source.GetComponent<EnemyBehavior>();
+        _patrolWaypoints = wayPoints.ToArray();
+        _waitingCountdown = 0f;
     }
 
     public override void EnterState()
     {
-        currentWaypointIndex = Random.Range(0, patrolWaypoints.Length);
-        currentWaypoint = patrolWaypoints[currentWaypointIndex];
+        currentWaypointIndex = Random.Range(0, _patrolWaypoints.Length);
+        currentWaypoint = _patrolWaypoints[currentWaypointIndex];
         targetWaypointPosition = currentWaypoint.position + Random.onUnitSphere * .4f;
     }
-
-
-    public override void LogicUpdate()
-    {        
-
+    
+    public override void LogicUpdate(float delta)
+    {
+        if (_waitingCountdown > 0f)
+        {
+            _waitingCountdown -= delta;
+            return;
+        }
+        
         if (CloseToWaypoint())
         {
             ArriveAtWaypoint();
         }
-     
     }
 
-    public override void PhysicsUpdate()
+    public override void PhysicsUpdate(float delta)
     {
-
         var direction = GetMoveDirection();
+        var currentPosition = _source.position;
+        rb.MovePosition(currentPosition + direction * speed * delta);
+        UpdateVelocity(delta);
 
-        rb.MovePosition(stateMachine.transform.position + direction * speed * Time.fixedDeltaTime);
-        UpdateVelocity();
-
-        previousPosition = stateMachine.transform.position;
+        previousPosition = currentPosition;
         enemyBehavior.Velocity = velocity;
     }
 
-
-
-
     Vector3 GetMoveDirection()
     {
-        return (targetWaypointPosition - stateMachine.transform.position).normalized;
+        return (targetWaypointPosition - _source.position).normalized;
     }
 
     bool CloseToWaypoint()
     {
-        return Vector2.Distance(stateMachine.transform.position, targetWaypointPosition) <= .1f;
+        return Vector2.Distance(_source.position, targetWaypointPosition) <= .1f;
     }
 
     void ArriveAtWaypoint()
     {
-        stateMachine.transform.position = targetWaypointPosition;
+        _source.position = targetWaypointPosition;
         velocity = Vector3.zero;
-        stateMachine.ChangeState(stateMachine.WaitState);
+        _waitingCountdown = 3f;
     }
-
-
-    void UpdateVelocity()
+    
+    void UpdateVelocity(float delta)
     {
-        velocity = (stateMachine.transform.position - previousPosition) / Time.deltaTime;
+        velocity = (_source.transform.position - previousPosition) / delta;
         velocity *= speed;
     }
 
@@ -103,5 +102,4 @@ public class PatrolState : State
         enemyBehavior.Velocity = Vector2.zero;
     }
     
-
 }

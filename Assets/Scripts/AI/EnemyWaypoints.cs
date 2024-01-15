@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyWaypoints : MonoBehaviour
+public class Waypoints : MonoBehaviour
 {
     public Transform[] PatrolWaypoints;
 }

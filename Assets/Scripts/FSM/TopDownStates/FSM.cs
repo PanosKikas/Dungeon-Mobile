@@ -2,24 +2,35 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class FSM : MonoBehaviour
+public class FSM
 {
+    private State previousState = null;
     public State currentState { get; protected set; }
 
-    public virtual void ChangeState(State newState)
+    public FSM(State initialState)
     {
-        currentState.ExitState();
+        ChangeState(initialState);
+    }
+    
+    public void ChangeState(State newState)
+    {
+        previousState = currentState;
+        currentState?.ExitState();
         currentState = newState;
         currentState.EnterState();
     }
 
-    public void LogicUpdateCurrentState()
+    public void LogicUpdate()
     {
         currentState.LogicUpdate();
     }
-    public void PhysicsUpdateCurrentState()
+    public void PhysicsUpdate()
     {
         currentState.PhysicsUpdate();
     }
-
+    
+    public void ChangeToPreviousState()
+    {
+        ChangeState(previousState);
+    }
 }

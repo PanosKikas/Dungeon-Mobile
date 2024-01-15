@@ -34,7 +34,6 @@ public class ChaseState : State
     public override void LogicUpdate()
     {
         enemyBehavior.Velocity = path.desiredVelocity;
-
     }
 
     void EnablePathFinder()

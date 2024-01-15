@@ -5,17 +5,14 @@ using UnityEngine;
 [RequireComponent(typeof(Rigidbody2D))]
 public class TopDownMovement : MonoBehaviour
 {
-
     Rigidbody2D rb;
     Animator animator;
 
-    [SerializeField]
-    float speed = 5f;
+    [SerializeField] float speed = 5f;
 
     Vector2 input = Vector2.zero;
 
-    [SerializeField]
-    Joystick joystick;
+    [SerializeField] Joystick joystick;
 
 
     private void Awake()
@@ -26,15 +23,13 @@ public class TopDownMovement : MonoBehaviour
 
     void Update()
     {
-        var KeyboardInput = GetKeyboardInput();
-        var JoystickInput = GetJoystickInput();
-        var UsedInput = (JoystickInput != Vector2.zero) ? JoystickInput : KeyboardInput;
+        var keyboardInput = GetKeyboardInput();
+        var joystickInput = GetJoystickInput();
+        var usedInput = (joystickInput != Vector2.zero) ? joystickInput : keyboardInput;
 
-        input = UsedInput;
+        input = usedInput;
         NormalizeInput();
-
-
-            Animate();
+        Animate();
     }
 
     private void FixedUpdate()
@@ -42,12 +37,12 @@ public class TopDownMovement : MonoBehaviour
         Move();
     }
 
-    void Move()
+    private void Move()
     {
         Vector3 deltaVelocity;
 
 
-        deltaVelocity = input * speed * Time.fixedDeltaTime;
+        deltaVelocity = input * (speed * Time.fixedDeltaTime);
 
 
         if (input.magnitude >= .1f)
@@ -62,7 +57,6 @@ public class TopDownMovement : MonoBehaviour
 
     private Vector2 GetKeyboardInput()
     {
-
         var x = Input.GetAxisRaw("Horizontal");
         var y = Input.GetAxisRaw("Vertical");
         return new Vector2(x, y);
@@ -85,6 +79,4 @@ public class TopDownMovement : MonoBehaviour
         animator.SetFloat("Horizontal", input.x);
         animator.SetFloat("Vertical", input.y);
     }
-
-
 }

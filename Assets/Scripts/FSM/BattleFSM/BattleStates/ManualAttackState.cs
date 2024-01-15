@@ -1,59 +1,59 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using Cinemachine;
+using DMT.Character;
 
-public class ManualAttackState : AttackState
+public class ManualAttackState : State
 {
-    PlayerBattle playerBattle;
-    CinemachineImpulseSource impulseSource;
-    PlayerCharacterStats playerStats;
-
-    public ManualAttackState(BattleFSM stateMachine) : base(stateMachine)
+    private readonly Character source;
+    private Character target;
+    
+    public ManualAttackState(Character source)
     {
-        impulseSource = stateMachine.GetComponent<CinemachineImpulseSource>();
-        playerBattle = (PlayerBattle)battle;
+        this.source = source;
+    }
+
+    private bool CanAttack()
+    {
+        return source.stats.CurrentEndurance > 0;
+    }
+
+    public override void LogicUpdate(float delta)
+    {
+        base.LogicUpdate(delta);
         
-    }
-
-    public override void EnterState()
-    {
-        base.EnterState();
-        playerStats = playerBattle.playerStats;
-        battle.Target = null;
-    }
-
-    public override void LogicUpdate()
-    {
-        base.LogicUpdate();
-        if (Input.GetButtonDown("Fire1") && CanAttack())
+        if (CanAttack() && Input.GetButtonDown("Fire1"))
         {
-            FindTarget();
-            if (battle.HasAttackTarget())
-            {
-                battle.AttackTarget();
-                nextFire = Time.time + 1f / playerStats.ManualAttackRate;
-                ShakeCamera();
-            }
+            target = FindClosestTargetToMousePosition();
         }
-     /*   else if (Input.GetMouseButtonDown(2))
+
+        if (target == null)
         {
-            playerBattle.EnterParry();
-        }*/
+            return;
+        }
+        
+        AttackTarget();
+    }
+    
+    private Character FindClosestTargetToMousePosition()
+    {
+        Vector2 mousePosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Collider2D[] colliders = Physics2D.OverlapCircleAll(mousePosition, 2f,
+            LayerMask.GetMask("Enemy"));
+        if (colliders != null && colliders.Any())
+        {
+            return colliders[0].gameObject.GetComponent<Character>();
+        }
+
+        return null;
     }
 
-    protected override void FindTarget()
+    private void AttackTarget()
     {
-        playerBattle.FindManualAttackTarget();
-    }
-
-    protected override bool CanAttack()
-    {
-        return base.CanAttack() && playerBattle.playerStats.HasEnduranceForAttack();
-    }
-
-    void ShakeCamera()
-    {
-        impulseSource.GenerateImpulse();
+        source.stats.CurrentEndurance -= 50;
+        target.TakeDamage(source.stats.AttackDamage);
+        target = null;
     }
 }

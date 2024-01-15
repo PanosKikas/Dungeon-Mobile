@@ -1,44 +1,45 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using DMT.Character;
 using UnityEngine;
 
-public class AutoAttackState : AttackState
+public class AutoAttackState : State
 {
-    public AutoAttackState(BattleFSM stateMachine) :base(stateMachine)
+    private float nextAttackCountdown;
+    private readonly Character _source;
+    private readonly Character _target;
+    
+    public AutoAttackState(Character source, Character target)
     {
-        
+        nextAttackCountdown = source.stats.AutoAttackRateStat.Value;
+        _source = source;
+        _target = target;
     }
 
     public override void EnterState()
     {
         base.EnterState();
-        FindTarget();
+        nextAttackCountdown = 0;
     }
 
-    public override void LogicUpdate()
+    private bool CanAttack()
     {
-        base.LogicUpdate();
+        return nextAttackCountdown <= 0;
+    }
+
+    public override void LogicUpdate(float delta)
+    {
+        base.LogicUpdate(delta);
+        nextAttackCountdown -= delta;
         if (CanAttack())
         {
-            nextFire = Time.time + (1f / stats.InitialData.AutoAttackRate);
-            battle.AttackTarget();
+            nextAttackCountdown = _source.stats.AutoAttackRateStat.Value;
+            AttackTarget();
         }
     }
 
-    protected override void FindTarget()
+    private void AttackTarget()
     {
-        battle.FindAutoAttackTarget();
+        _target.TakeDamage(_source.stats.AttackDamage);
     }
 }
-
-/* IEnumerator Attack()
- {
-     animator.SetTrigger("Attack");
-
-     yield return new WaitForSeconds(animator.GetCurrentAnimatorStateInfo(0).length +
-         animator.GetCurrentAnimatorStateInfo(0).normalizedTime - 1f);
-
-     StatusEffects.DamageTarget(target, stats.AttackDamage);
- }
-
-*/

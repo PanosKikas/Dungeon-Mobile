@@ -4,68 +4,24 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-public abstract class CharacterStatsSO : ScriptableObject
+namespace DMT.Character.Stats
 {
-    public string Name;    
-    protected List<CharacterStat> upgradableStatsList;
-
-    public CharacterStat MaxHealthStat;
-    public CharacterStat AttackDamageStat;
-
-    public CharacterStat AutoAttackRateStat;
-
-    public RuntimeAnimatorController battleAnimator;
-    public virtual void Initialize()
+    public class CharacterStatsSO : ScriptableObject
     {
-
-        upgradableStatsList = new List<CharacterStat>
-        {
-           MaxHealthStat, AttackDamageStat, AutoAttackRateStat
-
-        }; 
+        public int baseMaxHealthStat;
+        public int baseAttackDamageStat;
+        public float baseAutoAttackRateStat;
+        public float baseManualAttackRateStat;
+        public int baseMaxEnduranceStat;
+        public int baseMaxManaStat;
+        public float baseEnduranceRegenStat;
+        public int baseCriticalDamageStat;
+        public float baseCriticalChanceStat;
+        public int baseMagicDamageStat;
+        public float baseEvasionChanceStat;
+        public int basePhysicalDefenseStat;
+        public int baseMagicalResistanceStat;
+        public float baseItemDropRateStat;
+        public float baseMobilityStat;
     }
-
-    #region StatGetters
-    public int MaxHealth
-    {
-        get
-        {
-            return (int)MaxHealthStat.Value;
-        }
-        
-    }
-    
-    
-    public virtual float AttackDamage
-    {
-        get
-        {
-            return AttackDamageStat.Value;
-        }
-       
-    }
-
-    public float AutoAttackRate
-    {
-        get
-        {
-            return AutoAttackRateStat.Value;
-        }
-        
-    }
-    #endregion
-
-
-    public GameObject impactEffect;
-
-    [SerializeField]
-    Vector3 ImpactEffectOffset;
-
-
-    public List<CharacterStat> FindCharacterStats(Stat type)
-    {
-        return upgradableStatsList.FindAll(i => (i.Type == type));
-    }
-
-   
 }

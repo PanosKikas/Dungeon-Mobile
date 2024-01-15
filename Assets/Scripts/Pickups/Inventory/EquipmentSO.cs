@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DMT.Character.Stats;
 using UnityEngine;
 
 [CreateAssetMenu(fileName = "Equipment", menuName = "Pickups/InventoryPickups/Equipment")]
