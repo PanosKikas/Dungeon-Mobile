@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System;
+using DMT.Character.Stats;
 
 [CustomEditor(typeof(EquipmentSO), true)]
 public class EquipmenSOEditor : Editor
@@ -12,7 +13,6 @@ public class EquipmenSOEditor : Editor
     private void OnEnable()
     {
         equipable = (EquipmentSO)target;
-        
     }
 
     public override void OnInspectorGUI()

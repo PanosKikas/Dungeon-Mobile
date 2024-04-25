@@ -13,12 +13,7 @@ MonoBehaviour:
   m_Name: HealthPotion
   m_EditorClassIdentifier: 
   Name: Health Potion I
-  Icon: {fileID: -7149747800591892895, guid: efa2e029d1a721d469b4d0b897e7bdc9, type: 3}
-  prefab: {fileID: 1142393820424044004, guid: 3dd9e1abd6f7538409bee30d58c72496, type: 3}
-  description: Restore 20 HP
-  SellValue: 1
-  StackLimit: 99
-  EquipmentType: 4
-  StatValuePairs: []
   type: 0
-  Amount: 20
+  Description: Restores 10 HP
+  Amount: 10
+  icon: {fileID: -7149747800591892895, guid: efa2e029d1a721d469b4d0b897e7bdc9, type: 3}

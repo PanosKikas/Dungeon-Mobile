@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿/*using DMT.Character.Stats;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -22,7 +23,7 @@ public class BattleSetup : MonoBehaviour
         //SetupBattleScene(BattleTransistor.Instance.enemyGroupStats);
     }
 
-    public void SetupBattleScene(List<CharacterStatsSO> enemyStats)
+    public void SetupBattleScene(List<CharacterStats> enemyStats)
     {
         SetupEnemies(enemyStats);
         SetupPlayers();
@@ -51,3 +52,4 @@ public class BattleSetup : MonoBehaviour
         }
     }
 }
+*/

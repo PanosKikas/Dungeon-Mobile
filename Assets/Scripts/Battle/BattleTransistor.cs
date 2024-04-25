@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿/*using DMT.Character.Stats;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -24,7 +25,7 @@ public class BattleTransistor : MonoBehaviour
     #endregion
 
     [SerializeField]
-    public List<CharacterStatsSO> enemyGroupStats;
+    public List<CharacterStats> enemyGroupStats;
 
     BattleSetup setup;
 
@@ -61,3 +62,4 @@ public class BattleTransistor : MonoBehaviour
 
     
 }
+*/

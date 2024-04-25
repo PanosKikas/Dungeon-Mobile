@@ -1,22 +1,23 @@
-﻿using System.Collections;
+﻿/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 using Pathfinding;
+using DMT.Character;
 
 public abstract class StatusEffects : MonoBehaviour
 {
 
-   /* public GameObject impactEffect;
+   *//* public GameObject impactEffect;
 
     [SerializeField]
-    Vector3 ImpactEffectOffset;*/
+    Vector3 ImpactEffectOffset;*//*
 
     bool hasDied = false;
 
   //  public abstract CharacterStats stats { get; }
     
-    /*public virtual void TakeDamage(CharacterStats stats, int damage, GameObject impactEffect = null)
+    *//*public virtual void TakeDamage(CharacterStats stats, int damage, GameObject impactEffect = null)
     {  
         stats.CurrentHealth = Mathf.Clamp(stats.CurrentHealth - damage, 0, stats.MaxHealth);
         
@@ -34,28 +35,29 @@ public abstract class StatusEffects : MonoBehaviour
             hasDied = true;
             Die();
         }
-    }  */
+    }  *//*
 
-    public static void DamageTarget(CharacterController stats, float damage)
+    public static void DamageTarget(Character character, float damage)
     {
-        stats.TakeDamage(damage);
+        character.stats.TakeDamage(damage);
     }
 
-    public static bool Heal(CharacterController stats, int health)
+    public static bool Heal(Character character, int health)
     {
-        if (!stats.HasMaxHealth())
+        if (!character.HasMaxHealth())
         {
-            stats.Health = (int)Mathf.MoveTowards(stats.Health, stats.InitialStats.MaxHealth, health);
+            character.Health = (int)Mathf.MoveTowards(character.Health, character.InitialStats.MaxHealth, health);
             return true;
         }
         return false;
     }
 
-    /*protected virtual void Die()
+    *//*protected virtual void Die()
     {
         Debug.Log("Die");
         
         enabled = false;
         gameObject.SetActive(false);
-    }*/
+    }*//*
 }
+*/

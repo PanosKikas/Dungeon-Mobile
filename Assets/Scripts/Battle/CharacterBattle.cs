@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿/*using DMT.Character.Stats;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,21 +16,19 @@ public abstract class CharacterBattle : MonoBehaviour
     protected CharacterStat TargetStats;
 
 
-    protected BattleFSM stateMachine;
+   // protected BattleFSM stateMachine;
 
-/*    public bool IsBlocking
+*//*    public bool IsBlocking
     {
         get
         {
             return stateMachine.currentState.Equals(stateMachine.ParryState);
         }
-    }*/
+    }*//*
 
     private void Awake()
     {
-        animator = GetComponentInChildren<Animator>();
-        stateMachine = GetComponent<BattleFSM>();
-        
+        animator = GetComponentInChildren<Animator>();     
     }
 
     protected virtual void Update()
@@ -65,3 +64,4 @@ public abstract class CharacterBattle : MonoBehaviour
     }
 
 }
+*/

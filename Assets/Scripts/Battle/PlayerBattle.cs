@@ -1,4 +1,4 @@
-﻿using System.Collections;
+﻿/*using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
@@ -35,11 +35,11 @@ public class PlayerBattle : CharacterBattle
         playerStats.PerformAttack();
     }
 
-    /*    public void EnterParry()
+    *//*    public void EnterParry()
     {
         stateMachine.ChangeState(stateMachine.ParryState);
         animator.SetTrigger("Parry");
-    }*/
+    }*//*
 
     public void FindManualAttackTarget()
     {
@@ -59,4 +59,4 @@ public class PlayerBattle : CharacterBattle
             Target = null;
         }
     }
-}
+}*/

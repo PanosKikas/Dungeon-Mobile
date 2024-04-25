@@ -11,7 +11,7 @@ public class PcShooting : ShootingBase
     private void Start()
     {
         spawner = GetComponent<ProjectileSpawner>();
-        characterStats = StatsDatabase.Instance.GetMainCharacterStats();
+        //characterStats = StatsDatabase.Instance.GetMainCharacterStats();
     }
 
     protected override void Update()

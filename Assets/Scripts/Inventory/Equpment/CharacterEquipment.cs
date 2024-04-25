@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CharacterEquipment : MonoBehaviour
 {
-    public EquipableSO[] MainCharacterEquipment;
+    public EquipmentData[] MainCharacterEquipment;
 
     private readonly int PotionIndex = (int)EquipmentType.Potion;
 
@@ -13,7 +13,7 @@ public class CharacterEquipment : MonoBehaviour
 
     private void Start()
     {
-        MainCharacterEquipment = new EquipableSO[armorSlots];
+        MainCharacterEquipment = new EquipmentData[armorSlots];
     }
 
     #region Singletton
@@ -35,7 +35,7 @@ public class CharacterEquipment : MonoBehaviour
     }
     #endregion
 
-    public void Equip(EquipableSO item)
+    public void Equip(EquipmentData item)
     {
         int equippedIndex = (int)item.EquipmentType;
         
@@ -45,16 +45,15 @@ public class CharacterEquipment : MonoBehaviour
             equippedIndex = FindPotionEquipmentIndex();
         }
 
-        EquipableSO oldItem = MainCharacterEquipment[equippedIndex];
+        EquipmentData oldItem = MainCharacterEquipment[equippedIndex];
         if (oldItem != null)
         {
             oldItem.Unequip();
-            Inventory.Instance.TryStoreInventory(oldItem);
+          //  Inventory.Instance.TryStoreInventory(oldItem);
 
         }
 
         MainCharacterEquipment[equippedIndex] = item;
-        
         
     }
 

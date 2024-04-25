@@ -3,23 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
+using System;
 
 public class ItemSlotUI : MonoBehaviour
 {
-    Image itemIcon;
+    [SerializeField]
+    private Image itemIcon;
     Text stackText;
     ItemClickUI itemClick;
-    InventoryGUI inventoryGUI;
+    InventoryUI inventoryGUI;
     RectTransform rect;
 
-    StoredItem item;
+    ItemSlot itemSlot;
+    [SerializeField] private CanvasGroup itemCanvasGroup;
+    public event Action<ItemSlot> ItemSlotClicked;
 
     private void Awake()
     {
-        itemIcon = transform.GetChild(0).GetComponent<Image>();
         stackText = GetComponentInChildren<Text>();
         itemClick = GetComponent<ItemClickUI>();
-        inventoryGUI = GetComponentInParent<InventoryGUI>();
+        inventoryGUI = GetComponentInParent<InventoryUI>();
         rect = GetComponent<RectTransform>();
     }
 
@@ -28,11 +31,33 @@ public class ItemSlotUI : MonoBehaviour
         InitializeSlot();   
     }
 
+    public void SubscribeToSlot(ItemSlot slot)
+    {
+        slot.OnItemChanged += SlotItemChanged;
+        slot.OnItemChanged += SlotItemRemoved;
+        slot.OnStackChanged += SlotStackCountChanged;
+    }
+    private void SlotItemChanged(ItemSlot slot)
+    {
+        itemClick.OnTap.AddListener((_) => ItemSlotClicked?.Invoke(slot));
+        SetToItem(slot.Item);
+        UpdateStackText(slot.Stack);
+    }
+
+    private void SlotItemRemoved(ItemSlot slot)
+    {
+        //itemClick.OnTap.RemoveListener(inventoryGUI.DisplayItemOnDescription);
+    }
+
+    private void SlotStackCountChanged(ItemSlot slot)
+    {
+        UpdateStackText(slot.Stack);
+    }
+
     void InitializeSlot()
     {
-        itemClick.OnTap.AddListener(inventoryGUI.DisplayItemOnDescription);
-        itemClick.OnLongClick.AddListener(Inventory.Instance.TryUseOnIndex);
-        DisableItemSlotComponents();
+        
+       // itemClick.OnLongClick.AddListener(Inventory.Instance.TryUseOnIndex);
     }
         
 
@@ -41,12 +66,10 @@ public class ItemSlotUI : MonoBehaviour
         rect.DOShakePosition(.5f, 2, 40);
     }
 
-    public void ShowItemOnSlot(StoredItem item)
+    public void SetToItem(IStorable item)
     {
-        this.item = item;
-        EnableItemSlotComponents();
-        itemIcon.sprite = item.Item.Icon;
-        UpdateStackText();
+        itemCanvasGroup.alpha = 1f;
+        itemIcon.sprite = item.Icon;
     }
 
     void EnableItemSlotComponents()
@@ -56,21 +79,13 @@ public class ItemSlotUI : MonoBehaviour
         stackText.enabled = true;
     }
 
-    void DisableItemSlotComponents()
-    {
-        itemClick.enabled = false;
-        itemIcon.enabled = false;
-        stackText.enabled = false;
-    }
-
     public void RemoveItemFromSlot()
     {
-        DisableItemSlotComponents();
-        this.item = null;
+       // DisableItemSlotComponents();
     }
 
-    public void UpdateStackText()
+    public void UpdateStackText(int stackCount)
     {
-        stackText.text = string.Format("x{0}", item.Stack);
+        stackText.text = string.Format("x{0}", stackCount);
     }
 }

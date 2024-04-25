@@ -29,7 +29,7 @@ public class AttributeUI : MonoBehaviour
 
     private void Start()
     {
-        attributes = StatsDatabase.Instance.GetMainCharacterStats().AttributeStats;
+       // attributes = StatsDatabase.Instance.GetMainCharacterStats().AttributeStats;
         UpdateAttributeTexts();
     }
 

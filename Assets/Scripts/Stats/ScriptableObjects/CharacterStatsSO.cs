@@ -6,6 +6,7 @@ using System.Linq;
 
 namespace DMT.Character.Stats
 {
+    [CreateAssetMenu(fileName ="Stats", menuName ="Character/Stats")]
     public class CharacterStatsSO : ScriptableObject
     {
         public int baseMaxHealthStat;

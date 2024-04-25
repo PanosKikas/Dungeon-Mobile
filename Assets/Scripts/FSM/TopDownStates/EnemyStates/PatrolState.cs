@@ -25,18 +25,14 @@ public class PatrolState : State
 
     Vector3 previousPosition;
 
-    private SpriteRenderer _spriteRenderer;
-
     EnemyBehavior enemyBehavior;
 
     private float _waitingCountdown = 0f;
 
-    public PatrolState(Transform source, SpriteRenderer spriteRenderer,
-        IEnumerable<Transform> wayPoints)
+    public PatrolState(Transform source, IEnumerable<Transform> wayPoints)
     {
         _source = source;
         rb = source.GetComponent<Rigidbody2D>();
-        _spriteRenderer = spriteRenderer;
         enemyBehavior = source.GetComponent<EnemyBehavior>();
         _patrolWaypoints = wayPoints.ToArray();
         _waitingCountdown = 0f;

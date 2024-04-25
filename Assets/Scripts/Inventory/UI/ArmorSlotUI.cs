@@ -35,7 +35,7 @@ public class ArmorSlotUI : MonoBehaviour
     {
         for (int i = 0; i < equipmentButtons.Length; ++i)
         {
-            EquipableSO equipedSlot = CharacterEquipment.Instance.MainCharacterEquipment[i];
+            EquipmentData equipedSlot = CharacterEquipment.Instance.MainCharacterEquipment[i];
 
             if (equipedSlot != null)
             {

@@ -1,4 +1,6 @@
-﻿using System.Collections;
+﻿using DMT.Character;
+using DMT.Character.Stats;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -18,7 +20,7 @@ public class BarUI : MonoBehaviour
     Slider HpSlider;
 
     TextMeshProUGUI textMeshPro;
-    CharacterController characterControllerStats;
+    CharacterStats characterControllerStats;
 
     int targetCurrentStat; 
     CharacterStat targetMaxStat;
@@ -35,15 +37,15 @@ public class BarUI : MonoBehaviour
             textMeshPro = GetComponentInChildren<TextMeshProUGUI>();
         }
 
-        characterControllerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerCharacterController>();
+        characterControllerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<Character>().stats;
 
-         
+
     }
     
     private void Update()
     {
-        float CurrentHealth = characterControllerStats.Health;
-        float MaxHealth = characterControllerStats.InitialStats.MaxHealth;
+        float CurrentHealth = characterControllerStats.CurrentHealth;
+        float MaxHealth = characterControllerStats.MaxHealth;
         HpSlider.value = CurrentHealth / MaxHealth;
         textMeshPro.text = string.Format("{0}/{1}", CurrentHealth, MaxHealth);
     }

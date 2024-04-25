@@ -5,19 +5,14 @@ using UnityEngine;
 public class UIToggler : MonoBehaviour
 {
     [SerializeField]
-    GameObject inventory;
+    CanvasGroup inventory;
 
     [SerializeField]
     GameObject characterStats;
 
-    private void Start()
-    {
-        ToggleInventory();
-    }
-
     public void ToggleInventory()
     {
-        inventory.SetActive(!inventory.activeSelf);
+        inventory.alpha = inventory.alpha == 0 ? 1 : 0;
     }
 
     public void ToggleCharacterStats()

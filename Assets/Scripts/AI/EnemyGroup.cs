@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+
 public class EnemyGroup : MonoBehaviour
 {
-    public EnemyFSM[] enemies;
-    
+    /*public EnemyFSM[] enemies;
 
     private void Awake()
     {
@@ -18,8 +18,8 @@ public class EnemyGroup : MonoBehaviour
         {
             if (enemy.currentState != enemy.ChaseState)
                 enemy.ChangeState(enemy.ChaseState);
-            
+
         }
     }
-    
+*/
 }

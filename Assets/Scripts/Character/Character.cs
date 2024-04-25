@@ -6,32 +6,41 @@ using UnityEngine.Serialization;
 
 namespace DMT.Character
 {
-    public class Character : MonoBehaviour
+    public class Character : MonoBehaviour, IDamagable
     {
         public CharacterStats stats { get; private set; }
 
         [SerializeField] private CharacterStatsSO initialStats;
-
-        private FSM _stateMachine;
+        public IInventory inventory { get; private set; }
         
         private void Awake()
         {
             stats = new(initialStats);
-        }
-
-        private void Update()
-        {
-            _stateMachine.LogicUpdate();
-        }
-        
-        private void FixedUpdate()
-        {
-            _stateMachine.PhysicsUpdate();
+            inventory = new Inventory();
         }
 
         public bool IsAlive => stats.CurrentHealth > 0;
         
-        public void TakeDamage(float damage)
+        public void Pickup(ICollectable item)
+        {
+            if (item is IStorable storable)
+            {
+                inventory.TryStore(storable);
+            }
+            else if (item is IUsable usable)
+            {
+                usable.UseOn(this);
+            }
+        }
+
+        private void Die()
+        {
+            Debug.Log($"Character {gameObject.name} has died ");
+            //this.enabled = false;
+            // gameObject.SetActive(false);
+        }
+
+        public void TakeDamage(int damage)
         {
             stats.CurrentHealth = Mathf.Max((int)(stats.CurrentHealth - damage), 0);
 
@@ -43,13 +52,6 @@ namespace DMT.Character
             {
                 Die();
             }
-        }
-
-        private void Die()
-        {
-            Debug.Log($"Character {gameObject.name} has died ");
-            //this.enabled = false;
-            // gameObject.SetActive(false);
         }
     }
 }

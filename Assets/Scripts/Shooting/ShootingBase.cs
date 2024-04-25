@@ -1,3 +1,4 @@
+using DMT.Character.Stats;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,7 +7,7 @@ public abstract class ShootingBase : MonoBehaviour
 {
     protected ProjectileSpawner spawner;
 
-    protected PlayerCharacterStatsSO characterStats;
+    protected CharacterStats characterStats;
 
     protected float nextFireTime = 0f;
 

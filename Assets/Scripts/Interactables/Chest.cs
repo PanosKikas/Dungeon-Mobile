@@ -12,14 +12,17 @@ public class Chest : Interactable
     GameObject closedChest;
 
     [Header("Loot"), SerializeField]
-    public PickupSO[] loot;
+    public ScriptableObject[] loot;
+
+    [SerializeField]
+    public PickupObject pickupPrefab;
+
+    private ItemFactory _itemFactory = new ItemFactory();
 
     public override void Interact()
     {
-
         base.Interact();
         OpenChest();
-        
     }
 
     void OpenChest()
@@ -32,16 +35,11 @@ public class Chest : Interactable
 
     void SpawnLoot()
     {
-        foreach (var item in loot)
+        foreach (var itemData in loot)
         {
-            ItemSpawner.SpawnItemAtTransform(item, transform); 
-        }
-
-       
+            var item = _itemFactory.Create(itemData);
+            PickupObject prefab = Instantiate(pickupPrefab, transform.position + new Vector3(0, -.3f, 0), Quaternion.identity);
+            prefab.InitializeTo(item);
+        }  
     }
-
-
-
-    
-
 }

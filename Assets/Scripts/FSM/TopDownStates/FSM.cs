@@ -20,13 +20,13 @@ public class FSM
         currentState.EnterState();
     }
 
-    public void LogicUpdate()
+    public void LogicUpdate(float delta)
     {
-        currentState.LogicUpdate();
+        currentState.LogicUpdate(delta);
     }
-    public void PhysicsUpdate()
+    public void PhysicsUpdate(float delta)
     {
-        currentState.PhysicsUpdate();
+        currentState.PhysicsUpdate(delta);
     }
     
     public void ChangeToPreviousState()
