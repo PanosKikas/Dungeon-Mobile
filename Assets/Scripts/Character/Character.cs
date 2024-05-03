@@ -29,7 +29,7 @@ namespace DMT.Character
             }
             else if (item is IUsable usable)
             {
-                usable.UseOn(this);
+                usable.TryUseOn(this);
             }
         }
 
@@ -52,6 +52,11 @@ namespace DMT.Character
             {
                 Die();
             }
+        }
+
+        public void RemoveFromInventory(IStorable storable)
+        {
+
         }
     }
 }

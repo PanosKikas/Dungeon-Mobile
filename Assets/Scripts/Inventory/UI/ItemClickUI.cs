@@ -4,13 +4,10 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
 using UnityEngine.UI;
-
-[System.Serializable]
-public class IndexEvent : UnityEvent<int> { }
+using System;
 
 public class ItemClickUI : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 { 
-
     bool pointerDown = false;
 
     float pointerDownTimer = 0f;
@@ -18,18 +15,12 @@ public class ItemClickUI : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
     [SerializeField]
     float requiredHoldTime;
 
-    public IndexEvent OnLongClick;
-    public IndexEvent OnTap;
-    
+    public event Action OnLongClick;
+    public event Action OnTap;
 
     [SerializeField]
     private Image fillImage;
 
-    void Awake()
-    {
-        OnLongClick = new IndexEvent();
-        OnTap = new IndexEvent();
-    }
     public void OnPointerDown(PointerEventData eventData)
     {
         pointerDown = true;
@@ -40,9 +31,9 @@ public class ItemClickUI : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         if (pointerDownTimer < requiredHoldTime)
         {
             int index = transform.GetSiblingIndex();
-            OnTap?.Invoke(index);
+            OnTap?.Invoke();
         }
-        Reset();
+        ResetClick();
     }
 
     private void Update()
@@ -52,16 +43,15 @@ public class ItemClickUI : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
             pointerDownTimer += Time.deltaTime;
             if (pointerDownTimer >= requiredHoldTime)
             {
-                OnLongClick?.Invoke(transform.GetSiblingIndex());
-                //this.enabled = false;
-                Reset();
+                OnLongClick?.Invoke();
+                ResetClick();
             }
             
             fillImage.fillAmount = pointerDownTimer / requiredHoldTime;
         }
     }
 
-    void Reset()
+    private void ResetClick()
     {
         pointerDown = false;
         pointerDownTimer = 0f;

@@ -18,7 +18,7 @@ public class Potion : Item, IUsable
         this.potionData = potionData;
     }
 
-    public void UseOn(Character character)
+    public void TryUseOn(Character character)
     {
         switch (potionData.type)
         {

@@ -28,7 +28,7 @@ public class Equipment : Item, IUsable
         throw new System.NotImplementedException();
     }
 
-    public void UseOn(Character character)
+    public void TryUseOn(Character character)
     {
         
     }

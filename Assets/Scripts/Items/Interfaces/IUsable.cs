@@ -5,5 +5,5 @@ using UnityEngine;
 
 public interface IUsable
 {
-    void UseOn(Character character);
+    bool TryUseOn(Character character);
 }

@@ -13,8 +13,6 @@ public class InventoryUI : MonoBehaviour
     [SerializeField]
     Text itemDescritpion;
 
-    int? lastDisplayedIndex = null;
-
     [SerializeField]
     private Character character;
 
@@ -36,23 +34,50 @@ public class InventoryUI : MonoBehaviour
         for (int i = 0; i < itemSlotsUI.Length; ++i)
         {
             itemSlotsUI[i].SubscribeToSlot(inventorySlots[i]);
+            itemSlotsUI[i].OnClicked += OnItemSlotClicked;
+            itemSlotsUI[i].OnHeld += OnItemSlotHeld;
         }
     }
 
-/*    public void OnEnable()
+    private void OnItemSlotClicked(ItemSlot itemSlot)
     {
-        if (itemSlots == null || itemSlots.Length == 0)
+        if (itemSlot == null)
         {
-            InitializeItemSlots();
+            throw new System.InvalidOperationException("Item slot clicked is null");
         }
-        lastDisplayedIndex = null;
-        HideDescriptionText();
-         
-        for (int i = 0; i < Inventory.InventoryCapacity; ++i)
+        DisplayItemDescription(itemSlot.Item);
+    }
+
+    private void OnItemSlotHeld(ItemSlot itemSlot)
+    {
+        if (itemSlot == null)
         {
-            UpdateGUIOn(i);
-        }   
-    }*/
+            throw new System.InvalidOperationException("Item slot held is null");
+        }
+
+        if (itemSlot.Item is IUsable usable)
+        {
+            if (usable.TryUseOn(character))
+            {
+                character.RemoveFromInventory(itemSlot.Item);
+            }
+        }
+    }
+
+    /*    public void OnEnable()
+        {
+            if (itemSlots == null || itemSlots.Length == 0)
+            {
+                InitializeItemSlots();
+            }
+            lastDisplayedIndex = null;
+            HideDescriptionText();
+
+            for (int i = 0; i < Inventory.InventoryCapacity; ++i)
+            {
+                UpdateGUIOn(i);
+            }   
+        }*/
 
     private void DisplayItemDescription(IStorable item)
     {

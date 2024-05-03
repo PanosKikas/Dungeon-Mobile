@@ -4,8 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using System;
+using UnityEngine.EventSystems;
 
-public class ItemSlotUI : MonoBehaviour
+public class ItemSlotUI : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     [SerializeField]
     private Image itemIcon;
@@ -16,7 +17,20 @@ public class ItemSlotUI : MonoBehaviour
 
     ItemSlot itemSlot;
     [SerializeField] private CanvasGroup itemCanvasGroup;
-    public event Action<ItemSlot> ItemSlotClicked;
+
+    bool pointerDown = false;
+
+    float pointerDownTimer = 0f;
+
+    [SerializeField]
+    float requiredHoldTime;
+
+    [SerializeField]
+    private Image fillImage;
+
+    public event Action<ItemSlot> OnClicked;
+
+    public event Action<ItemSlot> OnHeld;
 
     private void Awake()
     {
@@ -39,7 +53,6 @@ public class ItemSlotUI : MonoBehaviour
     }
     private void SlotItemChanged(ItemSlot slot)
     {
-        itemClick.OnTap.AddListener((_) => ItemSlotClicked?.Invoke(slot));
         SetToItem(slot.Item);
         UpdateStackText(slot.Stack);
     }
@@ -87,5 +100,42 @@ public class ItemSlotUI : MonoBehaviour
     public void UpdateStackText(int stackCount)
     {
         stackText.text = string.Format("x{0}", stackCount);
+    }
+
+    public void OnPointerDown(PointerEventData eventData)
+    {
+        pointerDown = true;
+    }
+
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        if (pointerDownTimer < requiredHoldTime)
+        {
+            int index = transform.GetSiblingIndex();
+            OnClicked?.Invoke(itemSlot);
+        }
+        ResetClick();
+    }
+
+    private void Update()
+    {
+        if (pointerDown)
+        {
+            pointerDownTimer += Time.deltaTime;
+            if (pointerDownTimer >= requiredHoldTime)
+            {
+                OnHeld?.Invoke(itemSlot);
+                ResetClick();
+            }
+
+            fillImage.fillAmount = pointerDownTimer / requiredHoldTime;
+        }
+    }
+
+    private void ResetClick()
+    {
+        pointerDown = false;
+        pointerDownTimer = 0f;
+        fillImage.fillAmount = 0;
     }
 }
