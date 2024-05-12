@@ -2,16 +2,17 @@
 using DMT.Character.Stats;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using UnityEngine;
 
 public class Trap : MonoBehaviour
 {
     [SerializeField]
-    int damage = 10;
+    private int damage = 10;
+    
+    private Animator animator;
 
-    Animator animator;
-
-    CharacterStats playerStats;
+    private IDamagable player;
 
     private void Awake()
     {
@@ -22,18 +23,31 @@ public class Trap : MonoBehaviour
     {
         if (collision.CompareTag("Player") && collision.gameObject.TryGetComponent<IDamagable>(out var damagable))
         {
-            damagable.TakeDamage(damage);
-            animator.SetBool("Activated", true);
+            player = damagable;
+            Activate();
         }
-       
+    }
+
+    private void Activate()
+    {
+        animator.SetBool("Activated", true);
+    }
+
+    public void DamagePlayer()
+    {
+        if (player == null)
+        {
+            return;
+        }
+        player.TakeDamage(damage);
     }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Player"))
         {
+            player = null;
             animator.SetBool("Activated", false);
         }
-        
     }
 }

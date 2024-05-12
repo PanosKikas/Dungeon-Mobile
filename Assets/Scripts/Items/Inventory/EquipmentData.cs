@@ -1,29 +1,38 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DMT.Character.Stats;
 using UnityEngine;
+
+[CreateAssetMenu(fileName = "Equipment", menuName = "Item/Equipment")]
+public class EquipmentData : ItemData
+{
+    public EquipmentType EquipmentType;
+
+    #region StatValuePair
+    [System.Serializable]
+    public class StatValuePair
+    {
+        public StatType StatType;
+        public float Value;
+
+        public StatValuePair(StatType stat, float value)
+        {
+            this.StatType = stat;
+            this.Value = value;
+        }
+    }
+    #endregion
+
+    [HideInInspector]
+    public List<StatValuePair> Modifiers;
+}
 
 public enum EquipmentType
 {
-    Head,
-    Chest,
-    Legs,
-    Weapon,
-    Potion
-}
-
-public class EquipmentData : ScriptableObject
-{
-    public string Name;
-    public string Description;
-    public EquipmentType EquipmentType;
-    public Sprite Icon;
-
-    public void Equip()
-    {
-        CharacterEquipment.Instance.Equip(this);
-    }
-
-    public virtual void Unequip() { }
- 
+    Head = 0,
+    Chest = 1,
+    Legs = 2,
+    Weapon = 3,
+    Ring = 4
 }

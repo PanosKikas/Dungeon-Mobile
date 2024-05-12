@@ -6,33 +6,14 @@ using UnityEngine;
 
 namespace DMT.Character.Stats
 {
-    public enum Stat
-    {
-        MaxHealth,
-        MaxEndurance,
-        EnduranceRegen,
-        MaxMana,
-        AttackDamage,
-        AttackSpeed,
-        CriticalDamage,
-        EvasionChance,
-        CriticalChance,
-        ItemDrop,
-        MagicDamage,
-        PhysicalArmor,
-        MagicResist
-
-    }
-
     [System.Serializable]
     public class CharacterStat
     {
         private bool isDirty = true;
-        public float BaseValue;
+        private float baseValue;
         private float _value;
-        private float lastBaseValue = float.MinValue;
 
-        public Stat Type;
+        public StatType StatType { get; private set; }
 
         StatModifier levelModifier;
         Attribute dependantAttribute;
@@ -41,9 +22,8 @@ namespace DMT.Character.Stats
         {
             get
             {
-                if (isDirty || (BaseValue != lastBaseValue))
+                if (isDirty)
                 {
-                    lastBaseValue = BaseValue;
                     _value = CalculateFinalValue();
                     isDirty = false;
                 }
@@ -54,17 +34,11 @@ namespace DMT.Character.Stats
 
         private readonly List<StatModifier> statModifiers;
 
-        public readonly ReadOnlyCollection<StatModifier> StatModifiers;
-
-        public CharacterStat() : this(0f)
-        {
-        }
-
         public CharacterStat(float value)
         {
+            baseValue = value;
             isDirty = true;
             statModifiers = new List<StatModifier>();
-            StatModifiers = statModifiers.AsReadOnly();
         }
 
         private void AddModifier()
@@ -78,10 +52,8 @@ namespace DMT.Character.Stats
             statModifiers.Add(mod);
         }
 
-
         public bool RemoveModifier(StatModifier mod)
         {
-
             if (statModifiers.Remove(mod))
             {
                 isDirty = true;
@@ -109,7 +81,7 @@ namespace DMT.Character.Stats
 
         private float CalculateFinalValue()
         {
-            var finalValue = BaseValue;
+            float finalValue = baseValue;
             for (int i = 0; i < statModifiers.Count; ++i)
             {
                 StatModifier modifier = statModifiers[i];

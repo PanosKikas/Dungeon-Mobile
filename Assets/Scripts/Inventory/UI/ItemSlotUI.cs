@@ -5,96 +5,75 @@ using UnityEngine.UI;
 using DG.Tweening;
 using System;
 using UnityEngine.EventSystems;
+using static UnityEditor.Progress;
 
 public class ItemSlotUI : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 {
     [SerializeField]
     private Image itemIcon;
     Text stackText;
-    ItemClickUI itemClick;
-    InventoryUI inventoryGUI;
+
     RectTransform rect;
 
-    ItemSlot itemSlot;
+    private ItemSlot itemSlot;
+    public IStorable Item => itemSlot.Item;
     [SerializeField] private CanvasGroup itemCanvasGroup;
 
-    bool pointerDown = false;
+    bool isPointerDown = false;
 
     float pointerDownTimer = 0f;
 
     [SerializeField]
-    float requiredHoldTime;
+    float requiredHoldTime = 0.7f;
 
     [SerializeField]
     private Image fillImage;
 
-    public event Action<ItemSlot> OnClicked;
+    public event Action<ItemSlotUI> OnClicked;
 
-    public event Action<ItemSlot> OnHeld;
+    public event Action<ItemSlotUI> OnHeld;
 
     private void Awake()
     {
         stackText = GetComponentInChildren<Text>();
-        itemClick = GetComponent<ItemClickUI>();
-        inventoryGUI = GetComponentInParent<InventoryUI>();
         rect = GetComponent<RectTransform>();
     }
 
-    private void Start()
-    {
-        InitializeSlot();   
-    }
-
-    public void SubscribeToSlot(ItemSlot slot)
-    {
-        slot.OnItemChanged += SlotItemChanged;
-        slot.OnItemChanged += SlotItemRemoved;
-        slot.OnStackChanged += SlotStackCountChanged;
-    }
-    private void SlotItemChanged(ItemSlot slot)
-    {
-        SetToItem(slot.Item);
-        UpdateStackText(slot.Stack);
-    }
-
-    private void SlotItemRemoved(ItemSlot slot)
-    {
-        //itemClick.OnTap.RemoveListener(inventoryGUI.DisplayItemOnDescription);
-    }
-
-    private void SlotStackCountChanged(ItemSlot slot)
-    {
-        UpdateStackText(slot.Stack);
-    }
-
-    void InitializeSlot()
-    {
-        
-       // itemClick.OnLongClick.AddListener(Inventory.Instance.TryUseOnIndex);
-    }
-        
-
-    public void CannotBeUsedAnimate()
+    public void Shake()
     {
         rect.DOShakePosition(.5f, 2, 40);
     }
 
-    public void SetToItem(IStorable item)
+    public void InitializeTo(ItemSlot slot)
+    {
+        var item = slot.Item;
+        itemSlot = slot;
+        itemIcon.sprite = item.Icon;
+        UpdateUI();
+        EnableInteraction();
+    }
+
+    public void UpdateUI()
+    {
+        UpdateStackText(itemSlot.Stack);
+    }
+
+    public void Empty()
+    {
+        itemIcon.sprite = null;
+        DisableInteraction();
+    }
+
+    public void EnableInteraction()
     {
         itemCanvasGroup.alpha = 1f;
-        itemIcon.sprite = item.Icon;
+        itemCanvasGroup.interactable = true;
     }
 
-    void EnableItemSlotComponents()
+    public void DisableInteraction()
     {
-        itemClick.enabled = true;
-        itemIcon.enabled = true;
-        stackText.enabled = true;
-    }
-
-    public void RemoveItemFromSlot()
-    {
-       // DisableItemSlotComponents();
+        itemCanvasGroup.alpha = 0f;
+        itemCanvasGroup.interactable = false;
     }
 
     public void UpdateStackText(int stackCount)
@@ -104,28 +83,41 @@ public class ItemSlotUI : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     public void OnPointerDown(PointerEventData eventData)
     {
-        pointerDown = true;
+        isPointerDown = true;
     }
 
     public void OnPointerUp(PointerEventData eventData)
     {
+        if (!isPointerDown)
+        {
+            return;
+        }
+
         if (pointerDownTimer < requiredHoldTime)
         {
             int index = transform.GetSiblingIndex();
-            OnClicked?.Invoke(itemSlot);
+            if (Item != null)
+            {
+                OnClicked?.Invoke(this);
+            }
         }
         ResetClick();
     }
 
     private void Update()
     {
-        if (pointerDown)
+        if (itemSlot == null)
+        {
+            return;
+        }
+
+        if (isPointerDown)
         {
             pointerDownTimer += Time.deltaTime;
             if (pointerDownTimer >= requiredHoldTime)
             {
-                OnHeld?.Invoke(itemSlot);
                 ResetClick();
+                OnHeld?.Invoke(this);
             }
 
             fillImage.fillAmount = pointerDownTimer / requiredHoldTime;
@@ -134,7 +126,7 @@ public class ItemSlotUI : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
 
     private void ResetClick()
     {
-        pointerDown = false;
+        isPointerDown = false;
         pointerDownTimer = 0f;
         fillImage.fillAmount = 0;
     }

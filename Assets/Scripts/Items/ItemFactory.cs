@@ -4,15 +4,15 @@ using UnityEngine;
 
 public class ItemFactory
 {
-    public ICollectable Create(ScriptableObject scriptableObject)
+    public ICollectable Create(ItemData scriptableObject)
     {
         if (scriptableObject is EquipmentData)
         {
             return new Equipment((EquipmentData)scriptableObject);
         }
-        else if (scriptableObject is PotionSO)
+        else if (scriptableObject is PotionData)
         {
-            return new Potion((PotionSO)scriptableObject);
+            return new Potion((PotionData)scriptableObject);
         }
         else
         {

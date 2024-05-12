@@ -1,9 +1,10 @@
 using DMT.Character;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Equipment : Item, IUsable
+public class Equipment : Item, IUsable, IEquipable
 {
     private EquipmentData data;
 
@@ -13,23 +14,30 @@ public class Equipment : Item, IUsable
 
     public override Sprite Icon => data.Icon;
 
+    public EquipmentType EquipmentType => data.EquipmentType;
+
     public Equipment(EquipmentData equipableSO)
     {
         this.data = equipableSO;
     }
 
-    public void Equip(Character character)
+    public void EquipOn(Character character)
     {
-        throw new System.NotImplementedException();
+        foreach (var modifier in data.Modifiers)
+        {
+            var stat = character.stats.GetStatOfType(modifier.StatType);
+            stat.AddModifier(new StatModifier(modifier.Value, this));
+        }
     }
 
-    public void Unequip(Character character)
-    {
-        throw new System.NotImplementedException();
-    }
-
-    public void TryUseOn(Character character)
+    public void UnequipFrom(Character character)
     {
         
+    }
+
+    public bool TryUseOn(Character character)
+    {
+        character.Equip(this);
+        return true;
     }
 }

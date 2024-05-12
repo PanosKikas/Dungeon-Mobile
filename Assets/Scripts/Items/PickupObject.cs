@@ -30,9 +30,9 @@ public class PickupObject : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision.collider.CompareTag("Player") && collision.gameObject.TryGetComponent<Character>(out var character))
+        if (collision.collider.CompareTag("Player") && collision.gameObject.TryGetComponent<Player>(out var player))
         {
-            character.Pickup(item);
+            player.Pickup(item);
             Destroy(gameObject);
         }
     }

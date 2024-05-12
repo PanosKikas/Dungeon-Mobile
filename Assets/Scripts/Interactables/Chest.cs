@@ -12,7 +12,7 @@ public class Chest : Interactable
     GameObject closedChest;
 
     [Header("Loot"), SerializeField]
-    public ScriptableObject[] loot;
+    public ItemData[] loot;
 
     [SerializeField]
     public PickupObject pickupPrefab;

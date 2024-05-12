@@ -8,16 +8,8 @@ using UnityEngine.Events;
 
 public class ItemSlot
 {
-    public IStorable Item;
+    public IStorable Item { get; private set; }
     public int Stack = 0;
-    public event Action<ItemSlot> OnItemChanged;
-    public event Action<ItemSlot> OnStackChanged;
-    public event Action<ItemSlot> OnItemRemoved;
-
-    public ItemSlot()
-    {
-
-    }
 
     public void Store(IStorable itemToStore)
     {
@@ -25,133 +17,93 @@ public class ItemSlot
         {
             Item = itemToStore;
             Stack = 1;
-            OnItemChanged?.Invoke(this);
             return;
         }
 
-        if (Item != null && itemToStore != Item)
+        if (Item != null && !itemToStore.Equals(Item))
         {
             throw new InvalidOperationException("Cannot store different items to the same inventory slot");
         }
+
         Item = itemToStore;
         ++Stack;
-        OnStackChanged?.Invoke(this);
+    }
+    
+    public void RemoveItem()
+    {
+        --Stack;
+        if (Stack == 0)
+        {
+            Clear();
+        }
+    }
+
+    public bool IsEmpty()
+    {
+        return Item == null;
     }
 
     public void Clear()
     {
         Stack = 0;
         Item = null;
-        OnItemRemoved?.Invoke(this);
     }
 }
 
 public class Inventory : IInventory
-{   
-    CharacterStats stats;
-    
-    public static int InventoryCapacity { get; private set; }
-    public int NextFreeSlot { get; private set; }
-
-    public IEnumerable<ItemSlot> Slots => inventorySlots;
-
-    public ItemSlot[] inventorySlots;
-
+{
     private const int InitialCapacity = 20;
-    
+    public IEnumerable<ItemSlot> Slots => itemSlots;
+
+    private List<ItemSlot> itemSlots = new();
+    private int currentCapacity;
+
+    public event Action<ItemSlot> OnItemAdded;
+    public event Action<ItemSlot> OnItemRemoved;
+
     public Inventory()
     {
-        inventorySlots = new ItemSlot[InitialCapacity];
-        for (int i = 0; i < inventorySlots.Length; ++i)
-        {
-            inventorySlots[i] = new ItemSlot();
-        }
-        InventoryCapacity = 20;
-        NextFreeSlot = 0;
+        currentCapacity = InitialCapacity;
     }
 
-    ItemSlot FindItemSlot(IStorable item)
+    bool IsInventoryFull()
     {
-        return inventorySlots.FirstOrDefault(x => x.Item != null && x.Item.Equals(item));
-    }
-   
-    public void TryUseOnIndex(int index)
-    {        
-       // InventoryPickupSO item = Instance.inventorySlots[index].Item;
-        
-       /* if (item.Use())
-        {
-           
-            RemoveFromInventoryOn(index);    
-        }
-        else
-        {
-            inventoryGUI.NotUsedItemEffect(index);
-        }*/
+        return itemSlots.Count() == currentCapacity;
     }
 
-    public void RemoveFromInventoryOn(int index)
+    public bool TryStore(IStorable itemToStore)
     {
-        inventorySlots[index].Stack--;
-         
-        if (inventorySlots[index].Stack == 0)
-        {
-            DeleteItemFrominventory(index);
-        }
-        else
-        {
-            //inventoryGUI.UpdateGUIOn(index);
-        }
-          
-    }
-
-    void DeleteItemFrominventory(int index)
-    {
-        inventorySlots[index] = null;
-        ShiftInventoryArray(index);
-        NextFreeSlot--;
-        inventorySlots[NextFreeSlot] = null;
-    }
-
-    void ShiftInventoryArray(int index)
-    {
-        Array.Copy(inventorySlots, index + 1, inventorySlots, index, NextFreeSlot - index - 1);       
-    }
-
-    public bool HasItemOnIndex(int index)
-    {
-        return inventorySlots[index] != null && inventorySlots[index].Stack > 0;
-    }
-
-    bool InventoryFull()
-    {
-        return NextFreeSlot  == InventoryCapacity;
-    }
-
-    private ItemSlot GetNextFreeSlot()
-    {
-        return inventorySlots[NextFreeSlot++];
-    }
-
-    public bool TryStore(IStorable item)
-    {
-        ItemSlot slot = FindItemSlot(item);
+        ItemSlot slot = itemSlots.FirstOrDefault(s => s.Item.Equals(itemToStore));
 
         if (slot == null)
         {
-            if (InventoryFull())
+            if (IsInventoryFull())
             {
                 return false;
             }
-            slot = GetNextFreeSlot();
+            slot = new ItemSlot();
+            itemSlots.Add(slot);
         }
 
-        slot.Store(item);
+        slot.Store(itemToStore);
+        OnItemAdded?.Invoke(slot);
         return true;
     }
 
-    public IStorable GetItemOnSlot(int index)
+    public void RemoveItem(IStorable storable)
     {
-        return inventorySlots[index].Item;
+        var slot = itemSlots.FirstOrDefault(s => s.Item.Equals(storable));
+        
+        if (slot == null)
+        {
+            Debug.LogError("No item " + storable.Name + " found in inventory of character to remove.");
+        }
+
+        slot.RemoveItem();
+        if (slot.IsEmpty())
+        {
+            itemSlots.Remove(slot);
+        }
+        OnItemRemoved?.Invoke(slot);
     }
 }

@@ -9,8 +9,8 @@ public class TabButton : MonoBehaviour, IPointerEnterHandler, IPointerClickHandl
 {
     TabGroup tabGroup;
 
+    [HideInInspector]
     public Image background;
-
 
     private void Awake()
     {

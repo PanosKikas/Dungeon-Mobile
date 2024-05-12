@@ -8,21 +8,26 @@ using DMT.Character.Stats;
 public class StatsDisplayerUI : MonoBehaviour
 {
     TextMeshProUGUI statsText;
-    CharacterStats characterStats;
+    private CharacterStats characterStats;
+
 
     private void Awake()
     {
         statsText = GetComponent<TextMeshProUGUI>();
     }
 
-    private void Start()
+    public void SetTo(CharacterStats stats)
     {
-        //characterStats = StatsDatabase.Instance.GetMainCharacterStats();
+        this.characterStats = stats;
     }
 
     private void Update()
     {
-       
+        if (characterStats == null)
+        {
+            return;
+        }
+
         StringBuilder builder = new StringBuilder();
         builder.Append("Attk: ").Append(characterStats.AttackDamage).Append("\n");
         builder.Append("Crit Dmg: ").Append(characterStats.CriticalDamageStat.Value).Append("\n");

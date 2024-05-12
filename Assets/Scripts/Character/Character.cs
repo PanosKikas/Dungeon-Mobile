@@ -6,47 +6,43 @@ using UnityEngine.Serialization;
 
 namespace DMT.Character
 {
-    public class Character : MonoBehaviour, IDamagable
+    public class Character : IDamagable
     {
+        public string Name { get; private set; }
         public CharacterStats stats { get; private set; }
 
-        [SerializeField] private CharacterStatsSO initialStats;
-        public IInventory inventory { get; private set; }
-        
-        private void Awake()
+        public CharacterEquipment Equipment { get; private set; }
+
+        public int Level { get; private set; } = 1;
+
+        public Character(InitialCharacterData initialStats, IInventory inventory = null)
         {
+            Name = initialStats.Name;
+            Level = initialStats.Level;
             stats = new(initialStats);
-            inventory = new Inventory();
+            Equipment = new CharacterEquipment(this, inventory);
         }
 
         public bool IsAlive => stats.CurrentHealth > 0;
         
-        public void Pickup(ICollectable item)
-        {
-            if (item is IStorable storable)
-            {
-                inventory.TryStore(storable);
-            }
-            else if (item is IUsable usable)
-            {
-                usable.TryUseOn(this);
-            }
-        }
-
         private void Die()
         {
-            Debug.Log($"Character {gameObject.name} has died ");
-            //this.enabled = false;
-            // gameObject.SetActive(false);
+            Debug.Log($"Character has died ");
+        }
+
+        public bool IsFullHealth()
+        {
+            return stats.CurrentHealth == stats.MaxHealth;
+        }
+
+        public void Heal(int amount)
+        {
+            stats.CurrentHealth = Mathf.Min((int)stats.CurrentHealth + amount, stats.MaxHealth);
         }
 
         public void TakeDamage(int damage)
         {
             stats.CurrentHealth = Mathf.Max((int)(stats.CurrentHealth - damage), 0);
-
-            //Vector3 impactPosition = transform.position + ImpactEffectOffset + Random.onUnitSphere;
-            // GameObject impact = Instantiate(impactEffect, impactPosition, Quaternion.identity);
-            //  Destroy(impact, 2f);
 
             if (!IsAlive)
             {
@@ -54,9 +50,9 @@ namespace DMT.Character
             }
         }
 
-        public void RemoveFromInventory(IStorable storable)
+        public void Equip(IEquipable equipable)
         {
-
+            Equipment.Equip(equipable);
         }
     }
 }

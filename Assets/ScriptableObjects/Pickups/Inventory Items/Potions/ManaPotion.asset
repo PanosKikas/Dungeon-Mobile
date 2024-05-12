@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: ManaPotion
   m_EditorClassIdentifier: 
   Name: Mana Potion I
-  type: 1
   Description: Restores Mana
+  Icon: {fileID: 6037823018115353455, guid: efa2e029d1a721d469b4d0b897e7bdc9, type: 3}
+  type: 1
   Amount: 10
-  icon: {fileID: -4541461731274024486, guid: efa2e029d1a721d469b4d0b897e7bdc9, type: 3}

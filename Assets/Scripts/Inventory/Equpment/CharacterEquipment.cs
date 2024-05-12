@@ -1,72 +1,54 @@
-﻿using System;
+﻿using DMT.Character;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterEquipment : MonoBehaviour
+public class EquipmentSlot
 {
-    public EquipmentData[] MainCharacterEquipment;
+    public event Action<IEquipable> OnItemChanged;
+    public IEquipable CurrentEquipped { get; private set; }
 
-    private readonly int PotionIndex = (int)EquipmentType.Potion;
-
-    private const int armorSlots = 6;
-
-    private void Start()
+    public void Equip(IEquipable equipable)
     {
-        MainCharacterEquipment = new EquipmentData[armorSlots];
+        CurrentEquipped = equipable;
+        OnItemChanged?.Invoke(equipable);
     }
-
-    #region Singletton
-    public static CharacterEquipment Instance { get; private set; }
-
-
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-
-    }
-    #endregion
-
-    public void Equip(EquipmentData item)
-    {
-        int equippedIndex = (int)item.EquipmentType;
-        
-
-        if (IsPotion(item.EquipmentType))
-        {
-            equippedIndex = FindPotionEquipmentIndex();
-        }
-
-        EquipmentData oldItem = MainCharacterEquipment[equippedIndex];
-        if (oldItem != null)
-        {
-            oldItem.Unequip();
-          //  Inventory.Instance.TryStoreInventory(oldItem);
-
-        }
-
-        MainCharacterEquipment[equippedIndex] = item;
-        
-    }
-
-    private int FindPotionEquipmentIndex()
-    {
-        return (MainCharacterEquipment[PotionIndex] == null) ?  PotionIndex : PotionIndex + 1;
-    }
-
-    bool IsPotion(EquipmentType type)
-    {
-        return type == EquipmentType.Potion;
-    }
-
-
     
+    public bool IsEmpty()
+    {
+        return CurrentEquipped == null;
+    }
+}
+
+public class CharacterEquipment
+{
+    public EquipmentSlot[] EquipmentSlots { get; private set; } = new EquipmentSlot[totalSlots];
+    private IInventory inventory;
+    private const int totalSlots = 5;
+    private Character character;
+
+    public CharacterEquipment(Character character, IInventory inventory = null)
+    {
+        this.character = character;
+        this.inventory = inventory;
+        for (int i = 0; i < EquipmentSlots.Length; ++i)
+        {
+            EquipmentSlots[i] = new EquipmentSlot();
+        }
+    }
+
+    public void Equip(IEquipable equipment)
+    {
+        int equippedIndex = (int)equipment.EquipmentType;
+        var slot = EquipmentSlots[equippedIndex];
+        if (!slot.IsEmpty())
+        {
+            var oldItem = slot.CurrentEquipped;
+            oldItem.UnequipFrom(character);
+            inventory?.TryStore(oldItem as IStorable);
+        }
+
+        slot.Equip(equipment);
+    }
 }

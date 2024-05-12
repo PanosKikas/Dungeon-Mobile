@@ -8,95 +8,140 @@ using System.Linq;
 
 public class InventoryUI : MonoBehaviour
 {
-    private ItemSlotUI[] itemSlotsUI;
+    private Dictionary<ItemSlot, ItemSlotUI> usedSlots = new();
+    private List<ItemSlotUI> freeSlots = new();
+
+    [SerializeField]
+    private Transform slotsParent;
 
     [SerializeField]
     Text itemDescritpion;
 
-    [SerializeField]
-    private Character character;
+    private IInventory inventory;
+    private Character selectedCharacter => characters.First();
+    private ItemSlotUI currentSelectedSlot;
+    private IEnumerable<Character> characters;
 
     private void Awake()
     {
-        itemSlotsUI = GetComponentsInChildren<ItemSlotUI>();
+        freeSlots = slotsParent.GetComponentsInChildren<ItemSlotUI>().ToList();
     }
 
-    private void Start()
+    public void Initialize(IInventory inventory, IEnumerable<Character> characters)
     {
-        var inventorySlots = character.inventory.Slots.ToArray();
-
-        if (inventorySlots.Length != itemSlotsUI.Length)
+        if (inventory == null)
         {
-            Debug.LogError("Inventory slots has different length than the item slots UI");
+            Debug.LogError("Character does not contain an inventory");
             return;
         }
+        this.inventory = inventory;
+        this.characters = characters;
+        SubscribeTo(inventory);
+    }
 
-        for (int i = 0; i < itemSlotsUI.Length; ++i)
+    private void SubscribeTo(IInventory inventory)
+    {
+        inventory.OnItemAdded += OnItemAdded;
+        inventory.OnItemRemoved += OnItemRemoved;
+    }
+
+    private void OnItemAdded(ItemSlot slot)
+    {
+        if (usedSlots.TryGetValue(slot, out var slotUI))
         {
-            itemSlotsUI[i].SubscribeToSlot(inventorySlots[i]);
-            itemSlotsUI[i].OnClicked += OnItemSlotClicked;
-            itemSlotsUI[i].OnHeld += OnItemSlotHeld;
+            slotUI.UpdateUI();
+        }
+        else
+        {
+            var slotUIToUse = freeSlots.First();
+            freeSlots.Remove(slotUIToUse);
+            slotUIToUse.InitializeTo(slot);
+            usedSlots.Add(slot, slotUIToUse);
+            SubscribeToItemSlotEvents(slotUIToUse);
+            slotUIToUse.transform.SetSiblingIndex(usedSlots.Count() - 1);
         }
     }
 
-    private void OnItemSlotClicked(ItemSlot itemSlot)
+    private void OnItemRemoved(ItemSlot slot)
     {
-        if (itemSlot == null)
+        var slotUI = usedSlots[slot];
+        if (slot.IsEmpty())
+        {
+            if (currentSelectedSlot == slotUI)
+            {
+                EmptyDescriptionText();
+            }
+            UnsubscribeFromItemSlotEvents(slotUI);
+            slotUI.Empty();
+            freeSlots.Add(slotUI);
+            usedSlots.Remove(slot);
+            slotUI.transform.SetSiblingIndex(usedSlots.Count() + 1);
+        }
+        else
+        {
+            slotUI.UpdateUI();
+        }
+    }
+
+    private void SubscribeToItemSlotEvents(ItemSlotUI itemSlotUi)
+    {
+        itemSlotUi.OnClicked += OnItemSlotClicked;
+        itemSlotUi.OnHeld += OnItemSlotHeld;
+    }
+
+    private void UnsubscribeFromItemSlotEvents(ItemSlotUI itemSlotUI)
+    {
+        itemSlotUI.OnClicked -= OnItemSlotClicked;
+        itemSlotUI.OnHeld -= OnItemSlotHeld;
+    }
+
+    private void OnItemSlotClicked(ItemSlotUI itemSlotUI)
+    {
+        if (itemSlotUI.Item == null)
         {
             throw new System.InvalidOperationException("Item slot clicked is null");
         }
-        DisplayItemDescription(itemSlot.Item);
+
+        currentSelectedSlot = itemSlotUI;
+        ShowItemDescription(itemSlotUI.Item);
     }
 
-    private void OnItemSlotHeld(ItemSlot itemSlot)
+    private void OnItemSlotHeld(ItemSlotUI itemSlotUI)
     {
-        if (itemSlot == null)
+        if (itemSlotUI.Item == null)
         {
             throw new System.InvalidOperationException("Item slot held is null");
         }
 
-        if (itemSlot.Item is IUsable usable)
+        if (itemSlotUI.Item is IUsable usable && usable.TryUseOn(selectedCharacter))
         {
-            if (usable.TryUseOn(character))
-            {
-                character.RemoveFromInventory(itemSlot.Item);
-            }
+            inventory.RemoveItem(itemSlotUI.Item);
+        }
+        else
+        {
+            itemSlotUI.Shake();
         }
     }
 
-    /*    public void OnEnable()
-        {
-            if (itemSlots == null || itemSlots.Length == 0)
-            {
-                InitializeItemSlots();
-            }
-            lastDisplayedIndex = null;
-            HideDescriptionText();
-
-            for (int i = 0; i < Inventory.InventoryCapacity; ++i)
-            {
-                UpdateGUIOn(i);
-            }   
-        }*/
-
-    private void DisplayItemDescription(IStorable item)
+    private void ShowItemDescription(IStorable item)
     {
+        if (item == null)
+        {
+            EmptyDescriptionText();
+            return;
+        }
         itemDescritpion.text = string.Format("{0}: {1}", item.Name, item.Description);
     }
 
-    public void NotUsedItemEffect(int index)
+    private void EmptyDescriptionText()
     {
-        itemSlotsUI[index].CannotBeUsedAnimate();
-    }
-   
-    bool DescriptionShowingRemovedItem(int index)
-    {
-        return lastDisplayedIndex != null && lastDisplayedIndex == index;
+        currentSelectedSlot = null;
+        itemDescritpion.text = string.Empty;
     }
 
-    void HideDescriptionText()
+    private void OnDestroy()
     {
-        itemDescritpion.text = "";
+        inventory.OnItemAdded -= OnItemAdded;
+        inventory.OnItemRemoved -= OnItemRemoved;
     }
-    
 }

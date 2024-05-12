@@ -17,7 +17,7 @@ public class TabGroup : MonoBehaviour
     TabButton selectedTab;
 
     [SerializeField]
-    TabButton initialSelectedButton;
+    TabButton initialSelectedTab;
 
     private void Awake()
     {
@@ -27,7 +27,7 @@ public class TabGroup : MonoBehaviour
     private void Start()
     {
         ResetPages();
-        OnTabSelected(initialSelectedButton);
+        OnTabSelected(initialSelectedTab);
     }
 
     public void OnTabEnter(TabButton tabButton)
@@ -42,7 +42,6 @@ public class TabGroup : MonoBehaviour
     public void OnTabExit(TabButton tabButton)
     {
         ResetTabs();
-        
     }
 
     public void OnTabSelected(TabButton tabButton)
@@ -52,13 +51,13 @@ public class TabGroup : MonoBehaviour
         if (selectedTab != null)
         {
             int oldSelectedIndex = selectedTab.transform.GetSiblingIndex();
-            pageAreas[oldSelectedIndex].SetActive(false);
+            pageAreas[oldSelectedIndex].GetComponent<CanvasGroup>().SetActive(false);
         }
 
         selectedTab = tabButton;
         tabButton.background.sprite = tabActive;
         int index = tabButton.transform.GetSiblingIndex();
-        pageAreas[index].SetActive(true);
+        pageAreas[index].GetComponent<CanvasGroup>().SetActive(true);
         
     }
 
@@ -66,7 +65,7 @@ public class TabGroup : MonoBehaviour
     {
         foreach (var page in pageAreas)
         {
-            page.SetActive(false);
+            page.GetComponent<CanvasGroup>().SetActive(false);
         }
     }
 

@@ -5,6 +5,23 @@ using UnityEngine;
 
 namespace DMT.Character.Stats
 {
+    public enum StatType
+    {
+        MaxHealth,
+        MaxEndurance,
+        EnduranceRegen,
+        MaxMana,
+        AttackDamage,
+        AttackSpeed,
+        CriticalDamage,
+        EvasionChance,
+        CriticalChance,
+        ItemDropRate,
+        MagicDamage,
+        PhysicalDefense,
+        MagicResistance
+    }
+
     public class CharacterStats
     {
         public int CurrentHealth { get; set; }
@@ -30,7 +47,7 @@ namespace DMT.Character.Stats
 
         public CharacterStat MobilityStat;
 
-        public CharacterStats(CharacterStatsSO initialData)
+        public CharacterStats(InitialCharacterData initialData)
         {
             _maxHealthStat = new(initialData.baseMaxHealthStat);
             _attackDamageStat = new(initialData.baseAttackDamageStat);
@@ -52,9 +69,39 @@ namespace DMT.Character.Stats
             CurrentEndurance = (int)MaxEnduranceStat.Value;
         }
 
-        public virtual void TakeDamage(float damage)
+        public CharacterStat GetStatOfType(StatType statType)
         {
-            CurrentHealth = (int)Mathf.Clamp(CurrentHealth - damage, 0, Int32.MaxValue);
+            switch (statType)
+            {
+                case StatType.MaxHealth:
+                    return _maxHealthStat;
+                case StatType.MaxEndurance:
+                    return MaxEnduranceStat;
+                case StatType.EnduranceRegen:
+                    return EnduranceRegenStat;
+                case StatType.MaxMana:
+                    return MaxManaStat;
+                case StatType.AttackDamage:
+                    return _attackDamageStat;
+                case StatType.AttackSpeed:
+                    return AutoAttackRateStat;
+                case StatType.CriticalDamage:
+                    return CriticalDamageStat;
+                case StatType.EvasionChance:
+                    return EvasionChanceStat;
+                case StatType.CriticalChance:
+                    return CriticalChanceStat;
+                case StatType.ItemDropRate:
+                    return ItemDropRateStat;
+                case StatType.MagicDamage:
+                    return MagicDamageStat;
+                case StatType.PhysicalDefense:
+                    return PhysicalDefenseStat;
+                case StatType.MagicResistance:
+                    return MagicalResistanceStat;
+                default:
+                    throw new ArgumentException("No stat type found " + statType);
+            }
         }
     }
 }

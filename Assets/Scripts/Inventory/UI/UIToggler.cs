@@ -4,15 +4,23 @@ using UnityEngine;
 
 public class UIToggler : MonoBehaviour
 {
+    private bool CharacterUIEnabled = false;
+
     [SerializeField]
-    CanvasGroup inventory;
+    CanvasGroup characterUI;
 
     [SerializeField]
     GameObject characterStats;
 
+    private void Start()
+    {
+        characterUI.SetActive(false);
+    }
+
     public void ToggleInventory()
     {
-        inventory.alpha = inventory.alpha == 0 ? 1 : 0;
+        characterUI.SetActive(!CharacterUIEnabled);
+        CharacterUIEnabled = !CharacterUIEnabled;
     }
 
     public void ToggleCharacterStats()
