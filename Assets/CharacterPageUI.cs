@@ -1,19 +1,22 @@
-using DMT.Character;
+using DMT.Characters;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CharacterPageUI : MonoBehaviour
+namespace DMT.UI.Screen
 {
-    [SerializeField]
-    private ArmorSlotUI armorSlotUI;
-
-    [SerializeField]
-    private CharacterPreviewUI characterPreview;
-
-    public void SetTo(Character character)
+    public class CharacterPageUI : MonoBehaviour
     {
-        armorSlotUI.SubscribeTo(character.Equipment);
-        characterPreview.SetTo(character);
+        [SerializeField]
+        private ArmorSlotUI armorSlotUI;
+
+        [SerializeField]
+        private CharacterPreviewUI characterPreview;
+
+        public void SetTo(Character character)
+        {
+            armorSlotUI.SubscribeTo(character.Equipment);
+            characterPreview.SetTo(character);
+        }
     }
 }

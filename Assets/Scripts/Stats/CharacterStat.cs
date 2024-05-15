@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using UnityEngine;
 
-namespace DMT.Character.Stats
+namespace DMT.Characters.Stats
 {
     [System.Serializable]
     public class CharacterStat

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DMT.Character
+namespace DMT.Characters
 {
     public interface IDamagable
     {

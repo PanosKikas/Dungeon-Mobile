@@ -2,8 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using DG.Tweening;
-using DMT.Character;
+using DMT.Characters;
 using System.Linq;
 
 public class InventoryUI : MonoBehaviour

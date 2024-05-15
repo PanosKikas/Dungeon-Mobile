@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 using System;
-using DMT.Character.Stats;
+using DMT.Characters.Stats;
 using System.Reflection;
 
 [CustomEditor(typeof(EquipmentData), true)]

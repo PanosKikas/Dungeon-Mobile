@@ -1,10 +1,10 @@
 ﻿using System;
-using DMT.Character.Stats;
+using DMT.Characters.Stats;
 using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
 
-namespace DMT.Character
+namespace DMT.Characters
 {
     public class Character : IDamagable
     {

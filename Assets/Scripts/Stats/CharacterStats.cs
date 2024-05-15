@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace DMT.Character.Stats
+namespace DMT.Characters.Stats
 {
     public enum StatType
     {
