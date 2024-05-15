@@ -3,38 +3,41 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 
-public class CharacterUIPanel : MonoBehaviour
+namespace DMT.UI.Screen
 {
-    [SerializeField]
-    private Player player;
-
-    [SerializeField]
-    private InventoryUI inventoryUI;
-
-    [SerializeField]
-    private CanvasGroup canvasGroup;
-
-    [SerializeField]
-    private CharacterPageUI[] characterPages;
-
-    private void Start()
+    public class CharacterUIPanel : MonoBehaviour
     {
-        Hide();
-        var charactersInParty = player.Characters.ToArray();
-        for (int i = 0; i < charactersInParty.Length; ++i)
+        [SerializeField]
+        private Player player;
+
+        [SerializeField]
+        private InventoryUI inventoryUI;
+
+        [SerializeField]
+        private CanvasGroup canvasGroup;
+
+        [SerializeField]
+        private CharacterPageUI[] characterPages;
+
+        private void Start()
         {
-            characterPages[i].SetTo(charactersInParty[i]);
+            Hide();
+            var charactersInParty = player.Characters.ToArray();
+            for (int i = 0; i < charactersInParty.Length; ++i)
+            {
+                characterPages[i].SetTo(charactersInParty[i]);
+            }
+            inventoryUI.Initialize(player.Inventory, charactersInParty);
         }
-        inventoryUI.Initialize(player.Inventory, charactersInParty);
-    }
 
-    public void Show()
-    {
-        canvasGroup.SetActive(true);
-    }
+        public void Show()
+        {
+            canvasGroup.SetActive(true);
+        }
 
-    public void Hide()
-    {
-        canvasGroup.SetActive(false);
+        public void Hide()
+        {
+            canvasGroup.SetActive(false);
+        }
     }
 }

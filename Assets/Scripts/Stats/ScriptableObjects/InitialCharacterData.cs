@@ -4,7 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DMT.Character.Stats
+namespace DMT.Characters.Stats
 {
     [CreateAssetMenu(fileName ="Character", menuName ="Character/Character Data")]
     public class InitialCharacterData : ScriptableObject

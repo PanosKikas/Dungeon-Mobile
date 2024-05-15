@@ -1,4 +1,4 @@
-using DMT.Character.Stats;
+using DMT.Characters.Stats;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

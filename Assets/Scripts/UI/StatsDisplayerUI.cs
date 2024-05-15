@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using System.Text;
-using DMT.Character.Stats;
+using DMT.Characters.Stats;
 
 public class StatsDisplayerUI : MonoBehaviour
 {

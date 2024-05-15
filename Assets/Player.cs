@@ -1,5 +1,5 @@
-using DMT.Character;
-using DMT.Character.Stats;
+using DMT.Characters;
+using DMT.Characters.Stats;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;

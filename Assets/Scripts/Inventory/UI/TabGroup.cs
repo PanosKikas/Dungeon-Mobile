@@ -3,79 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-
-public class TabGroup : MonoBehaviour
+namespace DMT.UI.Components
 {
-    public TabButton[] tabButtons;
-
-    public GameObject[] pageAreas;
-
-    public Sprite tabIdle;
-    public Sprite tabHover;
-    public Sprite tabActive;
-
-    TabButton selectedTab;
-
-    [SerializeField]
-    TabButton initialSelectedTab;
-
-    private void Awake()
+    public class TabGroup : MonoBehaviour
     {
-        tabButtons = GetComponentsInChildren<TabButton>();
-    }
+        private TabButton currentSelectedTab;
 
-    private void Start()
-    {
-        ResetPages();
-        OnTabSelected(initialSelectedTab);
-    }
+        [SerializeField]
+        private TabButton initialSelectedTab;
 
-    public void OnTabEnter(TabButton tabButton)
-    {
-        if (selectedTab == null || selectedTab != tabButton)
+        private void Start()
         {
-            ResetTabs();
-            tabButton.background.sprite = tabHover;
-        }     
-    }
-
-    public void OnTabExit(TabButton tabButton)
-    {
-        ResetTabs();
-    }
-
-    public void OnTabSelected(TabButton tabButton)
-    {
-        ResetTabs();
-
-        if (selectedTab != null)
-        {
-            int oldSelectedIndex = selectedTab.transform.GetSiblingIndex();
-            pageAreas[oldSelectedIndex].GetComponent<CanvasGroup>().SetActive(false);
+            initialSelectedTab.Select();
+            currentSelectedTab = initialSelectedTab;
         }
 
-        selectedTab = tabButton;
-        tabButton.background.sprite = tabActive;
-        int index = tabButton.transform.GetSiblingIndex();
-        pageAreas[index].GetComponent<CanvasGroup>().SetActive(true);
-        
-    }
-
-    void ResetPages()
-    {
-        foreach (var page in pageAreas)
+        public void OnTabSelected(TabButton tabButton)
         {
-            page.GetComponent<CanvasGroup>().SetActive(false);
-        }
-    }
+            if (currentSelectedTab == tabButton)
+            {
+                return;
+            }
 
-    public void ResetTabs()
-    {
-        foreach (var tabButton in tabButtons)
-        {
-            if (selectedTab != null && tabButton == selectedTab)
-                continue;
-            tabButton.background.sprite = tabIdle;
+            currentSelectedTab?.Deselect();
+            currentSelectedTab = tabButton;
+            currentSelectedTab.Select();
         }
     }
 }
