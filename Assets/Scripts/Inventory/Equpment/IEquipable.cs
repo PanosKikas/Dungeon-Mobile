@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public interface IEquipable 
+public interface IEquipable : IStorable
 {
     void EquipOn(Character character);
     void UnequipFrom(Character character);

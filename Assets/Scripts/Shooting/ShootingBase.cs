@@ -12,7 +12,7 @@ public abstract class ShootingBase : MonoBehaviour
     protected float nextFireTime = 0f;
 
     [SerializeField]
-    LayerMask blockMask;
+    protected LayerMask blockMask;
 
     private void Awake()
     {

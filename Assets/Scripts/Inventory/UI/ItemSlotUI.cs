@@ -1,33 +1,20 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.UI;
 using DG.Tweening;
 using System;
 using UnityEngine.EventSystems;
-using static UnityEditor.Progress;
 
-public class ItemSlotUI : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
+public class ItemSlotUI : MonoBehaviour
 {
     [SerializeField]
     private Image itemIcon;
     Text stackText;
 
-    RectTransform rect;
+    private RectTransform rect;
 
     private ItemSlot itemSlot;
     public IStorable Item => itemSlot.Item;
     [SerializeField] private CanvasGroup itemCanvasGroup;
-
-    bool isPointerDown = false;
-
-    float pointerDownTimer = 0f;
-
-    [SerializeField]
-    float requiredHoldTime = 0.7f;
-
-    [SerializeField]
-    private Image fillImage;
 
     public event Action<ItemSlotUI> OnClicked;
 
@@ -81,53 +68,13 @@ public class ItemSlotUI : MonoBehaviour, IPointerDownHandler, IPointerUpHandler
         stackText.text = string.Format("x{0}", stackCount);
     }
 
-    public void OnPointerDown(PointerEventData eventData)
+    public void SlotHeld()
     {
-        isPointerDown = true;
+        OnHeld?.Invoke(this);
     }
 
-    public void OnPointerUp(PointerEventData eventData)
+    public void SlotClicked()
     {
-        if (!isPointerDown)
-        {
-            return;
-        }
-
-        if (pointerDownTimer < requiredHoldTime)
-        {
-            int index = transform.GetSiblingIndex();
-            if (Item != null)
-            {
-                OnClicked?.Invoke(this);
-            }
-        }
-        ResetClick();
-    }
-
-    private void Update()
-    {
-        if (itemSlot == null)
-        {
-            return;
-        }
-
-        if (isPointerDown)
-        {
-            pointerDownTimer += Time.deltaTime;
-            if (pointerDownTimer >= requiredHoldTime)
-            {
-                ResetClick();
-                OnHeld?.Invoke(this);
-            }
-
-            fillImage.fillAmount = pointerDownTimer / requiredHoldTime;
-        }
-    }
-
-    private void ResetClick()
-    {
-        isPointerDown = false;
-        pointerDownTimer = 0f;
-        fillImage.fillAmount = 0;
+        OnClicked?.Invoke(this);
     }
 }

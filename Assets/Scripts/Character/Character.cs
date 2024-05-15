@@ -54,5 +54,10 @@ namespace DMT.Characters
         {
             Equipment.Equip(equipable);
         }
+
+        public void UnequipFrom(EquipmentSlot slot)
+        {
+            Equipment.Unequip(slot);
+        }
     }
 }
