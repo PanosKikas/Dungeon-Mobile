@@ -12,6 +12,8 @@ namespace DMT.Characters.Stats
         public string Name;
         public int Level = 1;
 
+        public Sprite Portrait;
+
         [Header("Initial Stats")]
         public int baseMaxHealthStat;
         public int baseAttackDamageStat;

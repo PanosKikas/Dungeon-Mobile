@@ -23,8 +23,13 @@ namespace DMT.UI.Screen
         {
             Hide();
             var charactersInParty = player.Characters.ToArray();
-            for (int i = 0; i < charactersInParty.Length; ++i)
+            for (int i = 0; i < characterPages.Length; ++i)
             {
+                if (i >= charactersInParty.Length)
+                {
+                    characterPages[i].Disable();
+                    continue;
+                }
                 characterPages[i].SetTo(charactersInParty[i]);
             }
             inventoryUI.Initialize(player.Inventory, charactersInParty);

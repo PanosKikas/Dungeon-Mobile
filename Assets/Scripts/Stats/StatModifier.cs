@@ -6,11 +6,9 @@ using UnityEngine;
 public class StatModifier
 {
     public float Value;
-    public object Source;
 
-    public StatModifier(float value, object Source = null)
+    public StatModifier(float value)
     {
         this.Value = value;
-        this.Source = Source;
     }
 }

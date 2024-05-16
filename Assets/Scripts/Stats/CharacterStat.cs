@@ -63,22 +63,6 @@ namespace DMT.Characters.Stats
             return false;
         }
 
-        public bool RemoveAllModifiersFromSource(object source)
-        {
-            bool didRemove = false;
-            for (int i = statModifiers.Count - 1; i >= 0; i--)
-            {
-                if (statModifiers[i].Source == source)
-                {
-                    isDirty = true;
-                    didRemove = true;
-                    statModifiers.RemoveAt(i);
-                }
-            }
-
-            return didRemove;
-        }
-
         private float CalculateFinalValue()
         {
             float finalValue = baseValue;

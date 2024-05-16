@@ -9,6 +9,7 @@ namespace DMT.Characters
     public class Character : IDamagable
     {
         public string Name { get; private set; }
+        public Sprite Portrait { get; private set; }
         public CharacterStats stats { get; private set; }
 
         public CharacterEquipment Equipment { get; private set; }
@@ -20,6 +21,7 @@ namespace DMT.Characters
             Name = initialStats.Name;
             Level = initialStats.Level;
             stats = new(initialStats);
+            Portrait = initialStats.Portrait;
             Equipment = new CharacterEquipment(this, inventory);
         }
 

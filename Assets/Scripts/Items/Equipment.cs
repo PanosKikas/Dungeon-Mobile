@@ -30,7 +30,7 @@ public class Equipment : Item, IUsable, IEquipable
         foreach (var modifier in data.Modifiers)
         {
             var characterStat = character.stats.GetStatOfType(modifier.StatType);
-            var statModifier = new StatModifier(modifier.Value, this);
+            var statModifier = new StatModifier(modifier.Value);
             characterStat.AddModifier(statModifier);
             modifiersAdded.Add(modifier.StatType, statModifier);
         }

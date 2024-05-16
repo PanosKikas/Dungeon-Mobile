@@ -938,6 +938,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   equipmentPanel: {fileID: 982663231276077704}
   characterPreview: {fileID: 1124961333995968842}
+  tabImage: {fileID: 0}
+  canvasGroup: {fileID: 639920635637421066}
 --- !u!1 &2452820880106317488
 GameObject:
   m_ObjectHideFlags: 0
