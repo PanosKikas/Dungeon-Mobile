@@ -1,16 +1,17 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 namespace DMT.UI.Components
 {
     public class TabGroup : MonoBehaviour
     {
-        private TabButton currentSelectedTab;
+        private TabButtonUI currentSelectedTab;
 
         [SerializeField]
-        private TabButton initialSelectedTab;
+        private TabButtonUI initialSelectedTab;
 
         private void Start()
         {
@@ -18,7 +19,7 @@ namespace DMT.UI.Components
             currentSelectedTab = initialSelectedTab;
         }
 
-        public void OnTabSelected(TabButton tabButton)
+        public void OnTabSelected(TabButtonUI tabButton)
         {
             if (currentSelectedTab == tabButton)
             {

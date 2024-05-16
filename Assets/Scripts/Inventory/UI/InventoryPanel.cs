@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using DMT.Characters;
 using System.Linq;
 
-public class InventoryPanel : MonoBehaviour
+public class InventoryPanel : TabPageUI
 {
     private Dictionary<ItemSlot, ItemSlotUI> usedSlots = new();
     private List<ItemSlotUI> freeSlots = new();

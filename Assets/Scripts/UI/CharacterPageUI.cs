@@ -2,11 +2,12 @@ using DMT.Characters;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DMT.UI.Components;
 using UnityEngine.UI;
 
 namespace DMT.UI.Screen
 {
-    public class CharacterPageUI : MonoBehaviour
+    public class CharacterPageUI : TabPageUI
     {
         [SerializeField]
         private EquipmentPanel equipmentPanel;
@@ -14,24 +15,12 @@ namespace DMT.UI.Screen
         [SerializeField]
         private CharacterPreviewUI characterPreview;
 
-        [SerializeField]
-        private Image tabImage;
-
-        [SerializeField]
-        private CanvasGroup canvasGroup;
-
         public void SetTo(Character character)
         {
             equipmentPanel.SubscribeTo(character);
             characterPreview.SetTo(character);
-            tabImage.transform.parent.GetComponent<CanvasGroup>().SetActive(true);
-            tabImage.sprite = character.Portrait;
+            tabButton.SetIcon(character.Portrait);
+            Enable();
         }
-
-        public void Disable()
-        {
-            tabImage.transform.parent.GetComponent<CanvasGroup>().SetActive(false);
-        }
-
     }
 }

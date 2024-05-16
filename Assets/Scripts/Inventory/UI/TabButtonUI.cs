@@ -7,7 +7,7 @@ using UnityEngine.EventSystems;
 namespace DMT.UI.Components
 {
     [RequireComponent(typeof(Image))]
-    public class TabButton : MonoBehaviour, IPointerClickHandler
+    public class TabButtonUI : MonoBehaviour, IPointerClickHandler
     {
         TabGroup tabGroup;
 
@@ -21,15 +21,16 @@ namespace DMT.UI.Components
         private Sprite tabActive;
 
         [SerializeField]
-        private GameObject page;
+        private Image tabIcon;
 
-        private CanvasGroup pageCanvasGroup;
+        private CanvasGroup canvasGroup;
+        private TabPageUI tabPage;
 
         private void Awake()
         {
             tabGroup = GetComponentInParent<TabGroup>();
             background = GetComponent<Image>();
-            pageCanvasGroup = page?.GetComponent<CanvasGroup>();
+            canvasGroup = GetComponent<CanvasGroup>();
         }
 
         public void OnPointerClick(PointerEventData eventData)
@@ -45,7 +46,7 @@ namespace DMT.UI.Components
 
         private void ShowPage()
         {
-            pageCanvasGroup.SetActive(true);
+            tabPage?.Show();
         }
 
         public void Deselect()
@@ -56,7 +57,23 @@ namespace DMT.UI.Components
 
         private void HidePage()
         {
-            pageCanvasGroup.SetActive(false);
+            tabPage?.Hide();
+        }
+
+        public void Enable(TabPageUI page)
+        {
+            this.tabPage = page;
+        }
+
+        public void Disable()
+        {
+            this.tabPage = null;
+            canvasGroup.SetActive(false);
+        }
+
+        public void SetIcon(Sprite icon)
+        {
+            tabIcon.sprite = icon;
         }
     }
 }
