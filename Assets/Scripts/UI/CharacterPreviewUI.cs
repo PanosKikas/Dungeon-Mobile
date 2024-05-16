@@ -26,10 +26,6 @@ namespace DMT.UI.Screen
             characterStats = character.stats;
             hpBar.SetToStats(characterStats);
             levelText.text = string.Format($"Level {character.Level}");
-            string path = @"Assets/Animations/Character/" + character.Name;
-            string assetFound = AssetDatabase.FindAssets("t:AnimatorController", new string[] { path }).FirstOrDefault();
-            var animatorController = AssetDatabase.LoadAssetAtPath<AnimatorController>(AssetDatabase.GUIDToAssetPath(assetFound));
-            // animator.runtimeAnimatorController = animatorController;
         }
 
         public void OpenCharacterStatsPanel()

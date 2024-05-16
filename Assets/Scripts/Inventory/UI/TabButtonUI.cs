@@ -24,6 +24,8 @@ namespace DMT.UI.Components
         private Image tabIcon;
 
         private CanvasGroup canvasGroup;
+
+        [SerializeField]
         private TabPageUI tabPage;
 
         private void Awake()
@@ -46,7 +48,7 @@ namespace DMT.UI.Components
 
         private void ShowPage()
         {
-            tabPage?.Show();
+            tabPage.Show();
         }
 
         public void Deselect()
@@ -57,18 +59,18 @@ namespace DMT.UI.Components
 
         private void HidePage()
         {
-            tabPage?.Hide();
+            tabPage.Hide();
         }
 
-        public void Enable(TabPageUI page)
+        public void Enable()
         {
-            this.tabPage = page;
+            canvasGroup.SetActive(true);
         }
 
         public void Disable()
         {
-            this.tabPage = null;
             canvasGroup.SetActive(false);
+            tabPage.Hide();
         }
 
         public void SetIcon(Sprite icon)

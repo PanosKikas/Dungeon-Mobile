@@ -1,3 +1,4 @@
+using DMT.UI.Components;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -5,7 +6,7 @@ using UnityEngine;
 
 namespace DMT.UI.Screen
 {
-    public class CharacterUIPanel : MonoBehaviour
+    public class PlayerPanel : MonoBehaviour
     {
         [SerializeField]
         private Player player;
@@ -13,11 +14,18 @@ namespace DMT.UI.Screen
         [SerializeField]
         private InventoryPanel inventoryUI;
 
-        [SerializeField]
         private CanvasGroup canvasGroup;
 
         [SerializeField]
-        private CharacterPageUI[] characterPages;
+        private CharacterPanel[] characterPages;
+
+        [SerializeField]
+        private TabButtonUI[] characterTabs;
+
+        private void Awake()
+        {
+            canvasGroup = GetComponent<CanvasGroup>();
+        }
 
         private void Start()
         {
@@ -27,11 +35,13 @@ namespace DMT.UI.Screen
             {
                 if (i >= charactersInParty.Length)
                 {
-                    characterPages[i].Disable();
+                    characterTabs[i].Disable();
                     continue;
                 }
+                characterTabs[i].SetIcon(charactersInParty[i].Portrait);
                 characterPages[i].SetTo(charactersInParty[i]);
             }
+
             inventoryUI.Initialize(player.Inventory, charactersInParty);
         }
 

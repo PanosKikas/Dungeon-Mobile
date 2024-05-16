@@ -14,15 +14,11 @@ public class ItemDetailsPanel : MonoBehaviour
 
     public void ShowDetailsFor(IStorable item)
     {
-        if (item == null)
-        {
-            EmptyDescription();
-        }
         itemName.text = item.Name;
         itemDescription.text = item.Description;
     }
 
-    private void EmptyDescription()
+    public void EmptyDescription()
     {
         itemName.text = string.Empty;
         itemDescription.text = string.Empty;

@@ -5,7 +5,7 @@ using UnityEngine.UI;
 using DMT.Characters;
 using System.Linq;
 
-public class InventoryPanel : TabPageUI
+public class InventoryPanel : MonoBehaviour
 {
     private Dictionary<ItemSlot, ItemSlotUI> usedSlots = new();
     private List<ItemSlotUI> freeSlots = new();
@@ -68,7 +68,7 @@ public class InventoryPanel : TabPageUI
         {
             if (currentSelectedSlot == slotUI)
             {
-                itemDetails.ShowDetailsFor(null);
+                itemDetails.EmptyDescription();
             }
             UnsubscribeFromItemSlotEvents(slotUI);
             slotUI.Empty();

@@ -2,39 +2,31 @@ using DMT.UI.Components;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(CanvasGroup))]
 public class TabPageUI : MonoBehaviour
 {
     private CanvasGroup canvasGroup;
 
-    [SerializeField]
-    protected TabButtonUI tabButton;
+    public UnityEvent OnShow;
+    public UnityEvent OnHide;
 
-    public virtual void Awake()
+    public void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
     }
 
-    public virtual void Show()
+    public void Show()
     {
         canvasGroup.SetActive(true);
+        OnShow?.Invoke();
     }
 
-    public virtual void Hide()
+    public void Hide()
     {
         canvasGroup.SetActive(false);
-    }
-
-    public virtual void Enable()
-    {
-        tabButton.Enable(this);
-    }
-
-    public virtual void Disable()
-    {
-        tabButton.Disable();
-        Hide();
+        OnHide?.Invoke();
     }
 }
  
