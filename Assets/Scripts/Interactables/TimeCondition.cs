@@ -7,7 +7,8 @@ public class TimeCondition : Condition
 {
     private List<Condition> pendingConditions;
 
-    public List<Condition> startingConditions;
+    [SerializeField]
+    private List<Condition> startingConditions;
 
     private float Countdown;
     private bool isTimerRunning;
@@ -18,9 +19,7 @@ public class TimeCondition : Condition
         pendingConditions = new List<Condition>(startingConditions);
         isTimerRunning = false;
         Countdown = StartingTime;
-
     }
-
 
     public void Start()
     {
@@ -43,10 +42,7 @@ public class TimeCondition : Condition
         {
             ResetConditions();
         }
-
     }
-
-
 
     private void OnConditionComplete(Condition condition)
     {
@@ -56,6 +52,7 @@ public class TimeCondition : Condition
         {
             isTimerRunning = true;
         }
+
         if (!pendingConditions.Any() && Countdown > 0)
         {
             Complete();

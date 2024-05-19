@@ -1,15 +1,15 @@
-﻿using System.Collections;
+﻿using DMT.Characters;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Projectile : MonoBehaviour
 {
-
-    Rigidbody2D rb;
-    Animator animator;
+    private Rigidbody2D rb;
+    private Animator animator;
 
     [SerializeField]
-    float speed = 10f;
+    private float speed = 10f;
 
     public int ProjectileDamage { get; set; }
 
@@ -18,7 +18,6 @@ public class Projectile : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
-
 
     void Start()
     {
@@ -36,37 +35,19 @@ public class Projectile : MonoBehaviour
         Destroy(gameObject, seconds);
     }
 
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        
-        if (IsNotTrigger(collision))
+        if (collision is IDamagable damagable)
         {
-            HitTarget(collision.collider);
-
-            Explode();
-            
+            damagable.TakeDamage(ProjectileDamage);
         }
-        
-    }
-
-    bool IsNotTrigger(Collision2D hitCollision)
-    {
-        return !hitCollision.collider.isTrigger;
-    }
-
-    void HitTarget(Collider2D collider)
-    {
-        EnemyController enemy = collider.GetComponent<EnemyController>();
-/*
-        if (enemy != null)
-            StatusEffects.DamageTarget(enemy.GetComponent<CharacterController>(), ProjectileDamage);*/
+        Explode();
     }
 
     void Explode()
     {
         Idle();
-        Animate();    
+        Animate();
     }
 
     void Idle()

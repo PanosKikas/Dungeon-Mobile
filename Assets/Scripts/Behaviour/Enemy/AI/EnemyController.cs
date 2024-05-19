@@ -1,9 +1,11 @@
-﻿using System.Collections;
+﻿using DMT.Characters;
+using DMT.Characters.Stats;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class EnemyController : MonoBehaviour
+public class EnemyController : MonoBehaviour, IDamagable
 {
     private Rigidbody2D rb;
 
@@ -22,12 +24,18 @@ public class EnemyController : MonoBehaviour
     [SerializeField]
     private PatrolData patrtolData;
 
+    [SerializeField]
+    private InitialCharacterData data;
+
+    private Character character;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
         enemyGroup = GetComponentInParent<EnemyGroup>();
         animator = GetComponentInChildren<SpriteMovementAnimator>();
         stateMachine = new FSM();
+        character = new Character(data);
         patrolState = new PatrolState(this, stateMachine, waypoints.PatrolWaypoints, patrtolData);
         chaseState = new ChaseState(this, enemyGroup, stateMachine);
     }
@@ -73,5 +81,8 @@ public class EnemyController : MonoBehaviour
         stateMachine.OnTriggerExit(collision);
     }
 
-
+    public void TakeDamage(int damage)
+    {
+        character.TakeDamage(damage);
+    }
 }

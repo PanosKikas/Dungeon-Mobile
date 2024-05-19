@@ -940,6 +940,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1991800657}
   - {fileID: 1963155815}
   - {fileID: 1416711030}
   - {fileID: 176474545}
@@ -12725,7 +12726,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1991800656}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -12735,7 +12736,7 @@ Transform:
   - {fileID: 1874115200}
   - {fileID: 1609086274}
   - {fileID: 1147891948}
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 282365906}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &1993545310 stripped
 Transform:
@@ -25950,6 +25951,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 282365906}
     m_Modifications:
     - target: {fileID: 304844772, guid: e529457742c495245aaa14c89d0a0b10, type: 3}
+      propertyPath: data
+      value: 
+      objectReference: {fileID: 11400000, guid: 97f730c9046256d4ab36e7c13e1c60ae, type: 2}
+    - target: {fileID: 304844772, guid: e529457742c495245aaa14c89d0a0b10, type: 3}
       propertyPath: waypoints
       value: 
       objectReference: {fileID: 282365907}
@@ -26031,7 +26036,6 @@ SceneRoots:
   - {fileID: 282365906}
   - {fileID: 844474388}
   - {fileID: 1843889170}
-  - {fileID: 1991800657}
   - {fileID: 2033544031}
   - {fileID: 6058346524550719248}
   - {fileID: 178899767}

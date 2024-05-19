@@ -10,7 +10,8 @@ public class Door : MonoBehaviour
 
     public void Start()
     {
-        foreach (Condition condition in pendingConditions) {
+        foreach (Condition condition in pendingConditions) 
+        {
             condition.OnComplete += ConditionCompleteHandler;
         }
     }
@@ -23,7 +24,8 @@ public class Door : MonoBehaviour
         }
         
         pendingConditions.Remove(condition);
-        if(!pendingConditions.Any()){
+        if(!pendingConditions.Any())
+        {
             OpenDoor();
         }
     }

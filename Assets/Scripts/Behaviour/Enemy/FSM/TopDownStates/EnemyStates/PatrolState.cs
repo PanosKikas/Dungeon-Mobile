@@ -7,7 +7,6 @@ public class PatrolState : State
 {
     private PatrolData patrolData;
     private float speed => patrolData.Speed;
-    private float searchRadius => patrolData.Radius;
 
     private FSM stateMachine;
 

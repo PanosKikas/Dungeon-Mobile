@@ -6,6 +6,5 @@ using UnityEngine;
 public class PatrolData : ScriptableObject
 {
     public float Speed = 5f;
-    public float Radius = 5f;
     public float ArriveWaitTime = 1.5f;
 }

@@ -13,5 +13,4 @@ public abstract class Condition : MonoBehaviour
         OnComplete?.Invoke(this);
 
     }
-
 }
