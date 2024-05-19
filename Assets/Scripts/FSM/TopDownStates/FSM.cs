@@ -7,6 +7,11 @@ public class FSM
     private State previousState = null;
     public State currentState { get; protected set; }
 
+    public FSM()
+    {
+
+    }
+
     public FSM(State initialState)
     {
         ChangeState(initialState);
@@ -22,15 +27,25 @@ public class FSM
 
     public void LogicUpdate(float delta)
     {
-        currentState.LogicUpdate(delta);
+        currentState?.LogicUpdate(delta);
     }
     public void PhysicsUpdate(float delta)
     {
-        currentState.PhysicsUpdate(delta);
+        currentState?.PhysicsUpdate(delta);
     }
     
     public void ChangeToPreviousState()
     {
         ChangeState(previousState);
+    }
+
+    public void OnTriggerEnter(Collider2D collider)
+    {
+        currentState?.OnTriggerEnter(collider);
+    }
+
+    public void OnTriggerExit(Collider2D collider)
+    {
+        currentState?.OnTriggerExit(collider);
     }
 }

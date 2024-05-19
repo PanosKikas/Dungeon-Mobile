@@ -25949,6 +25949,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 282365906}
     m_Modifications:
+    - target: {fileID: 304844772, guid: e529457742c495245aaa14c89d0a0b10, type: 3}
+      propertyPath: waypoints
+      value: 
+      objectReference: {fileID: 282365907}
     - target: {fileID: 7495838158229068011, guid: e529457742c495245aaa14c89d0a0b10, type: 3}
       propertyPath: m_RootOrder
       value: 0
@@ -26003,7 +26007,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7495838158229068014, guid: e529457742c495245aaa14c89d0a0b10, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

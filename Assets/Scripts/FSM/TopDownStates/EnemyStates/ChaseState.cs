@@ -7,21 +7,22 @@ public class ChaseState : State
 {
     AIDestinationSetter destinationSetter;
     AIPath path;
-    EnemyBehavior enemyBehavior;
+    EnemyController controller;
     EnemyGroup parentGroup;
+    private FSM stateMachine;
 
-    public ChaseState(GameObject enemy)
+    public ChaseState(EnemyController controller, EnemyGroup enemyGroup, FSM stateMachine)
     {
-        destinationSetter = enemy.GetComponent<AIDestinationSetter>();
-        path = enemy.GetComponent<AIPath>();
-        
-        enemyBehavior = enemy.GetComponent<EnemyBehavior>();
-        parentGroup = enemy.GetComponentInParent<EnemyGroup>();
+        this.controller = controller;
+        this.stateMachine = stateMachine;
+        destinationSetter = controller.GetComponent<AIDestinationSetter>();
+        path = controller.GetComponent<AIPath>();
+        parentGroup = enemyGroup;
     }
 
     public override void EnterState()
     {
-       // parentGroup.EnableChaseAllEnemies();
+        // parentGroup.EnableChaseAllEnemies();
         EnablePathFinder();
     }
 
@@ -32,7 +33,7 @@ public class ChaseState : State
 
     public override void LogicUpdate(float delta)
     {
-        enemyBehavior.Velocity = path.desiredVelocity;
+        controller.Velocity = path.desiredVelocity;
     }
 
     void EnablePathFinder()
@@ -48,5 +49,14 @@ public class ChaseState : State
         path.enabled = false;
         destinationSetter.enabled = false;
 
+    }
+
+    public override void OnTriggerExit(Collider2D collider)
+    {
+        base.OnTriggerExit(collider);
+        if (collider.CompareTag("Player"))
+        {
+            stateMachine.ChangeState(controller.patrolState);
+        }
     }
 }

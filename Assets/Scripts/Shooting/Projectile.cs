@@ -57,7 +57,7 @@ public class Projectile : MonoBehaviour
 
     void HitTarget(Collider2D collider)
     {
-        EnemyBehavior enemy = collider.GetComponent<EnemyBehavior>();
+        EnemyController enemy = collider.GetComponent<EnemyController>();
 /*
         if (enemy != null)
             StatusEffects.DamageTarget(enemy.GetComponent<CharacterController>(), ProjectileDamage);*/

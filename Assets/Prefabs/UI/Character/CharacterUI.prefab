@@ -634,7 +634,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 40c4131c437dc074ca588da7b0b04a60, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  initialSelectedTab: {fileID: 2045469606768315351}
+  initialSelectedTab: {fileID: 0}
 --- !u!1 &5691678616726900230
 GameObject:
   m_ObjectHideFlags: 0
@@ -712,9 +712,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   inventoryUI: {fileID: 9011696642773131509}
-  canvasGroup: {fileID: 8795603201508845850}
   characterPages:
   - {fileID: 8894971267109760753}
+  characterTabs: []
 --- !u!1 &6159978743597053432
 GameObject:
   m_ObjectHideFlags: 0
@@ -3504,17 +3504,6 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 4819695626822106722, guid: 09ffb0820087e78419ecdf986e0e9927, type: 3}
   m_PrefabInstance: {fileID: 5895197694818958301}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2045469606768315351 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5597135224198279178, guid: 09ffb0820087e78419ecdf986e0e9927, type: 3}
-  m_PrefabInstance: {fileID: 5895197694818958301}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63b13871ec263e24f9e836fc48d2b8f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &5952616488965471392
 PrefabInstance:
   m_ObjectHideFlags: 0

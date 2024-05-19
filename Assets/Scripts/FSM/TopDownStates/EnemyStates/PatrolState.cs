@@ -4,98 +4,98 @@ using System.Linq;
 using UnityEngine;
 
 public class PatrolState : State
-{ 
-    [SerializeField]
-    float searchRadius = 5f;
+{
+    private PatrolData patrolData;
+    private float speed => patrolData.Speed;
+    private float searchRadius => patrolData.Radius;
 
-    Rigidbody2D rb;
+    private FSM stateMachine;
 
-    private Transform _source;
-    
-    Transform[] _patrolWaypoints;
+    private Transform[] patrolPoints;
 
     int currentWaypointIndex;
     Transform currentWaypoint;
     Vector3 targetWaypointPosition;
 
-    [SerializeField]
-    float speed = 5f;
+    EnemyController controller;
 
-    Vector2 velocity;
+    private float currentWaitTime = 0f;
+    private float waitSeconds => patrolData.ArriveWaitTime;
 
-    Vector3 previousPosition;
-
-    EnemyBehavior enemyBehavior;
-
-    private float _waitingCountdown = 0f;
-
-    public PatrolState(Transform source, IEnumerable<Transform> wayPoints)
+    public PatrolState(EnemyController controller, FSM stateMachine,
+                IEnumerable<Transform> wayPoints, PatrolData patrolData)
     {
-        _source = source;
-        rb = source.GetComponent<Rigidbody2D>();
-        enemyBehavior = source.GetComponent<EnemyBehavior>();
-        _patrolWaypoints = wayPoints.ToArray();
-        _waitingCountdown = 0f;
+        this.controller = controller;
+        this.stateMachine = stateMachine;
+        this.patrolData = patrolData;
+        patrolPoints = wayPoints.ToArray();
     }
 
     public override void EnterState()
     {
-        currentWaypointIndex = Random.Range(0, _patrolWaypoints.Length);
-        currentWaypoint = _patrolWaypoints[currentWaypointIndex];
-        targetWaypointPosition = currentWaypoint.position + Random.onUnitSphere * .4f;
+        ChooseRandomWaypoint();
     }
-    
-    public override void LogicUpdate(float delta)
+
+    private void ChooseRandomWaypoint()
     {
-        if (_waitingCountdown > 0f)
+        List<Transform> patrolPointsToChoose = new List<Transform>(patrolPoints);
+        if (currentWaypoint != null)
         {
-            _waitingCountdown -= delta;
-            return;
+            patrolPointsToChoose.Remove(currentWaypoint);
         }
         
+        currentWaypointIndex = Random.Range(0, patrolPointsToChoose.Count());
+        currentWaypoint = patrolPointsToChoose[currentWaypointIndex];
+        targetWaypointPosition = currentWaypoint.position + Random.onUnitSphere * .4f;
+    }
+
+    public override void LogicUpdate(float delta)
+    {
+        if (currentWaitTime > 0f)
+        {
+            currentWaitTime -= delta;
+            return;
+        }
+
         if (CloseToWaypoint())
         {
             ArriveAtWaypoint();
         }
-    }
-
-    public override void PhysicsUpdate(float delta)
-    {
-        var direction = GetMoveDirection();
-        var currentPosition = _source.position;
-        rb.MovePosition(currentPosition + direction * speed * delta);
-        UpdateVelocity(delta);
-
-        previousPosition = currentPosition;
-        enemyBehavior.Velocity = velocity;
+        else
+        {
+            var direction = GetMoveDirection();
+            controller.Velocity = direction * speed;
+        }
     }
 
     Vector3 GetMoveDirection()
     {
-        return (targetWaypointPosition - _source.position).normalized;
+        return (targetWaypointPosition - controller.transform.position).normalized;
     }
 
     bool CloseToWaypoint()
     {
-        return Vector2.Distance(_source.position, targetWaypointPosition) <= .1f;
+        return Vector2.Distance(controller.transform.position, targetWaypointPosition) <= .1f;
     }
 
     void ArriveAtWaypoint()
     {
-        _source.position = targetWaypointPosition;
-        velocity = Vector3.zero;
-        _waitingCountdown = 3f;
-    }
-    
-    void UpdateVelocity(float delta)
-    {
-        velocity = (_source.transform.position - previousPosition) / delta;
-        velocity *= speed;
+        //_source.position = targetWaypointPosition;
+        controller.Velocity = Vector2.zero;
+        currentWaitTime = waitSeconds;
+        ChooseRandomWaypoint();
     }
 
     public override void ExitState()
     {
-        enemyBehavior.Velocity = Vector2.zero;
+        controller.Velocity = Vector2.zero;
     }
-    
+
+    public override void OnTriggerEnter(Collider2D collision)
+    {
+        if (collision.CompareTag("Player") || collision.CompareTag("Projectile"))
+        {
+            stateMachine.ChangeState(controller.chaseState);
+        }
+    }
 }

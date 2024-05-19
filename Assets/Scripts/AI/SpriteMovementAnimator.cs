@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-public class MovementAnimation : MonoBehaviour
+public class SpriteMovementAnimator : MonoBehaviour
 {
     Animator animator;
     SpriteRenderer spriteRenderer;
