@@ -3,7 +3,7 @@ using UnityEngine;
 public abstract class ItemData : ScriptableObject
 {
     public string Name;
-    [TextAreaAttribute]
+    [TextArea]
     public string Description;
     public Sprite Icon;
 }

@@ -1,4 +1,7 @@
-﻿using TMPro;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using TMPro;
 using UnityEngine;
 using System.Text;
 using DMT.Characters.Stats;
@@ -7,43 +10,37 @@ namespace DMT.UI.Screen
 {
     public class CharacterStatsUI : MonoBehaviour
     {
-        private CharacterStats characterStats;
-
         [SerializeField]
         private CanvasGroup canvasGroup;
 
-        [SerializeField]
-        private TextMeshProUGUI statsText;
+        private readonly List<IDisposable> subscriptions = new();
 
-        public void ShowFor(CharacterStats stats)
+        [SerializeField] private CharacterStatUI[] statsUI;
+        
+        public void SubscribeTo(CharacterStats characterStats)
         {
-            this.characterStats = stats;
+            if (characterStats.Count() != statsUI.Length)
+            {
+                throw new InvalidOperationException("Stats UI does not have same number of elements as data.");
+            }
+            
+            var i = 0;
+            foreach (var stat in characterStats)
+            {
+                statsUI[i].SubscribeTo(stat);
+                ++i;
+            }
+        }
+        
+        public void ShowPanel()
+        {
+            subscriptions.DisposeAndClear();
             canvasGroup.SetActive(true);
         }
 
         public void Hide()
         {
             canvasGroup.SetActive(false);
-        }
-
-        private void Update()
-        {
-            if (characterStats == null)
-            {
-                return;
-            }
-
-            StringBuilder builder = new StringBuilder();
-            builder.Append("Attk: ").Append(characterStats.AttackDamage).Append("\n");
-            builder.Append("Crit Dmg: ").Append(characterStats.CriticalDamageStat.Value).Append("\n");
-            builder.Append("Crit % : ").Append(characterStats.CriticalChanceStat.Value).Append("\n");
-            builder.Append("Attk Speed: ").Append(characterStats.ManualAttackRateStat.Value).Append("\n");
-            builder.Append("Magic Dmg: ").Append(characterStats.MagicDamageStat.Value).Append("\n");
-            builder.Append("Mag Resist: ").Append(characterStats.MagicalResistanceStat.Value).Append("\n");
-            builder.Append("Endur Regen: ").Append(characterStats.EnduranceRegenStat.Value).Append("\n");
-            builder.Append("Evasion % : ").Append(characterStats.EvasionChanceStat.Value).Append("\n");
-            builder.Append("Item Drop % : ").Append(characterStats.ItemDropRateStat.Value).Append("\n");
-            statsText.text = builder.ToString();
         }
     }
 }

@@ -31,9 +31,9 @@ public class HPBarUI : MonoBehaviour
             return;
         }
 
-        float CurrentHealth = stats.CurrentHealth;
-        float MaxHealth = stats.MaxHealth;
-        slider.value = CurrentHealth / MaxHealth;
-        hpText.text = string.Format("{0}/{1}", CurrentHealth, MaxHealth);
+        float currentHealth = stats.CurrentHealth;
+        float maxHealth = stats.MaxHealth;
+        slider.value = currentHealth / maxHealth;
+        hpText.text = $"{currentHealth}/{maxHealth}";
     }
 }

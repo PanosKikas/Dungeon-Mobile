@@ -1,21 +1,24 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using DMT.Characters;
 using System.Linq;
+using UniRx;
 
 public class InventoryPanel : MonoBehaviour
 {
     private Dictionary<ItemSlot, ItemSlotUI> usedSlots = new();
     private List<ItemSlotUI> freeSlots = new();
 
-    [SerializeField]
-    private Transform slotsParent;
+    [SerializeField] private Transform slotsParent;
 
-    [SerializeField]
-    private ItemDetailsPanel itemDetails;
+    [SerializeField] private ItemDetailsPanel itemDetails;
 
+    private readonly List<IDisposable> subscriptions = new();
+
+    private readonly Dictionary<ItemSlotUI, IList<IDisposable>> slotSubscriptions = new();
     private IInventory inventory;
     private Character selectedCharacter => characters.First();
     private ItemSlotUI currentSelectedSlot;
@@ -26,79 +29,84 @@ public class InventoryPanel : MonoBehaviour
         freeSlots = slotsParent.GetComponentsInChildren<ItemSlotUI>().ToList();
     }
 
-    public void Initialize(IInventory inventory, IEnumerable<Character> characters)
+    public void Initialize(IInventory inventoryModel, IEnumerable<Character> characters)
     {
-        if (inventory == null)
+        if (inventoryModel == null)
         {
             Debug.LogError("Character does not contain an inventory");
             return;
         }
-        this.inventory = inventory;
+
+        inventory = inventoryModel;
         this.characters = characters;
-        SubscribeTo(inventory);
+        SubscribeTo(inventoryModel);
     }
 
     private void SubscribeTo(IInventory inventory)
     {
-        inventory.OnItemAdded += OnItemAdded;
-        inventory.OnItemRemoved += OnItemRemoved;
+        subscriptions.Clear();
+        this.inventory = inventory;
+        inventory.InventoryItems.ObserveAdd()
+            .Subscribe(x => OnItemSlotAdded(x.Value)).AddTo(subscriptions);
+        inventory.InventoryItems.ObserveRemove()
+            .Subscribe(x => OnItemSlotRemoved(x.Value)).AddTo(subscriptions);
     }
 
-    private void OnItemAdded(ItemSlot slot)
+    private void OnItemSlotAdded(ItemSlot slot)
     {
-        if (usedSlots.TryGetValue(slot, out var slotUI))
-        {
-            slotUI.UpdateUI();
-        }
-        else
-        {
-            var slotUIToUse = freeSlots.First();
-            freeSlots.Remove(slotUIToUse);
-            slotUIToUse.InitializeTo(slot);
-            usedSlots.Add(slot, slotUIToUse);
-            SubscribeToItemSlotEvents(slotUIToUse);
-            slotUIToUse.transform.SetSiblingIndex(usedSlots.Count() - 1);
-        }
+        var slotUIToUse = freeSlots.First();
+        freeSlots.Remove(slotUIToUse);
+        slotUIToUse.InitializeTo(slot);
+        usedSlots.Add(slot, slotUIToUse);
+        SubscribeToItemSlotEvents(slotUIToUse);
+        slotUIToUse.transform.SetSiblingIndex(usedSlots.Count() - 1);
     }
 
-    private void OnItemRemoved(ItemSlot slot)
+    private void OnItemSlotRemoved(ItemSlot slot)
     {
         var slotUI = usedSlots[slot];
-        if (slot.IsEmpty())
+        
+        if (currentSelectedSlot == slotUI)
         {
-            if (currentSelectedSlot == slotUI)
-            {
-                itemDetails.EmptyDescription();
-            }
-            UnsubscribeFromItemSlotEvents(slotUI);
-            slotUI.Empty();
-            freeSlots.Add(slotUI);
-            usedSlots.Remove(slot);
-            slotUI.transform.SetSiblingIndex(usedSlots.Count() + 1);
+            itemDetails.EmptyDescription();
         }
-        else
-        {
-            slotUI.UpdateUI();
-        }
+
+        UnsubscribeFromItemSlotEvents(slotUI);
+        slotUI.Empty();
+        freeSlots.Add(slotUI);
+        usedSlots.Remove(slot);
+        slotUI.transform.SetSiblingIndex(usedSlots.Count() + 1);
     }
 
     private void SubscribeToItemSlotEvents(ItemSlotUI itemSlotUi)
     {
-        itemSlotUi.OnClicked += OnItemSlotClicked;
-        itemSlotUi.OnHeld += OnItemSlotHeld;
+        if (slotSubscriptions.TryGetValue(itemSlotUi, out var oldSubscriptions))
+        {
+            Debug.LogError("Already subscribed to this slot.");
+            oldSubscriptions.DisposeAndClear();
+            slotSubscriptions.Remove(itemSlotUi);
+        }
+        
+        List<IDisposable> disposables = new List<IDisposable>();
+        
+        itemSlotUi.OnClicked.Subscribe(OnItemSlotClicked).AddTo(disposables);
+        itemSlotUi.OnHeld.Subscribe(OnItemSlotHeld).AddTo(disposables);
+        slotSubscriptions.Add(itemSlotUi, disposables);
     }
 
     private void UnsubscribeFromItemSlotEvents(ItemSlotUI itemSlotUI)
     {
-        itemSlotUI.OnClicked -= OnItemSlotClicked;
-        itemSlotUI.OnHeld -= OnItemSlotHeld;
+        if (slotSubscriptions.TryGetValue(itemSlotUI, out var disposables))
+        {
+            disposables.DisposeAndClear();
+        }
     }
 
     private void OnItemSlotClicked(ItemSlotUI itemSlotUI)
     {
         if (itemSlotUI.Item == null)
         {
-            throw new System.InvalidOperationException("Item slot clicked is null");
+            throw new InvalidOperationException("Item slot clicked is null");
         }
 
         currentSelectedSlot = itemSlotUI;
@@ -109,7 +117,7 @@ public class InventoryPanel : MonoBehaviour
     {
         if (itemSlotUI.Item == null)
         {
-            throw new System.InvalidOperationException("Item slot held is null");
+            throw new InvalidOperationException("Item slot held is null");
         }
 
         if (itemSlotUI.Item is IUsable usable && usable.TryUseOn(selectedCharacter))
@@ -124,7 +132,11 @@ public class InventoryPanel : MonoBehaviour
 
     private void OnDestroy()
     {
-        inventory.OnItemAdded -= OnItemAdded;
-        inventory.OnItemRemoved -= OnItemRemoved;
+        foreach (var slotSubscription in slotSubscriptions.Values)
+        {
+            slotSubscription.DisposeAndClear();
+        }
+  
+        subscriptions.DisposeAndClear();
     }
 }

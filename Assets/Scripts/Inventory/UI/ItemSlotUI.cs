@@ -2,7 +2,8 @@
 using UnityEngine.UI;
 using DG.Tweening;
 using System;
-using UnityEngine.EventSystems;
+using System.Collections.Generic;
+using UniRx;
 
 public class ItemSlotUI : MonoBehaviour
 {
@@ -15,10 +16,11 @@ public class ItemSlotUI : MonoBehaviour
     private ItemSlot itemSlot;
     public IStorable Item => itemSlot.Item;
     [SerializeField] private CanvasGroup itemCanvasGroup;
+    
+    public readonly ISubject<ItemSlotUI> OnClicked = new Subject<ItemSlotUI>();
+    public readonly ISubject<ItemSlotUI> OnHeld = new Subject<ItemSlotUI>();
 
-    public event Action<ItemSlotUI> OnClicked;
-
-    public event Action<ItemSlotUI> OnHeld;
+    private readonly List<IDisposable> itemSubscriptions = new();
 
     private void Awake()
     {
@@ -33,16 +35,12 @@ public class ItemSlotUI : MonoBehaviour
 
     public void InitializeTo(ItemSlot slot)
     {
+        itemSubscriptions.Clear();
         var item = slot.Item;
         itemSlot = slot;
         itemIcon.sprite = item.Icon;
-        UpdateUI();
+        slot.Stack.Subscribe(UpdateStackText).AddTo(itemSubscriptions);
         EnableInteraction();
-    }
-
-    public void UpdateUI()
-    {
-        UpdateStackText(itemSlot.Stack);
     }
 
     public void Empty()
@@ -51,30 +49,35 @@ public class ItemSlotUI : MonoBehaviour
         DisableInteraction();
     }
 
-    public void EnableInteraction()
+    private void EnableInteraction()
     {
         itemCanvasGroup.alpha = 1f;
         itemCanvasGroup.interactable = true;
     }
 
-    public void DisableInteraction()
+    private void DisableInteraction()
     {
         itemCanvasGroup.alpha = 0f;
         itemCanvasGroup.interactable = false;
     }
 
-    public void UpdateStackText(int stackCount)
+    private void UpdateStackText(int stackCount)
     {
-        stackText.text = string.Format("x{0}", stackCount);
+        stackText.text = $"x{stackCount}";
     }
 
     public void SlotHeld()
     {
-        OnHeld?.Invoke(this);
+        OnHeld.OnNext(this);
     }
 
     public void SlotClicked()
     {
-        OnClicked?.Invoke(this);
+        OnClicked.OnNext(this);
+    }
+
+    private void OnDisable()
+    {
+        itemSubscriptions.DisposeAndClear();
     }
 }

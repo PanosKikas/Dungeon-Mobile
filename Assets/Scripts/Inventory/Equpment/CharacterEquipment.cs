@@ -2,14 +2,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 
 public class EquipmentSlot
 {
     private Character character;
-
-    public event Action<IEquipable> OnItemChanged;
-    public IEquipable CurrentEquippedItem { get; private set; }
+    public ReactiveProperty<IEquipable> CurrentEquippedItem { get; } = new();
 
     public EquipmentSlot(Character character)
     {
@@ -18,21 +17,19 @@ public class EquipmentSlot
 
     public void Equip(IEquipable equipable)
     {
-        CurrentEquippedItem = equipable;
+        CurrentEquippedItem.Value = equipable;
         equipable.EquipOn(character);
-        OnItemChanged?.Invoke(equipable);
     }
 
     public void Unequip()
     {
-        if (CurrentEquippedItem == null)
+        if (CurrentEquippedItem.Value == null)
         {
             return;
         }
 
-        CurrentEquippedItem.UnequipFrom(character);
-        CurrentEquippedItem = null;
-        OnItemChanged?.Invoke(null);
+        CurrentEquippedItem.Value.UnequipFrom(character);
+        CurrentEquippedItem.Value = null;
     }
 
     public bool IsEmpty()
@@ -43,7 +40,7 @@ public class EquipmentSlot
 
 public class CharacterEquipment
 {
-    public EquipmentSlot[] EquipmentSlots { get; private set; } = new EquipmentSlot[totalSlots];
+    public EquipmentSlot[] EquipmentSlots { get; } = new EquipmentSlot[totalSlots];
     private IInventory inventory;
     private const int totalSlots = 5;
     private Character character;
@@ -65,7 +62,7 @@ public class CharacterEquipment
         IEquipable oldItem = null;
         if (!slot.IsEmpty())
         {
-            oldItem = slot.CurrentEquippedItem;
+            oldItem = slot.CurrentEquippedItem.Value;
         }
 
         slot.Unequip();
@@ -78,7 +75,7 @@ public class CharacterEquipment
 
     public void Unequip(EquipmentSlot slot)
     {
-        var itemOnSlot = slot.CurrentEquippedItem;
+        var itemOnSlot = slot.CurrentEquippedItem.Value;
         slot.Unequip();
         inventory?.TryStore(itemOnSlot);
     }

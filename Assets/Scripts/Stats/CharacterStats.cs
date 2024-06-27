@@ -22,86 +22,85 @@ namespace DMT.Characters.Stats
         MagicResistance
     }
 
-    public class CharacterStats
+    public class CharacterStats : IEnumerable<CharacterStat>
     {
         public int CurrentHealth { get; set; }
         public int CurrentEndurance { get; set; }
 
-        private CharacterStat _maxHealthStat;
-        public int MaxHealth => (int)_maxHealthStat.Value;
-        private CharacterStat _attackDamageStat;
-        public int AttackDamage => (int)_attackDamageStat.Value;
-        
-        public CharacterStat AutoAttackRateStat;
-        public CharacterStat ManualAttackRateStat;
-        public CharacterStat MaxEnduranceStat;
-        public CharacterStat MaxManaStat;
-        public CharacterStat EnduranceRegenStat;
-        public CharacterStat CriticalDamageStat;
-        public CharacterStat CriticalChanceStat;
-        public CharacterStat MagicDamageStat;
-        public CharacterStat EvasionChanceStat;
-        public CharacterStat PhysicalDefenseStat;
-        public CharacterStat MagicalResistanceStat;
-        public CharacterStat ItemDropRateStat;
+        public readonly CharacterStat maxHealthStat;
+        public int MaxHealth => (int)maxHealthStat.Value;
+        public readonly CharacterStat attackDamageStat;
+        public int AttackDamage => (int)attackDamageStat.Value;
 
-        public CharacterStat MobilityStat;
+        public readonly CharacterStat AutoAttackRateStat;
+        public readonly CharacterStat MaxEnduranceStat;
+        public readonly CharacterStat MaxManaStat;
+        public readonly CharacterStat EnduranceRegenStat;
+        public readonly CharacterStat CriticalDamageStat;
+        public readonly CharacterStat CriticalChanceStat;
+        public readonly CharacterStat MagicDamageStat;
+        public readonly CharacterStat EvasionChanceStat;
+        public readonly CharacterStat PhysicalDefenseStat;
+        public readonly CharacterStat MagicalResistanceStat;
+        public readonly CharacterStat ItemDropRateStat;
+
+        private readonly Dictionary<StatType, CharacterStat> statsMapping;
 
         public CharacterStats(InitialCharacterData initialData)
         {
-            _maxHealthStat = new(initialData.baseMaxHealthStat);
-            _attackDamageStat = new(initialData.baseAttackDamageStat);
-            AutoAttackRateStat = new(initialData.baseAutoAttackRateStat);
-            ManualAttackRateStat = new(initialData.baseManualAttackRateStat);
-            MaxEnduranceStat = new(initialData.baseMaxEnduranceStat);
-            MaxManaStat = new(initialData.baseMaxManaStat);
-            EnduranceRegenStat = new(initialData.baseEnduranceRegenStat);
-            CriticalDamageStat = new(initialData.baseCriticalDamageStat);
-            CriticalChanceStat = new(initialData.baseCriticalChanceStat);
-            MagicDamageStat = new(initialData.baseMagicDamageStat);
-            EvasionChanceStat = new(initialData.baseEvasionChanceStat);
-            PhysicalDefenseStat = new(initialData.basePhysicalDefenseStat);
-            MagicalResistanceStat = new(initialData.baseMagicalResistanceStat);
-            ItemDropRateStat = new(initialData.baseItemDropRateStat);
-            MobilityStat = new(initialData.baseMobilityStat);
+            maxHealthStat = new(initialData.baseMaxHealthStat, StatType.MaxHealth);
+            attackDamageStat = new(initialData.baseAttackDamageStat, StatType.AttackDamage);
+            AutoAttackRateStat = new(initialData.baseAutoAttackRateStat, StatType.AttackSpeed);
+            MaxEnduranceStat = new(initialData.baseMaxEnduranceStat, StatType.MaxEndurance);
+            MaxManaStat = new(initialData.baseMaxManaStat, StatType.MaxMana);
+            EnduranceRegenStat = new(initialData.baseEnduranceRegenStat, StatType.EnduranceRegen);
+            CriticalDamageStat = new(initialData.baseCriticalDamageStat, StatType.CriticalDamage);
+            CriticalChanceStat = new(initialData.baseCriticalChanceStat, StatType.CriticalChance);
+            MagicDamageStat = new(initialData.baseMagicDamageStat, StatType.MagicDamage);
+            EvasionChanceStat = new(initialData.baseEvasionChanceStat, StatType.EvasionChance);
+            PhysicalDefenseStat = new(initialData.basePhysicalDefenseStat, StatType.PhysicalDefense);
+            MagicalResistanceStat = new(initialData.baseMagicalResistanceStat, StatType.MagicResistance);
+            ItemDropRateStat = new(initialData.baseItemDropRateStat, StatType.ItemDropRate);
+            
+            statsMapping = new Dictionary<StatType, CharacterStat>()
+            {
+                { maxHealthStat.StatType, maxHealthStat },
+                { attackDamageStat.StatType, attackDamageStat },
+                { AutoAttackRateStat.StatType, AutoAttackRateStat },
+                { MaxEnduranceStat.StatType, MaxEnduranceStat },
+                { EnduranceRegenStat.StatType, EnduranceRegenStat },
+                { MaxManaStat.StatType, MaxManaStat },
+                { CriticalDamageStat.StatType, CriticalDamageStat },
+                { EvasionChanceStat.StatType, EvasionChanceStat },
+                { CriticalChanceStat.StatType, CriticalChanceStat },
+                { ItemDropRateStat.StatType, ItemDropRateStat },
+                { MagicDamageStat.StatType, MagicDamageStat },
+                { PhysicalDefenseStat.StatType, PhysicalDefenseStat },
+                { MagicalResistanceStat.StatType, MagicalResistanceStat }
+            };
 
-            CurrentHealth = (int)_maxHealthStat.Value;
+            CurrentHealth = (int)maxHealthStat.Value;
             CurrentEndurance = (int)MaxEnduranceStat.Value;
         }
 
         public CharacterStat GetStatOfType(StatType statType)
         {
-            switch (statType)
+            if (statsMapping.TryGetValue(statType, out var stat))
             {
-                case StatType.MaxHealth:
-                    return _maxHealthStat;
-                case StatType.MaxEndurance:
-                    return MaxEnduranceStat;
-                case StatType.EnduranceRegen:
-                    return EnduranceRegenStat;
-                case StatType.MaxMana:
-                    return MaxManaStat;
-                case StatType.AttackDamage:
-                    return _attackDamageStat;
-                case StatType.AttackSpeed:
-                    return AutoAttackRateStat;
-                case StatType.CriticalDamage:
-                    return CriticalDamageStat;
-                case StatType.EvasionChance:
-                    return EvasionChanceStat;
-                case StatType.CriticalChance:
-                    return CriticalChanceStat;
-                case StatType.ItemDropRate:
-                    return ItemDropRateStat;
-                case StatType.MagicDamage:
-                    return MagicDamageStat;
-                case StatType.PhysicalDefense:
-                    return PhysicalDefenseStat;
-                case StatType.MagicResistance:
-                    return MagicalResistanceStat;
-                default:
-                    throw new ArgumentException("No stat type found " + statType);
+                return stat;
             }
+
+            throw new ArgumentException("No stat of type " + statType + " found."); 
+        }
+
+        public IEnumerator<CharacterStat> GetEnumerator()
+        {
+            return statsMapping.Values.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }

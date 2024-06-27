@@ -2,43 +2,36 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Linq;
+using UniRx;
 using UnityEngine;
 
 namespace DMT.Characters.Stats
 {
-    [System.Serializable]
-    public class CharacterStat
+    [Serializable]
+    public class CharacterStat : IObservable<float>
     {
         private bool isDirty = true;
         private float baseValue;
         private float _value;
 
-        public StatType StatType { get; private set; }
+        public StatType StatType { get; }
 
         StatModifier levelModifier;
         Attribute dependantAttribute;
 
-        public float Value
-        {
-            get
-            {
-                if (isDirty)
-                {
-                    _value = CalculateFinalValue();
-                    isDirty = false;
-                }
+        private ReactiveProperty<float> FinalStatValue { get; } = new();
 
-                return _value;
-            }
-        }
+        public float Value => FinalStatValue.Value;
 
         private readonly List<StatModifier> statModifiers;
 
-        public CharacterStat(float value)
+        public CharacterStat(float value, StatType type)
         {
             baseValue = value;
-            isDirty = true;
+            StatType = type;
             statModifiers = new List<StatModifier>();
+            FinalStatValue.Value = CalculateFinalValue();
         }
 
         private void AddModifier()
@@ -50,45 +43,41 @@ namespace DMT.Characters.Stats
         {
             isDirty = true;
             statModifiers.Add(mod);
+            FinalStatValue.Value = CalculateFinalValue();
         }
 
         public bool RemoveModifier(StatModifier mod)
         {
-            if (statModifiers.Remove(mod))
+            if (!statModifiers.Remove(mod))
             {
-                isDirty = true;
-                return true;
+                return false;
             }
 
-            return false;
+            FinalStatValue.Value = CalculateFinalValue();
+            return true;
         }
 
         private float CalculateFinalValue()
         {
-            float finalValue = baseValue;
-            for (int i = 0; i < statModifiers.Count; ++i)
-            {
-                StatModifier modifier = statModifiers[i];
-
-                finalValue += modifier.Value;
-
-            }
-
+            var finalValue = baseValue + statModifiers.Sum(modifier => modifier.Value);
             return (float)Math.Round(finalValue, 4);
         }
 
-        public void AddDependantAttribute(Attribute attribute, StatModifier _levelModifier)
+        public void AddDependantAttribute(Attribute attribute, StatModifier levelModifier)
         {
-            levelModifier = _levelModifier;
-            for (int i = 0; i < attribute.Value; ++i)
+            this.levelModifier = levelModifier;
+            for (var i = 0; i < attribute.Value; ++i)
             {
-
-                AddModifier(levelModifier);
+                AddModifier(this.levelModifier);
             }
 
             attribute.OnAttributeChanged.AddListener(AddModifier);
             dependantAttribute = attribute;
+        }
 
+        public IDisposable Subscribe(IObserver<float> observer)
+        {
+            return FinalStatValue.Subscribe(observer);
         }
     }
 }

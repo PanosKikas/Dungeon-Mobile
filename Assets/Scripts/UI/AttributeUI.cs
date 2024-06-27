@@ -6,8 +6,6 @@ using UnityEngine.UI;
 
 public class AttributeUI : MonoBehaviour
 {
-    
-    
     [SerializeField]
     TextMeshProUGUI[] attributeValues;
     

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UniRx;
 
 public class EquipmentSlotUI : MonoBehaviour
 {
@@ -16,33 +17,35 @@ public class EquipmentSlotUI : MonoBehaviour
 
     public Action<EquipmentSlotUI> OnSlotHeld;
 
-    private IEquipable equipment => equipmentSlot?.CurrentEquippedItem;
+    private IEquipable equipment => equipmentSlot?.CurrentEquippedItem.Value;
 
+    private IDisposable equippedItemSubscription;
+    
     public void SubscribeTo(EquipmentSlot slot)
     {
-        this.equipmentSlot = slot;
-        ItemEquipped(slot.CurrentEquippedItem);
-        slot.OnItemChanged += ItemEquipped; 
+        equippedItemSubscription?.Dispose();
+        equipmentSlot = slot;
+        equippedItemSubscription = slot.CurrentEquippedItem.Subscribe(ItemChanged);
     }
 
-    private void ItemEquipped(IEquipable equipment)
+    private void ItemChanged(IEquipable equipable)
     {
-        if (equipment is null)
+        if (equipable is null)
         {
             EmptySlot();
             return;
         }
-        var item = equipment as Item;
+        var item = equipable as Item;
         SetToItem(item);
     }
 
-    public void SetToItem(Item item)
+    private void SetToItem(Item item)
     {
         icon.sprite = item.Icon;
         canvasGroup.SetActive(true);
     }
 
-    public void EmptySlot()
+    private void EmptySlot()
     {
         canvasGroup.SetActive(false);
     }
@@ -62,6 +65,8 @@ public class EquipmentSlotUI : MonoBehaviour
         {
             return;
         }
-        equipmentSlot.OnItemChanged -= ItemEquipped;
+        
+        equippedItemSubscription?.Dispose();
+        equippedItemSubscription = null;
     }
 }

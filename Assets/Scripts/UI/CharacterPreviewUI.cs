@@ -26,11 +26,13 @@ namespace DMT.UI.Screen
             characterStats = character.stats;
             hpBar.SetToStats(characterStats);
             levelText.text = string.Format($"Level {character.Level}");
+            
         }
 
         public void OpenCharacterStatsPanel()
         {
-            characterStatsUI.ShowFor(characterStats);
+            characterStatsUI.ShowPanel();
+            characterStatsUI.SubscribeTo(characterStats);
         }
     }
 }

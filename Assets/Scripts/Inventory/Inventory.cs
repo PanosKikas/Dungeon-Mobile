@@ -1,22 +1,20 @@
-﻿using DMT.Characters.Stats;
-using System;
-using System.Collections;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using UniRx;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class ItemSlot
 {
     public IStorable Item { get; private set; }
-    public int Stack = 0;
+    public ReactiveProperty<int> Stack { get; } = new(0);
 
     public void Store(IStorable itemToStore)
     {
         if (Item == null)
         {
             Item = itemToStore;
-            Stack = 1;
+            Stack.Value = 1;
             return;
         }
 
@@ -26,13 +24,13 @@ public class ItemSlot
         }
 
         Item = itemToStore;
-        ++Stack;
+        ++Stack.Value;
     }
     
     public void RemoveItem()
     {
-        --Stack;
-        if (Stack == 0)
+        --Stack.Value;
+        if (Stack.Value == 0)
         {
             Clear();
         }
@@ -43,9 +41,9 @@ public class ItemSlot
         return Item == null;
     }
 
-    public void Clear()
+    private void Clear()
     {
-        Stack = 0;
+        Stack.Value = 0;
         Item = null;
     }
 }
@@ -53,14 +51,9 @@ public class ItemSlot
 public class Inventory : IInventory
 {
     private const int InitialCapacity = 20;
-    public IEnumerable<ItemSlot> Slots => itemSlots;
-
-    private List<ItemSlot> itemSlots = new();
+    public IEnumerable<ItemSlot> Slots => InventoryItems;
     private int currentCapacity;
-
-    public event Action<ItemSlot> OnItemAdded;
-    public event Action<ItemSlot> OnItemRemoved;
-
+    public IReactiveCollection<ItemSlot> InventoryItems { get; } = new ReactiveCollection<ItemSlot>();
     public Inventory()
     {
         currentCapacity = InitialCapacity;
@@ -68,42 +61,45 @@ public class Inventory : IInventory
 
     bool IsInventoryFull()
     {
-        return itemSlots.Count() == currentCapacity;
+        return InventoryItems.Count() == currentCapacity;
     }
 
     public bool TryStore(IStorable itemToStore)
     {
-        ItemSlot slot = itemSlots.FirstOrDefault(s => s.Item.Equals(itemToStore));
-
+        ItemSlot slot = InventoryItems.FirstOrDefault(s => s.Item.Equals(itemToStore));
         if (slot == null)
         {
             if (IsInventoryFull())
             {
                 return false;
             }
-            slot = new ItemSlot();
-            itemSlots.Add(slot);
-        }
 
-        slot.Store(itemToStore);
-        OnItemAdded?.Invoke(slot);
+            slot = new ItemSlot();
+            slot.Store(itemToStore);
+            InventoryItems.Add(slot);
+        }
+        else
+        {
+            slot.Store(itemToStore);
+        }
+        
         return true;
     }
 
     public void RemoveItem(IStorable storable)
     {
-        var slot = itemSlots.FirstOrDefault(s => s.Item.Equals(storable));
+        var slot = InventoryItems.FirstOrDefault(s => s.Item.Equals(storable));
         
         if (slot == null)
         {
             Debug.LogError("No item " + storable.Name + " found in inventory of character to remove.");
+            return;
         }
 
         slot.RemoveItem();
         if (slot.IsEmpty())
         {
-            itemSlots.Remove(slot);
+            InventoryItems.Remove(slot);
         }
-        OnItemRemoved?.Invoke(slot);
     }
 }
