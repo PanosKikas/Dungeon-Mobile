@@ -5,13 +5,15 @@ using UnityEditor.Animations;
 using UnityEngine;
 using DMT.Characters;
 using DMT.Characters.Stats;
+using UniRx;
+using UnityEngine.Serialization;
 
 namespace DMT.UI.Screen
 {
     public class CharacterPreviewUI : MonoBehaviour
     {
-        [SerializeField]
-        private HPBarUI hpBar;
+        [FormerlySerializedAs("hpBar")] [SerializeField]
+        private StatBarUI statBar;
 
         [SerializeField]
         private TextMeshProUGUI levelText;
@@ -24,7 +26,7 @@ namespace DMT.UI.Screen
         public void SetTo(Character character)
         {
             characterStats = character.stats;
-            hpBar.SetToStats(characterStats);
+            statBar.SubscribeTo(characterStats.CurrentHealth, characterStats.maxHealthStat.AsObservable());
             levelText.text = string.Format($"Level {character.Level}");
             
         }
@@ -32,7 +34,6 @@ namespace DMT.UI.Screen
         public void OpenCharacterStatsPanel()
         {
             characterStatsUI.ShowPanel();
-            characterStatsUI.SubscribeTo(characterStats);
         }
     }
 }

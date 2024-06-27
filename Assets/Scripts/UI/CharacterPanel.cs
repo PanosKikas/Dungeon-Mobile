@@ -1,8 +1,10 @@
+using System;
 using DMT.Characters;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using DMT.UI.Components;
+using UniRx;
 using UnityEngine.UI;
 
 namespace DMT.UI.Screen
@@ -20,21 +22,31 @@ namespace DMT.UI.Screen
 
         private Character character;
 
-        public void SetTo(Character character)
+        public Subject<Character> OnShow = new();
+        public Subject<Character> OnHide = new();
+
+        public void SubscribeTo(Character character)
         {
             this.character = character;
             equipmentPanel.SubscribeTo(character);
             characterPreview.SetTo(character);
         }
 
-        public void OnShow()
+        public void Show()
         {
+            if (character == null)
+            {
+                throw new ArgumentException("No character for this page.");
+            }
+            
             characterPreviewAnimator.ShowFor(character);
+            OnShow.OnNext(character);
         }
 
-        public void OnHide()
+        public void Hide()
         {
             characterPreviewAnimator.Hide();
+            OnHide.OnNext(character);
         }
     }
 }

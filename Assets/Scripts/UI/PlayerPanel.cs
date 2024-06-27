@@ -1,7 +1,10 @@
+using System;
 using DMT.UI.Components;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using DMT.Characters;
+using UniRx;
 using UnityEngine;
 
 namespace DMT.UI.Screen
@@ -22,6 +25,12 @@ namespace DMT.UI.Screen
         [SerializeField]
         private TabButtonUI[] characterTabs;
 
+        private readonly ReactiveProperty<Character> selectedCharacter = new();
+
+        [SerializeField] private CharacterStatsUI characterStatsUI;
+
+        private readonly List<IDisposable> subscriptions = new();
+        
         private void Awake()
         {
             canvasGroup = GetComponent<CanvasGroup>();
@@ -29,6 +38,7 @@ namespace DMT.UI.Screen
 
         private void Start()
         {
+            subscriptions.DisposeAndClear();
             Hide();
             var charactersInParty = player.Characters.ToArray();
             for (int i = 0; i < characterPages.Length; ++i)
@@ -39,10 +49,18 @@ namespace DMT.UI.Screen
                     continue;
                 }
                 characterTabs[i].SetIcon(charactersInParty[i].Portrait);
-                characterPages[i].SetTo(charactersInParty[i]);
+                characterPages[i].SubscribeTo(charactersInParty[i]);
+                characterPages[i].OnShow.AsObservable().Subscribe(CharacterPageSelected).AddTo(subscriptions);
             }
 
             inventoryUI.Initialize(player.Inventory, charactersInParty);
+            selectedCharacter.Value = charactersInParty.First();
+            characterStatsUI.SubscribeTo(selectedCharacter);
+        }
+
+        private void CharacterPageSelected(Character character)
+        {
+            selectedCharacter.Value = character;
         }
 
         public void Show()

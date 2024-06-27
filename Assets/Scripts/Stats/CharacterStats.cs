@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
 
 namespace DMT.Characters.Stats
@@ -24,13 +25,12 @@ namespace DMT.Characters.Stats
 
     public class CharacterStats : IEnumerable<CharacterStat>
     {
-        public int CurrentHealth { get; set; }
+        public readonly ReactiveProperty<int> CurrentHealth;
         public int CurrentEndurance { get; set; }
 
         public readonly CharacterStat maxHealthStat;
         public int MaxHealth => (int)maxHealthStat.Value;
         public readonly CharacterStat attackDamageStat;
-        public int AttackDamage => (int)attackDamageStat.Value;
 
         public readonly CharacterStat AutoAttackRateStat;
         public readonly CharacterStat MaxEnduranceStat;
@@ -79,7 +79,7 @@ namespace DMT.Characters.Stats
                 { MagicalResistanceStat.StatType, MagicalResistanceStat }
             };
 
-            CurrentHealth = (int)maxHealthStat.Value;
+            CurrentHealth = new ReactiveProperty<int>((int)maxHealthStat.Value);
             CurrentEndurance = (int)MaxEnduranceStat.Value;
         }
 

@@ -1287,7 +1287,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10.734833, y: 3.0133638, z: -10}
+  m_LocalPosition: {x: 12.428364, y: 3.014968, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -11053,7 +11053,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1008944804874080618, guid: 15e31d89aa8b29444a85d6bec2f0b62b, type: 3}
       propertyPath: OnShow.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: OnShow
+      value: Show
       objectReference: {fileID: 0}
     - target: {fileID: 1008944804874080618, guid: 15e31d89aa8b29444a85d6bec2f0b62b, type: 3}
       propertyPath: OnShow.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
@@ -23979,6 +23979,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2363159845877492111, guid: e2edc47f69a7a354cb11abdbe785c366, type: 3}
+      propertyPath: m_fontAsset
+      value: 
+      objectReference: {fileID: 11400000, guid: feced1b33afb7e14bbefbd4e8a54de2e, type: 2}
+    - target: {fileID: 2363159845877492111, guid: e2edc47f69a7a354cb11abdbe785c366, type: 3}
+      propertyPath: m_sharedMaterial
+      value: 
+      objectReference: {fileID: 422638996557828857, guid: feced1b33afb7e14bbefbd4e8a54de2e, type: 2}
+    - target: {fileID: 2363159845877492111, guid: e2edc47f69a7a354cb11abdbe785c366, type: 3}
+      propertyPath: m_hasFontAssetChanged
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2545230996170507280, guid: e2edc47f69a7a354cb11abdbe785c366, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -26197,11 +26209,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8169096501705456726, guid: e2edc47f69a7a354cb11abdbe785c366, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -215
+      value: -291
       objectReference: {fileID: 0}
     - target: {fileID: 8169096501705456726, guid: e2edc47f69a7a354cb11abdbe785c366, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -224
+      value: -267
       objectReference: {fileID: 0}
     - target: {fileID: 8169096501705456726, guid: e2edc47f69a7a354cb11abdbe785c366, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
