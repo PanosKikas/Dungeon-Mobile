@@ -30,6 +30,8 @@ namespace DMT.UI.Screen
         [SerializeField] private CharacterStatsUI characterStatsUI;
 
         private readonly List<IDisposable> subscriptions = new();
+
+        private Character[] charactersInParty;
         
         private void Awake()
         {
@@ -40,21 +42,22 @@ namespace DMT.UI.Screen
         {
             subscriptions.DisposeAndClear();
             Hide();
-            var charactersInParty = player.Characters.ToArray();
-            for (int i = 0; i < characterPages.Length; ++i)
+            charactersInParty = player.Characters.ToArray();
+            for (var i = 0; i < characterPages.Length; ++i)
             {
                 if (i >= charactersInParty.Length)
                 {
                     characterTabs[i].Disable();
                     continue;
                 }
-                characterTabs[i].SetIcon(charactersInParty[i].Portrait);
-                characterPages[i].SubscribeTo(charactersInParty[i]);
+
+                var character = charactersInParty[i];
+                characterTabs[i].SetIcon(character.Portrait);
+                characterPages[i].SubscribeTo(character);
                 characterPages[i].OnShow.AsObservable().Subscribe(CharacterPageSelected).AddTo(subscriptions);
             }
 
             inventoryUI.Initialize(player.Inventory, charactersInParty);
-            selectedCharacter.Value = charactersInParty.First();
             characterStatsUI.SubscribeTo(selectedCharacter);
         }
 
@@ -71,6 +74,7 @@ namespace DMT.UI.Screen
         public void Hide()
         {
             canvasGroup.SetActive(false);
+            selectedCharacter.Value = null;
         }
     }
 }

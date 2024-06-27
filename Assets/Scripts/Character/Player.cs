@@ -10,8 +10,8 @@ public class Player : MonoBehaviour, IDamagable
     private const int MaxCharacterCount = 3;
     public IInventory Inventory { get; private set; }
     public IEnumerable<Character> Characters => characters.Where(c => c != null);
-
-    private Character[] characters = new Character[MaxCharacterCount];
+    
+    private readonly Character[] characters = new Character[MaxCharacterCount];
 
     [SerializeField]
     private InitialCharacterData[] initialCharacters;
