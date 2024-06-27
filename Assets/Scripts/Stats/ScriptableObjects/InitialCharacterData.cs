@@ -3,13 +3,14 @@ using UnityEngine.Events;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.Serialization;
 
 namespace DMT.Characters.Stats
 {
     [CreateAssetMenu(fileName ="Character", menuName ="Character/Character Data")]
     public class InitialCharacterData : ScriptableObject
     {
-        public string Name;
+        public string CharacterName;
         public int Level = 1;
 
         public Sprite Portrait;

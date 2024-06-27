@@ -9,7 +9,8 @@ namespace DMT.Characters
 {
     public class Character : IDamagable
     {
-        public string Name { get; private set; }
+        public string CharacterName { get; private set; }
+        public string NameId { get; private set; }
         public Sprite Portrait { get; private set; }
         public CharacterStats stats { get; }
 
@@ -19,7 +20,8 @@ namespace DMT.Characters
 
         public Character(InitialCharacterData initialStats, IInventory inventory = null)
         {
-            Name = initialStats.Name;
+            NameId = initialStats.name;
+            CharacterName = initialStats.CharacterName;
             Level = new ReactiveProperty<int>(initialStats.Level);
             stats = new(initialStats);
             Portrait = initialStats.Portrait;

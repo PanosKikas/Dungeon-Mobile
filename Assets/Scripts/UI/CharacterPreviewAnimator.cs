@@ -19,16 +19,16 @@ public class CharacterPreviewAnimator : MonoBehaviour
     public void ShowFor(Character character)
     {
         characterCamera.enabled = true;
-        if (_cachedAnimators.ContainsKey(character.Name))
+        if (_cachedAnimators.ContainsKey(character.NameId))
         {
-            animator.runtimeAnimatorController = _cachedAnimators[character.Name];
+            animator.runtimeAnimatorController = _cachedAnimators[character.NameId];
             return;
         }
-        string path = @"Assets/Animations/Character/" + character.Name;
+        string path = @"Assets/Animations/Character/" + character.NameId;
         string assetFound = AssetDatabase.FindAssets("t:RuntimeAnimatorController", new string[] { path }).FirstOrDefault();
         var animatorController = AssetDatabase.LoadAssetAtPath<RuntimeAnimatorController>(AssetDatabase.GUIDToAssetPath(assetFound));
         animator.runtimeAnimatorController = animatorController;
-        _cachedAnimators[character.Name] = animatorController;
+        _cachedAnimators[character.NameId] = animatorController;
     }
 
     public void Hide()

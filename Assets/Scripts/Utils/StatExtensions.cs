@@ -34,7 +34,7 @@ namespace Utils
                 case StatType.MagicResistance:
                     return "MGK RES";
                 case StatType.PhysicalDefense:
-                    return "PHYSICAL DEF";
+                    return "PHYS DEF";
                 default:
                     throw new ArgumentException($"No stat of type {statType} found");
             }

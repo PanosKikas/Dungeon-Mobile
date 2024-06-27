@@ -12,21 +12,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b723ed41d3ce26648a01c6e5551427a1, type: 3}
   m_Name: Gunwoman
   m_EditorClassIdentifier: 
-  Name: Gunwoman
+  CharacterName: Belle Starr
   Level: 1
   Portrait: {fileID: 21300000, guid: 91d7f08413e45fa48bc48d235f8e2142, type: 3}
   baseMaxHealthStat: 100
   baseAttackDamageStat: 100
   baseAutoAttackRateStat: 10
   baseManualAttackRateStat: 10
-  baseMaxEnduranceStat: 1
-  baseMaxManaStat: 1
-  baseEnduranceRegenStat: 1
-  baseCriticalDamageStat: 1
-  baseCriticalChanceStat: 1
-  baseMagicDamageStat: 1
-  baseEvasionChanceStat: 1
-  basePhysicalDefenseStat: 1
-  baseMagicalResistanceStat: 1
+  baseMaxEnduranceStat: 30
+  baseMaxManaStat: 5
+  baseEnduranceRegenStat: 3
+  baseCriticalDamageStat: 4
+  baseCriticalChanceStat: 7
+  baseMagicDamageStat: 3
+  baseEvasionChanceStat: 5
+  basePhysicalDefenseStat: 6
+  baseMagicalResistanceStat: 2
   baseItemDropRateStat: 1
-  baseMobilityStat: 1
+  baseMobilityStat: 10

@@ -21,6 +21,8 @@ namespace DMT.UI.Screen
         [SerializeField]
         private CharacterStatsUI characterStatsUI;
 
+        [SerializeField] private TextMeshProUGUI nameText;
+        
         private CharacterStats characterStats;
 
         public void SetTo(Character character)
@@ -28,7 +30,7 @@ namespace DMT.UI.Screen
             characterStats = character.stats;
             statBar.SubscribeTo(characterStats.CurrentHealth, characterStats.maxHealthStat.AsObservable());
             levelText.text = string.Format($"Level {character.Level}");
-            
+            nameText.text = character.CharacterName;
         }
 
         public void OpenCharacterStatsPanel()
