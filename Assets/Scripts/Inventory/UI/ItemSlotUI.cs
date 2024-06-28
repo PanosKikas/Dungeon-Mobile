@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using DG.Tweening;
 using System;
 using System.Collections.Generic;
+using Inventory;
 using UniRx;
 
 public class ItemSlotUI : MonoBehaviour
@@ -28,7 +29,7 @@ public class ItemSlotUI : MonoBehaviour
         rect = GetComponent<RectTransform>();
     }
 
-    public void Shake()
+    public void InvalidUse()
     {
         rect.DOShakePosition(.5f, 2, 40);
     }

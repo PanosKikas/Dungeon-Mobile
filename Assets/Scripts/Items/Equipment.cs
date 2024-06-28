@@ -46,9 +46,13 @@ public class Equipment : Item, IUsable, IEquipable
         modifiersAdded.Clear();
     }
 
-    public bool TryUseOn(Character character)
+    public bool CanBeUsedOn(Character character)
+    {
+        return true;
+    }
+
+    public void UseOn(Character character)
     {
         character.Equip(this);
-        return true;
     }
 }

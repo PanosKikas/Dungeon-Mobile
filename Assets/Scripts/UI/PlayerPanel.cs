@@ -31,7 +31,7 @@ namespace DMT.UI.Screen
 
         private readonly List<IDisposable> subscriptions = new();
 
-        private Character[] charactersInParty;
+        private CharacterParty characterParty;
         
         private void Awake()
         {
@@ -42,7 +42,8 @@ namespace DMT.UI.Screen
         {
             subscriptions.DisposeAndClear();
             Hide();
-            charactersInParty = player.Characters.ToArray();
+            characterParty = player.characterParty;
+            var charactersInParty = characterParty.ToArray(); 
             for (var i = 0; i < characterPages.Length; ++i)
             {
                 if (i >= charactersInParty.Length)
@@ -57,13 +58,14 @@ namespace DMT.UI.Screen
                 characterPages[i].OnShow.AsObservable().Subscribe(CharacterPageSelected).AddTo(subscriptions);
             }
 
-            inventoryUI.Initialize(player.Inventory, charactersInParty);
+            inventoryUI.InitializeTo(player.Inventory, characterParty);
             characterStatsUI.SubscribeTo(selectedCharacter);
         }
 
         private void CharacterPageSelected(Character character)
         {
             selectedCharacter.Value = character;
+            
         }
 
         public void Show()

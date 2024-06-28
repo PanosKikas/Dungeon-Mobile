@@ -28,12 +28,14 @@ public class PickupObject : MonoBehaviour
         spriteRenderer.sprite = collectable.Icon;
     }
 
-    private void OnCollisionEnter2D(Collision2D collision)
+    private void OnCollisionStay2D(Collision2D collision)
     {
         if (collision.collider.CompareTag("Player") && collision.gameObject.TryGetComponent<Player>(out var player))
         {
-            player.Pickup(item);
-            Destroy(gameObject);
+            if (player.Pickup(item))
+            {
+                Destroy(gameObject);
+            }
         }
     }
 
@@ -55,7 +57,12 @@ public class PickupObject : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (currentTarget == null)
+        if (currentTarget is null)
+        {
+            return;
+        }
+
+        if (currentTarget.GetComponent<Player>().IsInventoryFull())
         {
             return;
         }

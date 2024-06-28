@@ -57,19 +57,18 @@ public class CharacterEquipment
 
     public void Equip(IEquipable equipment)
     {
-        int equippedIndex = (int)equipment.EquipmentType;
+        var equippedIndex = (int)equipment.EquipmentType;
         var slot = EquipmentSlots[equippedIndex];
         IEquipable oldItem = null;
         if (!slot.IsEmpty())
         {
             oldItem = slot.CurrentEquippedItem.Value;
         }
-
-        slot.Unequip();
+        
         slot.Equip(equipment);
         if (oldItem != null)
         {
-            inventory?.TryStore(oldItem);
+            inventory?.Store(oldItem);
         }
     }
 
@@ -77,6 +76,6 @@ public class CharacterEquipment
     {
         var itemOnSlot = slot.CurrentEquippedItem.Value;
         slot.Unequip();
-        inventory?.TryStore(itemOnSlot);
+        inventory?.Store(itemOnSlot);
     }
 }

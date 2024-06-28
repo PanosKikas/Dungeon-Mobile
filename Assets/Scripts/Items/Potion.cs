@@ -19,17 +19,26 @@ public class Potion : Item, IUsable
         this.potionData = potionData;
     }
 
-    public bool TryUseOn(Character character)
+    public bool CanBeUsedOn(Character character)
     {
         switch (potionData.type)
         {
             case PotionType.Health:
-                if (character.IsFullHealth())
-                {
-                    return false;
-                }
-                character.Heal(potionData.Amount);
+                return !character.IsFullHealth();
+            case PotionType.Mana:
+            case PotionType.Endurance:
+            default:
                 return true;
+        }
+    }
+
+    public void UseOn(Character character)
+    {
+        switch (potionData.type)
+        {
+            case PotionType.Health:
+                character.Heal(potionData.Amount);
+                break;
             case PotionType.Mana:
                 Debug.Log("Restoring mana on " + character);
                 break;
@@ -40,6 +49,5 @@ public class Potion : Item, IUsable
                 Debug.LogError("No potion of type " + potionData.type + " found.");
                 break;
         }
-        return true;
     }
 }

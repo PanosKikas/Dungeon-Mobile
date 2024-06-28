@@ -6,5 +6,6 @@ using UnityEngine;
 
 public interface IUsable
 {
-    bool TryUseOn(Character character);
+    bool CanBeUsedOn(Character character);
+    void UseOn(Character character);
 }

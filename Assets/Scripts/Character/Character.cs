@@ -2,6 +2,7 @@
 using DMT.Characters.Stats;
 using UniRx;
 using UnityEngine;
+using UnityEngine.Assertions;
 using UnityEngine.Events;
 using UnityEngine.Serialization;
 
@@ -18,8 +19,11 @@ namespace DMT.Characters
 
         public readonly ReactiveProperty<int> Level;
 
-        public Character(InitialCharacterData initialStats, IInventory inventory = null)
+        private readonly IInventory inventory;
+
+        public Character(InitialCharacterData initialStats, IInventory itemStorage = null)
         {
+            inventory = itemStorage;
             NameId = initialStats.name;
             CharacterName = initialStats.CharacterName;
             Level = new ReactiveProperty<int>(initialStats.Level);
@@ -63,6 +67,17 @@ namespace DMT.Characters
         public void UnequipFrom(EquipmentSlot slot)
         {
             Equipment.Unequip(slot);
+        }
+
+        public void TryUse(IUsable usable)
+        {
+            Assert.IsNotNull(usable, "Trying to use null item");
+            usable.UseOn(this);
+            
+            if (inventory != null && usable is IStorable storable && inventory.ContainsItem(storable))
+            {
+                inventory.RemoveItem(storable);
+            }
         }
     }
 }

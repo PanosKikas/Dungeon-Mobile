@@ -9,36 +9,39 @@ public class Player : MonoBehaviour, IDamagable
 {
     private const int MaxCharacterCount = 3;
     public IInventory Inventory { get; private set; }
-    public IEnumerable<Character> Characters => characters.Where(c => c != null);
-    
-    private readonly Character[] characters = new Character[MaxCharacterCount];
 
-    [SerializeField]
-    private InitialCharacterData[] initialCharacters;
+    public CharacterParty characterParty { get; private set; }
+
+    [SerializeField] private InitialCharacterData[] initialCharacters;
 
     private void Awake()
     {
-        Inventory = new Inventory();
-        for (int i = 0; i < initialCharacters.Length; ++i)
+        characterParty = new CharacterParty();
+        Inventory = new Inventory.Inventory();
+        foreach (var characterData in initialCharacters)
         {
-            characters[i] = new Character(initialCharacters[i], Inventory);
+            characterParty.Add(new Character(characterData, Inventory));
         }
     }
 
-    public void Pickup(ICollectable item)
+    public bool Pickup(ICollectable item)
     {
-        if (item is IStorable storable)
+        if (item is IStorable storable && !Inventory.IsFull())
         {
-            Inventory.TryStore(storable);
+            Inventory.Store(storable);
+            return true;
         }
-        else if (item is IUsable usable)
-        {
-            usable.TryUseOn(characters.First());
-        }
+
+        return false;
     }
 
     public void TakeDamage(int damage)
     {
-        characters.First().TakeDamage(damage);
+        characterParty.First().TakeDamage(damage);
+    }
+
+    public bool IsInventoryFull()
+    {
+        return Inventory.IsFull();
     }
 }

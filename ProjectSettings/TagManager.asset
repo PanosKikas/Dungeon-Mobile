@@ -8,6 +8,7 @@ TagManager:
   - Projectile
   - PlayerBattleHolder
   - BattleManager
+  - Popups
   layers:
   - Default
   - TransparentFX

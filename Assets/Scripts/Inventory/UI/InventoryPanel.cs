@@ -5,31 +5,38 @@ using UnityEngine;
 using UnityEngine.UI;
 using DMT.Characters;
 using System.Linq;
+using Inventory;
 using UniRx;
+using UnityEngine.Assertions;
+using UnityEngine.Serialization;
 
 public class InventoryPanel : MonoBehaviour
 {
-    private Dictionary<ItemSlot, ItemSlotUI> usedSlots = new();
+    private readonly Dictionary<ItemSlot, ItemSlotUI> usedSlots = new();
     private List<ItemSlotUI> freeSlots = new();
 
     [SerializeField] private Transform slotsParent;
 
     [SerializeField] private ItemDetailsPanel itemDetails;
-
+    [FormerlySerializedAs("characterSelectPopup")] [SerializeField] private CharacterSelectPopup characterSelectPopupPrefab;
+    
+    private readonly Dictionary<ItemSlotUI, IList<IDisposable>> slotSubscriptions = new();
     private readonly List<IDisposable> subscriptions = new();
 
-    private readonly Dictionary<ItemSlotUI, IList<IDisposable>> slotSubscriptions = new();
     private IInventory inventory;
-    private Character selectedCharacter => characters.First();
-    private ItemSlotUI currentSelectedSlot;
-    private IEnumerable<Character> characters;
 
+    private ItemSlotUI currentSelectedSlot;
+    private CharacterParty characterParty;
+    private List<Character> validUseCharacters = new();
+    private IUsable itemAwaitingToBeUsed;
+    private IDisposable awaitingCharacterSelectSubscription;
+    
     private void Awake()
     {
         freeSlots = slotsParent.GetComponentsInChildren<ItemSlotUI>().ToList();
     }
 
-    public void Initialize(IInventory inventoryModel, IEnumerable<Character> characters)
+    public void InitializeTo(IInventory inventoryModel, CharacterParty characters)
     {
         if (inventoryModel == null)
         {
@@ -38,14 +45,8 @@ public class InventoryPanel : MonoBehaviour
         }
 
         inventory = inventoryModel;
-        this.characters = characters;
-        SubscribeTo(inventoryModel);
-    }
-
-    private void SubscribeTo(IInventory inventory)
-    {
-        subscriptions.Clear();
-        this.inventory = inventory;
+        characterParty = characters;
+        subscriptions.DisposeAndClear();
         inventory.InventoryItems.ObserveAdd()
             .Subscribe(x => OnItemSlotAdded(x.Value)).AddTo(subscriptions);
         inventory.InventoryItems.ObserveRemove()
@@ -65,7 +66,7 @@ public class InventoryPanel : MonoBehaviour
     private void OnItemSlotRemoved(ItemSlot slot)
     {
         var slotUI = usedSlots[slot];
-        
+
         if (currentSelectedSlot == slotUI)
         {
             itemDetails.EmptyDescription();
@@ -86,9 +87,9 @@ public class InventoryPanel : MonoBehaviour
             oldSubscriptions.DisposeAndClear();
             slotSubscriptions.Remove(itemSlotUi);
         }
-        
+
         List<IDisposable> disposables = new List<IDisposable>();
-        
+
         itemSlotUi.OnClicked.Subscribe(OnItemSlotClicked).AddTo(disposables);
         itemSlotUi.OnHeld.Subscribe(OnItemSlotHeld).AddTo(disposables);
         slotSubscriptions.Add(itemSlotUi, disposables);
@@ -115,28 +116,52 @@ public class InventoryPanel : MonoBehaviour
 
     private void OnItemSlotHeld(ItemSlotUI itemSlotUI)
     {
-        if (itemSlotUI.Item == null)
+        Assert.IsNotNull(itemSlotUI, "Item slot held is null, this should never happen.");
+
+        validUseCharacters.Clear();
+
+        if (itemSlotUI.Item is IUsable usable)
         {
-            throw new InvalidOperationException("Item slot held is null");
+            validUseCharacters = FindAllCharactersThatCanUse(usable).ToList();
         }
 
-        if (itemSlotUI.Item is IUsable usable && usable.TryUseOn(selectedCharacter))
+        if (!validUseCharacters.Any())
         {
-            inventory.RemoveItem(itemSlotUI.Item);
+            itemSlotUI.InvalidUse();
         }
         else
         {
-            itemSlotUI.Shake();
+            awaitingCharacterSelectSubscription?.Dispose();
+            itemAwaitingToBeUsed = itemSlotUI.Item as IUsable;
+            var popupParent = GameObject.FindWithTag("Popups");
+            CharacterSelectPopup popup = Instantiate(characterSelectPopupPrefab, popupParent.transform);
+            awaitingCharacterSelectSubscription = popup.CharacterSelected.Subscribe(CharacterSelected);
+            popup.InitializeTo(validUseCharacters, itemSlotUI.transform.position + Vector3.up * 75f);
         }
+    }
+
+    private IEnumerable<Character> FindAllCharactersThatCanUse(IUsable usable)
+    {
+        return characterParty.Where(c => usable.CanBeUsedOn(c));
+    }
+
+    private void CharacterSelected(Character character)
+    {
+        awaitingCharacterSelectSubscription?.Dispose();
+        
+        Assert.IsTrue(validUseCharacters.Any() && itemAwaitingToBeUsed != null);
+        character.TryUse(itemAwaitingToBeUsed);
+        itemAwaitingToBeUsed = null;
+        validUseCharacters.Clear();
     }
 
     private void OnDestroy()
     {
-        foreach (var slotSubscription in slotSubscriptions.Values)
+        foreach (var slotSubscriptionList in slotSubscriptions.Values)
         {
-            slotSubscription.DisposeAndClear();
+            slotSubscriptionList.DisposeAndClear();
         }
-  
+
         subscriptions.DisposeAndClear();
     }
 }
