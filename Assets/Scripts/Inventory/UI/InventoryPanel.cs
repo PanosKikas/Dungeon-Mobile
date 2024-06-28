@@ -18,8 +18,10 @@ public class InventoryPanel : MonoBehaviour
     [SerializeField] private Transform slotsParent;
 
     [SerializeField] private ItemDetailsPanel itemDetails;
-    [FormerlySerializedAs("characterSelectPopup")] [SerializeField] private CharacterSelectPopup characterSelectPopupPrefab;
-    
+
+    [FormerlySerializedAs("characterSelectPopup")] [SerializeField]
+    private CharacterSelectPopup characterSelectPopupPrefab;
+
     private readonly Dictionary<ItemSlotUI, IList<IDisposable>> slotSubscriptions = new();
     private readonly List<IDisposable> subscriptions = new();
 
@@ -30,7 +32,7 @@ public class InventoryPanel : MonoBehaviour
     private List<Character> validUseCharacters = new();
     private IUsable itemAwaitingToBeUsed;
     private IDisposable awaitingCharacterSelectSubscription;
-    
+
     private void Awake()
     {
         freeSlots = slotsParent.GetComponentsInChildren<ItemSlotUI>().ToList();
@@ -128,16 +130,15 @@ public class InventoryPanel : MonoBehaviour
         if (!validUseCharacters.Any())
         {
             itemSlotUI.InvalidUse();
+            return;
         }
-        else
-        {
-            awaitingCharacterSelectSubscription?.Dispose();
-            itemAwaitingToBeUsed = itemSlotUI.Item as IUsable;
-            var popupParent = GameObject.FindWithTag("Popups");
-            CharacterSelectPopup popup = Instantiate(characterSelectPopupPrefab, popupParent.transform);
-            awaitingCharacterSelectSubscription = popup.CharacterSelected.Subscribe(CharacterSelected);
-            popup.InitializeTo(validUseCharacters, itemSlotUI.transform.position + Vector3.up * 75f);
-        }
+
+        itemAwaitingToBeUsed = itemSlotUI.Item as IUsable;
+        awaitingCharacterSelectSubscription?.Dispose();
+        var popupParent = GameObject.FindWithTag("Popups");
+        CharacterSelectPopup popup = Instantiate(characterSelectPopupPrefab, popupParent.transform);
+        awaitingCharacterSelectSubscription = popup.CharacterSelected.Subscribe(CharacterSelected);
+        popup.InitializeTo(validUseCharacters, itemSlotUI.transform.position + Vector3.up * 75f);
     }
 
     private IEnumerable<Character> FindAllCharactersThatCanUse(IUsable usable)
@@ -148,7 +149,7 @@ public class InventoryPanel : MonoBehaviour
     private void CharacterSelected(Character character)
     {
         awaitingCharacterSelectSubscription?.Dispose();
-        
+
         Assert.IsTrue(validUseCharacters.Any() && itemAwaitingToBeUsed != null);
         character.TryUse(itemAwaitingToBeUsed);
         itemAwaitingToBeUsed = null;

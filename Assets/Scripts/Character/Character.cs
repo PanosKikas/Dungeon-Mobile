@@ -20,15 +20,17 @@ namespace DMT.Characters
         public readonly ReactiveProperty<int> Level;
 
         private readonly IInventory inventory;
+        public CharacterClass CharacterClass { get; }
 
-        public Character(InitialCharacterData initialStats, IInventory itemStorage = null)
+        public Character(InitialCharacterData data, IInventory itemStorage = null)
         {
             inventory = itemStorage;
-            NameId = initialStats.name;
-            CharacterName = initialStats.CharacterName;
-            Level = new ReactiveProperty<int>(initialStats.Level);
-            stats = new(initialStats);
-            Portrait = initialStats.Portrait;
+            CharacterClass = data.CharacterClass;
+            NameId = data.name;
+            CharacterName = data.CharacterName;
+            Level = new ReactiveProperty<int>(data.Level);
+            stats = new(data);
+            Portrait = data.Portrait;
             Equipment = new CharacterEquipment(this, inventory);
         }
 

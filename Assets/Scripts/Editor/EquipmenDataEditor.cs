@@ -5,6 +5,7 @@ using UnityEditor;
 using System;
 using DMT.Characters.Stats;
 using System.Reflection;
+using DMT.Characters;
 
 [CustomEditor(typeof(EquipmentData), true)]
 public class EquipmenDataEditor : Editor
@@ -25,6 +26,15 @@ public class EquipmenDataEditor : Editor
         var selectedType = EditorGUILayout.EnumPopup(equipment.EquipmentType);
         equipment.EquipmentType = (EquipmentType)selectedType;
         EditorGUILayout.EndHorizontal();
+        
+        EditorGUILayout.BeginHorizontal();
+        EditorGUILayout.LabelField("Required Class");
+        var selectedClass = EditorGUILayout.EnumPopup(equipment.CharacterClass);
+        equipment.CharacterClass = (CharacterClass)selectedClass;
+        EditorGUILayout.EndHorizontal();
+
+        equipment.MinLevel = EditorGUILayout.IntField("Min Equip Level", equipment.MinLevel);
+        
         EditorGUILayout.Space();
        
         EditorGUILayout.LabelField("Modifiers List");

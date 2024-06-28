@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using DMT.Characters;
 using DMT.Characters.Stats;
 using UnityEngine;
 
@@ -7,6 +8,10 @@ public class EquipmentData : ItemData
 {
     public EquipmentType EquipmentType;
 
+    public CharacterClass CharacterClass = CharacterClass.Any;
+
+    public int MinLevel = 1;
+    
     #region StatValuePair
     [System.Serializable]
     public class StatValuePair

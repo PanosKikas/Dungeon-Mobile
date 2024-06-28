@@ -214,7 +214,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 853a4297e101f6948b87360e2cba5c82, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  requiredHoldTime: 0.7
+  requiredHoldTime: 0.4
   OnClicked:
     m_PersistentCalls:
       m_Calls:

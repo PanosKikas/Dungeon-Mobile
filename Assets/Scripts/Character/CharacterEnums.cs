@@ -1,11 +1,9 @@
 namespace DMT.Characters
 {
-    public class CharacterEnums
+    public enum CharacterClass
     {
-        public enum CharacterClass
-        {
-            Gunslinger,
-            Warrior
-        }
+        Any,
+        Gunslinger,
+        Warrior
     }
 }

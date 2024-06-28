@@ -12,7 +12,7 @@ namespace DMT.Characters.Stats
     {
         public string CharacterName;
         public int Level = 1;
-
+        public CharacterClass CharacterClass = CharacterClass.Gunslinger;
         public Sprite Portrait;
 
         [Header("Initial Stats")]

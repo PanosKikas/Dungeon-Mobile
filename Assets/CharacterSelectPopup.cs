@@ -30,7 +30,6 @@ public class CharacterSelectPopup : MonoBehaviour
 
     private void OnCharacterSelected(Character character)
     {
-        Debug.Log("Character was selected " + character.CharacterName);
         CharacterSelected.OnNext(character);
         Hide();
     }

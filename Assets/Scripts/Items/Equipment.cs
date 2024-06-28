@@ -9,6 +9,10 @@ public class Equipment : Item, IUsable, IEquipable
 {
     private EquipmentData data;
 
+    private int minEquipLevel => data.MinLevel;
+
+    private CharacterClass requiredCharacterClass => data.CharacterClass;
+    
     public override string Name => data.Name;
 
     public override string Description => data.Description;
@@ -48,7 +52,22 @@ public class Equipment : Item, IUsable, IEquipable
 
     public bool CanBeUsedOn(Character character)
     {
-        return true;
+        return SatisfiesClassRequirement(character) && SatisfiesMinLevel(character);
+    }
+
+    private bool SatisfiesClassRequirement(Character character)
+    {
+        if (requiredCharacterClass == CharacterClass.Any)
+        {
+            return true;
+        }
+
+        return character.CharacterClass == requiredCharacterClass;
+    }
+
+    private bool SatisfiesMinLevel(Character character)
+    {
+        return character.Level.Value >= minEquipLevel;
     }
 
     public void UseOn(Character character)
