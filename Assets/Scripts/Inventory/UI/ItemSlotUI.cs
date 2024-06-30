@@ -44,7 +44,7 @@ public class ItemSlotUI : MonoBehaviour
         EnableInteraction();
     }
 
-    public void Empty()
+    public void Clear()
     {
         itemIcon.sprite = null;
         DisableInteraction();

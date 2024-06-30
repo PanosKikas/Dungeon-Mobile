@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UniRx;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 public class EquipmentSlot
 {
@@ -34,22 +35,20 @@ public class EquipmentSlot
 
     public bool IsEmpty()
     {
-        return CurrentEquippedItem == null;
+        return CurrentEquippedItem.Value == null;
     }
 }
 
 public class CharacterEquipment
 {
-    public EquipmentSlot[] EquipmentSlots { get; } = new EquipmentSlot[totalSlots];
-    private IInventory inventory;
-    private const int totalSlots = 5;
-    private Character character;
+    private const int TotalSlots = 5;
+    public EquipmentSlot[] EquipmentSlots { get; } = new EquipmentSlot[TotalSlots];
+    private readonly IInventory inventory;
 
     public CharacterEquipment(Character character, IInventory inventory = null)
     {
-        this.character = character;
         this.inventory = inventory;
-        for (int i = 0; i < EquipmentSlots.Length; ++i)
+        for (var i = 0; i < EquipmentSlots.Length; ++i)
         {
             EquipmentSlots[i] = new EquipmentSlot(character);
         }
@@ -75,6 +74,7 @@ public class CharacterEquipment
     public void Unequip(EquipmentSlot slot)
     {
         var itemOnSlot = slot.CurrentEquippedItem.Value;
+        Assert.IsNotNull(itemOnSlot, "Cannot unequip slot item because it is empty.");
         slot.Unequip();
         inventory?.Store(itemOnSlot);
     }

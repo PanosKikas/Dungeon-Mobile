@@ -15,13 +15,13 @@ public class EquipmentSlotUI : MonoBehaviour
 
     public EquipmentSlot equipmentSlot { get; private set; }
 
-    public Action<EquipmentSlotUI> OnSlotHeld;
+    public Subject<EquipmentSlotUI> OnSlotHeld = new();
 
     private IEquipable equipment => equipmentSlot?.CurrentEquippedItem.Value;
 
     private IDisposable equippedItemSubscription;
     
-    public void SubscribeTo(EquipmentSlot slot)
+    public void SetTo(EquipmentSlot slot)
     {
         equippedItemSubscription?.Dispose();
         equipmentSlot = slot;
@@ -56,7 +56,7 @@ public class EquipmentSlotUI : MonoBehaviour
         {
             return;
         }
-        OnSlotHeld?.Invoke(this);
+        OnSlotHeld.OnNext(this);
     }
 
     private void OnDestroy()

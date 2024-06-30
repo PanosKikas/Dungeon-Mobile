@@ -27,8 +27,8 @@ namespace DMT.UI.Screen
 
         public void SetTo(Character character)
         {
-            characterStats = character.stats;
-            statBar.SubscribeTo(characterStats.CurrentHealth, characterStats.maxHealthStat.AsObservable());
+            characterStats = character.Stats;
+            statBar.Set(characterStats.CurrentHealth, characterStats.MaxHealthStat.AsObservable());
             levelText.text = string.Format($"Level {character.Level}");
             nameText.text = character.CharacterName;
         }

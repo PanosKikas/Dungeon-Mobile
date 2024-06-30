@@ -25,9 +25,10 @@ namespace DMT.UI.Screen
         [SerializeField]
         private TabButtonUI[] characterTabs;
 
-        private readonly ReactiveProperty<Character> selectedCharacter = new();
+        private readonly ReactiveProperty<Character> currentSelectedCharacter = new();
 
-        [SerializeField] private CharacterStatsUI characterStatsUI;
+        [SerializeField]
+        private CharacterStatsUI characterStatsUI;
 
         private readonly List<IDisposable> subscriptions = new();
 
@@ -54,17 +55,17 @@ namespace DMT.UI.Screen
 
                 var character = charactersInParty[i];
                 characterTabs[i].SetIcon(character.Portrait);
-                characterPages[i].SubscribeTo(character);
+                characterPages[i].Set(character);
                 characterPages[i].OnShow.AsObservable().Subscribe(CharacterPageSelected).AddTo(subscriptions);
             }
 
             inventoryUI.InitializeTo(player.Inventory, characterParty);
-            characterStatsUI.SubscribeTo(selectedCharacter);
+            characterStatsUI.SubscribeTo(currentSelectedCharacter);
         }
 
         private void CharacterPageSelected(Character character)
         {
-            selectedCharacter.Value = character;
+            currentSelectedCharacter.Value = character;
             
         }
 
@@ -76,7 +77,7 @@ namespace DMT.UI.Screen
         public void Hide()
         {
             canvasGroup.SetActive(false);
-            selectedCharacter.Value = null;
+            currentSelectedCharacter.Value = null;
         }
     }
 }

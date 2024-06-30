@@ -28,10 +28,9 @@ namespace DMT.Characters.Stats
         public readonly ReactiveProperty<int> CurrentHealth;
         public int CurrentEndurance { get; set; }
 
-        public readonly CharacterStat maxHealthStat;
-        public int MaxHealth => (int)maxHealthStat.Value;
-        public readonly CharacterStat attackDamageStat;
-
+        public readonly CharacterStat MaxHealthStat;
+        public int MaxHealth => (int)MaxHealthStat.Value;
+        public readonly CharacterStat AttackDamageStat;
         public readonly CharacterStat AutoAttackRateStat;
         public readonly CharacterStat MaxEnduranceStat;
         public readonly CharacterStat MaxManaStat;
@@ -48,8 +47,8 @@ namespace DMT.Characters.Stats
 
         public CharacterStats(InitialCharacterData initialData)
         {
-            maxHealthStat = new(initialData.baseMaxHealthStat, StatType.MaxHealth);
-            attackDamageStat = new(initialData.baseAttackDamageStat, StatType.AttackDamage);
+            MaxHealthStat = new(initialData.baseMaxHealthStat, StatType.MaxHealth);
+            AttackDamageStat = new(initialData.baseAttackDamageStat, StatType.AttackDamage);
             AutoAttackRateStat = new(initialData.baseAutoAttackRateStat, StatType.AttackSpeed);
             MaxEnduranceStat = new(initialData.baseMaxEnduranceStat, StatType.MaxEndurance);
             MaxManaStat = new(initialData.baseMaxManaStat, StatType.MaxMana);
@@ -64,8 +63,8 @@ namespace DMT.Characters.Stats
             
             statsMapping = new Dictionary<StatType, CharacterStat>()
             {
-                { maxHealthStat.StatType, maxHealthStat },
-                { attackDamageStat.StatType, attackDamageStat },
+                { MaxHealthStat.StatType, MaxHealthStat },
+                { AttackDamageStat.StatType, AttackDamageStat },
                 { AutoAttackRateStat.StatType, AutoAttackRateStat },
                 { MaxEnduranceStat.StatType, MaxEnduranceStat },
                 { EnduranceRegenStat.StatType, EnduranceRegenStat },
@@ -79,7 +78,7 @@ namespace DMT.Characters.Stats
                 { MagicalResistanceStat.StatType, MagicalResistanceStat }
             };
 
-            CurrentHealth = new ReactiveProperty<int>((int)maxHealthStat.Value);
+            CurrentHealth = new ReactiveProperty<int>((int)MaxHealthStat.Value);
             CurrentEndurance = (int)MaxEnduranceStat.Value;
         }
 

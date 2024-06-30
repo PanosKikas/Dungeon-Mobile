@@ -5,14 +5,16 @@ using System.Collections.Generic;
 using UnityEngine;
 using DMT.UI.Components;
 using UniRx;
+using UnityEngine.Assertions;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace DMT.UI.Screen
 {
     public class CharacterPanel : MonoBehaviour
     {
-        [SerializeField]
-        private EquipmentPanel equipmentPanel;
+        [FormerlySerializedAs("equipmentPanel")] [SerializeField]
+        private CharacterEquipmentPanel characterEquipmentPanel;
 
         [SerializeField]
         private CharacterPreviewUI characterPreview;
@@ -25,20 +27,16 @@ namespace DMT.UI.Screen
         public Subject<Character> OnShow = new();
         public Subject<Character> OnHide = new();
 
-        public void SubscribeTo(Character character)
+        public void Set(Character character)
         {
             this.character = character;
-            equipmentPanel.SubscribeTo(character);
+            characterEquipmentPanel.SetTo(character);
             characterPreview.SetTo(character);
         }
 
         public void Show()
         {
-            if (character == null)
-            {
-                throw new ArgumentException("No character for this page.");
-            }
-            
+            Assert.IsNotNull(character, "Showing character UI for null character.");
             characterPreviewAnimator.ShowFor(character);
             OnShow.OnNext(character);
         }

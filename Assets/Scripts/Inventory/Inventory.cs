@@ -20,7 +20,7 @@ namespace Inventory
                 return;
             }
 
-            if (Item != null && !itemToStore.Equals(Item))
+            if (!itemToStore.Equals(Item))
             {
                 throw new InvalidOperationException("Cannot store different items to the same inventory slot");
             }

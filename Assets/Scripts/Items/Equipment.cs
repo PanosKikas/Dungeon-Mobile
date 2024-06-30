@@ -7,7 +7,7 @@ using UnityEngine;
 
 public class Equipment : Item, IUsable, IEquipable
 {
-    private EquipmentData data;
+    private readonly EquipmentData data;
 
     private int minEquipLevel => data.MinLevel;
 
@@ -21,11 +21,11 @@ public class Equipment : Item, IUsable, IEquipable
 
     public EquipmentType EquipmentType => data.EquipmentType;
 
-    private Dictionary<StatType, StatModifier> modifiersAdded = new();
+    private readonly Dictionary<StatType, StatModifier> modifiersAdded = new();
 
     public Equipment(EquipmentData equipableSO)
     {
-        this.data = equipableSO;
+        data = equipableSO;
     }
 
     public void EquipOn(Character character)
@@ -33,7 +33,7 @@ public class Equipment : Item, IUsable, IEquipable
         modifiersAdded.Clear();
         foreach (var modifier in data.Modifiers)
         {
-            var characterStat = character.stats.GetStatOfType(modifier.StatType);
+            var characterStat = character.Stats.GetStatOfType(modifier.StatType);
             var statModifier = new StatModifier(modifier.Value);
             characterStat.AddModifier(statModifier);
             modifiersAdded.Add(modifier.StatType, statModifier);
@@ -44,7 +44,7 @@ public class Equipment : Item, IUsable, IEquipable
     {
         foreach (var kvp in modifiersAdded)
         {
-            var characterStat = character.stats.GetStatOfType(kvp.Key);
+            var characterStat = character.Stats.GetStatOfType(kvp.Key);
             characterStat.RemoveModifier(kvp.Value);
         }
         modifiersAdded.Clear();

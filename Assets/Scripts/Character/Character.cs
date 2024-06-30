@@ -3,8 +3,6 @@ using DMT.Characters.Stats;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
-using UnityEngine.Events;
-using UnityEngine.Serialization;
 
 namespace DMT.Characters
 {
@@ -13,7 +11,7 @@ namespace DMT.Characters
         public string CharacterName { get; private set; }
         public string NameId { get; private set; }
         public Sprite Portrait { get; private set; }
-        public CharacterStats stats { get; }
+        public CharacterStats Stats { get; }
 
         public CharacterEquipment Equipment { get; }
 
@@ -29,12 +27,12 @@ namespace DMT.Characters
             NameId = data.name;
             CharacterName = data.CharacterName;
             Level = new ReactiveProperty<int>(data.Level);
-            stats = new(data);
+            Stats = new CharacterStats(data);
             Portrait = data.Portrait;
             Equipment = new CharacterEquipment(this, inventory);
         }
 
-        public bool IsAlive => stats.CurrentHealth.Value > 0;
+        public bool IsAlive => Stats.CurrentHealth.Value > 0;
 
         private void Die()
         {
@@ -43,17 +41,17 @@ namespace DMT.Characters
 
         public bool IsFullHealth()
         {
-            return stats.CurrentHealth.Value == stats.MaxHealth;
+            return Stats.CurrentHealth.Value == Stats.MaxHealth;
         }
-
+        
         public void Heal(int amount)
         {
-            stats.CurrentHealth.Value = Mathf.Min(stats.CurrentHealth.Value + amount, stats.MaxHealth);
+            Stats.CurrentHealth.Value = Mathf.Min(Stats.CurrentHealth.Value + amount, Stats.MaxHealth);
         }
 
         public void TakeDamage(int damage)
         {
-            stats.CurrentHealth.Value = Mathf.Max((stats.CurrentHealth.Value - damage), 0);
+            Stats.CurrentHealth.Value = Mathf.Max((Stats.CurrentHealth.Value - damage), 0);
 
             if (!IsAlive)
             {
@@ -71,7 +69,7 @@ namespace DMT.Characters
             Equipment.Unequip(slot);
         }
 
-        public void TryUse(IUsable usable)
+        public void Use(IUsable usable)
         {
             Assert.IsNotNull(usable, "Trying to use null item");
             usable.UseOn(this);

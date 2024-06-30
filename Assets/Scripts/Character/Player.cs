@@ -7,7 +7,6 @@ using UnityEngine;
 
 public class Player : MonoBehaviour, IDamagable
 {
-    private const int MaxCharacterCount = 3;
     public IInventory Inventory { get; private set; }
 
     public CharacterParty characterParty { get; private set; }

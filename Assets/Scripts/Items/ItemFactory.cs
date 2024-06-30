@@ -6,17 +6,11 @@ public class ItemFactory
 {
     public ICollectable Create(ItemData scriptableObject)
     {
-        if (scriptableObject is EquipmentData)
+        return scriptableObject switch
         {
-            return new Equipment((EquipmentData)scriptableObject);
-        }
-        else if (scriptableObject is PotionData)
-        {
-            return new Potion((PotionData)scriptableObject);
-        }
-        else
-        {
-            return null;
-        }
+            EquipmentData data => new Equipment(data),
+            PotionData data => new Potion(data),
+            _ => null
+        };
     }
 }

@@ -31,7 +31,7 @@ namespace DMT.UI.Screen
                 return;
             }
 
-            var characterStats = character.stats;
+            var characterStats = character.Stats;
             
             if (characterStats.Count() != statsUI.Length)
             {

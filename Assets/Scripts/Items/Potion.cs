@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class Potion : Item, IUsable
 {
-    public PotionData potionData { get; set; }
+    private PotionData potionData { get;}
 
     public override string Name => potionData.Name;
 

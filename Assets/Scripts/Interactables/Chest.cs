@@ -5,9 +5,9 @@ using UnityEngine;
 
 public class Chest : Interactable
 {
-
     [Header("Open/Closed Chest"), SerializeField]
     GameObject openChest;
+    
     [SerializeField]
     GameObject closedChest;
 
@@ -17,7 +17,7 @@ public class Chest : Interactable
     [SerializeField]
     public PickupObject pickupPrefab;
 
-    private ItemFactory _itemFactory = new ItemFactory();
+    private readonly ItemFactory itemFactory = new();
 
     public override void Interact()
     {
@@ -37,7 +37,7 @@ public class Chest : Interactable
     {
         foreach (var itemData in loot)
         {
-            var item = _itemFactory.Create(itemData);
+            var item = itemFactory.Create(itemData);
             PickupObject prefab = Instantiate(pickupPrefab, transform.position + new Vector3(0, -.3f, 0), Quaternion.identity);
             prefab.InitializeTo(item);
         }  

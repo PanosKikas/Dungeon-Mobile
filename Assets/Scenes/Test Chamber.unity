@@ -23252,7 +23252,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 857230784274042517, guid: 214ccb8e7b819e446b440efacb365861, type: 3}
       propertyPath: loot.Array.size
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 857230784274042517, guid: 214ccb8e7b819e446b440efacb365861, type: 3}
       propertyPath: 'loot.Array.data[0]'
@@ -23286,6 +23286,10 @@ PrefabInstance:
       propertyPath: 'loot.Array.data[7]'
       value: 
       objectReference: {fileID: 11400000, guid: 60f13daea83914549994c918c1dfe5c3, type: 2}
+    - target: {fileID: 857230784274042517, guid: 214ccb8e7b819e446b440efacb365861, type: 3}
+      propertyPath: 'loot.Array.data[8]'
+      value: 
+      objectReference: {fileID: 11400000, guid: 2fc6fa78002c4b642a99e9c179312a83, type: 2}
     - target: {fileID: 6058346524424804152, guid: 214ccb8e7b819e446b440efacb365861, type: 3}
       propertyPath: m_Name
       value: Chest

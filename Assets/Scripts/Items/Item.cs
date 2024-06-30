@@ -17,13 +17,8 @@ public abstract class Item : ICollectable, IStorable, IEquatable<Item>
         {
             return false;
         }
-        
-        Item other = obj as Item;
-        if (other == null)
-        {
-            return false;
-        }
-        return this.Equals(other);
+
+        return obj is Item other && this.Equals(other);
     }
 
     public bool Equals(Item other)

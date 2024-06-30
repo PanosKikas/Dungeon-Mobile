@@ -10,10 +10,12 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: eb51442add58af2479ebc21838f12d18, type: 3}
-  m_Name: Gun
+  m_Name: StartingRing
   m_EditorClassIdentifier: 
-  Name: Starting Gun
-  Description: A starting gun
-  Icon: {fileID: -6423153202971946108, guid: efa2e029d1a721d469b4d0b897e7bdc9, type: 3}
-  EquipmentType: 3
+  Name: Ring of Power I
+  Description: It glows with potential
+  Icon: {fileID: 6531160189707970998, guid: efa2e029d1a721d469b4d0b897e7bdc9, type: 3}
+  EquipmentType: 4
+  CharacterClass: 0
+  MinLevel: 1
   Modifiers: []

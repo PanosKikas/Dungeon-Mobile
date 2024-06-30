@@ -22,7 +22,7 @@ public class StatBarUI : MonoBehaviour
         hpText = GetComponentInChildren<TextMeshProUGUI>();
     }
     
-    public void SubscribeTo(IObservable<int> curr, IObservable<float> max)
+    public void Set(IObservable<int> curr, IObservable<float> max)
     {
         curr.Subscribe(x =>
         {
