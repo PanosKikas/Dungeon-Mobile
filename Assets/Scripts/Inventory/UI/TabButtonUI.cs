@@ -69,6 +69,7 @@ namespace DMT.UI.Components
 
         public void Disable()
         {
+            Deselect();
             canvasGroup.SetActive(false);
             tabPage.Hide();
         }

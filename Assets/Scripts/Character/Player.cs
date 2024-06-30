@@ -3,6 +3,7 @@ using DMT.Characters.Stats;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using NUnit.Framework;
 using UnityEngine;
 
 public class Player : MonoBehaviour, IDamagable
@@ -48,5 +49,11 @@ public class Player : MonoBehaviour, IDamagable
     {
         var character = new Character(characterData, Inventory);
         characterParty.Add(character);
+    }
+
+    public void RemoveFromParty(Character character)
+    {
+        Assert.IsFalse(characterParty.Count == 1, "Cannot remove last character from party");
+        characterParty.Remove(character);
     }
 }

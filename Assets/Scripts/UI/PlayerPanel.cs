@@ -7,35 +7,37 @@ using DMT.Characters;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
+using UnityEngine.Serialization;
 
 namespace DMT.UI.Screen
 {
     public class PlayerPanel : MonoBehaviour
     {
-        [SerializeField]
-        private Player player;
+        [SerializeField] private Player player;
 
-        [SerializeField]
-        private InventoryPanel inventoryUI;
+        [SerializeField] private InventoryPanel inventoryUI;
 
         private CanvasGroup canvasGroup;
 
-        [SerializeField]
-        private CharacterPanel[] characterPages;
+        [FormerlySerializedAs("freeCharacterPages")] [FormerlySerializedAs("characterPages")] [SerializeField]
+        private CharacterPanel[] allCharacterPages;
 
-        [SerializeField]
-        private TabButtonUI[] characterTabs;
+        [SerializeField] private TabButtonUI[] characterTabs;
+
+        [SerializeField] private CharacterManagementPopup characterManagementPopup;
 
         private readonly ReactiveProperty<Character> currentSelectedCharacter = new();
 
-        [SerializeField]
-        private CharacterStatsUI characterStatsUI;
+        [SerializeField] private CharacterStatsUI characterStatsUI;
 
-        private readonly Dictionary<int, IDisposable> characterPageSubscriptions = new();
+        private readonly List<IDisposable> characterPageSubscriptions = new();
         private readonly List<IDisposable> characterPartySubscriptions = new();
-        
+
+        private Stack<int> freeCharacterPagesIndexes = new();
+        private readonly Dictionary<Character, int> characterPagesMapping = new();
+
         private CharacterParty characterParty;
-        
+
         private void Awake()
         {
             canvasGroup = GetComponent<CanvasGroup>();
@@ -43,42 +45,87 @@ namespace DMT.UI.Screen
 
         private void Start()
         {
-            characterPageSubscriptions.Values.ToList().DisposeAndClear();
             Hide();
             characterParty = player.characterParty;
-            
-            var charactersInParty = characterParty.ToArray(); 
-            for (var i = 0; i < characterPages.Length; ++i)
+            freeCharacterPagesIndexes = new Stack<int>(Enumerable.Range(0, allCharacterPages.Length).Reverse());
+            var charactersInParty = characterParty.ToArray();
+
+            foreach (var character in charactersInParty)
             {
-                var pageSubscription = characterPages[i].OnShow.AsObservable().Subscribe(CharacterPageSelected);
-                characterPageSubscriptions.Add(i, pageSubscription);
-                if (i >= charactersInParty.Length)
+                AddCharacterUI(character);
+            }
+            
+            for (var i = 0; i < allCharacterPages.Length; ++i)
+            {
+                allCharacterPages[i].OnShow.AsObservable().Subscribe(CharacterPageSelected)
+                    .AddTo(characterPageSubscriptions);
+                if (freeCharacterPagesIndexes.Contains(i))
                 {
                     characterTabs[i].Disable();
-                    continue;
                 }
-
-                var character = charactersInParty[i];
-                ConfigureCharacterUI(character, i);
             }
-
+            
             inventoryUI.InitializeTo(player.Inventory, characterParty);
             characterStatsUI.SetTo(currentSelectedCharacter);
-            characterParty.ObserveAdd.Subscribe(CharacterAddedToParty).AddTo(characterPartySubscriptions);
+            characterParty.CharacterAdded.Subscribe(CharacterAddedToParty).AddTo(characterPartySubscriptions);
+            characterParty.CharacterRemoved.Subscribe(CharacterRemovedFromParty).AddTo(characterPartySubscriptions);
         }
 
-        private void ConfigureCharacterUI(Character character, int index)
+        private void AddCharacterUI(Character character)
         {
-            characterTabs[index].Enable();
+            var index = freeCharacterPagesIndexes.Pop();
             characterTabs[index].SetIcon(character.Portrait);
-            characterPages[index].Set(character);
+            characterTabs[index].Enable();
+            characterTabs[index].transform.SetSiblingIndex(characterParty.Count);
+            allCharacterPages[index].Set(player, character);
+            characterPagesMapping.Add(character, index);
+        }
+
+        private void RemoveCharacterUI(Character character, int index)
+        {
+            characterTabs[index].Disable();
+            characterTabs[index].transform.SetSiblingIndex(characterParty.Count + 1);
+            allCharacterPages[index].Clear();
+            freeCharacterPagesIndexes.Push(index);
+            characterPagesMapping.Remove(character);
         }
 
         private void CharacterAddedToParty(CollectionAddEvent<Character> addEvent)
         {
             Assert.IsNotNull(addEvent.Value, "Character added was null");
-            var index = characterParty.Count - 1;
-            ConfigureCharacterUI(addEvent.Value, index);
+            AddCharacterUI(addEvent.Value);
+        }
+
+        private void CharacterRemovedFromParty(CollectionRemoveEvent<Character> removeEvent)
+        {
+            Assert.IsNotNull(removeEvent.Value, "Character removed was null");
+            var removedCharacter = removeEvent.Value;
+
+            if (characterPagesMapping.TryGetValue(removedCharacter, out var index))
+            {
+                RemoveCharacterUI(removedCharacter, index);
+            }
+            else
+            {
+                Debug.LogError("No character page found in character mappings");
+            }
+
+            SelectValidCharacterTab(removedCharacter);
+        }
+
+        private void SelectValidCharacterTab(Character removedCharacter)
+        {
+            if (currentSelectedCharacter.Value != null && currentSelectedCharacter.Value == removedCharacter)
+            {
+                for (var i = 0; i < allCharacterPages.Length; ++i)
+                {
+                    if (!freeCharacterPagesIndexes.Contains(i))
+                    {
+                        characterTabs[i].OnPointerClick(null);
+                        break;
+                    }
+                }      
+            }
         }
 
         private void CharacterPageSelected(Character character)
@@ -99,7 +146,7 @@ namespace DMT.UI.Screen
 
         private void OnDestroy()
         {
-            characterPartySubscriptions.DisposeAndClear();
+            characterPageSubscriptions.DisposeAndClear();
             characterPartySubscriptions.DisposeAndClear();
         }
     }

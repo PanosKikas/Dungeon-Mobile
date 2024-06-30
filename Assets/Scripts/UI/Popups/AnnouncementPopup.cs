@@ -33,9 +33,9 @@ public class AnnouncementPopup : MonoBehaviour
 
     private void Start()
     {
-        player.characterParty.ObserveAdd.Subscribe(c =>
+        player.characterParty.CharacterAdded.Subscribe(c =>
             Show($"{c.Value.CharacterName} has joined the party")).AddTo(subscriptions);
-        player.characterParty.ObserveRemove.Subscribe(c =>
+        player.characterParty.CharacterRemoved.Subscribe(c =>
             Show($"{c.Value.CharacterName} has left the party")).AddTo(subscriptions);
     }
 

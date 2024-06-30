@@ -28,6 +28,7 @@ namespace DMT.UI.Screen
         {
             if (character == null)
             {
+                Hide();
                 return;
             }
 

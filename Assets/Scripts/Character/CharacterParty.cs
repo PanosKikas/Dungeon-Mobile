@@ -12,8 +12,8 @@ namespace DMT.Characters
         private const int MaxCharacterPartyCount = 3;
         private readonly ReactiveCollection<Character> party = new();
 
-        public IObservable<CollectionAddEvent<Character>> ObserveAdd => party.ObserveAdd();
-        public IObservable<CollectionRemoveEvent<Character>> ObserveRemove => party.ObserveRemove();
+        public IObservable<CollectionAddEvent<Character>> CharacterAdded => party.ObserveAdd();
+        public IObservable<CollectionRemoveEvent<Character>> CharacterRemoved => party.ObserveRemove();
 
         public IEnumerator<Character> GetEnumerator()
         {
@@ -36,9 +36,9 @@ namespace DMT.Characters
             party.Clear();
         }
 
-        public bool Contains(Character item)
+        public bool Contains(Character character)
         {
-            return party.Contains(item);
+            return party.Contains(character);
         }
 
         public void CopyTo(Character[] array, int arrayIndex)
@@ -46,9 +46,10 @@ namespace DMT.Characters
             party.CopyTo(array, arrayIndex);
         }
 
-        public bool Remove(Character item)
+        public bool Remove(Character character)
         {
-            return party.Remove(item);
+            Assert.IsTrue(party.Contains(character));
+            return party.Remove(character);
         }
 
         public int Count => party.Count;
