@@ -6,6 +6,7 @@ using System.Linq;
 using DMT.Characters;
 using UniRx;
 using UnityEngine;
+using UnityEngine.Assertions;
 
 namespace DMT.UI.Screen
 {
@@ -30,8 +31,9 @@ namespace DMT.UI.Screen
         [SerializeField]
         private CharacterStatsUI characterStatsUI;
 
-        private readonly List<IDisposable> subscriptions = new();
-
+        private readonly Dictionary<int, IDisposable> characterPageSubscriptions = new();
+        private readonly List<IDisposable> characterPartySubscriptions = new();
+        
         private CharacterParty characterParty;
         
         private void Awake()
@@ -41,12 +43,15 @@ namespace DMT.UI.Screen
 
         private void Start()
         {
-            subscriptions.DisposeAndClear();
+            characterPageSubscriptions.Values.ToList().DisposeAndClear();
             Hide();
             characterParty = player.characterParty;
+            
             var charactersInParty = characterParty.ToArray(); 
             for (var i = 0; i < characterPages.Length; ++i)
             {
+                var pageSubscription = characterPages[i].OnShow.AsObservable().Subscribe(CharacterPageSelected);
+                characterPageSubscriptions.Add(i, pageSubscription);
                 if (i >= charactersInParty.Length)
                 {
                     characterTabs[i].Disable();
@@ -54,19 +59,31 @@ namespace DMT.UI.Screen
                 }
 
                 var character = charactersInParty[i];
-                characterTabs[i].SetIcon(character.Portrait);
-                characterPages[i].Set(character);
-                characterPages[i].OnShow.AsObservable().Subscribe(CharacterPageSelected).AddTo(subscriptions);
+                ConfigureCharacterUI(character, i);
             }
 
             inventoryUI.InitializeTo(player.Inventory, characterParty);
-            characterStatsUI.SubscribeTo(currentSelectedCharacter);
+            characterStatsUI.SetTo(currentSelectedCharacter);
+            characterParty.ObserveAdd.Subscribe(CharacterAddedToParty).AddTo(characterPartySubscriptions);
+        }
+
+        private void ConfigureCharacterUI(Character character, int index)
+        {
+            characterTabs[index].Enable();
+            characterTabs[index].SetIcon(character.Portrait);
+            characterPages[index].Set(character);
+        }
+
+        private void CharacterAddedToParty(CollectionAddEvent<Character> addEvent)
+        {
+            Assert.IsNotNull(addEvent.Value, "Character added was null");
+            var index = characterParty.Count - 1;
+            ConfigureCharacterUI(addEvent.Value, index);
         }
 
         private void CharacterPageSelected(Character character)
         {
             currentSelectedCharacter.Value = character;
-            
         }
 
         public void Show()
@@ -78,6 +95,12 @@ namespace DMT.UI.Screen
         {
             canvasGroup.SetActive(false);
             currentSelectedCharacter.Value = null;
+        }
+
+        private void OnDestroy()
+        {
+            characterPartySubscriptions.DisposeAndClear();
+            characterPartySubscriptions.DisposeAndClear();
         }
     }
 }

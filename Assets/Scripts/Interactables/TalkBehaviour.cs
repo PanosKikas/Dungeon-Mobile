@@ -1,23 +1,27 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UniRx;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.EventSystems;
+using UnityEngine.Serialization;
 
 public class TalkBehaviour : MonoBehaviour, IPointerClickHandler
 {
+    [FormerlySerializedAs("DialogueBoxPrefab")] [SerializeField]
+    private DialogueSystem dialogueBoxPrefab;
+
+    private bool isTalking;
+
     [SerializeField]
-    DialogueSystem DialogueBoxPrefab;
-
-    private bool isTalking = false;
-
-    private Vector3 SpawnOffset = new Vector3(2, .8f, 0);
+    private readonly Vector3 spawnOffset = new(2, .8f, 0);
 
     public DialogueText Dialogue;
     CharacterTopDownManager mainPlayerTopDown;
 
-    Action OnDialogueCompleted;
-
+    public UnityEvent OnComplete = new();
+    
     void Awake()
     {
         mainPlayerTopDown = GameObject.FindGameObjectWithTag("Player").GetComponent<CharacterTopDownManager>();
@@ -31,10 +35,10 @@ public class TalkBehaviour : MonoBehaviour, IPointerClickHandler
         }
 
         mainPlayerTopDown.Freeze();
-        DialogueSystem spawnedDialogue = Instantiate<DialogueSystem>(DialogueBoxPrefab, transform.position, Quaternion.identity);
+        DialogueSystem spawnedDialogue = Instantiate<DialogueSystem>(dialogueBoxPrefab, transform.position, Quaternion.identity);
         //Vector3 screenPos = Camera.main.ScreenToWorldPoint(transform.position + SpawnOffset);
         RectTransform rect = spawnedDialogue.GetComponent<RectTransform>();
-        rect.position = transform.position + SpawnOffset;
+        rect.position = transform.position + spawnOffset;
         spawnedDialogue.Show(Dialogue, () => StartCoroutine(OnDialogueComplete()));
         isTalking = true;
     }
@@ -44,6 +48,6 @@ public class TalkBehaviour : MonoBehaviour, IPointerClickHandler
         yield return new WaitForSeconds(0.1f);
         isTalking = false;
         mainPlayerTopDown.Unfreeze();
-        OnDialogueCompleted?.Invoke();
+        OnComplete?.Invoke();
     }
 }

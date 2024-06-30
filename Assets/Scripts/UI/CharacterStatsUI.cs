@@ -18,7 +18,7 @@ namespace DMT.UI.Screen
         [SerializeField] private CharacterStatUI[] statsUI;
         private IDisposable characterDisposable;
         
-        public void SubscribeTo(IObservable<Character> selectedCharacter)
+        public void SetTo(IObservable<Character> selectedCharacter)
         {
             characterDisposable?.Dispose();
             characterDisposable = selectedCharacter.Subscribe(SetToCharacter);

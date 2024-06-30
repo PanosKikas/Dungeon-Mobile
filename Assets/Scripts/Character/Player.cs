@@ -43,4 +43,10 @@ public class Player : MonoBehaviour, IDamagable
     {
         return Inventory.IsFull();
     }
+
+    public void AddToParty(InitialCharacterData characterData)
+    {
+        var character = new Character(characterData, Inventory);
+        characterParty.Add(character);
+    }
 }

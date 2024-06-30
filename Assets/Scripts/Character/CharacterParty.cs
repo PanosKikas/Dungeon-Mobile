@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,7 +11,10 @@ namespace DMT.Characters
     {
         private const int MaxCharacterPartyCount = 3;
         private readonly ReactiveCollection<Character> party = new();
-        
+
+        public IObservable<CollectionAddEvent<Character>> ObserveAdd => party.ObserveAdd();
+        public IObservable<CollectionRemoveEvent<Character>> ObserveRemove => party.ObserveRemove();
+
         public IEnumerator<Character> GetEnumerator()
         {
             return party.GetEnumerator();
