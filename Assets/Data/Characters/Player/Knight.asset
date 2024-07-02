@@ -16,18 +16,18 @@ MonoBehaviour:
   Level: 12
   CharacterClass: 2
   Portrait: {fileID: 21300000, guid: c6c9b65101434a245b8ef13a021ef6ad, type: 3}
-  baseMaxHealthStat: 250
-  baseAttackDamageStat: 20
-  baseAutoAttackRateStat: 20
-  baseManualAttackRateStat: 20
-  baseMaxEnduranceStat: 20
-  baseMaxManaStat: 20
-  baseEnduranceRegenStat: 20
-  baseCriticalDamageStat: 20
-  baseCriticalChanceStat: 20
-  baseMagicDamageStat: 20
-  baseEvasionChanceStat: 20
-  basePhysicalDefenseStat: 20
-  baseMagicalResistanceStat: 20
-  baseItemDropRateStat: 20
-  baseMobilityStat: 20
+  baseMaxHealthStat: 200
+  baseAttackDamageStat: 5
+  baseAutoAttackRateStat: 1
+  baseManualAttackRateStat: 1
+  baseMaxEnduranceStat: 70
+  baseMaxManaStat: 10
+  baseEnduranceRegenStat: 1
+  baseCriticalDamageStat: 10
+  baseCriticalChanceStat: 10
+  baseMagicDamageStat: 1
+  baseEvasionChanceStat: 1
+  basePhysicalDefenseStat: 15
+  baseMagicalResistanceStat: 15
+  baseItemDropRateStat: 2
+  baseMobilityStat: 5

@@ -7,18 +7,20 @@ using UnityEngine.UI;
 
 public class CharacterSelectPopup : MonoBehaviour
 {
-    [SerializeField]
-    private CharacterSelectSlotUI characterSlotPrefab;
+    [SerializeField] private CharacterSelectSlotUI characterSlotPrefab;
 
-    [SerializeField]
-    private Transform characterContainer;
+    [SerializeField] private Transform characterContainer;
 
     public readonly Subject<Character> CharacterSelected = new();
     
-    public void InitializeTo(IEnumerable<Character> characters, Vector2 position)
+    [SerializeField]
+    private Vector2 offset = new(0f, 75f);
+
+    public void Initialize(IEnumerable<Character> characters, Vector2 position)
     {
         characterContainer.transform.position =
-            new Vector3(position.x, position.y, characterContainer.transform.position.z);
+            new Vector3(position.x, position.y, characterContainer.transform.position.z) +
+            new Vector3(offset.x, offset.y, 0f);
         foreach (var character in characters)
         {
             var characterSlot = Instantiate(characterSlotPrefab, characterContainer);

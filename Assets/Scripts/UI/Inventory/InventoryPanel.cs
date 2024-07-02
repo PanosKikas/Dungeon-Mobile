@@ -14,11 +14,13 @@ namespace DMT.Characters.Inventory.UI
         private readonly Dictionary<ItemSlot, ItemSlotUI> usedSlots = new();
         private List<ItemSlotUI> freeSlots = new();
 
-        [SerializeField] private Transform slotsParent;
+        [SerializeField] 
+        private Transform slotsParent;
+        
+        [SerializeField] 
+        private ItemDetailsPanel itemDetails;
 
-        [SerializeField] private ItemDetailsPanel itemDetails;
-
-        [FormerlySerializedAs("characterSelectPopup")] [SerializeField]
+        [SerializeField]
         private CharacterSelectPopup characterSelectPopupPrefab;
 
         private readonly Dictionary<ItemSlotUI, IList<IDisposable>> slotSubscriptions = new();
@@ -30,6 +32,21 @@ namespace DMT.Characters.Inventory.UI
         private CharacterParty characterParty;
         private List<Character> validUseCharacters = new();
         private IUsable itemAwaitingToBeUsed;
+
+        private GameObject _cachedPopupParent;
+        private GameObject popupParent
+        {
+            get
+            {
+                if (_cachedPopupParent == null)
+                {
+                    _cachedPopupParent = GameObject.FindWithTag("Popups");
+                }
+
+                return _cachedPopupParent;
+            }
+        }
+
         private IDisposable awaitingCharacterSelectSubscription;
 
         private void Awake()
@@ -37,10 +54,10 @@ namespace DMT.Characters.Inventory.UI
             freeSlots = slotsParent.GetComponentsInChildren<ItemSlotUI>().ToList();
         }
 
-        public void InitializeTo(IInventory inventoryModel, CharacterParty characters)
+        public void Initialize(IInventory inventoryModel, CharacterParty characters)
         {
-            Assert.IsNotNull(inventoryModel);
-
+            Assert.IsNotNull(inventoryModel, "Inventory passed to Inventory UI was null");
+            Assert.IsNotNull(characters, "Character party passed to Inventory UI was null");
             inventory = inventoryModel;
             characterParty = characters;
             inventorySubscriptions.DisposeAndClear();
@@ -54,10 +71,10 @@ namespace DMT.Characters.Inventory.UI
         {
             var slotUI = freeSlots.First();
             freeSlots.Remove(slotUI);
-
+            
             slotUI.InitializeTo(slot);
             usedSlots.Add(slot, slotUI);
-
+            
             SubscribeToItemSlotEvents(slotUI);
             slotUI.transform.SetSiblingIndex(usedSlots.Count() - 1);
         }
@@ -78,20 +95,19 @@ namespace DMT.Characters.Inventory.UI
             slotUI.transform.SetSiblingIndex(usedSlots.Count() + 1);
         }
 
-        private void SubscribeToItemSlotEvents(ItemSlotUI slotUI)
+        private void SubscribeToItemSlotEvents(ItemSlotUI itemSlotUI)
         {
-            if (slotSubscriptions.TryGetValue(slotUI, out var oldSubscriptions))
+            if (slotSubscriptions.TryGetValue(itemSlotUI, out var oldSubscriptions))
             {
-                Debug.LogError("Already subscribed to this slot.");
+                Debug.LogWarning($"Already subscribed to {itemSlotUI.gameObject.name} slot UI events.");
                 oldSubscriptions.DisposeAndClear();
-                slotSubscriptions.Remove(slotUI);
+                slotSubscriptions.Remove(itemSlotUI);
             }
 
-            List<IDisposable> disposables = new List<IDisposable>();
-
-            slotUI.OnClicked.Subscribe(OnItemSlotClicked).AddTo(disposables);
-            slotUI.OnHeld.Subscribe(OnItemSlotHeld).AddTo(disposables);
-            slotSubscriptions.Add(slotUI, disposables);
+            var disposables = new List<IDisposable>();
+            itemSlotUI.OnClicked.Subscribe(OnItemSlotClicked).AddTo(disposables);
+            itemSlotUI.OnHeld.Subscribe(OnItemSlotHeld).AddTo(disposables);
+            slotSubscriptions.Add(itemSlotUI, disposables);
         }
 
         private void UnsubscribeFromItemSlotEvents(ItemSlotUI itemSlotUI)
@@ -99,6 +115,10 @@ namespace DMT.Characters.Inventory.UI
             if (slotSubscriptions.TryGetValue(itemSlotUI, out var disposables))
             {
                 disposables.DisposeAndClear();
+            }
+            else
+            {
+                Debug.LogWarning($"Could not find slot UI subscription events to unsubscribe from {itemSlotUI.gameObject.name}");
             }
         }
 
@@ -118,7 +138,7 @@ namespace DMT.Characters.Inventory.UI
 
             if (itemSlotUI.Item is IUsable usable)
             {
-                validUseCharacters = FindAllCharactersThatCanUse(usable).ToList();
+                validUseCharacters = characterParty.Where(usable.CanBeUsedOn).ToList();
             }
 
             if (!validUseCharacters.Any())
@@ -129,22 +149,18 @@ namespace DMT.Characters.Inventory.UI
 
             itemAwaitingToBeUsed = itemSlotUI.Item as IUsable;
             awaitingCharacterSelectSubscription?.Dispose();
-            var popupParent = GameObject.FindWithTag("Popups");
-            CharacterSelectPopup popup = Instantiate(characterSelectPopupPrefab, popupParent.transform);
+            
+            var popup = Instantiate(characterSelectPopupPrefab, popupParent.transform);
             awaitingCharacterSelectSubscription = popup.CharacterSelected.Subscribe(CharacterSelected);
-            popup.InitializeTo(validUseCharacters, itemSlotUI.transform.position + Vector3.up * 75f);
-        }
-
-        private IEnumerable<Character> FindAllCharactersThatCanUse(IUsable usable)
-        {
-            return characterParty.Where(usable.CanBeUsedOn);
+            popup.Initialize(validUseCharacters, itemSlotUI.transform.position);
         }
 
         private void CharacterSelected(Character character)
         {
             awaitingCharacterSelectSubscription?.Dispose();
 
-            Assert.IsTrue(validUseCharacters.Any() && itemAwaitingToBeUsed != null);
+            Assert.IsTrue(validUseCharacters.Any() && itemAwaitingToBeUsed != null, 
+                $"Character {character.NameId} selected but item awaiting to be used was null.");
             character.Use(itemAwaitingToBeUsed);
             itemAwaitingToBeUsed = null;
             validUseCharacters.Clear();

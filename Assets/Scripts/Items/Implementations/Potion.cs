@@ -42,10 +42,10 @@ namespace DMT.Pickups
                     character.Heal(potionData.Amount);
                     break;
                 case PotionType.Mana:
-                    Debug.Log("Restoring mana on " + character);
+                    Debug.Log("Restoring mana on " + character.CharacterName);
                     break;
                 case PotionType.Endurance:
-                    Debug.Log("Restoring endurance on " + character);
+                    Debug.Log("Restoring stamina on " + character.CharacterName);
                     break;
                 default:
                     Debug.LogError("No potion of type " + potionData.type + " found.");

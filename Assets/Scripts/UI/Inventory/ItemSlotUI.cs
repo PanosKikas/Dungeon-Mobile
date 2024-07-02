@@ -11,10 +11,8 @@ namespace DMT.Characters.Inventory.UI
     public class ItemSlotUI : MonoBehaviour
     {
         [SerializeField] private Image itemIcon;
-        Text stackText;
-
+        private Text stackText;
         private RectTransform rect;
-
         private ItemSlot itemSlot;
         public IStorable Item => itemSlot.Item;
         [SerializeField] private CanvasGroup itemCanvasGroup;
