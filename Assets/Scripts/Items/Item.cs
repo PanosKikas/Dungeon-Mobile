@@ -1,38 +1,51 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
+using DMT.Controllers;
 using UnityEngine;
 
-public abstract class Item : ICollectable, IStorable, IEquatable<Item>
+namespace DMT.Pickups
 {
-    public abstract string Name { get; }
-
-    public abstract string Description { get; }
-
-    public abstract Sprite Icon { get; }
-
-    public override bool Equals(object obj)
+    public abstract class Item : IPickable, IStorable, IEquatable<Item>
     {
-        if (obj is null)
+        public abstract string Name { get; }
+
+        public abstract string Description { get; }
+
+        public abstract Sprite Icon { get; }
+
+        public virtual bool TryPickUp(Player player)
         {
-            return false;
+            if (player.Inventory.IsFull())
+            {
+                return false;
+            }
+
+            player.Inventory.Store(this);
+            return true;
         }
 
-        return obj is Item other && this.Equals(other);
-    }
-
-    public bool Equals(Item other)
-    {
-        if (other == null)
+        public override bool Equals(object obj)
         {
-            return false;
+            if (obj is null)
+            {
+                return false;
+            }
+
+            return obj is Item other && this.Equals(other);
         }
 
-        return Name.Equals(other.Name);
-    }
+        public bool Equals(Item other)
+        {
+            if (other == null)
+            {
+                return false;
+            }
 
-    public override int GetHashCode()
-    {
-        return Name.GetHashCode();
+            return Name.Equals(other.Name);
+        }
+
+        public override int GetHashCode()
+        {
+            return Name.GetHashCode();
+        }
     }
 }

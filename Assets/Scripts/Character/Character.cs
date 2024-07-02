@@ -1,5 +1,7 @@
-﻿using System;
+﻿using DMT.Characters.Equipment;
+using DMT.Characters.Inventory;
 using DMT.Characters.Stats;
+using DMT.Pickups;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
@@ -20,7 +22,7 @@ namespace DMT.Characters
         private readonly IInventory inventory;
         public CharacterClass CharacterClass { get; }
 
-        public Character(InitialCharacterData data, IInventory itemStorage = null)
+        public Character(InitialCharacterData data, IInventory itemStorage)
         {
             inventory = itemStorage;
             CharacterClass = data.CharacterClass;

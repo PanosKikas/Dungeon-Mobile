@@ -2,15 +2,18 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemFactory
+namespace DMT.Pickups
 {
-    public ICollectable Create(ItemData scriptableObject)
+    public class ItemFactory
     {
-        return scriptableObject switch
+        public IPickable Create(ItemData scriptableObject)
         {
-            EquipmentData data => new Equipment(data),
-            PotionData data => new Potion(data),
-            _ => null
-        };
+            return scriptableObject switch
+            {
+                EquipmentData data => new Equipment(data),
+                PotionData data => new Potion(data),
+                _ => null
+            };
+        }
     }
 }

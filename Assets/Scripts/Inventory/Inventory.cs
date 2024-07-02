@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using DMT.Pickups;
 using UniRx;
-using UnityEngine.Assertions;
 
-namespace Inventory
+namespace DMT.Characters.Inventory
 {
     public class ItemSlot
     {

@@ -1,15 +1,15 @@
 using System;
 using DMT.UI.Components;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using DMT.Characters;
+using DMT.Characters.Inventory.UI;
+using DMT.Controllers;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Assertions;
 using UnityEngine.Serialization;
 
-namespace DMT.UI.Screen
+namespace DMT.Characters.UI
 {
     public class PlayerPanel : MonoBehaviour
     {
