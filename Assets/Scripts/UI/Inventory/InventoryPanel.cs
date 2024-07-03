@@ -62,12 +62,12 @@ namespace DMT.Characters.Inventory.UI
             characterParty = characters;
             inventorySubscriptions.DisposeAndClear();
             inventory.InventoryItems.ObserveAdd()
-                .Subscribe(x => OnItemSlotAdded(x.Value)).AddTo(inventorySubscriptions);
+                .Subscribe(x => ItemSlotAdded(x.Value)).AddTo(inventorySubscriptions);
             inventory.InventoryItems.ObserveRemove()
-                .Subscribe(x => OnItemSlotRemoved(x.Value)).AddTo(inventorySubscriptions);
+                .Subscribe(x => ItemSlotRemoved(x.Value)).AddTo(inventorySubscriptions);
         }
 
-        private void OnItemSlotAdded(ItemSlot slot)
+        private void ItemSlotAdded(ItemSlot slot)
         {
             var slotUI = freeSlots.First();
             freeSlots.Remove(slotUI);
@@ -76,10 +76,10 @@ namespace DMT.Characters.Inventory.UI
             usedSlots.Add(slot, slotUI);
             
             SubscribeToItemSlotEvents(slotUI);
-            slotUI.transform.SetSiblingIndex(usedSlots.Count() - 1);
+            slotUI.transform.SetSiblingIndex(usedSlots.Count - 1);
         }
 
-        private void OnItemSlotRemoved(ItemSlot slot)
+        private void ItemSlotRemoved(ItemSlot slot)
         {
             var slotUI = usedSlots[slot];
 
@@ -92,7 +92,7 @@ namespace DMT.Characters.Inventory.UI
             slotUI.Clear();
             freeSlots.Add(slotUI);
             usedSlots.Remove(slot);
-            slotUI.transform.SetSiblingIndex(usedSlots.Count() + 1);
+            slotUI.transform.SetSiblingIndex(usedSlots.Count);
         }
 
         private void SubscribeToItemSlotEvents(ItemSlotUI itemSlotUI)

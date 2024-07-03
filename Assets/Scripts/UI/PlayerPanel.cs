@@ -20,7 +20,7 @@ namespace DMT.Characters.UI
         [SerializeField] private TabButtonUI[] characterTabs;
 
         private CanvasGroup canvasGroup;
-        private bool isVisible = false;
+        private bool isVisible;
         private Stack<int> freeCharacterPagesIndexes = new();
         private readonly Dictionary<Character, int> usedCharacterPagesMapping = new();
         private readonly ReactiveProperty<Character> currentSelectedCharacter = new();

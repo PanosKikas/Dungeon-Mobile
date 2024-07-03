@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using DMT.Pickups;
 using UniRx;
+using UnityEngine;
 
 namespace DMT.Characters.Inventory
 {
@@ -79,17 +80,18 @@ namespace DMT.Characters.Inventory
 
         public void RemoveItem(IStorable storable)
         {
-            var slot = InventoryItems.First(s => s.Item.Equals(storable));
+            var slot = InventoryItems.FirstOrDefault(s => s.Item.Equals(storable));
+            if (slot == null)
+            {
+                Debug.LogWarning("Slot for storable " + storable.Name +" has already been removed.");
+                return;
+            }
+            
             slot.RemoveItem();
             if (slot.IsEmpty())
             {
                 InventoryItems.Remove(slot);
             }
-        }
-
-        public bool ContainsItem(IStorable storable)
-        {
-            return InventoryItems.Any(s => s.Item.Equals(storable));
         }
     }
 }

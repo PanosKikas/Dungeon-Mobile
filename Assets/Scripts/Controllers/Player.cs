@@ -27,7 +27,10 @@ namespace DMT.Controllers
 
         public void TakeDamage(int damage)
         {
-            characterParty.First().TakeDamage(damage);
+            if (characterParty.Any())
+            {
+                characterParty.First().TakeDamage(damage);
+            }
         }
 
         public bool IsInventoryFull()

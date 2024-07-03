@@ -11,6 +11,5 @@ namespace DMT.Characters.Inventory
         void Store(IStorable item);
         IEnumerable<ItemSlot> Slots { get; }
         void RemoveItem(IStorable storable);
-        bool ContainsItem(IStorable storable);
     }
 }

@@ -34,10 +34,10 @@ namespace DMT.Interactables
         {
             foreach (var itemData in loot)
             {
-                var item = itemFactory.Create(itemData);
-                PickupObject prefab = Instantiate(pickupPrefab, transform.position + new Vector3(0, -.3f, 0),
+                var pickable = itemFactory.Create(itemData);
+                var pickupInstance = Instantiate(pickupPrefab, transform.position + new Vector3(0, -.3f, 0),
                     Quaternion.identity);
-                prefab.SetPickup(item);
+                pickupInstance.SetPickup(pickable);
             }
         }
     }

@@ -1,4 +1,5 @@
-﻿using DMT.Characters.Equipment;
+﻿using System;
+using DMT.Characters.Equipment;
 using DMT.Characters.Inventory;
 using DMT.Characters.Stats;
 using DMT.Pickups;
@@ -10,17 +11,18 @@ namespace DMT.Characters
 {
     public class Character : IDamagable
     {
-        public string CharacterName { get; private set; }
+        public string CharacterName { get;}
         public string NameId { get; private set; }
         public Sprite Portrait { get; private set; }
         public CharacterStats Stats { get; }
-
         public CharacterEquipment Equipment { get; }
 
         public readonly ReactiveProperty<int> Level;
 
         private readonly IInventory inventory;
         public CharacterClass CharacterClass { get; }
+        public IObservable<Character> CharacterDied =>
+            Stats.CurrentHealth.Where(hp => hp <= 0).Select(_ => this);
 
         public Character(InitialCharacterData data, IInventory itemStorage)
         {
@@ -38,7 +40,7 @@ namespace DMT.Characters
 
         private void Die()
         {
-            Debug.Log($"Character has died ");
+            Debug.Log($"Character {CharacterName} has died ");
         }
 
         public bool IsFullHealth()
@@ -76,7 +78,7 @@ namespace DMT.Characters
             Assert.IsNotNull(usable, "Trying to use null item");
             usable.UseOn(this);
             
-            if (inventory != null && usable is IStorable storable && inventory.ContainsItem(storable))
+            if (inventory != null && usable is IStorable storable)
             {
                 inventory.RemoveItem(storable);
             }

@@ -25,10 +25,5 @@ namespace DMT.Characters.Inventory
         {
             
         }
-
-        public bool ContainsItem(IStorable storable)
-        {
-            return false;
-        }
     }
 }
