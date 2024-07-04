@@ -1,2 +1,3 @@
-# Dungeon-Mobile-
-A procedural Dungeon Roguelike Mobile Game under construction using the Unity Engine 2020. [Currently under development]. 
+# Dungeon Master's Trials
+A procedural Dungeon Roguelike Mobile Game currently under development.
+Unity version used: 2023.2.10f1
