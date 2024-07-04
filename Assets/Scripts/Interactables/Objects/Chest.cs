@@ -1,5 +1,8 @@
-﻿using DMT.Pickups;
+﻿using System;
+using DMT.Pickups;
 using UnityEngine;
+using UnityEngine.Assertions;
+using Random = UnityEngine.Random;
 
 namespace DMT.Interactables
 {
@@ -12,9 +15,15 @@ namespace DMT.Interactables
 
         [Header("Loot"), SerializeField] public ItemData[] loot;
 
-        [SerializeField] public PickupObject pickupPrefab;
+        // TODO: Inject when DI container is added.
+        [SerializeField] private ItemSpawner itemSpawner;
 
-        private readonly ItemFactory itemFactory = new();
+        [SerializeField] private float spawnPositionVariance = 0.5f;
+
+        private void Start()
+        {
+            Assert.IsNotNull(itemSpawner, "Item spawner in chest is null");
+        }
 
         public override void Interact()
         {
@@ -34,10 +43,9 @@ namespace DMT.Interactables
         {
             foreach (var itemData in loot)
             {
-                var pickable = itemFactory.Create(itemData);
-                var pickupInstance = Instantiate(pickupPrefab, transform.position + new Vector3(0, -.3f, 0),
-                    Quaternion.identity);
-                pickupInstance.SetPickup(pickable);
+                var spawnPosition = transform.position + new Vector3(0, -.3f, 0)
+                                                       + Vector3.right * Random.onUnitSphere.x * spawnPositionVariance;
+                itemSpawner.Spawn(itemData, spawnPosition);
             }
         }
     }
