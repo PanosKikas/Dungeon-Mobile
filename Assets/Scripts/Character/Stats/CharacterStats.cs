@@ -25,8 +25,8 @@ namespace DMT.Characters.Stats
 
     public class CharacterStats : IEnumerable<CharacterStat>
     {
-        public readonly ReactiveProperty<int> CurrentHealth;
-        public int CurrentEndurance { get; set; }
+        public readonly ReactiveProperty<float> CurrentHealth;
+        public ReactiveProperty<float> CurrentEndurance { get; set; }
 
         public readonly CharacterStat MaxHealthStat;
         public int MaxHealth => (int)MaxHealthStat.Value;
@@ -78,8 +78,8 @@ namespace DMT.Characters.Stats
                 { MagicalResistanceStat.StatType, MagicalResistanceStat }
             };
 
-            CurrentHealth = new ReactiveProperty<int>((int)MaxHealthStat.Value);
-            CurrentEndurance = (int)MaxEnduranceStat.Value;
+            CurrentHealth = new ReactiveProperty<float>(MaxHealthStat.Value);
+            CurrentEndurance = new ReactiveProperty<float>(MaxEnduranceStat.Value);
         }
 
         public CharacterStat GetStatOfType(StatType statType)

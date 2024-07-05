@@ -1,55 +1,41 @@
-﻿/*using DMT.Character.Stats;
-using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
+using DMT.Battle;
+using DMT.Battle.UI;
+using DMT.Characters;
+using DMT.Characters.Inventory;
+using DMT.Characters.Stats;
 using UnityEngine;
 
-public class BattleSetup : MonoBehaviour
+namespace DMT.Battle
 {
-    
-    [SerializeField]
-    GameObject[] enemyPlaceholders;
-
-    [SerializeField]
-    GameObject[] playerPlaceholders;
-
-    private void Awake()
+    public class BattleSetup : MonoBehaviour
     {
-        // TODO: Delete once we have battle transition working.
-        var testStats = new List<CharacterStatsSO>
+        [SerializeField] GameObject[] enemyPlaceholders;
+        
+        [SerializeField, Header("Debugging Start Data")]
+        private InitialCharacterData[] debugPlayerCharacters;
+
+        [SerializeField] private BattleController playerController;
+
+        private void Awake()
         {
-            BattleTransistor.Instance.enemyGroupStats[0]
-        };
-        SetupBattleScene(testStats);
-        //SetupBattleScene(BattleTransistor.Instance.enemyGroupStats);
-    }
-
-    public void SetupBattleScene(List<CharacterStats> enemyStats)
-    {
-        SetupEnemies(enemyStats);
-        SetupPlayers();
-    }
-
-    void SetupEnemies(List<CharacterStatsSO> enemyStats)
-    {
-        for (int i = 0; i < enemyStats.Count; ++i)
-        {
-            GameObject enemyToSetup = enemyPlaceholders[i];
-            enemyToSetup.GetComponent<CharacterBattle>().stats = new CharacterStats(enemyStats[i]);
-            enemyToSetup.GetComponentInChildren<Animator>().
-                runtimeAnimatorController = enemyStats[i].battleAnimator;
+            SetupBattleScene();
         }
-    }
 
-    
-    void SetupPlayers()
-    {
-        for (int i = 0; i < StatsDatabase.Instance.PlayerCharacterStats.Count; ++i)
+        private void SetupBattleScene()
         {
-            var initialData = StatsDatabase.Instance.GetCharacterStats(i);
-            playerPlaceholders[i].GetComponent<CharacterBattle>().stats = new PlayerCharacterStats(initialData);
-            playerPlaceholders[i].GetComponentInChildren<Animator>().runtimeAnimatorController = initialData.battleAnimator;
-
+            SetupPlayerCharacters();
+        }
+        
+        // TODO: Replace once battle transition is implemented.
+        private void SetupPlayerCharacters()
+        {
+            List<Character> playerParty = new List<Character>();
+            foreach (var characterData in debugPlayerCharacters)
+            {
+                playerParty.Add(new Character(characterData, new NullInventory()));
+                playerController.Initialize(playerParty);
+            }
         }
     }
 }
-*/

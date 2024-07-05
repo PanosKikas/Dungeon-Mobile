@@ -12,9 +12,10 @@ EditorBuildSettings:
     path: Assets/Scenes/Test Chamber.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/BatteScene01.unity
+    path: Assets/Scenes/MainBattle.unity
     guid: fa334f758fea9694487fa40f4ed69cd4
   - enabled: 1
     path: Assets/Scenes/Level1.unity
     guid: 321cbbb844a9d17478736ab7d7ba16a3
   m_configObjects: {}
+  m_UseUCBPForAssetBundles: 0

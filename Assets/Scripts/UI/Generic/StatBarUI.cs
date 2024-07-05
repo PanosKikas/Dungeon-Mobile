@@ -1,8 +1,4 @@
 ﻿using System;
-using DMT.Characters;
-using DMT.Characters.Stats;
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UniRx;
@@ -11,7 +7,7 @@ using UnityEngine.UI;
 public class StatBarUI : MonoBehaviour
 {
     private Slider slider;
-    private TextMeshProUGUI hpText;
+    private TextMeshProUGUI uiText;
 
     private int currentValue;
     private int maxValue;
@@ -19,26 +15,29 @@ public class StatBarUI : MonoBehaviour
     private void Awake()
     {
         slider = GetComponent<Slider>();
-        hpText = GetComponentInChildren<TextMeshProUGUI>();
+        uiText = GetComponentInChildren<TextMeshProUGUI>();
     }
-    
-    public void Set(IObservable<int> curr, IObservable<float> max)
+
+    public void Set(IObservable<float> curr, IObservable<float> max)
     {
         curr.Subscribe(x =>
         {
-            currentValue = x;
-            UpdateHealthBar();
+            currentValue = (int)x;
+            UpdateBar();
         });
         max.Subscribe(x =>
         {
             maxValue = (int)x;
-            UpdateHealthBar();
+            UpdateBar();
         });
     }
 
-    private void UpdateHealthBar()
+    private void UpdateBar()
     {
         slider.value = (float)currentValue / maxValue;
-        hpText.text = $"{currentValue}/{maxValue}";
+        if (uiText != null)
+        {
+            uiText.text = $"{currentValue}/{maxValue}";
+        }
     }
 }

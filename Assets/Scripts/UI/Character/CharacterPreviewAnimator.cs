@@ -8,31 +8,38 @@ using UnityEngine;
 
 public class CharacterPreviewAnimator : MonoBehaviour
 {
-    [SerializeField]
-    private Animator animator;
+    [SerializeField] private Animator animator;
 
-    [SerializeField]
-    private Camera characterCamera;
+    [SerializeField] private Camera characterCamera;
 
     private Dictionary<string, RuntimeAnimatorController> _cachedAnimators = new();
 
     public void ShowFor(Character character)
     {
-        characterCamera.enabled = true;
-        if (_cachedAnimators.ContainsKey(character.NameId))
+        if (characterCamera)
         {
-            animator.runtimeAnimatorController = _cachedAnimators[character.NameId];
+            characterCamera.enabled = true;
+        }
+
+        if (_cachedAnimators.TryGetValue(character.NameId, out var cachedAnimator))
+        {
+            animator.runtimeAnimatorController = cachedAnimator;
             return;
         }
-        string path = @"Assets/Animations/Character/" + character.NameId;
-        string assetFound = AssetDatabase.FindAssets("t:RuntimeAnimatorController", new string[] { path }).FirstOrDefault();
-        var animatorController = AssetDatabase.LoadAssetAtPath<RuntimeAnimatorController>(AssetDatabase.GUIDToAssetPath(assetFound));
+
+        string path = "Assets/Animations/Character/" + character.NameId;
+        string assetFound = AssetDatabase.FindAssets("t:RuntimeAnimatorController", new[] { path }).FirstOrDefault();
+        var animatorController =
+            AssetDatabase.LoadAssetAtPath<RuntimeAnimatorController>(AssetDatabase.GUIDToAssetPath(assetFound));
         animator.runtimeAnimatorController = animatorController;
         _cachedAnimators[character.NameId] = animatorController;
     }
 
     public void Hide()
     {
-        characterCamera.enabled = false;
+        if (characterCamera)
+        {
+            characterCamera.enabled = false;
+        }
     }
 }
