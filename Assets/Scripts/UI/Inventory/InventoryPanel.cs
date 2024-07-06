@@ -160,7 +160,7 @@ namespace DMT.Characters.Inventory.UI
             awaitingCharacterSelectSubscription?.Dispose();
 
             Assert.IsTrue(validUseCharacters.Any() && itemAwaitingToBeUsed != null, 
-                $"Character {character.NameId} selected but item awaiting to be used was null.");
+                $"Character {character.Id} selected but item awaiting to be used was null.");
             character.Use(itemAwaitingToBeUsed);
             itemAwaitingToBeUsed = null;
             validUseCharacters.Clear();

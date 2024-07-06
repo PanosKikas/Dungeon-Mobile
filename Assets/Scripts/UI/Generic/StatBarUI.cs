@@ -6,17 +6,12 @@ using UnityEngine.UI;
 
 public class StatBarUI : MonoBehaviour
 {
-    private Slider slider;
-    private TextMeshProUGUI uiText;
+    [SerializeField] private Slider slider;
+
+    [SerializeField] private TextMeshProUGUI uiText;
 
     private int currentValue;
     private int maxValue;
-
-    private void Awake()
-    {
-        slider = GetComponent<Slider>();
-        uiText = GetComponentInChildren<TextMeshProUGUI>();
-    }
 
     public void Set(IObservable<float> curr, IObservable<float> max)
     {

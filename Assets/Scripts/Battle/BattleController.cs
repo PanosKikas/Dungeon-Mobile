@@ -1,9 +1,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using DMT.Battle.UI;
 using DMT.Characters;
-using DMT.Characters.Inventory;
-using DMT.Characters.Stats;
 using UniRx;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -12,17 +11,21 @@ namespace DMT.Battle
 {
     public class BattleController : MonoBehaviour
     {
-        public readonly CharacterParty CharacterParty = new();
-        private ReactiveProperty<Character> CurrentSelectedCharacter { get; } = new();
+        protected IEnumerable<BattleCharacter> teamCharacters => team.GetCharacters();
 
-        public void Initialize(IEnumerable<Character> startingCharacters)
+        private BattleTeam team;
+        
+        public void SetTeam(BattleTeam battleTeam)
         {
-            foreach (var character in startingCharacters)
-            {
-                CharacterParty.Add(character);
-            }
+            team = battleTeam;
+        }
 
-            CurrentSelectedCharacter.Value = CharacterParty.First();
+        public virtual void BeginBattle()
+        {
+            foreach (var character in teamCharacters)
+            {
+                character.CanTick = true;
+            }
         }
     }
 }

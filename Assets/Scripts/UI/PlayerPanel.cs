@@ -123,7 +123,7 @@ namespace DMT.Characters.UI
             }
             else
             {
-                Debug.LogError($"No character UI found for character {character.NameId}");
+                Debug.LogError($"No character UI found for character {character.Id}");
             }
         }
 

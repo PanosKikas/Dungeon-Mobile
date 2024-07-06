@@ -14,25 +14,25 @@ public class CharacterPreviewAnimator : MonoBehaviour
 
     private Dictionary<string, RuntimeAnimatorController> _cachedAnimators = new();
 
-    public void ShowFor(Character character)
+    public void ShowFor(string characterId)
     {
         if (characterCamera)
         {
             characterCamera.enabled = true;
         }
 
-        if (_cachedAnimators.TryGetValue(character.NameId, out var cachedAnimator))
+        if (_cachedAnimators.TryGetValue(characterId, out var cachedAnimator))
         {
             animator.runtimeAnimatorController = cachedAnimator;
             return;
         }
 
-        string path = "Assets/Animations/Character/" + character.NameId;
+        string path = "Assets/Animations/Character/" + characterId;
         string assetFound = AssetDatabase.FindAssets("t:RuntimeAnimatorController", new[] { path }).FirstOrDefault();
         var animatorController =
             AssetDatabase.LoadAssetAtPath<RuntimeAnimatorController>(AssetDatabase.GUIDToAssetPath(assetFound));
         animator.runtimeAnimatorController = animatorController;
-        _cachedAnimators[character.NameId] = animatorController;
+        _cachedAnimators[characterId] = animatorController;
     }
 
     public void Hide()

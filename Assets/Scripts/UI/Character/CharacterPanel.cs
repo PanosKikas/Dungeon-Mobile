@@ -47,7 +47,7 @@ namespace DMT.Characters.UI
                 return;
             }
             isShowing = true;
-            characterPreviewAnimator.ShowFor(character);
+            characterPreviewAnimator.ShowFor(character.Id);
             OnShow.OnNext(character);
         }
 

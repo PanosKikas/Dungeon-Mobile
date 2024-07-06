@@ -71,7 +71,7 @@ namespace DMT.Characters
             }
             else
             {
-                Debug.LogWarning($"Character subscriptions for {character.NameId} have already been disposed");
+                Debug.LogWarning($"Character subscriptions for {character.Id} have already been disposed");
             }
 
             if (party.Count == 1)

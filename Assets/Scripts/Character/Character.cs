@@ -12,7 +12,7 @@ namespace DMT.Characters
     public class Character : IDamagable
     {
         public string CharacterName { get;}
-        public string NameId { get; private set; }
+        public string Id { get; private set; }
         public Sprite Portrait { get; private set; }
         public CharacterStats Stats { get; }
         public CharacterEquipment Equipment { get; }
@@ -28,7 +28,7 @@ namespace DMT.Characters
         {
             inventory = itemStorage;
             CharacterClass = data.CharacterClass;
-            NameId = data.name;
+            Id = data.name;
             CharacterName = data.CharacterName;
             Level = new ReactiveProperty<int>(data.Level);
             Stats = new CharacterStats(data);
