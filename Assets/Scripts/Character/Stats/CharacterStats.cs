@@ -25,7 +25,7 @@ namespace DMT.Characters.Stats
 
     public class CharacterStats : IEnumerable<CharacterStat>
     {
-        private const float endurancePerAttack = 3f;
+        private const float endurancePerAttack = 8f;
         public float EndurancePerAttack => endurancePerAttack;
         
         public readonly CharacterStat MaxHealthStat;

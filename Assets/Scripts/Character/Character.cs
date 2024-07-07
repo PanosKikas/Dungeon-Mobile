@@ -46,7 +46,7 @@ namespace DMT.Characters
 
         private void Die()
         {
-            Debug.Log($"Character {CharacterName} has died ");
+            Debug.Log($"Character {Id} has died ");
         }
 
         public bool IsFullHealth()

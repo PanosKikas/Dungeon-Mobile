@@ -22,7 +22,7 @@ MonoBehaviour:
   baseManualAttackRateStat: 3
   baseMaxEnduranceStat: 40
   baseMaxManaStat: 20
-  baseEnduranceRegenStat: 5
+  baseEnduranceRegenStat: 15
   baseCriticalDamageStat: 3
   baseCriticalChanceStat: 7
   baseMagicDamageStat: 3

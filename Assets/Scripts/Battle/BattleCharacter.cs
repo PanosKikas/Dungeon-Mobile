@@ -5,6 +5,7 @@ using DMT.Characters;
 using DMT.Characters.Stats;
 using UnityEngine;
 using Random = UnityEngine.Random;
+using UniRx;
 
 namespace DMT.Battle
 {
@@ -26,20 +27,25 @@ namespace DMT.Battle
 
         private BattleTeam characterTeam;
         private BattleTeam enemyTeam;
+        private bool isAttacking = false;
 
         public IObservable<float> Health => character.CurrentHealth;
         public IObservable<float> Endurance => character.CurrentEndurance;
         public CharacterStats Stats => character.Stats;
         public int Level => character.Level.Value;
         public string CharacterId => character.Id;
+
+        private readonly List<IDisposable> subscriptions = new();
         
         public void Initialize(Character character, BattleTeam team, BattleTeam enemyTeam)
         {
+            subscriptions.DisposeAndClear();
             this.character = character;
-            this.characterTeam = team;
+            characterTeam = team;
             this.enemyTeam = enemyTeam;
-            this.targetSelector = new RandomTargetSelector();
+            targetSelector = new RandomTargetSelector();
             nextActionTime = Random.Range(0f, 1f/character.Stats.AutoAttackRateStat.Value);
+            character.CharacterDied.Subscribe(_ => OnCharacterDied()).AddTo(subscriptions);
         }
         
         private void Update()
@@ -55,8 +61,9 @@ namespace DMT.Battle
             }
             
             RechargeEndurance();
+            nextActionTime -= Time.deltaTime;
             
-            if (isPossessed)
+            if (isPossessed || isAttacking)
             {
                 return;
             }
@@ -65,7 +72,6 @@ namespace DMT.Battle
             {
                 Act();
             }
-            nextActionTime -= Time.deltaTime;
         }
         
         private void Act()
@@ -76,24 +82,48 @@ namespace DMT.Battle
 
         public void ManualAttack(BattleCharacter target)
         {
+            if (isAttacking)
+            {
+                return;
+            }
+            
             if (character.CurrentEndurance.Value < character.Stats.EndurancePerAttack)
             {
                 return;
             }
+            
             character.CurrentEndurance.Value -= character.Stats.EndurancePerAttack;
             Attack(target);
         }
 
         private void Attack(BattleCharacter target)
         {
+            isAttacking = true;
             var damage = (int)character.Stats.AttackDamageStat.Value;
-            characterAnimator.Attack(() => target.TakeDamage(damage));
+            characterAnimator.Attack(() => DamageTarget(target, damage));
             nextActionTime += 1f/character.Stats.AutoAttackRateStat.Value;
+        }
+
+        private void DamageTarget(BattleCharacter target, int damage)
+        {
+            isAttacking = false;
+            
+            if (!target.IsAlive())
+            {
+                return;
+            }
+
+            target.TakeDamage(damage);
         }
 
         public void TakeDamage(int damage)
         {
             character.TakeDamage(damage);
+        }
+
+        private void OnCharacterDied()
+        {
+            CanTick = false;
         }
 
         public void Possess()

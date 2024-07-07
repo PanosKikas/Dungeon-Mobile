@@ -73,11 +73,6 @@ namespace DMT.Characters
             {
                 Debug.LogWarning($"Character subscriptions for {character.Id} have already been disposed");
             }
-
-            if (party.Count == 1)
-            {
-                Debug.Log("GAME OVER");
-            }
             
             return party.Remove(character);
         }
