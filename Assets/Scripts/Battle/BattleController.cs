@@ -11,13 +11,16 @@ namespace DMT.Battle
 {
     public class BattleController : MonoBehaviour
     {
-        protected IEnumerable<BattleCharacter> teamCharacters => team.GetCharacters();
-
-        private BattleTeam team;
+        protected IEnumerable<BattleCharacter> teamCharacters => controlledTeam.GetCharacters();
+        protected IEnumerable<BattleCharacter> enemyCharacters => enemyTeam.GetCharacters();
         
-        public void SetTeam(BattleTeam battleTeam)
+        private BattleTeam controlledTeam;
+        private BattleTeam enemyTeam;
+        
+        public void SetTeam(BattleTeam myTeam, BattleTeam otherTeam)
         {
-            team = battleTeam;
+            controlledTeam = myTeam;
+            enemyTeam = otherTeam;
         }
 
         public virtual void BeginBattle()

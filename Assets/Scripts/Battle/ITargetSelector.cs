@@ -4,6 +4,6 @@ namespace DMT.Battle
 {
     public interface ITargetSelector
     {
-        BattleCharacter Select(IEnumerable<BattleCharacter> characters);
+        BattleCharacter SelectFrom(IEnumerable<BattleCharacter> characters);
     }
 }

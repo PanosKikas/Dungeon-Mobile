@@ -12,34 +12,14 @@ public class CharacterPreviewAnimator : MonoBehaviour
 
     [SerializeField] private Camera characterCamera;
 
-    private Dictionary<string, RuntimeAnimatorController> _cachedAnimators = new();
-
     public void ShowFor(string characterId)
     {
-        if (characterCamera)
-        {
-            characterCamera.enabled = true;
-        }
-
-        if (_cachedAnimators.TryGetValue(characterId, out var cachedAnimator))
-        {
-            animator.runtimeAnimatorController = cachedAnimator;
-            return;
-        }
-
-        string path = "Assets/Animations/Character/" + characterId;
-        string assetFound = AssetDatabase.FindAssets("t:RuntimeAnimatorController", new[] { path }).FirstOrDefault();
-        var animatorController =
-            AssetDatabase.LoadAssetAtPath<RuntimeAnimatorController>(AssetDatabase.GUIDToAssetPath(assetFound));
-        animator.runtimeAnimatorController = animatorController;
-        _cachedAnimators[characterId] = animatorController;
+        characterCamera.enabled = true;
+        animator.runtimeAnimatorController = CharacterUtils.GetCharacterAnimatorController(characterId);
     }
 
     public void Hide()
     {
-        if (characterCamera)
-        {
-            characterCamera.enabled = false;
-        }
+        characterCamera.enabled = false;
     }
 }

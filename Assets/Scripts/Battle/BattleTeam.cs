@@ -38,8 +38,8 @@ namespace DMT.Battle
                 teamCharacters.ElementAt(i).Initialize(character, this, enemyTeam);
                 activeTeamCharacters.Add(teamCharacters.ElementAt(i));
             }
-            controller.SetTeam(this);
-            charactersPresenter.Initialize(this);
+            controller.SetTeam(this, enemyTeam);
+            charactersPresenter.Initialize(this, controller);
         }
 
         public void BeginBattle()

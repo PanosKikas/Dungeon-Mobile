@@ -455,26 +455,6 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 1368239197731665407, guid: f344642588b30454d9d037ecd08de51b, type: 3}
-      propertyPath: m_Enabled
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1368239197731665407, guid: f344642588b30454d9d037ecd08de51b, type: 3}
-      propertyPath: m_LocalBounds.m_Center.y
-      value: -0.00000011920929
-      objectReference: {fileID: 0}
-    - target: {fileID: 1368239197731665407, guid: f344642588b30454d9d037ecd08de51b, type: 3}
-      propertyPath: m_LocalBounds.m_Extent.x
-      value: 0.9985302
-      objectReference: {fileID: 0}
-    - target: {fileID: 1368239197731665407, guid: f344642588b30454d9d037ecd08de51b, type: 3}
-      propertyPath: m_LocalBounds.m_Extent.y
-      value: 0.99853027
-      objectReference: {fileID: 0}
-    - target: {fileID: 1368239198574367201, guid: f344642588b30454d9d037ecd08de51b, type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 4735866023248197168, guid: f344642588b30454d9d037ecd08de51b, type: 3}
       propertyPath: m_AnchorMax.x
       value: 0

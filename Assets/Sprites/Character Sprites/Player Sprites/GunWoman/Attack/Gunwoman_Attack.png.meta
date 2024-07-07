@@ -1,0 +1,748 @@
+fileFormatVersion: 2
+guid: 6cb9f09cfdb403f41a008080404e7745
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -1408055739959250949
+    second: Gunwoman_Attack_0
+  - first:
+      213: -8152240498623075186
+    second: Gunwoman_Attack_1
+  - first:
+      213: -3367841427759351776
+    second: Gunwoman_Attack_2
+  - first:
+      213: -8988582672873488373
+    second: Gunwoman_Attack_3
+  - first:
+      213: 8828443637731960663
+    second: Gunwoman_Attack_4
+  - first:
+      213: -3127694714675695448
+    second: Gunwoman_Attack_5
+  - first:
+      213: -2060384392475075543
+    second: Gunwoman_Attack_6
+  - first:
+      213: -8427072677012385242
+    second: Gunwoman_Attack_7
+  - first:
+      213: 2231017582051484436
+    second: Gunwoman_Attack_8
+  - first:
+      213: 8533299013755580367
+    second: Gunwoman_Attack_9
+  - first:
+      213: -3244467603337358976
+    second: Gunwoman_Attack_10
+  - first:
+      213: 7582282787607153049
+    second: Gunwoman_Attack_11
+  - first:
+      213: 1630993680503922177
+    second: Gunwoman_Attack_12
+  - first:
+      213: -5532856783425824777
+    second: Gunwoman_Attack_13
+  - first:
+      213: 3337131965710261929
+    second: Gunwoman_Attack_14
+  - first:
+      213: 4304163878382930106
+    second: Gunwoman_Attack_15
+  - first:
+      213: 4782226312373535918
+    second: Gunwoman_Attack_16
+  - first:
+      213: 3877338104829568400
+    second: Gunwoman_Attack_17
+  - first:
+      213: -6972100058781826097
+    second: Gunwoman_Attack_18
+  - first:
+      213: 7116101671807854519
+    second: Gunwoman_Attack_19
+  - first:
+      213: 499540448060040742
+    second: Gunwoman_Attack_20
+  - first:
+      213: -8076562450579415614
+    second: Gunwoman_Attack_21
+  - first:
+      213: 9127344409461231617
+    second: Gunwoman_Attack_22
+  - first:
+      213: -1174520804544935836
+    second: Gunwoman_Attack_23
+  - first:
+      213: -8234229609834576800
+    second: Gunwoman_Attack_24
+  - first:
+      213: -5611694930758901370
+    second: Gunwoman_Attack_25
+  - first:
+      213: -5283119984421823615
+    second: Gunwoman_Attack_26
+  - first:
+      213: 4182143553560929632
+    second: Gunwoman_Attack_27
+  - first:
+      213: -5962848465117139127
+    second: Gunwoman_Attack_28
+  - first:
+      213: -2138468338127352607
+    second: Gunwoman_Attack_29
+  - first:
+      213: -8687561437519671726
+    second: Gunwoman_Attack_30
+  - first:
+      213: 3996380590426690954
+    second: Gunwoman_Attack_31
+  - first:
+      213: -4932787064964289878
+    second: Gunwoman_Attack_32
+  - first:
+      213: 8424870655499806639
+    second: Gunwoman_Attack_33
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 64
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Gunwoman_Attack_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 768
+        width: 384
+        height: 192
+      alignment: 9
+      pivot: {x: 0.4070313, y: 0.08}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: bff67c3c3c4957ce0800000000000000
+      internalID: -1408055739959250949
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gunwoman_Attack_1
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 768
+        width: 384
+        height: 192
+      alignment: 9
+      pivot: {x: 0.4070313, y: 0.08}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: e8ca40c757c6dde80800000000000000
+      internalID: -8152240498623075186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gunwoman_Attack_2
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 768
+        width: 384
+        height: 192
+      alignment: 9
+      pivot: {x: 0.4070313, y: 0.08}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 0283f86a0160341d0800000000000000
+      internalID: -3367841427759351776
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gunwoman_Attack_3
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 768
+        width: 384
+        height: 192
+      alignment: 9
+      pivot: {x: 0.4070313, y: 0.08}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: b00052dbea3224380800000000000000
+      internalID: -8988582672873488373
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gunwoman_Attack_4
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 768
+        width: 384
+        height: 192
+      alignment: 9
+      pivot: {x: 0.4070313, y: 0.08}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7572292a6bee48a70800000000000000
+      internalID: 8828443637731960663
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gunwoman_Attack_5
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 576
+        width: 384
+        height: 192
+      alignment: 9
+      pivot: {x: 0.4070313, y: 0.08}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 8a073ed6a323894d0800000000000000
+      internalID: -3127694714675695448
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gunwoman_Attack_6
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 576
+        width: 384
+        height: 192
+      alignment: 9
+      pivot: {x: 0.4070313, y: 0.08}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 92c93c9bf4b0863e0800000000000000
+      internalID: -2060384392475075543
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gunwoman_Attack_7
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 576
+        width: 384
+        height: 192
+      alignment: 9
+      pivot: {x: 0.4070313, y: 0.08}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 622d64e7c060d0b80800000000000000
+      internalID: -8427072677012385242
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gunwoman_Attack_8
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 576
+        width: 384
+        height: 192
+      alignment: 9
+      pivot: {x: 0.4070313, y: 0.08}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 41364d1abaa26fe10800000000000000
+      internalID: 2231017582051484436
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gunwoman_Attack_9
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 576
+        width: 384
+        height: 192
+      alignment: 9
+      pivot: {x: 0.4070313, y: 0.08}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fcfa71ddd3e5c6670800000000000000
+      internalID: 8533299013755580367
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gunwoman_Attack_10
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 384
+        width: 384
+        height: 192
+      alignment: 9
+      pivot: {x: 0.4070313, y: 0.08}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 08150d997e559f2d0800000000000000
+      internalID: -3244467603337358976
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gunwoman_Attack_11
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 384
+        width: 384
+        height: 192
+      alignment: 9
+      pivot: {x: 0.4070313, y: 0.08}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 99902edc50ea93960800000000000000
+      internalID: 7582282787607153049
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gunwoman_Attack_12
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 384
+        width: 384
+        height: 192
+      alignment: 9
+      pivot: {x: 0.4070313, y: 0.08}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 10ed75d6c1472a610800000000000000
+      internalID: 1630993680503922177
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gunwoman_Attack_13
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 384
+        width: 384
+        height: 192
+      alignment: 9
+      pivot: {x: 0.4070313, y: 0.08}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7f71bced1185733b0800000000000000
+      internalID: -5532856783425824777
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gunwoman_Attack_14
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 384
+        width: 384
+        height: 192
+      alignment: 9
+      pivot: {x: 0.4070313, y: 0.08}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 9aed2c887dfdf4e20800000000000000
+      internalID: 3337131965710261929
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gunwoman_Attack_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 384
+        height: 192
+      alignment: 9
+      pivot: {x: 0.4070313, y: 0.08}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ab805123e367bbb30800000000000000
+      internalID: 4304163878382930106
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gunwoman_Attack_16
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 192
+        width: 384
+        height: 192
+      alignment: 9
+      pivot: {x: 0.4070313, y: 0.08}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: ea40d886e71ed5240800000000000000
+      internalID: 4782226312373535918
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gunwoman_Attack_17
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 192
+        width: 384
+        height: 192
+      alignment: 9
+      pivot: {x: 0.4070313, y: 0.08}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 095e37c96721fc530800000000000000
+      internalID: 3877338104829568400
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gunwoman_Attack_18
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 192
+        width: 384
+        height: 192
+      alignment: 9
+      pivot: {x: 0.4070313, y: 0.08}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: fc344d1bfef1e3f90800000000000000
+      internalID: -6972100058781826097
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gunwoman_Attack_19
+      rect:
+        serializedVersion: 2
+        x: 1536
+        y: 192
+        width: 384
+        height: 192
+      alignment: 9
+      pivot: {x: 0.4070313, y: 0.08}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 7b7abad84c871c260800000000000000
+      internalID: 7116101671807854519
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gunwoman_Attack_20
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 384
+        height: 192
+      alignment: 9
+      pivot: {x: 0.4070313, y: 0.08}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 626ee8d0469bee600800000000000000
+      internalID: 499540448060040742
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gunwoman_Attack_21
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 384
+        height: 192
+      alignment: 9
+      pivot: {x: 0.4070313, y: 0.08}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 2cd94fe1e394aef80800000000000000
+      internalID: -8076562450579415614
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Gunwoman_Attack_22
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 0
+        width: 384
+        height: 192
+      alignment: 9
+      pivot: {x: 0.4070313, y: 0.08}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: -1
+      bones: []
+      spriteID: 1009594b167daae70800000000000000
+      internalID: 9127344409461231617
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 00df3cca7ce247f44beae429f2dba522
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Gunwoman_Attack_0: -1408055739959250949
+      Gunwoman_Attack_1: -8152240498623075186
+      Gunwoman_Attack_10: -3244467603337358976
+      Gunwoman_Attack_11: 7582282787607153049
+      Gunwoman_Attack_12: 1630993680503922177
+      Gunwoman_Attack_13: -5532856783425824777
+      Gunwoman_Attack_14: 3337131965710261929
+      Gunwoman_Attack_15: 4304163878382930106
+      Gunwoman_Attack_16: 4782226312373535918
+      Gunwoman_Attack_17: 3877338104829568400
+      Gunwoman_Attack_18: -6972100058781826097
+      Gunwoman_Attack_19: 7116101671807854519
+      Gunwoman_Attack_2: -3367841427759351776
+      Gunwoman_Attack_20: 499540448060040742
+      Gunwoman_Attack_21: -8076562450579415614
+      Gunwoman_Attack_22: 9127344409461231617
+      Gunwoman_Attack_3: -8988582672873488373
+      Gunwoman_Attack_4: 8828443637731960663
+      Gunwoman_Attack_5: -3127694714675695448
+      Gunwoman_Attack_6: -2060384392475075543
+      Gunwoman_Attack_7: -8427072677012385242
+      Gunwoman_Attack_8: 2231017582051484436
+      Gunwoman_Attack_9: 8533299013755580367
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

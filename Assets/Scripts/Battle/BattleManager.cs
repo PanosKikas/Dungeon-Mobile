@@ -1,11 +1,4 @@
-﻿using System.Collections.Generic;
-using System.Linq;
-using DMT.Battle;
-using DMT.Battle.UI;
-using DMT.Characters;
-using DMT.Characters.Inventory;
-using DMT.Characters.Stats;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace DMT.Battle
 {

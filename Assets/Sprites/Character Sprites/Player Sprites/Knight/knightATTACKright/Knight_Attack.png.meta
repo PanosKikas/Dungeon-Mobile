@@ -1,0 +1,658 @@
+fileFormatVersion: 2
+guid: e90e2a1fc10cbae4fa27b4aba9fc8fbd
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: 7650388749095820770
+    second: Knight_AttackCopy (2)_0
+  - first:
+      213: 4612686325657176625
+    second: Knight_AttackCopy (2)_1
+  - first:
+      213: -2986378504862500649
+    second: Knight_AttackCopy (2)_2
+  - first:
+      213: -2736071722829870114
+    second: Knight_AttackCopy (2)_3
+  - first:
+      213: 1299685601948389220
+    second: Knight_AttackCopy (2)_4
+  - first:
+      213: -6479928925841509737
+    second: Knight_AttackCopy (2)_5
+  - first:
+      213: 4729766615283709286
+    second: Knight_AttackCopy (2)_6
+  - first:
+      213: 3494734022142905080
+    second: Knight_AttackCopy (2)_7
+  - first:
+      213: 3785331758717861763
+    second: Knight_AttackCopy (2)_8
+  - first:
+      213: -3201295421633321689
+    second: Knight_AttackCopy (2)_9
+  - first:
+      213: -6827715731777809948
+    second: Knight_AttackCopy (2)_10
+  - first:
+      213: -4092691498693921589
+    second: Knight_AttackCopy (2)_11
+  - first:
+      213: 412092117159042642
+    second: Knight_AttackCopy (2)_12
+  - first:
+      213: -2263735923602191326
+    second: Knight_AttackCopy (2)_13
+  - first:
+      213: 7420871660328414835
+    second: Knight_AttackCopy (2)_14
+  - first:
+      213: 5057718550678037369
+    second: Knight_AttackCopy (2)_15
+  - first:
+      213: -3077066539690263842
+    second: Knight_AttackCopy (2)_16
+  - first:
+      213: -94807210068778013
+    second: Knight_AttackCopy (2)_17
+  - first:
+      213: 7611676276121405708
+    second: Knight_AttackCopy (2)_18
+  - first:
+      213: -8461739910150216053
+    second: Knight_AttackCopy (2)_19
+  - first:
+      213: 1376642697636410820
+    second: Knight_AttackCopy (2)_20
+  - first:
+      213: 6215204509202124107
+    second: Knight_AttackCopy (2)_21
+  - first:
+      213: 2413630630436496217
+    second: Knight_AttackCopy (2)_22
+  - first:
+      213: -970569263423625316
+    second: Knight_AttackCopy (2)_23
+  - first:
+      213: -9042107941696318872
+    second: Knight_AttackCopy (2)_24
+  - first:
+      213: 7099602489048338416
+    second: Knight_AttackCopy (2)_25
+  - first:
+      213: -3818716129324967504
+    second: Knight_AttackCopy (2)_26
+  - first:
+      213: 2781028108820712273
+    second: Knight_AttackCopy (2)_27
+  - first:
+      213: 2615506033300484270
+    second: Knight_AttackCopy (2)_28
+  - first:
+      213: 2577547133053057325
+    second: Knight_AttackCopy (2)_29
+  - first:
+      213: -3508399865229631676
+    second: Knight_AttackCopy (2)_30
+  - first:
+      213: -4012530466986695123
+    second: Knight_AttackCopy (2)_31
+  - first:
+      213: 1572800470412292732
+    second: Knight_AttackCopy (2)_32
+  - first:
+      213: -8587186363481463576
+    second: Knight_AttackCopy (2)_33
+  - first:
+      213: 3781946795227748328
+    second: Knight_AttackCopy (2)_34
+  - first:
+      213: 1209948278120467579
+    second: Knight_AttackCopy (2)_35
+  - first:
+      213: -1489060722526979290
+    second: Knight_AttackCopy (2)_36
+  - first:
+      213: -2309357388182330073
+    second: Knight_AttackCopy (2)_37
+  - first:
+      213: 2448562690393233619
+    second: Knight_AttackCopy (2)_38
+  - first:
+      213: -8605721686957915341
+    second: Knight_AttackCopy (2)_39
+  - first:
+      213: -6957981320925949131
+    second: Knight_AttackCopy (2)_40
+  - first:
+      213: -1715255708514739084
+    second: Knight_AttackCopy (2)_41
+  - first:
+      213: -1573126189035095015
+    second: Knight_AttackCopy (2)_42
+  - first:
+      213: 3259092000891674983
+    second: Knight_AttackCopy (2)_43
+  - first:
+      213: 5131893051872880197
+    second: Knight_AttackCopy (2)_44
+  - first:
+      213: 3505850078739302844
+    second: Knight_AttackCopy (2)_45
+  - first:
+      213: 1368651493865220991
+    second: Knight_AttackCopy (2)_46
+  - first:
+      213: -880439684626404831
+    second: Knight_AttackCopy (2)_47
+  - first:
+      213: 3486284879764475643
+    second: Knight_AttackCopy (2)_48
+  - first:
+      213: -5207294458795200188
+    second: Knight_AttackCopy (2)_49
+  - first:
+      213: -2139694333757367319
+    second: Knight_AttackCopy (2)_50
+  - first:
+      213: -6005812022635546758
+    second: Knight_AttackCopy (2)_51
+  - first:
+      213: -1228815582578248087
+    second: Knight_AttackCopy (2)_52
+  - first:
+      213: 8147095645765296263
+    second: Knight_AttackCopy (2)_53
+  - first:
+      213: -8404887858491545123
+    second: Knight_AttackCopy (2)_54
+  - first:
+      213: 550614128802462814
+    second: Knight_AttackCopy (2)_55
+  - first:
+      213: 4625649630796706707
+    second: Knight_AttackCopy (2)_56
+  - first:
+      213: 6829425717826822026
+    second: Knight_AttackCopy (2)_57
+  - first:
+      213: 1264493845372773404
+    second: Knight_AttackCopy (2)_58
+  - first:
+      213: -4172744835338606573
+    second: Knight_AttackCopy (2)_59
+  - first:
+      213: 5120736582070271316
+    second: Knight_AttackCopy (2)_60
+  - first:
+      213: 1621884651523677333
+    second: Knight_AttackCopy (2)_61
+  - first:
+      213: -1472527279448268095
+    second: Knight_AttackCopy (2)_62
+  - first:
+      213: 4507723323515209892
+    second: Knight_AttackCopy (2)_63
+  - first:
+      213: -4225165118383848942
+    second: Knight_AttackCopy (2)_64
+  - first:
+      213: 3739170957457173348
+    second: Knight_AttackCopy (2)_65
+  - first:
+      213: -7966576574414817703
+    second: Knight_AttackCopy (2)_66
+  - first:
+      213: -1761238049552117031
+    second: Knight_AttackCopy (2)_67
+  - first:
+      213: -774922391146582958
+    second: Knight_AttackCopy (2)_68
+  - first:
+      213: 8284479400419825144
+    second: Knight_AttackCopy (2)_69
+  externalObjects: {}
+  serializedVersion: 13
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+    flipGreenChannel: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  vTOnly: 0
+  ignoreMipmapLimit: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: 1
+    mipBias: 0
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 64
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  ignorePngGamma: 0
+  applyGammaDecoding: 0
+  swizzle: 50462976
+  cookieLightType: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: iPhone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    ignorePlatformSupport: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: Knight_AttackCopy (2)_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 576
+        width: 384
+        height: 192
+      alignment: 9
+      pivot: {x: 0.4375, y: 0.08}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16080e71d3163ff4ab93ad3571a6534d
+      internalID: -378976331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Knight_AttackCopy (2)_1
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 576
+        width: 384
+        height: 192
+      alignment: 9
+      pivot: {x: 0.4375, y: 0.08}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 0e0d96fe97b521c4b83d4f1c80786f2c
+      internalID: 605716222
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Knight_AttackCopy (2)_2
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 576
+        width: 384
+        height: 192
+      alignment: 9
+      pivot: {x: 0.4375, y: 0.08}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 07226370dec68a244b366c3f9dc8a89b
+      internalID: -2003883408
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Knight_AttackCopy (2)_3
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 576
+        width: 384
+        height: 192
+      alignment: 9
+      pivot: {x: 0.4375, y: 0.08}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 38ca7ccea9371ac4380918879a85ed0d
+      internalID: 374139771
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Knight_AttackCopy (2)_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 384
+        width: 384
+        height: 192
+      alignment: 9
+      pivot: {x: 0.4375, y: 0.08}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4727dda8ae33743429b6698cd4949168
+      internalID: -549429607
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Knight_AttackCopy (2)_5
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 384
+        width: 384
+        height: 192
+      alignment: 9
+      pivot: {x: 0.4375, y: 0.08}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 606a120bcb9e0034294fc16c32e79387
+      internalID: -2049131045
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Knight_AttackCopy (2)_6
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 384
+        width: 384
+        height: 192
+      alignment: 9
+      pivot: {x: 0.4375, y: 0.08}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 66f1c9709ecad1e44af2c696d4ddcb19
+      internalID: -1949128962
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Knight_AttackCopy (2)_7
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 384
+        width: 384
+        height: 192
+      alignment: 9
+      pivot: {x: 0.4375, y: 0.08}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b9c031107f5bb934eb0f89c3954a08c0
+      internalID: -205308697
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Knight_AttackCopy (2)_8
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 384
+        height: 192
+      alignment: 9
+      pivot: {x: 0.4375, y: 0.08}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 3de9a6cafd83ddf4d89c1c798060b3dc
+      internalID: 669240841
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Knight_AttackCopy (2)_9
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 192
+        width: 384
+        height: 192
+      alignment: 9
+      pivot: {x: 0.4375, y: 0.08}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 140808b92305c2b45a1e999ab4a9231b
+      internalID: -1967924331
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Knight_AttackCopy (2)_10
+      rect:
+        serializedVersion: 2
+        x: 768
+        y: 192
+        width: 384
+        height: 192
+      alignment: 9
+      pivot: {x: 0.4375, y: 0.08}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 25ea4866011297947abfef0b19f027d2
+      internalID: 1240374848
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Knight_AttackCopy (2)_11
+      rect:
+        serializedVersion: 2
+        x: 1152
+        y: 192
+        width: 384
+        height: 192
+      alignment: 9
+      pivot: {x: 0.4375, y: 0.08}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: dfc9dbce07a8ad74694f97124adfcfbc
+      internalID: -715269117
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Knight_AttackCopy (2)_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 384
+        height: 192
+      alignment: 9
+      pivot: {x: 0.4375, y: 0.08}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 8acdc25629695a444a8bfeee354ab202
+      internalID: 1126463277
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Knight_AttackCopy (2)_13
+      rect:
+        serializedVersion: 2
+        x: 384
+        y: 0
+        width: 384
+        height: 192
+      alignment: 9
+      pivot: {x: 0.4375, y: 0.08}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b31428409c83ee94f9b1e1603b6c3d56
+      internalID: 527265822
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 8cb343c46e77dc84596d39dde709fd83
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+    nameFileIdTable:
+      Knight_AttackCopy (2)_0: -378976331
+      Knight_AttackCopy (2)_1: 605716222
+      Knight_AttackCopy (2)_10: 1240374848
+      Knight_AttackCopy (2)_11: -715269117
+      Knight_AttackCopy (2)_12: 1126463277
+      Knight_AttackCopy (2)_13: 527265822
+      Knight_AttackCopy (2)_2: -2003883408
+      Knight_AttackCopy (2)_3: 374139771
+      Knight_AttackCopy (2)_4: -549429607
+      Knight_AttackCopy (2)_5: -2049131045
+      Knight_AttackCopy (2)_6: -1949128962
+      Knight_AttackCopy (2)_7: -205308697
+      Knight_AttackCopy (2)_8: 669240841
+      Knight_AttackCopy (2)_9: -1967924331
+  mipmapLimitGroupName: 
+  pSDRemoveMatte: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

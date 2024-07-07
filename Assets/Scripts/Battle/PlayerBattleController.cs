@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,8 +10,10 @@ namespace DMT.Battle
 {
     public class PlayerBattleController : BattleController
     {
-        protected ReactiveProperty<BattleCharacter> CurrentSelectedCharacter { get; } = new();
+        public ReactiveProperty<BattleCharacter> CurrentSelectedCharacter { get; } = new();
 
+        private BattleCharacter SelectedCharacter => CurrentSelectedCharacter.Value;
+        
         public override void BeginBattle()
         {
             base.BeginBattle();
@@ -23,5 +26,14 @@ namespace DMT.Battle
             character.Possess();
             CurrentSelectedCharacter.Value = character;
         }
+
+        private void Update()
+        {
+            if (Input.GetMouseButtonDown(0))
+            {
+                SelectedCharacter.ManualAttack(enemyCharacters.First());
+            }
+        }
+        
     }
 }

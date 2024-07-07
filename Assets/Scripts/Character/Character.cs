@@ -11,7 +11,7 @@ namespace DMT.Characters
 {
     public class Character : IDamagable
     {
-        public string CharacterName { get;}
+        public string CharacterName { get; }
         public string Id { get; private set; }
         public Sprite Portrait { get; private set; }
         public CharacterStats Stats { get; }
@@ -21,8 +21,12 @@ namespace DMT.Characters
 
         private readonly IInventory inventory;
         public CharacterClass CharacterClass { get; }
+
+        public readonly ReactiveProperty<float> CurrentHealth;
+        public readonly ReactiveProperty<float> CurrentEndurance;
+
         public IObservable<Character> CharacterDied =>
-            Stats.CurrentHealth.Where(hp => hp <= 0).Select(_ => this);
+            CurrentHealth.Where(hp => hp <= 0).Select(_ => this);
 
         public Character(InitialCharacterData data, IInventory itemStorage)
         {
@@ -34,9 +38,11 @@ namespace DMT.Characters
             Stats = new CharacterStats(data);
             Portrait = data.Portrait;
             Equipment = new CharacterEquipment(this, inventory);
+            CurrentHealth = new ReactiveProperty<float>(Stats.MaxHealthStat.Value);
+            CurrentEndurance = new ReactiveProperty<float>(Stats.MaxEnduranceStat.Value);
         }
 
-        public bool IsAlive => Stats.CurrentHealth.Value > 0;
+        public bool IsAlive => CurrentHealth.Value > 0;
 
         private void Die()
         {
@@ -45,17 +51,17 @@ namespace DMT.Characters
 
         public bool IsFullHealth()
         {
-            return Stats.CurrentHealth.Value == Stats.MaxHealth;
+            return (int)CurrentHealth.Value == Stats.MaxHealth;
         }
-        
+
         public void Heal(int amount)
         {
-            Stats.CurrentHealth.Value = Mathf.Min(Stats.CurrentHealth.Value + amount, Stats.MaxHealth);
+            CurrentHealth.Value = Mathf.Min(CurrentHealth.Value + amount, Stats.MaxHealth);
         }
 
         public void TakeDamage(int damage)
         {
-            Stats.CurrentHealth.Value = Mathf.Max((Stats.CurrentHealth.Value - damage), 0);
+            CurrentHealth.Value = Mathf.Max(CurrentHealth.Value - damage, 0);
 
             if (!IsAlive)
             {
@@ -77,7 +83,7 @@ namespace DMT.Characters
         {
             Assert.IsNotNull(usable, "Trying to use null item");
             usable.UseOn(this);
-            
+
             if (inventory != null && usable is IStorable storable)
             {
                 inventory.RemoveItem(storable);

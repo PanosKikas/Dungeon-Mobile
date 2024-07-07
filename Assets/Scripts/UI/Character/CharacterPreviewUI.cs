@@ -12,7 +12,7 @@ namespace DMT.Characters.UI
 {
     public class CharacterPreviewUI : MonoBehaviour
     {
-        [FormerlySerializedAs("hpBar")] [SerializeField]
+        [SerializeField]
         private StatBarUI statBar;
 
         [SerializeField]
@@ -28,7 +28,7 @@ namespace DMT.Characters.UI
         public void SetTo(Character character)
         {
             characterStats = character.Stats;
-            statBar.Set(characterStats.CurrentHealth, characterStats.MaxHealthStat);
+            statBar.Set(character.CurrentHealth, characterStats.MaxHealthStat);
             levelText.text = string.Format($"Level {character.Level}");
             nameText.text = character.CharacterName;
         }

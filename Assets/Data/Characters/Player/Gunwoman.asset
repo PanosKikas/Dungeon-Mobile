@@ -17,8 +17,8 @@ MonoBehaviour:
   CharacterClass: 1
   Portrait: {fileID: 21300000, guid: 91d7f08413e45fa48bc48d235f8e2142, type: 3}
   baseMaxHealthStat: 100
-  baseAttackDamageStat: 10
-  baseAutoAttackRateStat: 3
+  baseAttackDamageStat: 2
+  baseAutoAttackRateStat: 0.5
   baseManualAttackRateStat: 3
   baseMaxEnduranceStat: 40
   baseMaxManaStat: 20

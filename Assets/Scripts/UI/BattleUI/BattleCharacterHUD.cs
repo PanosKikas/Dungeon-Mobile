@@ -10,15 +10,26 @@ namespace DMT.Battle.UI
         [SerializeField] private StatBarUI enduranceBar;
         [SerializeField] private StatBarUI manaBar;
         [SerializeField] private TextMeshProUGUI levelText;
-        [SerializeField] private CharacterPreviewAnimator animator;
+        [SerializeField] private CharacterBattleAnimator animator;
+        [SerializeField] private GameObject highlight;
         
         public void Set(BattleCharacter character)
         {
-            healthBar.Set(character.Stats.CurrentHealth, character.Stats.MaxHealthStat);
-            enduranceBar.Set(character.Stats.CurrentEndurance, character.Stats.MaxEnduranceStat);
+            healthBar.Set(character.Health, character.Stats.MaxHealthStat);
+            enduranceBar.Set(character.Endurance, character.Stats.MaxEnduranceStat);
             // TODO: Consider making this reactive in case it can change during battle.
             levelText.text = $"Level: {character.Level}";
-            animator.ShowFor(character.CharacterId);
+            animator.Initialize(character.CharacterId);
+        }
+
+        public void Highlight()
+        {
+            highlight.SetActive(true);
+        }
+
+        public void Unhighlight()
+        {
+            highlight.SetActive(false);
         }
     }
 }
