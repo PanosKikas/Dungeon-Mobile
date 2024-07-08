@@ -118,7 +118,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: aece4bcf0aea4d49b3f8a1752b5d8ae9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterAnimator: {fileID: 2626799891905186482}
+  battleCharacterAnimator: {fileID: 2626799891905186482}
 --- !u!58 &88007339328889905
 CircleCollider2D:
   m_ObjectHideFlags: 0

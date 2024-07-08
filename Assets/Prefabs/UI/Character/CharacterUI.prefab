@@ -760,9 +760,8 @@ MonoBehaviour:
   inventoryUI: {fileID: 9011696642773131509}
   allCharacterPages:
   - {fileID: 8894971267109760753}
-  characterTabs: []
-  characterManagementPopup: {fileID: 0}
   characterStatsUI: {fileID: 4016723003745623069}
+  characterTabs: []
 --- !u!1 &6159978743597053432
 GameObject:
   m_ObjectHideFlags: 0

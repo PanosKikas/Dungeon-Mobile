@@ -8,9 +8,8 @@ TrueTypeFontImporter:
   characterSpacing: 0
   characterPadding: 1
   includeFontData: 1
-  fontName: C&C Red Alert [INET]
   fontNames:
-  - C&C Red Alert [INET]
+  - 'C&C Red Alert [INET]'
   fallbackFontReferences: []
   customCharacters: 
   fontRenderingMode: 0

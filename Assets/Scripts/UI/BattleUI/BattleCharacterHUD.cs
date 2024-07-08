@@ -10,7 +10,7 @@ namespace DMT.Battle.UI
         [SerializeField] private StatBarUI enduranceBar;
         [SerializeField] private StatBarUI manaBar;
         [SerializeField] private TextMeshProUGUI levelText;
-        [SerializeField] private CharacterBattleAnimator animator;
+        [SerializeField] private BattleCharacterAnimator animator;
         [SerializeField] private GameObject highlight;
         
         public void Set(BattleCharacter character)

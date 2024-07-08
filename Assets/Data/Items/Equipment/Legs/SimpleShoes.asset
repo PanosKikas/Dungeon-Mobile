@@ -16,6 +16,8 @@ MonoBehaviour:
   Description: Worn shoes
   Icon: {fileID: -9088812214773742645, guid: efa2e029d1a721d469b4d0b897e7bdc9, type: 3}
   EquipmentType: 2
+  CharacterClass: 0
+  MinLevel: 1
   Modifiers:
   - StatType: 7
     Value: 1

@@ -5,7 +5,7 @@ using UnityEngine;
 
 namespace DMT.Battle
 {
-    public class CharacterBattleAnimator : MonoBehaviour
+    public class BattleCharacterAnimator : MonoBehaviour
     {
         public readonly Subject<Unit> OnDamage = new();
         [SerializeField] private Animator animator;

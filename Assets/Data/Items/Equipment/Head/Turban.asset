@@ -16,6 +16,8 @@ MonoBehaviour:
   Description: A mysterious turban
   Icon: {fileID: -3257167936560734997, guid: efa2e029d1a721d469b4d0b897e7bdc9, type: 3}
   EquipmentType: 0
+  CharacterClass: 0
+  MinLevel: 1
   Modifiers:
   - StatType: 0
     Value: 20

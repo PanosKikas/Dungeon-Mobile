@@ -682,11 +682,11 @@ MonoBehaviour:
   m_LightType: 4
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
-  m_Color: {r: 0.8567594, g: 0.7311321, b: 1, a: 1}
-  m_Intensity: 0.06
+  m_Color: {r: 0.6462264, g: 0.8977705, b: 1, a: 1}
+  m_Intensity: 0.1
   m_LightVolumeIntensity: 0
   m_LightVolumeEnabled: 0
-  m_ApplyToSortingLayers: 00000000d361b7d1
+  m_ApplyToSortingLayers: 00000000d361b7d1a74ca2eb49048f344d39ca43
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
@@ -727,7 +727,7 @@ Transform:
   m_GameObject: {fileID: 251272897}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 7.009259, y: 4.1924706, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1523,7 +1523,7 @@ Transform:
   m_GameObject: {fileID: 519420028}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 12.230391, y: 3.0133638, z: -10}
+  m_LocalPosition: {x: 12.428364, y: 3.014968, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

@@ -16,6 +16,8 @@ MonoBehaviour:
   Description: A rusty sword
   Icon: {fileID: -4021536631775024569, guid: efa2e029d1a721d469b4d0b897e7bdc9, type: 3}
   EquipmentType: 3
+  CharacterClass: 0
+  MinLevel: 1
   Modifiers:
   - StatType: 5
     Value: 25

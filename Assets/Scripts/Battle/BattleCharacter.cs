@@ -6,13 +6,14 @@ using DMT.Characters.Stats;
 using UnityEngine;
 using Random = UnityEngine.Random;
 using UniRx;
+using UnityEngine.Serialization;
 
 namespace DMT.Battle
 {
     public class BattleCharacter : MonoBehaviour, IDamagable
     {
         public bool CanTick { get; set; } 
-        [SerializeField] private CharacterBattleAnimator characterAnimator;
+        [FormerlySerializedAs("characterAnimator")] [SerializeField] private BattleCharacterAnimator battleCharacterAnimator;
 
         private Character character;
         private BattleCharacter lastTarget;
@@ -100,7 +101,7 @@ namespace DMT.Battle
         {
             isAttacking = true;
             var damage = (int)character.Stats.AttackDamageStat.Value;
-            characterAnimator.Attack(() => DamageTarget(target, damage));
+            battleCharacterAnimator.Attack(() => DamageTarget(target, damage));
             nextActionTime += 1f/character.Stats.AutoAttackRateStat.Value;
         }
 

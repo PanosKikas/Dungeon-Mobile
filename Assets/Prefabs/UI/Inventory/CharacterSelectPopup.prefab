@@ -138,6 +138,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   characterSlotPrefab: {fileID: 7594274401199831606, guid: e7c1810c7715b39468764ca96aa308de, type: 3}
   characterContainer: {fileID: 7561912936598127234}
+  offset: {x: 0, y: 75}
 --- !u!1 &7545267566263654255
 GameObject:
   m_ObjectHideFlags: 0

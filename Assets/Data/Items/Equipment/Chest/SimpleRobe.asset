@@ -16,6 +16,8 @@ MonoBehaviour:
   Description: A plain robe
   Icon: {fileID: -5591007841690343270, guid: efa2e029d1a721d469b4d0b897e7bdc9, type: 3}
   EquipmentType: 0
+  CharacterClass: 0
+  MinLevel: 1
   Modifiers:
   - StatType: 11
     Value: 2

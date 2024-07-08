@@ -13,5 +13,4 @@ MonoBehaviour:
   m_Name: PatrolData
   m_EditorClassIdentifier: 
   Speed: 3
-  Radius: 5
   ArriveWaitTime: 1.5
