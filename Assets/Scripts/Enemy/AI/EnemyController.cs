@@ -1,6 +1,10 @@
-﻿using DMT.Characters;
+﻿using System.Collections.Generic;
+using DMT.Characters;
 using DMT.Characters.Inventory;
 using DMT.Characters.Stats;
+using DMT.Controllers;
+using DMT.Persistent;
+using NUnit.Framework;
 using UnityEngine;
 
 public class EnemyController : MonoBehaviour, IDamagable
@@ -64,7 +68,11 @@ public class EnemyController : MonoBehaviour, IDamagable
     {
         if (collision.gameObject.CompareTag("Player"))
         {
-            Debug.Log("Activating combat mode");
+            var player = collision.gameObject.GetComponent<Player>();
+            Assert.IsNotNull("Player interacted with enemy should never be null.");
+            SceneTransitionManager.Instance.TransitionToBattleScene(player.CharacterParty,
+                new List<Character>() { character });
+            Destroy(gameObject);
         }
     }
 

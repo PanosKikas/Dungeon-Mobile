@@ -159,8 +159,8 @@ CapsuleCollider2D:
   m_UsedByEffector: 0
   m_CompositeOperation: 0
   m_CompositeOrder: 0
-  m_Offset: {x: 0.015194893, y: -0.00027751923}
-  m_Size: {x: 1.2805347, y: 1.6709318}
+  m_Offset: {x: 0.015194893, y: -0.07624352}
+  m_Size: {x: 1.2805347, y: 1.2826612}
   m_Direction: 0
 --- !u!114 &7495838158229068012
 MonoBehaviour:
@@ -203,10 +203,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   version: 5
-  radius: 0.89
-  height: 3.09
+  radius: 0.61
+  height: 13.95
   canMove: 1
-  maxSpeed: 4
+  maxSpeed: 7
   gravity: {x: 0, y: 0, z: 0}
   groundMask:
     serializedVersion: 2
@@ -225,9 +225,9 @@ MonoBehaviour:
   targetCompatibility: {fileID: 0}
   maxAcceleration: -2.5
   rotationSpeed: 360
-  slowdownDistance: 0.57
+  slowdownDistance: 2
   pickNextWaypointDist: 0.8
-  endReachedDistance: 0.5
+  endReachedDistance: 0.7
   alwaysDrawGizmos: 0
   slowWhenNotFacingTarget: 1
   whenCloseToDestination: 0
@@ -254,13 +254,13 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7495838158229068014}
-  m_BodyType: 1
+  m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -323,7 +323,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waypoints: {fileID: 0}
   patrtolData: {fileID: 11400000, guid: f8bff5b330942634d9730962f113f2c3, type: 2}
-  data: {fileID: 0}
+  data: {fileID: 11400000, guid: 97f730c9046256d4ab36e7c13e1c60ae, type: 2}
 --- !u!114 &2017368314191846117
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -363,7 +363,7 @@ Transform:
   m_GameObject: {fileID: 7495838158493420706}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.13, z: 0}
+  m_LocalPosition: {x: 0, y: -0.528, z: 0}
   m_LocalScale: {x: 0.7, y: 0.7, z: 0.7}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -391,7 +391,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 8484016d6bf14e349befd55c5ac68821, type: 2}
+  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -409,15 +409,15 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1137326413
-  m_SortingLayer: 7
-  m_SortingOrder: 11
-  m_Sprite: {fileID: 21300000, guid: 6ea59611c70de9d479eee771a4a14882, type: 3}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 1906514904, guid: 2c8dcde1c8934f041af2b128bc31c886, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.32, y: 0.32}
+  m_Size: {x: 2.56, y: 2.56}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -433,7 +433,7 @@ Animator:
   m_GameObject: {fileID: 7495838158493420706}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: 006e2479ae721534cbc5704845c47c85, type: 2}
+  m_Controller: {fileID: 22100000, guid: 93c0e99086074084b86bc5282568f383, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0

@@ -13,7 +13,7 @@ namespace DMT.Characters.UI
         {
             player = GameObject.FindWithTag("Player").GetComponent<Player>();
             Assert.IsNotNull(player, "Player is null");
-            if (player.characterParty.Count == 1)
+            if (player.CharacterParty.Count == 1)
             {
                 Destroy(gameObject);
             }

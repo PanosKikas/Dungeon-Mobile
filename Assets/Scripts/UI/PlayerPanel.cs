@@ -37,7 +37,7 @@ namespace DMT.Characters.UI
         private void Start()
         {
             Hide();
-            characterParty = player.characterParty;
+            characterParty = player.CharacterParty;
             InitializeCharactersUI(characterParty);
 
             inventoryUI.Initialize(player.Inventory, characterParty);

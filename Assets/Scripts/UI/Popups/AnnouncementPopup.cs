@@ -35,9 +35,9 @@ namespace DMT.Popups
 
         private void Start()
         {
-            player.characterParty.CharacterAdded.Subscribe(c =>
+            player.CharacterParty.CharacterAdded.Subscribe(c =>
                 Show($"{c.Value.CharacterName} has joined the party")).AddTo(subscriptions);
-            player.characterParty.CharacterRemoved.Subscribe(c =>
+            player.CharacterParty.CharacterRemoved.Subscribe(c =>
                 Show($"{c.Value.CharacterName} has left the party")).AddTo(subscriptions);
         }
 

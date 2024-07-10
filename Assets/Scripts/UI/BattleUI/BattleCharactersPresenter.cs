@@ -21,8 +21,13 @@ namespace DMT.Battle.UI
         {
             subscriptions.DisposeAndClear();
             var teamCharacters = team.GetCharacters().ToArray();
-            for (var i = 0; i < teamCharacters.Length; ++i)
+            for (var i = 0; i < characterHUD.Length; ++i)
             {
+                if (i >= teamCharacters.Length)
+                {
+                    characterHUD[i].gameObject.SetActive(false);
+                    continue;
+                }
                 characterHUD[i].Set(teamCharacters[i]);
                 charterHUDMapping.Add(teamCharacters[i], characterHUD[i]);
             }

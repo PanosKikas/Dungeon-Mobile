@@ -65,7 +65,7 @@ namespace DMT.Characters.UI
 
         public void AbandonCharacter()
         {
-            if (playerController.characterParty.Count == 1)
+            if (playerController.CharacterParty.Count == 1)
             {
                 Debug.Log("Cannot abandon the only party character.");
                 return;

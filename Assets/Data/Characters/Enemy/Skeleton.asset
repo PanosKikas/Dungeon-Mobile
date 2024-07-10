@@ -16,7 +16,7 @@ MonoBehaviour:
   Level: 1
   CharacterClass: 1
   Portrait: {fileID: 0}
-  baseMaxHealthStat: 100
+  baseMaxHealthStat: 10
   baseAttackDamageStat: 10
   baseAutoAttackRateStat: 0.2
   baseManualAttackRateStat: 1

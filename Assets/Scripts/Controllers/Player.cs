@@ -11,25 +11,24 @@ namespace DMT.Controllers
     {
         public IInventory Inventory { get; private set; }
 
-        public CharacterParty characterParty { get; private set; }
+        public CharacterParty CharacterParty { get; } = new();
 
         [SerializeField] private InitialCharacterData[] initialCharacters;
 
         private void Awake()
         {
-            characterParty = new CharacterParty();
             Inventory = new Inventory();
             foreach (var characterData in initialCharacters)
             {
-                characterParty.Add(new Character(characterData, Inventory));
+                CharacterParty.Add(new Character(characterData, Inventory));
             }
         }
 
         public void TakeDamage(int damage)
         {
-            if (characterParty.Any())
+            if (CharacterParty.Any())
             {
-                characterParty.First().TakeDamage(damage);
+                CharacterParty.First().TakeDamage(damage);
             }
         }
 
@@ -41,13 +40,13 @@ namespace DMT.Controllers
         public void AddToParty(InitialCharacterData characterData)
         {
             var character = new Character(characterData, Inventory);
-            characterParty.Add(character);
+            CharacterParty.Add(character);
         }
 
         public void RemoveFromParty(Character character)
         {
-            Assert.IsFalse(characterParty.Count == 1, "Cannot remove last character from party");
-            characterParty.Remove(character);
+            Assert.IsFalse(CharacterParty.Count == 1, "Cannot remove last character from party");
+            CharacterParty.Remove(character);
         }
     }
 }

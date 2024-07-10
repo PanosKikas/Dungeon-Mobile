@@ -24,12 +24,22 @@ namespace DMT.Battle
 
         private readonly List<BattleCharacter> activeTeamCharacters = new();
         [SerializeField] private BattleTeam enemyTeam;
+
+        [SerializeField] private bool useDebugCharacters;
         
         private void Awake()
         {
-            foreach (var characterData in debugTeam)
+            if (useDebugCharacters)
             {
-                teamParty.Add(new Character(characterData, new NullInventory()));
+                Setup(debugTeam.Select(x => new Character(x, new NullInventory())));
+            }
+        }
+
+        public void Setup(IEnumerable<Character> characters)
+        {
+            foreach (var character in characters)
+            {
+                teamParty.Add(character);
             }
             
             for (var i =0; i < teamParty.Count; ++i)

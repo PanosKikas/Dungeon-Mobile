@@ -9,6 +9,7 @@ TagManager:
   - PlayerBattleHolder
   - BattleManager
   - Popups
+  - Root
   layers:
   - Default
   - TransparentFX

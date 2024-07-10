@@ -32,6 +32,7 @@ namespace DMT.Battle
 
         public IObservable<float> Health => character.CurrentHealth;
         public IObservable<float> Endurance => character.CurrentEndurance;
+        public Subject<BattleCharacter> CharacterDied = new();
         public CharacterStats Stats => character.Stats;
         public int Level => character.Level.Value;
         public string CharacterId => character.Id;
@@ -45,7 +46,7 @@ namespace DMT.Battle
             characterTeam = team;
             this.enemyTeam = enemyTeam;
             targetSelector = new RandomTargetSelector();
-            nextActionTime = Random.Range(0f, 1f/character.Stats.AutoAttackRateStat.Value);
+            nextActionTime = Random.Range(0f, 0.5f);
             character.CharacterDied.Subscribe(_ => OnCharacterDied()).AddTo(subscriptions);
         }
         
@@ -125,6 +126,7 @@ namespace DMT.Battle
         private void OnCharacterDied()
         {
             CanTick = false;
+            CharacterDied.OnNext(this);
         }
 
         public void Possess()

@@ -35,8 +35,8 @@ public class TalkBehaviour : MonoBehaviour, IPointerClickHandler
         }
 
         mainPlayerTopDown.Freeze();
-        DialogueSystem spawnedDialogue = Instantiate<DialogueSystem>(dialogueBoxPrefab, transform.position, Quaternion.identity);
-        //Vector3 screenPos = Camera.main.ScreenToWorldPoint(transform.position + SpawnOffset);
+        DialogueSystem spawnedDialogue = Instantiate(dialogueBoxPrefab, transform.position, Quaternion.identity);
+        spawnedDialogue.transform.SetParent(transform, true);
         RectTransform rect = spawnedDialogue.GetComponent<RectTransform>();
         rect.position = transform.position + spawnOffset;
         spawnedDialogue.Show(Dialogue, () => StartCoroutine(OnDialogueComplete()));

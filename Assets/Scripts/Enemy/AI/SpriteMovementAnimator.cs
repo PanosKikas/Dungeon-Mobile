@@ -13,7 +13,7 @@ public class SpriteMovementAnimator : MonoBehaviour
     
     public void AnimateMovement(Vector2 velocity)
     {
-        animator.SetFloat("Speed", velocity.magnitude);
+        //animator.SetFloat("", velocity.magnitude);
         if (velocity.x > 0.1f)
         {
             spriteRenderer.flipX = true;
