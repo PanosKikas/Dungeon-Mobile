@@ -10,7 +10,7 @@ using UnityEngine.Serialization;
 
 namespace DMT.Battle
 {
-    public class BattleCharacter : MonoBehaviour, IDamagable
+    public class BattleCharacter : MonoBehaviour, IDamageable
     {
         public bool CanTick { get; set; } 
         [FormerlySerializedAs("characterAnimator")] [SerializeField] private BattleCharacterAnimator battleCharacterAnimator;

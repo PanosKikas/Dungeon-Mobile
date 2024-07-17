@@ -5,21 +5,13 @@ using UnityEngine;
 public class ProjectileSpawner : MonoBehaviour
 {
     [SerializeField]
-    GameObject projectileToSpawn;
+    private GameObject projectileToSpawn;
 
-    Vector3 bulletSpawnPosition;
-    Quaternion bulletSpawnRotation;
-
-    int projectileDamage;
-
+    private Vector3 bulletSpawnPosition;
+    private Quaternion bulletSpawnRotation;
+    
     [SerializeField]
-    LayerMask blockMask;
-
-    private void Start()
-    {
-        //projectileDamage = StatsDatabase.Instance.GetMainCharacterStats().ProjecitleDamage;
-        projectileDamage = 20;
-    }
+    private LayerMask blockMask;
 
     public void Spawn(Vector2 dir)
     {
@@ -27,8 +19,7 @@ public class ProjectileSpawner : MonoBehaviour
         CalculateSpawnRotation(mouseDirection);
         mouseDirection.Normalize();
         CalculateSpawnPosition(mouseDirection);
-        GameObject projectile = Instantiate(projectileToSpawn, bulletSpawnPosition, bulletSpawnRotation);
-        projectile.GetComponent<Projectile>().ProjectileDamage = projectileDamage;
+        Instantiate(projectileToSpawn, bulletSpawnPosition, bulletSpawnRotation);
     }
 
     void CalculateSpawnRotation(Vector2 mouseDirection)

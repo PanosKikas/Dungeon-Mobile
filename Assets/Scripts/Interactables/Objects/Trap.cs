@@ -12,7 +12,7 @@ public class Trap : MonoBehaviour
     
     private Animator animator;
 
-    private IDamagable player;
+    private IDamageable player;
 
     private void Awake()
     {
@@ -21,7 +21,7 @@ public class Trap : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") && collision.gameObject.TryGetComponent<IDamagable>(out var damagable))
+        if (collision.CompareTag("Player") && collision.gameObject.TryGetComponent<IDamageable>(out var damagable))
         {
             player = damagable;
             Activate();

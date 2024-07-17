@@ -16,8 +16,7 @@ public class PatrolState : State
     Transform currentWaypoint;
     Vector3 targetWaypointPosition;
 
-    EnemyController controller;
-
+    private EnemyController controller;
     private float currentWaitTime = 0f;
     private float waitSeconds => patrolData.ArriveWaitTime;
 

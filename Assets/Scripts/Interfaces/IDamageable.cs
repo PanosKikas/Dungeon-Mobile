@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace DMT.Characters
 {
-    public interface IDamagable
+    public interface IDamageable
     {
         void TakeDamage(int damage);
     }

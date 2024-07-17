@@ -2,16 +2,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Projectile : MonoBehaviour
 {
     private Rigidbody2D rb;
     private Animator animator;
 
-    [SerializeField]
-    private float speed = 10f;
-
-    public int ProjectileDamage { get; set; }
+    [SerializeField] private float speed = 10f;
+    [SerializeField] private int projectileDamage;
+    [SerializeField] private float projectileLifetime = 10f;
 
     private void Awake()
     {
@@ -22,7 +22,7 @@ public class Projectile : MonoBehaviour
     void Start()
     {
         StartMovingUp();
-        DestroyAfter(10);
+        Destroy(gameObject, projectileLifetime);
     }
 
     private void StartMovingUp()
@@ -30,17 +30,10 @@ public class Projectile : MonoBehaviour
         rb.velocity = transform.up * speed;
     }
 
-    void DestroyAfter(float seconds)
-    {
-        Destroy(gameObject, seconds);
-    }
-
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        if (collision is IDamagable damagable)
-        {
-            damagable.TakeDamage(ProjectileDamage);
-        }
+        var damageable = collision.gameObject.GetComponent<IDamageable>();
+        damageable?.TakeDamage(projectileDamage);
         Explode();
     }
 
@@ -67,5 +60,4 @@ public class Projectile : MonoBehaviour
     {
         Destroy(gameObject);
     }
-
 }

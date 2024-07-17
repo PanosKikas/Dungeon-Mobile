@@ -7,7 +7,7 @@ using UnityEngine;
 
 namespace DMT.Controllers
 {
-    public class Player : MonoBehaviour, IDamagable
+    public class Player : MonoBehaviour, IDamageable
     {
         public IInventory Inventory { get; private set; }
 

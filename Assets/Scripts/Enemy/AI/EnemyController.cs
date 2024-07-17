@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using DMT.Characters;
 using DMT.Characters.Inventory;
 using DMT.Characters.Stats;
@@ -6,8 +7,9 @@ using DMT.Controllers;
 using DMT.Persistent;
 using NUnit.Framework;
 using UnityEngine;
+using UniRx;
 
-public class EnemyController : MonoBehaviour, IDamagable
+public class EnemyController : MonoBehaviour, IDamageable
 {
     private Rigidbody2D rb;
 
@@ -17,33 +19,33 @@ public class EnemyController : MonoBehaviour, IDamagable
     public State patrolState { get; private set; }
     public State chaseState { get; private set; }
 
-    private EnemyGroup enemyGroup;
     private SpriteMovementAnimator animator;
 
-    [Header("Patrol Data")]
-    [SerializeField]
+    [Header("Patrol Data")] [SerializeField]
     private Waypoints waypoints;
-    [SerializeField]
-    private PatrolData patrtolData;
 
-    [SerializeField]
-    private InitialCharacterData data;
+    [SerializeField] private PatrolData patrtolData;
 
-    private Character character;
+    [SerializeField] private InitialCharacterData data;
 
+    public Character Character { get; private set; }
+    public EnemyGroup EnemyGroup { get; set; }
+
+    private readonly List<IDisposable> characterSubscriptions = new();
+    
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        enemyGroup = GetComponentInParent<EnemyGroup>();
         animator = GetComponentInChildren<SpriteMovementAnimator>();
+        Character = new Character(data, new NullInventory());
         stateMachine = new FSM();
-        character = new Character(data, new NullInventory());
-        patrolState = new PatrolState(this, stateMachine, waypoints.PatrolWaypoints, patrtolData);
-        chaseState = new ChaseState(this, enemyGroup, stateMachine);
+        Character.CharacterDied.Subscribe(_ => Destroy(gameObject)).AddTo(characterSubscriptions);
     }
 
     private void Start()
     {
+        patrolState = new PatrolState(this, stateMachine, waypoints.PatrolWaypoints, patrtolData);
+        chaseState = new ChaseState(this, EnemyGroup, stateMachine);
         stateMachine.ChangeState(patrolState);
     }
 
@@ -70,12 +72,9 @@ public class EnemyController : MonoBehaviour, IDamagable
         {
             var player = collision.gameObject.GetComponent<Player>();
             Assert.IsNotNull("Player interacted with enemy should never be null.");
-            SceneTransitionManager.Instance.TransitionToBattleScene(player.CharacterParty,
-                new List<Character>() { character });
-            Destroy(gameObject);
+            EnemyGroup.EngageInCombat(player);
         }
     }
-
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -89,6 +88,19 @@ public class EnemyController : MonoBehaviour, IDamagable
 
     public void TakeDamage(int damage)
     {
-        character.TakeDamage(damage);
+        Character.TakeDamage(damage);
+    }
+
+    public void ChaseTarget()
+    {
+        if (stateMachine.currentState != chaseState)
+        {
+            stateMachine.ChangeState(chaseState);
+        }
+    }
+
+    private void OnDestroy()
+    {
+        characterSubscriptions.DisposeAndClear();
     }
 }

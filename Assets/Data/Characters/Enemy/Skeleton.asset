@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b723ed41d3ce26648a01c6e5551427a1, type: 3}
   m_Name: Skeleton
   m_EditorClassIdentifier: 
-  CharacterName: 
+  CharacterName: Skelly
   Level: 1
-  CharacterClass: 1
+  CharacterClass: 0
   Portrait: {fileID: 0}
-  baseMaxHealthStat: 10
+  baseMaxHealthStat: 35
   baseAttackDamageStat: 10
   baseAutoAttackRateStat: 0.2
   baseManualAttackRateStat: 1

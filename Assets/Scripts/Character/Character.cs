@@ -9,7 +9,7 @@ using UnityEngine.Assertions;
 
 namespace DMT.Characters
 {
-    public class Character : IDamagable
+    public class Character : IDamageable
     {
         public string CharacterName { get; }
         public string Id { get; private set; }

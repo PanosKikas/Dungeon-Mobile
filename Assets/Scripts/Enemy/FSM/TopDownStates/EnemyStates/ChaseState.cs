@@ -8,7 +8,7 @@ public class ChaseState : State
     AIDestinationSetter destinationSetter;
     AIPath path;
     EnemyController controller;
-    EnemyGroup parentGroup;
+    EnemyGroup enemyGroup;
     private FSM stateMachine;
 
     public ChaseState(EnemyController controller, EnemyGroup enemyGroup, FSM stateMachine)
@@ -17,12 +17,12 @@ public class ChaseState : State
         this.stateMachine = stateMachine;
         destinationSetter = controller.GetComponent<AIDestinationSetter>();
         path = controller.GetComponent<AIPath>();
-        parentGroup = enemyGroup;
+        this.enemyGroup = enemyGroup;
     }
 
     public override void EnterState()
     {
-        // parentGroup.EnableChaseAllEnemies();
+        enemyGroup.TargetDetected();
         EnablePathFinder();
     }
 
